@@ -1,0 +1,37 @@
+{
+  "comparedAgainst": "published v1.5.0 complete source",
+  "seed": "Wildflower",
+  "generators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "dimensions": [
+    "overworld",
+    "cinderwild"
+  ],
+  "coordinates": [
+    [
+      0,
+      0
+    ],
+    [
+      -2,
+      1
+    ],
+    [
+      5,
+      -4
+    ]
+  ],
+  "identicalChunks": 60,
+  "comparison": "byte-for-byte voxel data",
+  "limitation": "Representative samples, not exhaustive across all seeds and chunks."
+}
