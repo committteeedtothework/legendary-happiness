@@ -1,0 +1,60 @@
+{
+  "version": "1.5.0",
+  "reference": "Minecraft Java Edition 1.20.4",
+  "generationVersion": 11,
+  "core": {
+    "tests": 310,
+    "passed": 310,
+    "failed": 0
+  },
+  "browser": {
+    "selectedScenarios": 6,
+    "passed": 6,
+    "failed": 0,
+    "standaloneScenarios": 3,
+    "httpsWssScenarios": 1,
+    "survivalCoopScenarios": 2,
+    "runtimeBuildFrozen": true,
+    "combatSetup": "controlled positioning and charged melee between strikes",
+    "extraction": "real 30-second held-mouse input"
+  },
+  "compatibility": {
+    "comparedAgainst": "published v1.4.1 source",
+    "legacyGenerators": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "dimensions": [
+      "overworld",
+      "cinderwild"
+    ],
+    "identicalChunks": 54
+  },
+  "resources": {
+    "generator": 11,
+    "seed": "Wildflower",
+    "chunks": 49,
+    "hellfireOreBlocks": 1606,
+    "brimstoneOreBlocks": 2690,
+    "cinderstoneBlocks": 1832468,
+    "milliseconds": 1126
+  },
+  "frozenInputs": 107,
+  "windowsRuntimeVerified": false,
+  "fileNavigationVerified": false,
+  "liveCloudflareVerified": false,
+  "limits": [
+    "New world required for new temple; saved generators preserve their terrain.",
+    "Previously unvisited Cinderworld realms use generator 11.",
+    "Mob AI uses local steering; upper towers have no ladders or furnished upper floors.",
+    "Dimension travel remains unavailable in co-op.",
+    "Windows executable built and embedded payload verified; not executed on Windows."
+  ]
+}
