@@ -8,15 +8,16 @@
     "failed": 0
   },
   "browser": {
-    "selectedScenarios": 6,
-    "passed": 6,
+    "selectedScenarios": 8,
+    "passed": 8,
     "failed": 0,
     "standaloneScenarios": 3,
     "httpsWssScenarios": 1,
     "survivalCoopScenarios": 2,
     "runtimeBuildFrozen": true,
     "combatSetup": "controlled positioning and charged melee between strikes",
-    "extraction": "real 30-second held-mouse input"
+    "extraction": "real 30-second held-mouse input",
+    "legacyStandaloneScenarios": 2
   },
   "compatibility": {
     "comparedAgainst": "published v1.4.1 source",
@@ -56,5 +57,10 @@
     "Mob AI uses local steering; upper towers have no ladders or furnished upper floors.",
     "Dimension travel remains unavailable in co-op.",
     "Windows executable built and embedded payload verified; not executed on Windows."
-  ]
+  ],
+  "packagedRelay": {
+    "packagedRelayServesExactStandalone": true,
+    "httpStatus": 200,
+    "sha256": "20e95642026fadea3dcf3ec4d2e7201e6b7b851e71c8a95dd4d0a03049c681c3"
+  }
 }
