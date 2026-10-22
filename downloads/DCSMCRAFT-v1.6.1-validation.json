@@ -1,0 +1,79 @@
+{
+  "version": "1.6.1",
+  "reference": "Minecraft Java Edition 1.20.4",
+  "generationVersion": 11,
+  "core": {
+    "tests": 332,
+    "passed": 332,
+    "failed": 0,
+    "newGuardianGateCases": 7
+  },
+  "browser": {
+    "selectedScenarios": 2,
+    "passed": 2,
+    "failed": 0,
+    "runtimeBuildFrozen": true,
+    "frozenInputs": 108,
+    "standaloneExternalResourcesBlocked": true,
+    "checkedPageAndWebGlErrors": 0,
+    "scenarios": [
+      "Creative and Peaceful cannot start temple extraction; two real Guardian defeats remain locked after reload; the third real death and normal Sigil attunement permit actual 30-second held-mouse extraction; one sword persists after reload.",
+      "Retained guarded Cinderworld vault, real melee victories, Sigil approach, bulletproof temple Guardians, permanent defeats and actual 30-second extraction/reload."
+    ],
+    "setup": "Controlled positions, equipment and charged production attacks; not an unaided full Survival playthrough.",
+    "scope": "Focused patch: previous 1.6.0 nine-scenario browser suite is not repeated in full."
+  },
+  "compatibility": {
+    "comparedAgainst": "published v1.6.0 complete source",
+    "seed": "Wildflower",
+    "generators": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "dimensions": [
+      "overworld",
+      "cinderwild"
+    ],
+    "coordinates": [
+      [
+        0,
+        0
+      ],
+      [
+        -2,
+        1
+      ],
+      [
+        5,
+        -4
+      ]
+    ],
+    "identicalChunks": 60,
+    "comparison": "byte-for-byte voxel data",
+    "limitation": "Representative samples, not exhaustive across all seeds and chunks."
+  },
+  "build": {
+    "production": true,
+    "standalone": true,
+    "windowsX64CrossCompiled": true,
+    "embeddedHtmlExtractionMatches": true,
+    "nativeWindowsExecutionVerified": false,
+    "standaloneSha256": "180d6c36dd556d8fed82ffaa8889f49b45fc4bbf72c5a10d1c398913b8c39db8",
+    "windowsExeSha256": "981ad6ea12044c5e915aa94145375cd38fe50d203d95a08797fe64f6909c8f5b"
+  },
+  "limitations": [
+    "This restriction applies to planted temple relics; Creative catalogs and owner cheats remain unrestricted tools.",
+    "Already claimed swords and older pre-temple relics remain unchanged.",
+    "Peaceful Guardians remain dormant; mode/difficulty alone no longer opens the inner seal or permits temple extraction.",
+    "Direct file:// navigation, native Windows execution, live Cloudflare tunneling and real YouTube streaming remain unverified on this host.",
+    "Broader partial/missing mechanics are retained and documented in FEATURES.md."
+  ]
+}
