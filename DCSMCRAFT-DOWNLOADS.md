@@ -1,0 +1,26 @@
+# DCSMCRAFT 1.8.0 — Forge & Motion
+
+Download the Windows ZIP, extract it and run DCSMCRAFT.exe with installed Edge or Chrome. A self-contained HTML and the complete source remain available below. **Existing worlds receive this update; no new world is needed.**
+
+- All **42 non-pistol weapon/tool variants** have original thin pixel silhouettes, material-specific edges, consistent palm sockets and shared first-person/F5/dropped models. Swords, axes, spears and mining tools have distinct staged actions.
+- **The Devin Sword** now has a broad stepped turquoise blade, raised ridges, gold guard and wrapped golden grip, including the planted temple display. Anchored glints, a subtle sheen and concentrated combat flair replace distracting idle motes. Minimal particles hides decorative glints/sheen/trails. Its abilities, all-Guardians/Sigil gate and 30-second unique extraction remain.
+- **Flint and steel** is a flat transparent cutout in hand and when dropped, without cuboid sidewalls or thick pixel extrusion. Ground/portal ignition and durability still work; other ordinary item and block models are retained.
+- Non-pistol player rigs have elbows, smoother weight transfer and carrying, first-person paddling, F5 prone swimming, continuous treading and smooth land recovery. Co-op appearance packets carry safe water/ground flags; ordinary weapon swaps retain movement phase.
+- Eight **Cinderworld foe/neutral designs** have distinct silhouettes and articulated jaws, pincers, trailing mantles and weapons. Damage flashes restore their original glowing eyes/cores. Stats, attacks, hitboxes, loot and progression are unchanged.
+
+**Matthew's Dual Wielded Pistols are excluded:** original models, recoil, firing/F5 poses, player rig, sounds and Trickster skills are retained. Their stance is an intentional exception to the new non-pistol swimming/articulation rig. Swimming is cosmetic: existing upright collisions and water physics remain; Space still swims upward. A horizontal visual limb can intersect nearby terrain. Reference inspiration remains Minecraft Java Edition 1.20.4 with partial parity and original assets.
+
+- [Windows 10/11 game ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/DCSMCRAFT-Windows-1.8.0.zip)
+- [Standalone offline HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/DCSMCRAFT-Standalone-v1.8.0.html)
+- [Browser build ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/dcsmcraft-build-v1.8.0.zip)
+- [Multiplayer relay ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/DCSMCRAFT-Multiplayer-Server-1.8.0.zip)
+- [Complete source ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/dcsmcraft-source-v1.8.0.zip)
+- [Checksums](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/DCSMCRAFT-v1.8.0-checksums.json)
+- [Validation report](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/DCSMCRAFT-v1.8.0-validation.json)
+- [Terrain compatibility report](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.8.0/downloads/DCSMCRAFT-v1.8.0-compatibility.json)
+
+Validation: **361 core tests and eight selected browser scenarios pass**. The standalone checks cover all weapon model creation, representative rendered families, real sword damage, staged F5 grips, Minimal effects, the matching planted sword, flat flint/steel and ordinary ignition/durability, Q dropping, persistent reload, real-water swimming/treading/recovery and all eight Cinderworld designs with emissive restoration. Regression scenarios verify independent pistol recoil/F5, actual portal travel and saves, all-Guardians plus real 30-second extraction, and HTTPS/WSS Survival co-op.
+
+Sixty-six sampled old/current-generator chunks and 22 container snapshots match v1.7.0; item/block definitions, recipes and mob stats compare equal. Thirteen core gameplay/pistol source files are byte-identical. Published pistol geometry and motion fingerprints, working block models, frozen runtime hashes, ZIP CRCs, embedded HTML and public download SHA-256 values are verified. Controlled positions, gear, timers and animation phases make the tests reproducible; this is not an unaided full Survival playthrough or a guarantee of no bugs.
+
+The named **complete source ZIP** includes original code/assets, dependency lockfile, tests, launch/build instructions and the implemented/partial/missing checklist. GitHub automatic source archives contain the distribution branch. Native Windows execution and direct file-origin persistence remain unverified here; managed Chromium blocks file:// before loading, so the identical standalone is tested on isolated local HTTP with outside requests blocked. Live Cloudflare tunneling, actual YouTube playback, full remote attack animation synchronization and exact Minecraft parity remain unverified or partial. See README.md, FEATURES.md, VALIDATION.md and MULTIPLAYER.md for scope.

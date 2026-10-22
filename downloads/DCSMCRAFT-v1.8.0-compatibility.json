@@ -1,0 +1,130 @@
+{
+  "comparedAgainst": "published v1.7.0 complete source",
+  "seed": "Wildflower",
+  "generators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "dimensions": [
+    "overworld",
+    "cinderwild"
+  ],
+  "coordinates": [
+    [
+      0,
+      0
+    ],
+    [
+      -2,
+      1
+    ],
+    [
+      5,
+      -4
+    ]
+  ],
+  "identicalChunks": 66,
+  "identicalContainerSnapshots": 22,
+  "unchangedData": [
+    "B",
+    "BLOCKS",
+    "ITEMS",
+    "RECIPES",
+    "MOB_INFO",
+    "CREATIVE_ITEMS",
+    "SPAWN_EGG_TYPES",
+    "GENERATION_VERSION"
+  ],
+  "unchangedGameplaySources": [
+    {
+      "file": "pistol-model.js",
+      "sha256": "f5a03cbbe6192c0bb87bb1ff7b129858dc81b14ad3085801db9768a1a3c1824e"
+    },
+    {
+      "file": "pistol-audio.js",
+      "sha256": "b8daa206ca5a5cb6d474fe55f725418fc5892cc25d581081a07da7b99703ad83"
+    },
+    {
+      "file": "matthew.js",
+      "sha256": "199bf372a93fa82c534292b19ba896473f2611ef2aef011ff76018d067f99245"
+    },
+    {
+      "file": "trickster-effects.js",
+      "sha256": "594b36d9c54bd35df464827c0db2ef9dddbf0d9372902866883d795717cfa794"
+    },
+    {
+      "file": "simulation.js",
+      "sha256": "260070cbe06d7ce39345e53f5ffc8361568ae0de5823b501edd4878f079906f3"
+    },
+    {
+      "file": "physics.js",
+      "sha256": "1e0882057ca9aaa49e6b39709fa1205241a1af8e6e0e83c357dbf1064f637b03"
+    },
+    {
+      "file": "world.js",
+      "sha256": "cdb30ab89071ec0109e38ac2bd52c20da4b9efda0d7c511970b3b30d4ef1b371"
+    },
+    {
+      "file": "inventory.js",
+      "sha256": "d1fc55fc96ed327b17ff20ac2ef6201017024fea0fe23ad11b3bbb9ace30fd7a"
+    },
+    {
+      "file": "equipment.js",
+      "sha256": "a4936aceaf451c9b8c2ea98469484c99dab0477065d6698d7d7d9f0a48923fad"
+    },
+    {
+      "file": "relic.js",
+      "sha256": "f03a457ff3de79b5ee2b2f2ba77f21ab91e386d71ccdab2225e2a6dc1b7a139e"
+    },
+    {
+      "file": "cave-life.js",
+      "sha256": "33e2253479bdffd4bccc461ff19284e8027deeea7dc7206a49d8562723d4d882"
+    },
+    {
+      "file": "cave-update.js",
+      "sha256": "a5a1f2e895b0344f1d709af868e9b8af6f2f244c519a78387c33b57bb29cbe66"
+    },
+    {
+      "file": "hostile-combat.js",
+      "sha256": "d5bfbec2ebe0f39272bc2f523c30846f58502828f664b0f9cfc8c2c57215077a"
+    }
+  ],
+  "preservedPistolAndBlockFingerprints": true,
+  "limitation": "Representative terrain samples, not exhaustive across all seeds; model and action changes are cosmetic.",
+  "pistolFingerprintReference": {
+    "geometry": [
+      "6c715769b1df1760d22b2ce0a38d65328f15da3e62a065f7e25fd836743f0e79",
+      "c8e2271321c2949527a0496be573800f24725a47f8f6799fc4bfaf3335ada774"
+    ],
+    "player": [
+      {
+        "skin": "explorer",
+        "hash": "8ce90ef878a23179db58bb73f2e5976fbbc24a8763e535526b33e731cba2342d"
+      },
+      {
+        "skin": "dante",
+        "hash": "a1204d8519d9def939bf420b94904b7f384533c5b19691a799724cda761f2995"
+      },
+      {
+        "skin": "vergil",
+        "hash": "f369c4953d1329fdd55ebdda761f7b8932778bb43106ba47922b2c1d11229595"
+      }
+    ],
+    "ordinaryBlocks": {
+      "grass": "895add88dfe3bf600b93ced921a98577b3a8dc3c3bbfe7a6896b47218a9fca98",
+      "planks": "cca09d61764298b347406d754126c10039964af02497a5fe10f120502fcd77f0",
+      "stone": "cea9cbb7dd9730454f2696124397e405e26e2adac035d97e7b43fab2ae22ff98",
+      "glass": "fee0fa52512f4e80f7ca6647b0a8e425412d4dc7dc50666433db353bbc2b4d8c",
+      "oak_door": "813a25f20392d2d1a188360a1e377d10afbc4b4561ab007b2d3293895360fb66"
+    }
+  }
+}

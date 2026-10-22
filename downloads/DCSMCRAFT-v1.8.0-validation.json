@@ -1,0 +1,325 @@
+{
+  "version": "1.8.0",
+  "name": "Forge & Motion",
+  "reference": "Minecraft Java Edition 1.20.4 \u2014 partial parity",
+  "generationVersion": 12,
+  "newWorldRequired": false,
+  "coreTests": {
+    "passed": 361,
+    "failed": 0,
+    "skipped": 0,
+    "newModelAnimationCases": 11
+  },
+  "browserTests": {
+    "distinctPassed": 8,
+    "unresolvedFailures": 0,
+    "skipped": 0,
+    "initialSelectedRun": {
+      "passed": 7,
+      "fixtureFailures": 1
+    },
+    "correctedFixtureRerun": {
+      "passed": 1,
+      "failed": 0
+    },
+    "fixtureCorrection": "Initial assertion expected Creative flint/steel durability loss. Corrected test verifies Creative keeps 64 uses and Survival ignition reduces to 63; application build unchanged.",
+    "scenarios": [
+      "All 42 model creation, representative held/dropped shapes, flat flint/steel alpha hole, actual ground ignition in both modes, Q drop, preserved block/pistol models and persistent reload",
+      "Actual sword hit, staged F5 grips, Minimal effects and matching natural temple display",
+      "Actual W water movement, first-person paddling, F5 prone swimming/treading and land recovery",
+      "Eight Cinderworld foe/neutral rigs, special poses and emissive restoration after damage",
+      "Retained independent pistol recoil/palm sockets/F5/particles/item swaps",
+      "Actual flint portal travel, linked dimension return, realm persistence",
+      "All-Guardians/Sigil gate, actual 30-second unique sword extraction and saved defeats",
+      "Actual HTTPS/WSS Survival relay with chat/inventory/world synchronization and rendered players"
+    ]
+  },
+  "builds": {
+    "productionWeb": true,
+    "standaloneHtml": true,
+    "windowsX64PE": true,
+    "embeddedHtmlMatches": true,
+    "temporaryPortalTestHtmlMatches": true,
+    "htmlSha256": "961b0f2acf29d3d6b7e0b30cb182366cf82a123a9ae573bc063b4bde61e7d761",
+    "exeSha256": "91fe7145612abc3f879cf73b237cec2cd808692a4739db5681ef80d05cba5cf5"
+  },
+  "modelBatches": {
+    "ordinaryWeapon": 1,
+    "devinSword": 5,
+    "cinderworld": {
+      "emberling": 17,
+      "basalt_crawler": 20,
+      "cinderback": 10,
+      "cinder_wraith": 15,
+      "dread_knight": 20,
+      "soul_reaver": 18,
+      "magma_maw": 15,
+      "mad_titan": 21
+    },
+    "scope": "Visible model meshes before shadows; bounded batching evidence, not measured hardware FPS."
+  },
+  "compatibility": {
+    "comparedAgainst": "published v1.7.0 complete source",
+    "seed": "Wildflower",
+    "generators": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "dimensions": [
+      "overworld",
+      "cinderwild"
+    ],
+    "coordinates": [
+      [
+        0,
+        0
+      ],
+      [
+        -2,
+        1
+      ],
+      [
+        5,
+        -4
+      ]
+    ],
+    "identicalChunks": 66,
+    "identicalContainerSnapshots": 22,
+    "unchangedData": [
+      "B",
+      "BLOCKS",
+      "ITEMS",
+      "RECIPES",
+      "MOB_INFO",
+      "CREATIVE_ITEMS",
+      "SPAWN_EGG_TYPES",
+      "GENERATION_VERSION"
+    ],
+    "unchangedGameplaySources": [
+      {
+        "file": "pistol-model.js",
+        "sha256": "f5a03cbbe6192c0bb87bb1ff7b129858dc81b14ad3085801db9768a1a3c1824e"
+      },
+      {
+        "file": "pistol-audio.js",
+        "sha256": "b8daa206ca5a5cb6d474fe55f725418fc5892cc25d581081a07da7b99703ad83"
+      },
+      {
+        "file": "matthew.js",
+        "sha256": "199bf372a93fa82c534292b19ba896473f2611ef2aef011ff76018d067f99245"
+      },
+      {
+        "file": "trickster-effects.js",
+        "sha256": "594b36d9c54bd35df464827c0db2ef9dddbf0d9372902866883d795717cfa794"
+      },
+      {
+        "file": "simulation.js",
+        "sha256": "260070cbe06d7ce39345e53f5ffc8361568ae0de5823b501edd4878f079906f3"
+      },
+      {
+        "file": "physics.js",
+        "sha256": "1e0882057ca9aaa49e6b39709fa1205241a1af8e6e0e83c357dbf1064f637b03"
+      },
+      {
+        "file": "world.js",
+        "sha256": "cdb30ab89071ec0109e38ac2bd52c20da4b9efda0d7c511970b3b30d4ef1b371"
+      },
+      {
+        "file": "inventory.js",
+        "sha256": "d1fc55fc96ed327b17ff20ac2ef6201017024fea0fe23ad11b3bbb9ace30fd7a"
+      },
+      {
+        "file": "equipment.js",
+        "sha256": "a4936aceaf451c9b8c2ea98469484c99dab0477065d6698d7d7d9f0a48923fad"
+      },
+      {
+        "file": "relic.js",
+        "sha256": "f03a457ff3de79b5ee2b2f2ba77f21ab91e386d71ccdab2225e2a6dc1b7a139e"
+      },
+      {
+        "file": "cave-life.js",
+        "sha256": "33e2253479bdffd4bccc461ff19284e8027deeea7dc7206a49d8562723d4d882"
+      },
+      {
+        "file": "cave-update.js",
+        "sha256": "a5a1f2e895b0344f1d709af868e9b8af6f2f244c519a78387c33b57bb29cbe66"
+      },
+      {
+        "file": "hostile-combat.js",
+        "sha256": "d5bfbec2ebe0f39272bc2f523c30846f58502828f664b0f9cfc8c2c57215077a"
+      }
+    ],
+    "preservedPistolAndBlockFingerprints": true,
+    "limitation": "Representative terrain samples, not exhaustive across all seeds; model and action changes are cosmetic.",
+    "pistolFingerprintReference": {
+      "geometry": [
+        "6c715769b1df1760d22b2ce0a38d65328f15da3e62a065f7e25fd836743f0e79",
+        "c8e2271321c2949527a0496be573800f24725a47f8f6799fc4bfaf3335ada774"
+      ],
+      "player": [
+        {
+          "skin": "explorer",
+          "hash": "8ce90ef878a23179db58bb73f2e5976fbbc24a8763e535526b33e731cba2342d"
+        },
+        {
+          "skin": "dante",
+          "hash": "a1204d8519d9def939bf420b94904b7f384533c5b19691a799724cda761f2995"
+        },
+        {
+          "skin": "vergil",
+          "hash": "f369c4953d1329fdd55ebdda761f7b8932778bb43106ba47922b2c1d11229595"
+        }
+      ],
+      "ordinaryBlocks": {
+        "grass": "895add88dfe3bf600b93ced921a98577b3a8dc3c3bbfe7a6896b47218a9fca98",
+        "planks": "cca09d61764298b347406d754126c10039964af02497a5fe10f120502fcd77f0",
+        "stone": "cea9cbb7dd9730454f2696124397e405e26e2adac035d97e7b43fab2ae22ff98",
+        "glass": "fee0fa52512f4e80f7ca6647b0a8e425412d4dc7dc50666433db353bbc2b4d8c",
+        "oak_door": "813a25f20392d2d1a188360a1e377d10afbc4b4561ab007b2d3293895360fb66"
+      }
+    }
+  },
+  "frozenInputs": {
+    ".dockerignore": "f19bc6521684c21ce697070c90818c8819dea2f7eb97d8eea2eb985f35e73773",
+    "desktop/README.md": "b8bcb9844255618d413ce84e2b46db18c46c5312fd197f6d2fc9a842e09ee943",
+    "desktop/TOOLCHAIN.json": "17ad291806e06c531e4b99bc72b36a73aabcd144055b64812ca910a4a8ea7000",
+    "desktop/launcher.c": "ac46935ae5c34d3eec6c06aa3f37e9d083cc4b44819a6e4d747af095f54ba7b5",
+    "desktop/licenses/MINGW-w64.txt": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f",
+    "desktop/licenses/ZIG.txt": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+    "index.html": "d7483b0689f0270e1b6349ef5b78332a648b62a20914c37d0449ba5661464ea8",
+    "package-lock.json": "65d34b89c70c3106f8c6828e8bf41f94f8da320ef5c93fb79295c30b0feaddf7",
+    "package.json": "303db03822185882a3d05f127139153966236c7233d698bd2d3d550f14efd89e",
+    "public/LICENSE.txt": "f059d8fc12366a841281fa4926f562db75194324dc1989a5e1f70e6c6345a941",
+    "public/THIRD-PARTY.txt": "72ee6e51fbc7c1247393476e909ece92eb9522fa96ce76f9e93fcae5c79b4f55",
+    "public/THREE-LICENSE.txt": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+    "public/dcsm-pixel.woff": "6408a1345aaf6090a964962334fc18a2674dbb3838fcc86e6aca3bbad890456c",
+    "public/icon.svg": "bb2d6b4ff6d56420951a42e257d4caf9b701bd44cfe74c39c315990a7304bfe1",
+    "render.yaml": "d6d3b760e6720da723b9530a1cae8bed7b3688ea1a3f7bd2195e8d6badbb0a08",
+    "scripts/benchmark-fluids.mjs": "690cc8afe1cd5077a9c5d80b80797a52012352fefa5a50453c09a231dc504890",
+    "scripts/benchmark-meshing.mjs": "f681bca7da26a76d0cc876ceea4cb63672b04b601b188b2edc70bec628676c34",
+    "scripts/build-desktop.mjs": "30742dbb0b000261f4773d7ca44d4d93ad7085e4a3866b6daa2a8ad1b3c48fb5",
+    "scripts/build-standalone.mjs": "4551bad9921eb0dfa555191fb8ba647e0223a9823b6497a89090fb042bf85bfd",
+    "scripts/build-worker.mjs": "07e3a7ab4997c8c77a40b9f4702f65844134ae61499159e931c1c1cbe615d94a",
+    "scripts/generate-font.py": "20f7c1bd8842f80e1f5acf0382817d7fe85179b7c65a538ae312c1fe7888d9b3",
+    "scripts/package-release.py": "3b8152e6dff52b89879f320efe5bbc5701c2eb0f7b4d487f7da97ead04ac01b0",
+    "scripts/preview-pistols.mjs": "117b87af656ca22f36df99c59e1a166a55e27ebea3dc59dca94b0a55f19bbef1",
+    "server/Caddyfile": "9c9ee94847844555f26b9510e403b315d11ffa8779fcf5e7a18e60c3e49b7060",
+    "server/Dockerfile": "e722f220bbdafb26d34752ac3b7111ca09d2eac4666889ca967faec27ef6ec1c",
+    "server/HOST-PUBLIC.cmd": "3ae1e0d32832e98bc873573d0faf129c6d8031ed864a8821fc4a929abf00ff22",
+    "server/HOST-PUBLIC.sh": "24ba8ede411c893e21ff40556a53633ae56786100a00311a075556790d4463f6",
+    "server/HOST-SERVER.cmd": "b9fbe103914f18014ddb59b78f04d1f6ba0414fd04dcdb1602345c3b75e0653f",
+    "server/HOST-SERVER.sh": "12ea7731470aa1a81277ee2a095e913c8f9d580be1c81e209050e5399a48b6fb",
+    "server/check-address.mjs": "91c342b8518331efff44774bb5c2022625faca8c68ded1538ae15968aa6b7832",
+    "server/compose.yaml": "79ea6eecbe1a131e6697b18d94195a4bb0a86fd2a6589a8098c4c28863a1d33a",
+    "server/licenses/ws-MIT.txt": "2b29dcfe0d6471f7e8c92c5fb38c9f93edee10330937055440192f1832b1ecef",
+    "server/public-relay.mjs": "c0ced00c0f7ff7e3418c5be352434f1fd0abeea1adfa5ff19864d788320811e1",
+    "server/relay.mjs": "ca190fe777915c88eb6548ab460e2ba9accf61a614eea6ae755aa4d0cf99a9c4",
+    "src/animation.js": "8446f1a669716d730605e31d8df6f9b2e25316ce1ba920b2617ee48e2f781e14",
+    "src/arcane-effects.js": "26f8a8f3d35b1bd72cd6b0106517e0200fe61f1862189000ea87f5d82a7e3781",
+    "src/audio.js": "844a1ab78d0238d4c930bd2ce3b8b218017732b5e60bcac57f1ceeffbd696871",
+    "src/biomes.js": "3471c8f7be24a28e5e1159a0429a4d2572d05bdbf0715ff86341217026ec81d2",
+    "src/block-actions.js": "926862b093434edca1dbb5e0683b78067376a2ee290f192263bb516949e5cae5",
+    "src/block-dynamics.js": "2cdd511e52d8476a4a8b677480da1d4323e7453903c99d257edc58835dc03d82",
+    "src/cave-life.js": "33e2253479bdffd4bccc461ff19284e8027deeea7dc7206a49d8562723d4d882",
+    "src/cave-update.js": "a5a1f2e895b0344f1d709af868e9b8af6f2f244c519a78387c33b57bb29cbe66",
+    "src/caves.js": "c552c0fb19d53ac8dc626b988ac8cdb23c78777b1764b6e3aaddd2405e81e6a7",
+    "src/chat.js": "2b1e7e7fe28382b4f63f3ef149f7f682f6de2afe2568fe056b6b2fd6d9fd9da2",
+    "src/cinderworld.js": "b765951dd103bede37608cf67e815a70f3c490ba10c65f9cb01f2deefce7978e",
+    "src/classic-textures.js": "c4a88be7e4bfa9131e9c41e126730a8fc4715bec4f786bbab1eaeb4470135f5c",
+    "src/compat.js": "6dd7b707ba4dd0c21c4d2ef1a5f4bbf7bc771cb2e276e5014bd3434759bd6866",
+    "src/content-textures.js": "c9692812d2ebd364bfe60001ee4e0c7e7b74ea03aa99273f22c1afa9b2c9e254",
+    "src/controls.js": "2209e5d9f86b6baa4e188a075d2540a5b474800a1b7cb46d3817ffb3663eed76",
+    "src/coop-players.js": "4277c94f1d259989fac170a353e24cdb0ebe4cda220643d70577729ac245e251",
+    "src/coop-survival.js": "21ad3d2130e83b2a9e4c84829635c3f04f2399e9964fec65f562d74f651c29c2",
+    "src/data.js": "0785a408f04087702f16327aa741e23e8f5ff077261356ff978d89f24e57b37b",
+    "src/daylight.js": "9072e4bb0a1e2cae5a06c7ca5d1e592567acad664e3bab2897dfcb55bf442868",
+    "src/defenders.js": "ad5cf0fe9dc97cfec46bb3dcb98c1c30fe5efd6b6973f5772e2453cd730e00f9",
+    "src/doors.js": "2ef32d9a520c9b55bb1332b49f0d1f83eed5f9935053950699f81264a3ed2ce9",
+    "src/ecology.js": "79cc58d1a7f52722454575ec1b186be482b0e146b46639d062ff70c0facb8ab1",
+    "src/encounters.js": "c7583bdec14930cc357d63ebbf92e8d0f6ae3d041342aa64c6af07c0b0e3c0df",
+    "src/equipment.js": "a4936aceaf451c9b8c2ea98469484c99dab0477065d6698d7d7d9f0a48923fad",
+    "src/expansion-models.js": "15ce40f3d9ff7933d68429d95ce23c390db446356bd4dc3402b4d36c3984ff5c",
+    "src/first-person.js": "df5af2768a6f194629c8b05c65c6c9310fc65ecabff67df855399969340c3894",
+    "src/foley.js": "26bc9d60bf3415274b9c2e32bf24587517742392b6def176413b7a00b5c725d2",
+    "src/graphics.js": "16a96d52ab2e4126a8628bd025cd5312278f5243faf0b87f3e7262da67fd738f",
+    "src/horizon.js": "76aa03b48c8058761d673ff3335aa1bbe0b38af01f8c646d3b3a01e0a71a4fae",
+    "src/hostile-combat.js": "d5bfbec2ebe0f39272bc2f523c30846f58502828f664b0f9cfc8c2c57215077a",
+    "src/incursion-renderer.js": "6f824902fda44f04a0b54bf05d2983eca589a1ee6930d91f6effb1e266b4f4b4",
+    "src/infernal-encounters.js": "1cf95c1ffab2103e640ab8e570cc3c95dc613918e40bdf5c1c44e618c80fac4b",
+    "src/infernal-models.js": "6a0fa91b32a7f6cfe257efc2a039fdc7c664f1e276fa701ab97b74201aec6d8a",
+    "src/infernal-world.js": "10ac90030e9391e03904db3f2686b014d07c615cda2f72e17c28439070ee26d9",
+    "src/invasion.js": "88a590e6f054325f55f2997cf5ef55253296f673281d22daaee9bef49faf2b93",
+    "src/inventory.js": "d1fc55fc96ed327b17ff20ac2ef6201017024fea0fe23ad11b3bbb9ace30fd7a",
+    "src/jukebox.js": "0520331adae9e0c363659143fc572ca2a02b9926f50016d30ee170492090a9c3",
+    "src/main.js": "831ab4dc9b991e8154156ab7157f9a5a14327f975f6181734c8e7352cc4db0ea",
+    "src/matthew.js": "199bf372a93fa82c534292b19ba896473f2611ef2aef011ff76018d067f99245",
+    "src/mesher.js": "f1406c66bea4fc03bb1556c612f790c234298850f39d0f77bde34840cc68480d",
+    "src/models.js": "553fe69af53277aed69237e94f7ac4987db8f74c80b5210c390bc4db9d0f9f0e",
+    "src/multiplayer.js": "b5c53856c488291cdd1eda1b46e7608fa482ea57c5afe5c71785ccd99fdac5b5",
+    "src/music.js": "6339a69c2e97e69c79070a2eeeac08e618aa5093452dce86a564b49946fb5fd2",
+    "src/navigation.js": "b60c51842c2ead89913af575dbd53dd085e743e2ec927e402cd35f0a4446835e",
+    "src/night-models.js": "fe2d045dbcae6074fdb6cc7c64f6dca2b47d4052c234213cd0a96a95f949a573",
+    "src/physics.js": "1e0882057ca9aaa49e6b39709fa1205241a1af8e6e0e83c357dbf1064f637b03",
+    "src/pistol-audio.js": "b8daa206ca5a5cb6d474fe55f725418fc5892cc25d581081a07da7b99703ad83",
+    "src/pistol-model.js": "f5a03cbbe6192c0bb87bb1ff7b129858dc81b14ad3085801db9768a1a3c1824e",
+    "src/player-model.js": "ac1777f14999219d9e63df71da34b09ace29921bc1c64fa191aa26311e875f3e",
+    "src/player-motion.js": "a595edee5db8bf511033fd3f8987edb8574fde58a205fc1286418429589aea0c",
+    "src/portals.js": "715224dcb3e15b427f0471c31872be852bb96080006c9b307e6ab44f20dfcb91",
+    "src/random.js": "e0beed1861e961b2e1c7488c1890d67ef75ed21e32b664bdfb5a92adf5165f89",
+    "src/realms.js": "48cdc19720769f4d0a6a5d2e66a06f386ac70b98fd22c77c80c256c7fd59eb80",
+    "src/relay-connection.js": "b1a80ffd0bf6941d094186e9ad169caeb13fb13128e219c72371f1947786049d",
+    "src/relic.js": "f03a457ff3de79b5ee2b2f2ba77f21ab91e386d71ccdab2225e2a6dc1b7a139e",
+    "src/renderer.js": "dd1155d6e854738a78a1598702b10207804d7b0f2f4eeb7ce6aa12083311c733",
+    "src/renewed-textures.js": "896e2406de78a8ab07dfaa902870f200439d01ccf5a4ac3d62a3503d87f99de5",
+    "src/rift-trial.js": "fa2b92eb185f3939b5ca821f551e1a64bced6f8db393a853c687b7c541d555b0",
+    "src/seeker.js": "7d4ffec1a729c31960f7b421fb748d5c242f7f7309d9287f57d364ef645852eb",
+    "src/simulation.js": "260070cbe06d7ce39345e53f5ffc8361568ae0de5823b501edd4878f079906f3",
+    "src/skins.js": "d792aa1825b7cb79e324356e6341d9b5344a27e2675a6b3eac8d6ad3396b09d0",
+    "src/soundscape.js": "cac530ad42faa94f98eebb4b51edf21eaceac03c478ac602ce15367a9647c2fe",
+    "src/spawn-eggs.js": "42b701d701457d2fd908e8b776efb4cce3bc795a548f27792d1522563bd17e53",
+    "src/storage.js": "41b8f7aa2409e7268e84b8a02ff944fe93548b4a0e60d4d6bf79713d214efc86",
+    "src/style.css": "77a53a82df9e08125dff0130f7db42abfb647027b9bf35d81528a14e7c0783df",
+    "src/terrain-worker.js": "e8639f5d69274eccdf94d0b78c9434a8d6ca065fbd75f91d872a1db2b12d9217",
+    "src/textures.js": "1c9c453db33f6eb271203cb2884b4e2489db66bdc6fdda6d53df92d7288f7e2a",
+    "src/trickster-effects.js": "594b36d9c54bd35df464827c0db2ef9dddbf0d9372902866883d795717cfa794",
+    "src/ui.js": "0dd11129766e8254d7f62b022cf4367d0789bcc06c4ebd4862c17435480f31fc",
+    "src/village-styles.js": "76be91722b0f6ed7149cefcf5116246ed5a701c2d68c513b3a87fed81b3c32e5",
+    "src/villages.js": "6bf8365a36565f15a21a128d3ee6e7f65e7782f54aeb24b7bdd833abdfee72bc",
+    "src/voices.js": "f7f8608d0c8bf7b8ddee37693d5e637c42561af8d8f4e96049bb7f52973f3005",
+    "src/watcher-model.js": "838bc143f99a6ab4d685b6b5ce3b4d31f72b7a51e188292b0981ff2020f9bd24",
+    "src/weapon-hud.js": "b306e85b2036db91a5309ff237d56d611b93fbbbee6f8b508d387b99de9a7c9c",
+    "src/weapon-models.js": "3e0af917a33bf6d789350e563bc621eda8d2ce67e9e278d11cf639810ae142f2",
+    "src/weapon-motion.js": "4e1dc691624b3505f7108163c34b5c1d440768913a2349c2b9262ce43ea16874",
+    "src/weather-renderer.js": "76f5ba281238eab00a51a0000f11f35cab897cf759deea15a20bc7c726026165",
+    "src/weather.js": "bc670667a1bf99c333f9df34f7de3731b52419351b17bbcee38b4c442bf47642",
+    "src/worker-code.js": "11aa1ed5e0dcfd68aedf831857d5fc0b3fd3fb92ce8619c989215c605c80ad44",
+    "src/world.js": "cdb30ab89071ec0109e38ac2bd52c20da4b9efda0d7c511970b3b30d4ef1b371",
+    "src/youtube-player.js": "cd7d573e03eafc12a5d00793f358c5dfdf1b8cc867d1dd55f112b90a81bf9744"
+  },
+  "limitations": [
+    "Native Windows execution and direct file-origin persistence remain unverified. Managed Chromium blocks file://; standalone tested with outside requests blocked over local HTTP.",
+    "Controlled positions, gear, timers and animation phases used; no unaided full Survival playthrough or zero-bugs guarantee.",
+    "Cosmetic swimming keeps upright collisions/physics; visual limbs may overlap nearby terrain. Wind-up does not delay current click damage.",
+    "Pistol original models/recoil/F5 player rig/poses intentionally excluded from the new non-pistol articulation/swimming rig.",
+    "Co-op swimming/movement appearances update; complete remote attack synchronization remains partial.",
+    "Existing navigation, parity, hosting and advanced-system limits remain in FEATURES.md and MULTIPLAYER.md.",
+    "Live Cloudflare tunnel and actual YouTube streaming unverified."
+  ],
+  "commands": [
+    "npm test",
+    "npm run build",
+    "npm run build:standalone",
+    "npm run build:desktop",
+    "npx playwright test tests/browser/model-overhaul.spec.js tests/browser/arsenal-visuals.spec.js tests/browser/https-relay.spec.js tests/browser/edition.spec.js tests/browser/guardian-gate.spec.js --grep \"offline all weapon|real sword hits|player uses actual water|all redesigned|pistols keep their palm|actual HTTPS|flint ignition|offline temple sword\""
+  ],
+  "packaging": "scripts/package-release.py verifies frozen inputs, ZIP CRCs, embedded HTML and artifact SHA-256 values. Public publisher fetches each download and verifies its bytes/hash before creating the release."
+}
