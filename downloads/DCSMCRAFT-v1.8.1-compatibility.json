@@ -1,0 +1,382 @@
+{
+  "comparedAgainst": "published v1.8.0 complete source",
+  "seed": "Wildflower",
+  "generators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "dimensions": [
+    "overworld",
+    "cinderwild"
+  ],
+  "coordinates": [
+    [
+      0,
+      0
+    ],
+    [
+      -2,
+      1
+    ],
+    [
+      5,
+      -4
+    ]
+  ],
+  "identicalChunks": 66,
+  "identicalContainerSnapshots": 22,
+  "unchangedData": [
+    "ARMOR_SLOTS",
+    "B",
+    "BLOCKS",
+    "CHUNK",
+    "CREATIVE_ITEMS",
+    "CYCLE_EVENTS",
+    "CYCLE_TEXT",
+    "DEFAULT_SETTINGS",
+    "FUELS",
+    "GENERATION_VERSION",
+    "HOSTILE_TYPES",
+    "ITEMS",
+    "MAX_Y",
+    "MIN_Y",
+    "MOB_INFO",
+    "PASSIVE_TYPES",
+    "RECIPES",
+    "REFERENCE",
+    "SEA",
+    "SMELTS",
+    "SPAWN_EGG_TYPES",
+    "VILLAGER_TRADES",
+    "attackCooldown",
+    "makeStack"
+  ],
+  "unchangedSources": [
+    {
+      "file": "animation.js",
+      "sha256": "8446f1a669716d730605e31d8df6f9b2e25316ce1ba920b2617ee48e2f781e14"
+    },
+    {
+      "file": "arcane-effects.js",
+      "sha256": "26f8a8f3d35b1bd72cd6b0106517e0200fe61f1862189000ea87f5d82a7e3781"
+    },
+    {
+      "file": "audio.js",
+      "sha256": "844a1ab78d0238d4c930bd2ce3b8b218017732b5e60bcac57f1ceeffbd696871"
+    },
+    {
+      "file": "biomes.js",
+      "sha256": "3471c8f7be24a28e5e1159a0429a4d2572d05bdbf0715ff86341217026ec81d2"
+    },
+    {
+      "file": "block-actions.js",
+      "sha256": "926862b093434edca1dbb5e0683b78067376a2ee290f192263bb516949e5cae5"
+    },
+    {
+      "file": "block-dynamics.js",
+      "sha256": "2cdd511e52d8476a4a8b677480da1d4323e7453903c99d257edc58835dc03d82"
+    },
+    {
+      "file": "cave-life.js",
+      "sha256": "33e2253479bdffd4bccc461ff19284e8027deeea7dc7206a49d8562723d4d882"
+    },
+    {
+      "file": "cave-update.js",
+      "sha256": "a5a1f2e895b0344f1d709af868e9b8af6f2f244c519a78387c33b57bb29cbe66"
+    },
+    {
+      "file": "caves.js",
+      "sha256": "c552c0fb19d53ac8dc626b988ac8cdb23c78777b1764b6e3aaddd2405e81e6a7"
+    },
+    {
+      "file": "chat.js",
+      "sha256": "2b1e7e7fe28382b4f63f3ef149f7f682f6de2afe2568fe056b6b2fd6d9fd9da2"
+    },
+    {
+      "file": "cinderworld.js",
+      "sha256": "b765951dd103bede37608cf67e815a70f3c490ba10c65f9cb01f2deefce7978e"
+    },
+    {
+      "file": "classic-textures.js",
+      "sha256": "c4a88be7e4bfa9131e9c41e126730a8fc4715bec4f786bbab1eaeb4470135f5c"
+    },
+    {
+      "file": "compat.js",
+      "sha256": "6dd7b707ba4dd0c21c4d2ef1a5f4bbf7bc771cb2e276e5014bd3434759bd6866"
+    },
+    {
+      "file": "content-textures.js",
+      "sha256": "c9692812d2ebd364bfe60001ee4e0c7e7b74ea03aa99273f22c1afa9b2c9e254"
+    },
+    {
+      "file": "controls.js",
+      "sha256": "2209e5d9f86b6baa4e188a075d2540a5b474800a1b7cb46d3817ffb3663eed76"
+    },
+    {
+      "file": "coop-players.js",
+      "sha256": "4277c94f1d259989fac170a353e24cdb0ebe4cda220643d70577729ac245e251"
+    },
+    {
+      "file": "coop-survival.js",
+      "sha256": "21ad3d2130e83b2a9e4c84829635c3f04f2399e9964fec65f562d74f651c29c2"
+    },
+    {
+      "file": "daylight.js",
+      "sha256": "9072e4bb0a1e2cae5a06c7ca5d1e592567acad664e3bab2897dfcb55bf442868"
+    },
+    {
+      "file": "defenders.js",
+      "sha256": "ad5cf0fe9dc97cfec46bb3dcb98c1c30fe5efd6b6973f5772e2453cd730e00f9"
+    },
+    {
+      "file": "doors.js",
+      "sha256": "2ef32d9a520c9b55bb1332b49f0d1f83eed5f9935053950699f81264a3ed2ce9"
+    },
+    {
+      "file": "ecology.js",
+      "sha256": "79cc58d1a7f52722454575ec1b186be482b0e146b46639d062ff70c0facb8ab1"
+    },
+    {
+      "file": "encounters.js",
+      "sha256": "c7583bdec14930cc357d63ebbf92e8d0f6ae3d041342aa64c6af07c0b0e3c0df"
+    },
+    {
+      "file": "equipment.js",
+      "sha256": "a4936aceaf451c9b8c2ea98469484c99dab0477065d6698d7d7d9f0a48923fad"
+    },
+    {
+      "file": "expansion-models.js",
+      "sha256": "15ce40f3d9ff7933d68429d95ce23c390db446356bd4dc3402b4d36c3984ff5c"
+    },
+    {
+      "file": "first-person.js",
+      "sha256": "df5af2768a6f194629c8b05c65c6c9310fc65ecabff67df855399969340c3894"
+    },
+    {
+      "file": "foley.js",
+      "sha256": "26bc9d60bf3415274b9c2e32bf24587517742392b6def176413b7a00b5c725d2"
+    },
+    {
+      "file": "horizon.js",
+      "sha256": "76aa03b48c8058761d673ff3335aa1bbe0b38af01f8c646d3b3a01e0a71a4fae"
+    },
+    {
+      "file": "hostile-combat.js",
+      "sha256": "d5bfbec2ebe0f39272bc2f523c30846f58502828f664b0f9cfc8c2c57215077a"
+    },
+    {
+      "file": "incursion-renderer.js",
+      "sha256": "6f824902fda44f04a0b54bf05d2983eca589a1ee6930d91f6effb1e266b4f4b4"
+    },
+    {
+      "file": "infernal-encounters.js",
+      "sha256": "1cf95c1ffab2103e640ab8e570cc3c95dc613918e40bdf5c1c44e618c80fac4b"
+    },
+    {
+      "file": "infernal-models.js",
+      "sha256": "6a0fa91b32a7f6cfe257efc2a039fdc7c664f1e276fa701ab97b74201aec6d8a"
+    },
+    {
+      "file": "infernal-world.js",
+      "sha256": "10ac90030e9391e03904db3f2686b014d07c615cda2f72e17c28439070ee26d9"
+    },
+    {
+      "file": "invasion.js",
+      "sha256": "88a590e6f054325f55f2997cf5ef55253296f673281d22daaee9bef49faf2b93"
+    },
+    {
+      "file": "inventory.js",
+      "sha256": "d1fc55fc96ed327b17ff20ac2ef6201017024fea0fe23ad11b3bbb9ace30fd7a"
+    },
+    {
+      "file": "jukebox.js",
+      "sha256": "0520331adae9e0c363659143fc572ca2a02b9926f50016d30ee170492090a9c3"
+    },
+    {
+      "file": "main.js",
+      "sha256": "831ab4dc9b991e8154156ab7157f9a5a14327f975f6181734c8e7352cc4db0ea"
+    },
+    {
+      "file": "matthew.js",
+      "sha256": "199bf372a93fa82c534292b19ba896473f2611ef2aef011ff76018d067f99245"
+    },
+    {
+      "file": "mesher.js",
+      "sha256": "f1406c66bea4fc03bb1556c612f790c234298850f39d0f77bde34840cc68480d"
+    },
+    {
+      "file": "models.js",
+      "sha256": "553fe69af53277aed69237e94f7ac4987db8f74c80b5210c390bc4db9d0f9f0e"
+    },
+    {
+      "file": "multiplayer.js",
+      "sha256": "b5c53856c488291cdd1eda1b46e7608fa482ea57c5afe5c71785ccd99fdac5b5"
+    },
+    {
+      "file": "music.js",
+      "sha256": "6339a69c2e97e69c79070a2eeeac08e618aa5093452dce86a564b49946fb5fd2"
+    },
+    {
+      "file": "navigation.js",
+      "sha256": "b60c51842c2ead89913af575dbd53dd085e743e2ec927e402cd35f0a4446835e"
+    },
+    {
+      "file": "night-models.js",
+      "sha256": "fe2d045dbcae6074fdb6cc7c64f6dca2b47d4052c234213cd0a96a95f949a573"
+    },
+    {
+      "file": "physics.js",
+      "sha256": "1e0882057ca9aaa49e6b39709fa1205241a1af8e6e0e83c357dbf1064f637b03"
+    },
+    {
+      "file": "pistol-audio.js",
+      "sha256": "b8daa206ca5a5cb6d474fe55f725418fc5892cc25d581081a07da7b99703ad83"
+    },
+    {
+      "file": "pistol-model.js",
+      "sha256": "f5a03cbbe6192c0bb87bb1ff7b129858dc81b14ad3085801db9768a1a3c1824e"
+    },
+    {
+      "file": "player-model.js",
+      "sha256": "ac1777f14999219d9e63df71da34b09ace29921bc1c64fa191aa26311e875f3e"
+    },
+    {
+      "file": "player-motion.js",
+      "sha256": "a595edee5db8bf511033fd3f8987edb8574fde58a205fc1286418429589aea0c"
+    },
+    {
+      "file": "portals.js",
+      "sha256": "715224dcb3e15b427f0471c31872be852bb96080006c9b307e6ab44f20dfcb91"
+    },
+    {
+      "file": "random.js",
+      "sha256": "e0beed1861e961b2e1c7488c1890d67ef75ed21e32b664bdfb5a92adf5165f89"
+    },
+    {
+      "file": "realms.js",
+      "sha256": "48cdc19720769f4d0a6a5d2e66a06f386ac70b98fd22c77c80c256c7fd59eb80"
+    },
+    {
+      "file": "relay-connection.js",
+      "sha256": "b1a80ffd0bf6941d094186e9ad169caeb13fb13128e219c72371f1947786049d"
+    },
+    {
+      "file": "relic.js",
+      "sha256": "f03a457ff3de79b5ee2b2f2ba77f21ab91e386d71ccdab2225e2a6dc1b7a139e"
+    },
+    {
+      "file": "renderer.js",
+      "sha256": "dd1155d6e854738a78a1598702b10207804d7b0f2f4eeb7ce6aa12083311c733"
+    },
+    {
+      "file": "renewed-textures.js",
+      "sha256": "896e2406de78a8ab07dfaa902870f200439d01ccf5a4ac3d62a3503d87f99de5"
+    },
+    {
+      "file": "rift-trial.js",
+      "sha256": "fa2b92eb185f3939b5ca821f551e1a64bced6f8db393a853c687b7c541d555b0"
+    },
+    {
+      "file": "seeker.js",
+      "sha256": "7d4ffec1a729c31960f7b421fb748d5c242f7f7309d9287f57d364ef645852eb"
+    },
+    {
+      "file": "simulation.js",
+      "sha256": "260070cbe06d7ce39345e53f5ffc8361568ae0de5823b501edd4878f079906f3"
+    },
+    {
+      "file": "skins.js",
+      "sha256": "d792aa1825b7cb79e324356e6341d9b5344a27e2675a6b3eac8d6ad3396b09d0"
+    },
+    {
+      "file": "soundscape.js",
+      "sha256": "cac530ad42faa94f98eebb4b51edf21eaceac03c478ac602ce15367a9647c2fe"
+    },
+    {
+      "file": "spawn-eggs.js",
+      "sha256": "42b701d701457d2fd908e8b776efb4cce3bc795a548f27792d1522563bd17e53"
+    },
+    {
+      "file": "storage.js",
+      "sha256": "41b8f7aa2409e7268e84b8a02ff944fe93548b4a0e60d4d6bf79713d214efc86"
+    },
+    {
+      "file": "terrain-worker.js",
+      "sha256": "e8639f5d69274eccdf94d0b78c9434a8d6ca065fbd75f91d872a1db2b12d9217"
+    },
+    {
+      "file": "trickster-effects.js",
+      "sha256": "594b36d9c54bd35df464827c0db2ef9dddbf0d9372902866883d795717cfa794"
+    },
+    {
+      "file": "village-styles.js",
+      "sha256": "76be91722b0f6ed7149cefcf5116246ed5a701c2d68c513b3a87fed81b3c32e5"
+    },
+    {
+      "file": "villages.js",
+      "sha256": "6bf8365a36565f15a21a128d3ee6e7f65e7782f54aeb24b7bdd833abdfee72bc"
+    },
+    {
+      "file": "voices.js",
+      "sha256": "f7f8608d0c8bf7b8ddee37693d5e637c42561af8d8f4e96049bb7f52973f3005"
+    },
+    {
+      "file": "watcher-model.js",
+      "sha256": "838bc143f99a6ab4d685b6b5ce3b4d31f72b7a51e188292b0981ff2020f9bd24"
+    },
+    {
+      "file": "weapon-hud.js",
+      "sha256": "b306e85b2036db91a5309ff237d56d611b93fbbbee6f8b508d387b99de9a7c9c"
+    },
+    {
+      "file": "weapon-models.js",
+      "sha256": "3e0af917a33bf6d789350e563bc621eda8d2ce67e9e278d11cf639810ae142f2"
+    },
+    {
+      "file": "weapon-motion.js",
+      "sha256": "4e1dc691624b3505f7108163c34b5c1d440768913a2349c2b9262ce43ea16874"
+    },
+    {
+      "file": "weather-renderer.js",
+      "sha256": "76f5ba281238eab00a51a0000f11f35cab897cf759deea15a20bc7c726026165"
+    },
+    {
+      "file": "weather.js",
+      "sha256": "bc670667a1bf99c333f9df34f7de3731b52419351b17bbcee38b4c442bf47642"
+    },
+    {
+      "file": "worker-code.js",
+      "sha256": "11aa1ed5e0dcfd68aedf831857d5fc0b3fd3fb92ce8619c989215c605c80ad44"
+    },
+    {
+      "file": "world.js",
+      "sha256": "cdb30ab89071ec0109e38ac2bd52c20da4b9efda0d7c511970b3b30d4ef1b371"
+    },
+    {
+      "file": "youtube-player.js",
+      "sha256": "cd7d573e03eafc12a5d00793f358c5dfdf1b8cc867d1dd55f112b90a81bf9744"
+    }
+  ],
+  "changedSources": [
+    "data.js",
+    "graphics.js",
+    "textures.js",
+    "ui.js"
+  ],
+  "coverage": {
+    "sourcePNGs": 183,
+    "mappedBlockStates": 109,
+    "totalBlockStates": 129,
+    "importedItemIcons": 87
+  },
+  "limitation": "Representative terrain samples; original data and gameplay source files unchanged. Custom art, creature textures, modeled weapons/worn armor and animated strips retain documented fallbacks."
+}

@@ -1,0 +1,61 @@
+{
+  "version": "1.8.1",
+  "name": "Supplied Assets",
+  "reference": "Minecraft Java Edition 1.20.4 \u2014 partial parity",
+  "generationVersion": 12,
+  "newWorldRequired": false,
+  "coreTests": {
+    "passed": 363,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browserTests": {
+    "passed": 3,
+    "failed": 0,
+    "scenarios": [
+      "Exact offline standalone: 327 imported block face comparisons and all 87 imported item icons; transparent held flint/steel, actual Q drop, Creative catalog and no outside requests",
+      "Reversible switching through all four packs, unchanged edits, saved supplied preference, actual world save and reload across a chunk boundary",
+      "Vite web entry with saved supplied preference, successful world creation and actual W movement"
+    ],
+    "initialFixtureCorrection": "The first run used d.stack.id instead of the existing dropped-item d.id. The test was corrected and expanded to all imported item icons; all three scenarios pass against the same frozen game."
+  },
+  "builds": {
+    "productionWeb": true,
+    "standaloneHtml": true,
+    "windowsX64PE": true,
+    "embeddedHtmlMatches": true,
+    "htmlSha256": "b9175db54f0e2e5b4094411aeacda1555d128ae00e1c6fc55a90460a5a6c3676",
+    "exeSha256": "dd27757c5a8460b82028be30e90c0aa3c9f5b57b2fa3331cc1186b4111036140"
+  },
+  "sourceFreeze": {
+    "files": 304,
+    "sha256": "863c207055ed65cf332189fb10c693cdd1d6b645d278799131636d3eb07f19e1",
+    "allVerified": true
+  },
+  "coverage": {
+    "sourcePNGs": 183,
+    "mappedBlockStates": 109,
+    "totalBlockStates": 129,
+    "importedItemIcons": 87
+  },
+  "compatibility": {
+    "identicalChunks": 66,
+    "identicalContainerSnapshots": 22,
+    "unchangedExistingSourceFiles": 76,
+    "identicalGameplayDataExports": 24,
+    "comparison": "Published v1.8.0 source; all gameplay, model, simulation, physics, audio, save and networking sources unchanged."
+  },
+  "screenshots": [
+    "graphics-menu.png",
+    "terrain-items.png",
+    "flint-held.png",
+    "creative-inventory.png"
+  ],
+  "limits": [
+    "Imported animated strips use frame zero and existing fluid shimmer; full resource-pack animation metadata is not implemented.",
+    "Custom blocks/items, chest/bed artwork, modeled weapons, worn armor, creatures and menus retain original art or Renewed fallback.",
+    "Native Windows execution is not verified on this Linux host; embedded HTML is byte-for-byte verified.",
+    "Managed Chromium blocks file://; identical standalone tested over HTTP with outside requests blocked.",
+    "Focused texture update: full historical Survival progression and multiplayer scenarios were not repeated. No zero-bug guarantee."
+  ]
+}
