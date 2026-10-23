@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "baseline": "1.9.1",
+  "baseTerrainChunksEqual": 48,
+  "containerSnapshotsEqual": 12,
+  "containersCompared": 0,
+  "originalItemsUnchanged": true,
+  "blocksUnchanged": true,
+  "recipesUnchanged": true,
+  "mobStatsUnchanged": true,
+  "defaultGraphicsAudioUnchanged": true,
+  "baseGenerationVersion": 12,
+  "unchangedWeaponModules": [
+    "pistol-model.js",
+    "pistol-audio.js",
+    "matthew.js",
+    "trickster-effects.js",
+    "weapon-models.js",
+    "weapon-motion.js",
+    "animation.js"
+  ],
+  "newItems": [
+    "palm_tablet",
+    "saint_corpse_part"
+  ],
+  "structureTerrainChunksEqual": 100,
+  "populatedContainersCompared": 18
+}
