@@ -1,0 +1,130 @@
+{
+  "version": "1.9.0",
+  "name": "Field & Form",
+  "reference": "Minecraft Java Edition 1.20.4 \u2014 partial parity",
+  "generationVersion": 12,
+  "newWorldRequired": false,
+  "coreTests": {
+    "passed": 368,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browserTests": {
+    "passed": 6,
+    "failed": 0,
+    "scenarios": [
+      "All 16 current Overworld rigs plus two legacy appearances, eight village outfits, actual bounded head tracking across repeated body/camera rotations and saved villager reload",
+      "All 97 flat item shapes, representative actual textures in hand, F5, real Q drop, camera-facing sprites and retained solid block/weapon geometry",
+      "Actual terrain worker directional UVs, local pack-change remeshing, fitted chest/workstation/door/torch/plant/rail rendering, 48-pixel bamboo stalk mask",
+      "Exact standalone with outside requests blocked: 330 block-face pixel comparisons, all 97 imported icons, real cutout rendering, drop and Creative inventory",
+      "Reversible four-pack switching, unchanged edits, saved preference and block/inventory reload across a chunk boundary",
+      "Normal Vite entry with saved pack, world creation and actual W movement"
+    ]
+  },
+  "builds": {
+    "productionWeb": true,
+    "standaloneHtml": true,
+    "windowsX64PE": true,
+    "embeddedHtmlMatches": true,
+    "htmlSha256": "1224436e825bc393361b53b81338cb26787b7ace0dd6c9f92932cd052efba14b",
+    "exeSha256": "c6ddda8adc69af9d0e745cc660953e610f54b4a63ce300db3221827db915a753"
+  },
+  "sourceFreeze": {
+    "files": 314,
+    "sha256": "561803a7d39db9a279e73cd6eb74eed62006ba99734bb27bd9ab7f88521c9d90",
+    "allVerified": true
+  },
+  "coverage": {
+    "sourcePNGs": 189,
+    "mappedBlockStates": 110,
+    "totalBlockStates": 129,
+    "importedItemIcons": 97,
+    "bakedImages": 191,
+    "flatItemTypes": 97,
+    "currentOverworldTypes": 16,
+    "legacyAppearanceVariants": 2,
+    "villagePalettes": 8,
+    "professions": 3
+  },
+  "modelBatches": {
+    "currentTypes": [
+      "watcher",
+      "zombie",
+      "creeper",
+      "spider",
+      "skeleton",
+      "panda",
+      "koala",
+      "tiger",
+      "devin_guardian",
+      "iron_golem",
+      "grazer",
+      "woolling",
+      "cow",
+      "chicken",
+      "rabbit",
+      "villager"
+    ],
+    "currentCount": 16,
+    "legacy": [
+      "shade",
+      "stalker"
+    ],
+    "batches": {
+      "grazer": 19,
+      "woolling": 19,
+      "cow": 21,
+      "chicken": 11,
+      "rabbit": 18,
+      "panda": 13,
+      "koala": 18,
+      "tiger": 17,
+      "villager": 16,
+      "iron_golem": 16,
+      "zombie": 15,
+      "creeper": 14,
+      "skeleton": 12,
+      "spider": 22,
+      "devin_guardian": 21,
+      "watcher": 13,
+      "shade": 15,
+      "stalker": 15
+    },
+    "maxDraws": 22,
+    "scope": "Visible rigid model meshes before optional shadows or combat-warning meshes; not measured hardware FPS."
+  },
+  "compatibility": {
+    "comparison": "Published v1.8.1 complete source",
+    "identicalSampledChunks": 66,
+    "identicalContainerSnapshots": 22,
+    "unchangedExistingJavaScriptModules": 70,
+    "identicalNonVersionDataExports": 24,
+    "unchangedCinderModels": [
+      "emberling",
+      "basalt_crawler",
+      "cinderback",
+      "cinder_wraith",
+      "dread_knight",
+      "soul_reaver",
+      "magma_maw",
+      "mad_titan",
+      "ash_deer"
+    ]
+  },
+  "visualReview": {
+    "creatures": true,
+    "villagePalettes": true,
+    "flatHeldAndF5Items": true,
+    "repairedWorldBlocks": true,
+    "correction": "Screenshot review caught the native opaque bamboo UV texture filling crossed panels. Its three-pixel shaft is now centered on transparency; source provenance, unit checks, real atlas checks and all six browser scenarios were rerun after correction."
+  },
+  "fixtureNotes": "An early creature fixture lacked production createEntity turn/dir fields and was corrected; source simulation was unchanged. Original block-preservation tests now explicitly cover the intentional flat door item while retaining old solid-block/pistol fingerprints.",
+  "limits": [
+    "Animated strips use frame zero with existing shimmer; full resource-pack metadata/models are not implemented.",
+    "Custom and bed artwork retain original fallback; workstation fronts retain the fixed north-facing orientation.",
+    "Original AI/steering, collision, combat and progression limitations remain; models do not change hitboxes.",
+    "Native Windows launch is unverified on this Linux host; the exact embedded payload is byte-for-byte verified.",
+    "Managed Chromium blocks direct file://; identical standalone is tested over HTTP with outside requests blocked.",
+    "The complete historical Survival progression and multiplayer browser suite were not repeated; this is not a zero-bug guarantee."
+  ]
+}

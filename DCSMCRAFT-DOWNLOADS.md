@@ -1,0 +1,25 @@
+# DCSMCRAFT 1.9.0 — Field & Form
+
+Download the Windows ZIP, extract it and run DCSMCRAFT.exe using installed Edge or Chrome. A self-contained standalone HTML and full source are also available. **Existing worlds are supported; no new generator or progression reset is required.**
+
+- **All 16 current Overworld creature types** have original stylized voxel designs: farm animals, jungle wildlife, night hostiles, villagers, Iron Golems, Devin Guardians and The Watcher. Two legacy saved mob types use wanderer palette variants. Eight village palettes, three professions, connected folded arms, moving tiger-tail markings and distinct silhouettes are retained. Cinderworld models remain unchanged.
+- **Villager neck repair:** smooth local head tracking stays within ±60° horizontally and ±0.32 radians vertically. It cannot accumulate whole rotations or face backward through the body. AI and body steering remain unchanged.
+- **All 97 ordinary/plant/door items** are transparent, double-sided flat sprites in hand, F5/co-op appearances and when dropped, with no cuboid sides or pixel extrusion. Flat drops face the camera. Solid building blocks, modeled tools/weapons, The Devin Sword and Matthew’s pistols retain their depth.
+- **Supplied Assets pack repairs:** separate workstation fronts/sides, fitted chest-sheet crops and latch, world torch shaft/tip UVs, solid narrow door edges with intact upper/lower windows, connected bamboo/cane cutouts, crossed cobwebs, thin rails and proper flat item icons. Pack changes remesh local and worker-built terrain with the correct directional UVs; far terrain follows the same face rules.
+
+Select the optional pack under **Options → Video Settings → World detail → Texture Pack → Supplied Assets**. Renewed stays the default; Renewed, Soft and Classic remain available. The pack now uses **189 supplied source images**, **110 mapped block states** and **97 imported inventory icons**, with crop/hash provenance in the source. Imported Minecraft artwork belongs to Mojang/Microsoft and is not covered by the DCSMCRAFT MIT license; DCSMCRAFT is independent and unaffiliated.
+
+**Remaining texture limits:** unmapped custom content and bed artwork retain original fallbacks. Source animation strips use frame zero with existing fluid shimmer. Full resource-pack models/metadata animation and exact reference block geometry/orientation are not implemented; workstations use the existing fixed north-facing orientation. Creature designs are original, not imported Minecraft entity skins. Gameplay, combat statistics, loot, recipes, saves and generator 12 are unchanged. Mechanics reference remains **Minecraft Java Edition 1.20.4, partial parity**.
+
+- [Windows 10/11 game ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/DCSMCRAFT-Windows-1.9.0.zip)
+- [Standalone offline HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/DCSMCRAFT-Standalone-v1.9.0.html)
+- [Browser build ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/dcsmcraft-build-v1.9.0.zip)
+- [Multiplayer relay ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/DCSMCRAFT-Multiplayer-Server-1.9.0.zip)
+- [Complete source ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/dcsmcraft-source-v1.9.0.zip)
+- [Checksums](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/DCSMCRAFT-v1.9.0-checksums.json)
+- [Validation report](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/DCSMCRAFT-v1.9.0-validation.json)
+- [Terrain compatibility report](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/downloads-v1.9.0/downloads/DCSMCRAFT-v1.9.0-compatibility.json)
+
+Validation: **368 core tests** and **six browser scenarios** pass on frozen inputs. Checks cover all creature rigs/outfit palettes, bounded head tracking, real save/reload, all flat item shapes, F5, actual Q drops and camera-facing sprites, supplied block/icon pixels, torch transparency, actual terrain workers, pack remeshing, reversible pack switching and normal movement. Controlled screenshots are visually inspected. All 66 sampled chunks and 22 accumulated container snapshots match v1.8.1 across generators 2–12; gameplay definitions and gameplay source remain unchanged. Nine retained Cinderworld model fingerprints match v1.8.1.
+
+Web, standalone and Windows x64 builds succeed; the executable’s extracted payload matches the standalone byte-for-byte. Native Windows launch and direct file:// storage are not verified on this Linux host; the identical self-contained HTML is tested over HTTP with outside requests blocked. The complete historical Survival progression and multiplayer suite were not repeated. Existing documented foundation limitations remain. See the included README.md, FEATURES.md, THIRD_PARTY.md and VALIDATION.md for coverage and validation limits.
