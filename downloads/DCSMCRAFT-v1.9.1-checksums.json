@@ -1,0 +1,26 @@
+{
+  "DCSMCRAFT-Windows-1.9.1.zip": {
+    "bytes": 1656138,
+    "sha256": "b74c60501f3836e6bc09bf6226f231623b019a07f6b410a996c5d5f55a99c923"
+  },
+  "DCSMCRAFT.exe": {
+    "bytes": 1553408,
+    "sha256": "89d3cd49306fd2f61735c45920752bc44525dca817a32efab389f2f302ffb226"
+  },
+  "DCSMCRAFT-Standalone-v1.9.1.html": {
+    "bytes": 1374182,
+    "sha256": "9bf2d9b79c98175f8f902d2df1dc7ae7d698e0dc40a966c0c3944dca4352a192"
+  },
+  "DCSMCRAFT-Multiplayer-Server-1.9.1.zip": {
+    "bytes": 469520,
+    "sha256": "09ae130a55e549db9018e1c3f9aa228e31288c35634868a2b79310e7b736d52e"
+  },
+  "dcsmcraft-source-v1.9.1.zip": {
+    "bytes": 841475,
+    "sha256": "499b0632d5f1984505d2e0c1ecf9a5d55aa4e9438809282b89b05a385c86c33d"
+  },
+  "dcsmcraft-build-v1.9.1.zip": {
+    "bytes": 1702838,
+    "sha256": "c96e88ce2ac507a028b4badf4a23e9adc8890d3af02e064ce2aaf45a7f896be9"
+  }
+}

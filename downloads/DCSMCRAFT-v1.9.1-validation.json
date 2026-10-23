@@ -1,0 +1,17 @@
+{
+  "version": "1.9.1",
+  "reference": "Minecraft Java Edition 1.20.4",
+  "generationVersion": 12,
+  "coreTests": 370,
+  "selectedBrowserScenarios": 8,
+  "runtimeBuildAssetInputsFrozen": 316,
+  "frozenInputSHA256": "e8f522f4695cb4b25906f7c11ffd67a2c6525051671bbb5bd9e507e5b333c156",
+  "webBuild": "passed",
+  "standaloneBuild": "passed",
+  "windowsX64Build": "passed",
+  "embeddedHTMLExtractedByteIdentically": true,
+  "offlineStandaloneOutsideRequestsBlocked": true,
+  "nativeWindowsExecutionVerified": false,
+  "directFileURLVerified": false,
+  "notes": "Targeted visual, UI, crafting, saves, packs, combat, swimming and pistol regressions; no exhaustive parity/no-bug guarantee."
+}
