@@ -1,0 +1,27 @@
+{
+  "version": "2.2.0",
+  "baseline": "2.1.0",
+  "terrainChunksEqual": 48,
+  "existingBlocksItemsRecipesStatsSettingsUnchanged": true,
+  "oldRecipeIndicesPreserved": true,
+  "addedDiscs": 4,
+  "addedDiscRecipes": 4,
+  "survivalStandAbilitiesAndTrialUnchanged": true,
+  "unchangedModules": [
+    "world.js",
+    "physics.js",
+    "simulation.js",
+    "devils-palm.js",
+    "stands-data.js",
+    "storage.js",
+    "weather.js",
+    "snow.js",
+    "weapon-models.js",
+    "weapon-motion.js",
+    "animation.js",
+    "pistol-model.js",
+    "pistol-audio.js",
+    "matthew.js",
+    "hostile-combat.js"
+  ]
+}
