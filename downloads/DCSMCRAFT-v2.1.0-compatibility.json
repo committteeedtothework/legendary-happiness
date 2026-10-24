@@ -1,0 +1,21 @@
+{
+  "version": "2.1.0",
+  "baseline": "2.0.0",
+  "baseTerrainChunksEqual": 91,
+  "populatedContainersEqual": 10,
+  "oldBlockIDsAndDefinitionsUnchanged": true,
+  "appendedSnowStates": 8,
+  "itemsRecipesMobStatsDefaultSettingsUnchanged": true,
+  "unchangedModules": [
+    "pistol-model.js",
+    "pistol-audio.js",
+    "matthew.js",
+    "trickster-effects.js",
+    "weapon-models.js",
+    "weapon-motion.js",
+    "animation.js",
+    "stand-abilities.js",
+    "devils-palm.js",
+    "storage.js"
+  ]
+}
