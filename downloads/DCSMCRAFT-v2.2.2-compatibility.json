@@ -1,0 +1,14 @@
+{
+  "version": "2.2.2",
+  "baseline": "2.2.1",
+  "runtimeAndAssetFilesCompared": 295,
+  "changedFiles": [
+    "src/data.js",
+    "src/first-person.js"
+  ],
+  "dataChanges": "Release version string only",
+  "allOtherRuntimeAndAssetsByteIdentical": true,
+  "worldGenerationSavesCombatControlsInventoryRecipesUnchanged": true,
+  "actionCurvesF5WeaponsPistolsSoundsStandsDiscsMultiplayerUnchanged": true,
+  "newWorldRequired": false
+}
