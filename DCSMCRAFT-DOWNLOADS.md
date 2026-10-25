@@ -1,0 +1,20 @@
+DCSMCRAFT 2.3.0 — Oceans & Expeditions
+
+Create a NEW WORLD for generator 13. Old worlds keep their recorded terrain; boats, new creatures and biome-weighted weather also work in existing saves. All participants should use matching 2.3.0 clients; the Windows ZIP includes the matching relay package.
+
+The Overworld has large irregular landmasses separated by deep ocean corridors, broader climate regions with all 13 existing biomes, mountains, water-filled river cores, lakes and retained caves/ores/mineshafts. Villages use 1,536-block regions with a minimum 1,024-block center separation and dry footprint checks. Broad-desert spawn height is checked against actual ground. On sampled Wildflower terrain, sea coverage is 83.5% and mean land-biome runs are 227 blocks versus 79 before; these are seed-specific measurements.
+
+Craft an Oak Boat using five planks in a U at a crafting table. Right-click water to launch, right-click the boat to board, W/S paddle, A/D steer, Shift dismounts. Boats float/collide/save with riders, have oars/seated F5 and a dry rendered hull, recover as a single flat item, and burn in lava. One seat, 32 boats per dimension; water-only and approximate physics. Survival guests use host authority and client prediction with public ownership IDs; Creative guests observe host-controlled boats.
+
+Cinderworld has broad volcanic regions/lava seas, similarly sparse structures and three genuinely distinct seeded citadel/cathedral/foundry layouts with variable orientation, height, size, ruins, palettes and loot. Six persistent defenders protect rotated vaults and Cinder Sigils. Ember Rays and Cinder Rocs fly and fire telegraphed shots: aim and left-click with an empty hand/melee item to return a nearby fireball. Cyan returns can hurt the shooter, spare players/passive creatures, and use a six-tick parry recharge. Original models, voices, drops and Creative eggs are included. Four natural fliers/48 projectiles; local flight steering and no terrain-destroying fireballs. Bridge lava or use Creative flight; boats cannot sail lava.
+
+Wet/cold/ocean biomes have faster natural weather cycles, cold precipitation becomes accumulating snow, and deserts stay naturally dry. Weather remains one saved clock influenced by the host's biome. Existing manual overrides and baseline co-op dimension restrictions remain.
+
+410 core tests and 13 selected browser scenarios pass, including actual boat crafting/controls/persistence, a real portal and fireball reflection, two-context Survival boat authority, real HTTPS/WSS, original gathering/crafting, all held-item and skin fixes, local MP3 discs, Creative Stands, snow and tornadoes. All 424 packaged input hashes, ZIP CRCs and 189 supplied PNGs are verified. Legacy generators 2–12 match 78 chunk samples and 12 populated containers exactly; old item/block/recipe indices remain. The executable embeds the tested HTML byte-for-byte. Native Windows execution remains unverified on the Linux build host and needs installed Edge/Chrome. No new hardware FPS or zero-bug guarantee is claimed. Minecraft mechanics reference remains Java 1.20.4 with partial baseline parity.
+
+Downloads:
+
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.0/downloads/DCSMCRAFT-Windows-2.3.0.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.0/downloads/DCSMCRAFT-Standalone-v2.3.0.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.0/downloads/dcsmcraft-source-v2.3.0.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.0/downloads/DCSMCRAFT-Multiplayer-Server-2.3.0.zip)

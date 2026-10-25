@@ -1,0 +1,52 @@
+{
+  "version": "2.3.0",
+  "baseline": "2.2.3",
+  "legacyGenerators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "legacyChunkBytesMatched": 78,
+  "legacyContainersMatched": 12,
+  "existingBlocksItemsRecipesStatsSettingsUnchanged": true,
+  "originalRecipeIndicesPreserved": true,
+  "newGenerator": 13,
+  "newItems": [
+    "oak_boat",
+    "ember_ray_spawn_egg",
+    "cinder_roc_spawn_egg"
+  ],
+  "newCreatures": 2,
+  "newRecipes": 1,
+  "newWorldRequiredForTerrain": true,
+  "seedSample": {
+    "seed": "Wildflower",
+    "extent": "-8192..8192 at 128-block intervals",
+    "oceanFraction": 0.8345051379123851,
+    "biomes": [
+      "ocean",
+      "woodland",
+      "birch_woodland",
+      "pine_forest",
+      "meadow",
+      "alpine",
+      "marsh",
+      "savanna",
+      "desert",
+      "snowy_taiga",
+      "jungle",
+      "badlands",
+      "stony_peaks"
+    ],
+    "meanLandBiomeRunOld": 78.58064516129032,
+    "meanLandBiomeRunNew": 227.11111111111111
+  }
+}
