@@ -1,0 +1,49 @@
+{
+  "version": "2.3.1",
+  "baseline": "2.3.0",
+  "legacyGenerators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "legacyChunkBytesMatched": 86,
+  "legacyContainersMatched": 13,
+  "existingBlocksItemsRecipesStatsSettingsUnchanged": true,
+  "originalRecipeIndicesPreserved": true,
+  "newGenerator": 14,
+  "newItems": [],
+  "newCreatures": 0,
+  "newRecipes": 0,
+  "newWorldRequiredForTerrain": true,
+  "seedSample": {
+    "seed": "Wildflower",
+    "extent": "-8192..8192 at 128-block intervals",
+    "oceanFraction": 0.20876149269875607,
+    "biomes": [
+      "savanna",
+      "meadow",
+      "birch_woodland",
+      "jungle",
+      "ocean",
+      "woodland",
+      "marsh",
+      "pine_forest",
+      "badlands",
+      "snowy_taiga",
+      "alpine",
+      "desert",
+      "stony_peaks"
+    ],
+    "meanLandBiomeRunOld": 227.11111111111111,
+    "meanLandBiomeRunNew": 162.48275862068965
+  }
+}

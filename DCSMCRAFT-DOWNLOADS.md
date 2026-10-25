@@ -1,0 +1,22 @@
+DCSMCRAFT 2.3.1 — Connected Worlds
+
+Create a NEW WORLD for generator 14 terrain and caves. Old saves keep their original generation/buildings; the first-person and Cinderworld spawn changes apply to existing saves too. Use matching 2.3.1 clients/relay. Extract the Windows ZIP and run DCSMCRAFT.exe with Edge/Chrome installed, or save/open the standalone HTML. Singleplayer needs no server.
+
+Continuous warped land fields replace isolated continental discs in both dimensions. Overworld biomes now meet over large joined landscapes instead of separate islands. Ocean crossings remain, with much shorter coastal channels and occasional wider seas. Wildflower sampling across ±4,096 blocks at 32-block intervals finds 20.1% water, median east/west water runs of 128 blocks and a 608-block 90th percentile. Cinderworld uses connected volcanic regions and about 20.9% lava in that sample. These are sample statistics, not guaranteed maximum crossing widths. All 13 Overworld and six Cinderworld biomes remain. Sparse villages/guarded structures and the seeded citadel/cathedral/foundry variants are retained.
+
+Cinderworld spawns up to three ground threats per three seconds when safe unlit space exists. Shared nearby live-hostile caps are 18/26/32 in Easy/Normal/Hard, including natural flyers and guards. Natural aerial checks run every five seconds with separate four/six-flyer limits. Peaceful, torch exclusion, solid-body checks, Hellfire resources, defended vault loot and reflectable fireballs remain. No new loot tier. Boats are still water-only, single-seat and approximate; bridge lava or use Creative flight.
+
+Caves now use winding 3–5-section routes with different widths/slopes, optional branches and dead ends, diagonal/cross-level links, rotated elongated/compound rooms, variable heights, uneven floors/ceilings and occasional pillars. Existing moss/dripstone/rift regions, ore veins, mineshafts, Watcher and cave hostiles remain. Cinderworld caves combine warped chambers and narrow twisting routes. World-space plans and negative coordinates are deterministic; custom generation, not the reference noise algorithm.
+
+First-person blocks sit closer to the hand tip with reduced arm penetration. Flat items stay flat and sit closer to the actual grip. Camera clearance now checks the actual solved forearm/sleeve/glove/shoulder as well as rigid item bounds. Finger-free square arms, selected-skin colours, smooth motions and rigid item sockets remain.
+
+Validation: 416 core tests and 15 selected browser scenarios pass, including three-seed connected-land checks, real negative-border cave generation, all four natural cave regions, natural Cinderworld threat buildup and Survival attacks, actual boat crafting/controls/save-reload, portal travel and clicked fireball reflection, two-context Survival boats, HTTPS/WSS, wood-to-pickaxe, all held-item/skin checks, local MP3 discs, Creative Stands, snow and tornadoes. All 427 packaged input hashes, ZIP CRCs and 189 supplied PNGs are verified. Legacy generators 2–13 match 86 chunks and 13 populated containers byte-for-byte against 2.3.0. All block/item/recipe/mob-stat definitions remain unchanged.
+
+Limits: existing multiplayer dimension restrictions, one shared host-influenced weather clock, local creature navigation and three seeded structure families remain. The Windows x64 executable embeds the exact tested offline HTML; native Windows launch remains unverified on Linux and requires Edge/Chrome. Managed Chromium blocks direct file:// navigation, so the same standalone bytes are playtested over local HTTP with outside requests blocked. No new hardware FPS or zero-bug guarantee. Mechanics reference remains partial/custom Minecraft Java 1.20.4. README.md, FEATURES.md, VALIDATION.md and MULTIPLAYER.md are included in the source/Windows packages.
+
+Downloads:
+
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.1/downloads/DCSMCRAFT-Windows-2.3.1.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.1/downloads/DCSMCRAFT-Standalone-v2.3.1.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.1/downloads/dcsmcraft-source-v2.3.1.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.1/downloads/DCSMCRAFT-Multiplayer-Server-2.3.1.zip)
