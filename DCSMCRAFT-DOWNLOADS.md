@@ -1,0 +1,18 @@
+DCSMCRAFT 2.3.2 — Devin Sword Claim Audio
+
+The supplied High Value Item Get The Legend of Zelda Breath of the Wild OST.mp3 now plays once when the Devin Sword is successfully extracted. The complete, unchanged 215,357-byte stereo MP3 (about 5.46 seconds) is embedded in the offline HTML and Windows executable. No external request, file picker or internet connection is needed for playback. It uses Master volume, including changes while it plays, independently of background Music controls. Muted claims do not queue sound for later. Preloading is silent and playback does not loop or overlap.
+
+Guardian defeats, Cinder Sigil attunement, the full uninterrupted 30-second hold, reach, inventory space, single-item reward and persistent claim state are unchanged. Failed/interrupted/full-inventory attempts, ordinary relic interactions, Creative grants, pickups and save reloads do not play the clip. If decoding fails, the claim still succeeds with the previous synthesized cue. Unique relic extraction remains host-controlled in co-op.
+
+Works with existing worlds: no new world or regeneration required. Terrain generator 14, connected biomes/ocean/lava crossings, caves, Cinderworld density, graphics, held models, all other sounds and gameplay remain unchanged from 2.3.1. All 299 other existing runtime/asset files are byte-identical; existing runtime changes are limited to audio wiring, the successful claim audio call and the version string. The supplied recording is separately attributed in THIRD_PARTY.md and public/audio/DEVIN-CLAIM-NOTICE.txt; it is not original DCSMCRAFT audio or covered by the project MIT license.
+
+420 core tests and three targeted browser scenarios pass. The browser test completes the full real mouse-held claim, decodes and plays the actual stereo recording offline, measures audio output/master mute during playback, checks one-shot cleanup and saves/reloads the sword without replaying the cue. Retained checks verify original pistol audio, mute/cleanup and wood-to-pickaxe crafting. All 433 packaged input hashes, ZIP CRCs, 189 supplied PNGs and unchanged MP3 bytes are verified. The Windows x64 executable embeds the tested HTML exactly; native Windows launch remains unverified on the Linux host and requires installed Edge/Chrome. Identical standalone bytes are tested over local HTTP with outside requests blocked because managed Chromium blocks file navigation. This small audio patch does not repeat every historical world/weather/multiplayer playthrough.
+
+Extract the Windows ZIP and run DCSMCRAFT.exe, or save/open the standalone HTML. The existing partial/custom Minecraft Java 1.20.4 mechanics and multiplayer limits remain; see included README.md, FEATURES.md, VALIDATION.md and MULTIPLAYER.md. Use matching 2.3.2 clients/relay.
+
+Downloads:
+
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.2/downloads/DCSMCRAFT-Windows-2.3.2.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.2/downloads/DCSMCRAFT-Standalone-v2.3.2.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.2/downloads/dcsmcraft-source-v2.3.2.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.3.2/downloads/DCSMCRAFT-Multiplayer-Server-2.3.2.zip)

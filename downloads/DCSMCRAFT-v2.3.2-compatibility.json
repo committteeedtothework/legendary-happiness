@@ -1,0 +1,16 @@
+{
+  "version": "2.3.2",
+  "baseline": "2.3.1",
+  "existingRuntimeAndAssetFilesByteIdentical": 299,
+  "existingRuntimeFilesChanged": [
+    "src/audio.js",
+    "src/data.js",
+    "src/relic.js"
+  ],
+  "generationVersionUnchanged": 14,
+  "itemsBlocksRecipesMobStatsSettingsUnchanged": true,
+  "newWorldRequired": false,
+  "suppliedMp3Bytes": 215357,
+  "suppliedMp3Sha256": "400e34aca3bc56b56d5b17500c9b52b5664ec037283d6bb23320f4fe03411aac",
+  "suppliedMp3Unmodified": true
+}
