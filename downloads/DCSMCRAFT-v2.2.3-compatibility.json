@@ -1,0 +1,16 @@
+{
+  "version": "2.2.3",
+  "baseline": "2.2.2",
+  "unchangedRuntimeModules": 94,
+  "changedModules": [
+    "data.js",
+    "first-person.js",
+    "player-model.js",
+    "renderer.js",
+    "skins.js"
+  ],
+  "dataChanges": "Release version only",
+  "f5GeometryAndMaterialConfigurationsIdentical": 110,
+  "allGameplayModulesAndDefinitionsUnchanged": true,
+  "newWorldRequired": false
+}
