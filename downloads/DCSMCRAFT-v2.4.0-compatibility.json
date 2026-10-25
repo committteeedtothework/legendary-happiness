@@ -1,0 +1,55 @@
+{
+  "version": "2.4.0",
+  "baseline": "2.3.2",
+  "legacyGenerators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "legacyChunkBytesMatched": 94,
+  "legacyContainersMatched": 13,
+  "existingBlocksItemsRecipesStatsSettingsUnchanged": true,
+  "originalRecipeIndicesPreserved": true,
+  "newGenerator": 14,
+  "newItems": [
+    "snow_leopard_spawn_egg",
+    "polar_bear_spawn_egg"
+  ],
+  "newCreatures": 2,
+  "newRecipes": 0,
+  "newWorldRequiredForTerrain": false,
+  "seedSample": {
+    "seed": "Wildflower",
+    "extent": "-8192..8192 at 128-block intervals",
+    "oceanFraction": 0.20876149269875607,
+    "biomes": [
+      "savanna",
+      "meadow",
+      "birch_woodland",
+      "jungle",
+      "ocean",
+      "woodland",
+      "marsh",
+      "pine_forest",
+      "badlands",
+      "snowy_taiga",
+      "alpine",
+      "desert",
+      "stony_peaks"
+    ],
+    "meanLandBiomeRunOld": 162.48275862068965,
+    "meanLandBiomeRunNew": 162.48275862068965
+  },
+  "priorCreatureAndBoatModelFingerprintsUnchanged": 27,
+  "suppliedClaimMp3Unchanged": true
+}
