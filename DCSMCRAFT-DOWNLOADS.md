@@ -1,0 +1,21 @@
+DCSMCRAFT 2.5.0 — Aquatic Voyages
+
+A playable ocean expansion based on Mojang's July 2018 Update Aquatic Phase Two announcement. The game keeps Minecraft Java Edition 1.20.4 as its reference; the article's Bedrock-only platform features are identified separately. Existing boats, oxygen and Unbreaking are retained, not duplicated.
+
+New worlds use generator 15: nine ocean climate/depth variants, reefs, kelp/seagrass, ice formations, sparse wrecks and ruins, coordinate treasure maps and buried Heart-of-the-Sea loot. Added fish, squid, dolphins, turtles and Drowned with original models/voices and Creative eggs; turtle breeding/eggs/scutes/helmets, fish buckets, real fishing, conduits, bubble columns, tridents with Loyalty/Riptide/Impaling/Channeling, Mending, Turtle Master brewing, undead conversion, underwater skeleton-horse riding and sprint swimming. Pause → Ocean Journal explains the progression and records discoveries.
+
+Create a new world for the new terrain and structures. Old generators 2–14 and existing terrain edits remain unchanged; new items and simulation work in existing worlds. Compatibility checks match 94 old chunks, 13 containers, 28 previous creature-model fingerprints and all 200 existing public assets, including both supplied claim MP3s. Existing item/block statistics, original recipe indices and saved settings are retained. The expanded atlas rescales legacy UVs while preserving their artwork.
+
+This remains an original sandbox foundation, not exact Minecraft parity. Local AI, some timings, harvesting/loot, maps, potion variants and animations are simplified; general waterlogging, coral wall orientation, full monument/Guardian ecosystems, platform Realms and Education commands are not implemented. Read AQUATIC.md for the complete source-by-source implemented/partial/not-applicable checklist. Survival co-op is host authoritative; Creative guest utility limits and host-region simulation remain. Use matching 2.5.0 clients and relay.
+
+Validation: 456 core tests and 18 selected browser scenarios pass, including new ocean/save/input/Survival co-op cases and retained wood → tools → mining → smelting → shelter → night → death/respawn, interrupted-save recovery, boats, shared containers, skins/hand grips, HTTPS/WSS and both real supplied claim recordings. Exact offline HTML is tested over local HTTP with outside requests blocked; managed Chromium forbids direct file navigation. Windows x64 compilation and embedded-payload extraction are verified byte-for-byte, but native Windows launch is unverified on the Linux host. No zero-bug or hardware-FPS guarantee is claimed.
+
+Windows: download/extract the Windows ZIP and run DCSMCRAFT.exe (installed Edge or Chrome required). Alternatively save/open the standalone HTML in a desktop browser with WebGL2; singleplayer needs no local server or network. Browser/profile world saves stay on that device: export backups before moving files. The source ZIP includes complete source/assets/lockfile, launch/build instructions, licensing and feature/validation checklists. Public internet co-op requires the included optional relay and an HTTPS tunnel/server; it is not an automatically hosted service.
+
+Downloads:
+
+- [Feature checklist](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.0/downloads/AQUATIC.md)
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.0/downloads/DCSMCRAFT-Windows-2.5.0.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.0/downloads/DCSMCRAFT-Standalone-v2.5.0.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.0/downloads/dcsmcraft-source-v2.5.0.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.0/downloads/DCSMCRAFT-Multiplayer-Server-2.5.0.zip)

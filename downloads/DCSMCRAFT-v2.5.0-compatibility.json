@@ -1,0 +1,33 @@
+{
+  "version": "2.5.0",
+  "baseline": "2.4.1",
+  "legacyGenerators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "legacyChunkBytesMatched": 94,
+  "legacyContainersMatched": 13,
+  "existingBlocksItemsRecipesStatsSettingsUnchanged": true,
+  "originalRecipeIndicesPreserved": true,
+  "existingCreatureModelFingerprintsMatched": 28,
+  "existingPublicAssetFilesUnmodified": 200,
+  "bothSuppliedMp3sUnmodified": true,
+  "newGenerator": 15,
+  "newBlocks": 62,
+  "newItems": 83,
+  "newMobs": 11,
+  "newRecipes": 13,
+  "newWorldRequiredForTerrain": true,
+  "atlas": "16 columns by 64 rows; legacy UVs rescaled, pixels retained"
+}
