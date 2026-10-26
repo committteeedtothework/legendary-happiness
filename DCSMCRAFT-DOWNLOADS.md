@@ -1,0 +1,18 @@
+DCSMCRAFT 2.4.1 — Matthew Claim Cue
+
+The supplied Devil May Cry 1 HD Remastered Title Video Let s Rock Baby (1).mp3 now plays once on the first successful Matthew's Dual Wielded Pistols altar claim per world. The complete unchanged 32,888-byte stereo MP3 (about 2.01 seconds) is embedded in the offline HTML and Windows executable. No network, file picker or external service is needed. Master volume controls it, including changes during playback, independently of background Music settings. Muted claims do not queue sound. The existing Devin Sword recording uses its own independent buffer and remains unchanged.
+
+Existing Hellspawn/ready-state, host-only, reach, inventory space and single-reward rules remain. Failed/full-inventory attempts, already-claimed altars, Creative grants, ordinary pickup and save reloads do not play the recording. Previously claimed altars stay claimed without replaying on upgrade. Decoding failure falls back to the previous rune cue without blocking the award/save. No new world or regeneration needed.
+
+All 2.4.0 world animations, creatures/density, terrain, graphics, weapon behavior, saves and other sounds remain. All 307 other existing runtime/asset files match 2.4.0 exactly. Existing runtime changes are limited to audio wiring, an optional sample argument in the existing fanfare helper, the successful claim audio call and version text. The recording is user-supplied Capcom audio, separately attributed in THIRD_PARTY.md and public/audio/MATTHEW-CLAIM-NOTICE.txt, not original DCSMCRAFT audio or covered by its MIT license.
+
+437 core tests and three targeted browser scenarios pass. The new offline case right-clicks a full-inventory altar and confirms silence, frees a slot and awards the actual weapon with the supplied stereo clip, measures audio output/Master mute, verifies single-shot cleanup and reloads the claimed world without replay. Retained cases verify the full real 30-second Devin Sword claim recording and original alternating pistol reports/mute/cleanup. All 446 packaged input hashes, ZIP CRCs, 189 supplied PNGs and both original MP3s are verified. The Windows x64 executable embeds the exact tested HTML; native Windows execution remains unverified on the Linux build host and requires installed Edge/Chrome. Managed Chromium blocks file://; identical offline HTML is tested over local HTTP with outside requests blocked. This small audio patch does not repeat every historical world/multiplayer playthrough.
+
+Extract the Windows ZIP and run DCSMCRAFT.exe, or save/open the standalone HTML. Use matching 2.4.1 clients/relay. Existing partial/custom Minecraft Java 1.20.4 mechanics and multiplayer restrictions remain; see README.md, FEATURES.md, VALIDATION.md and MULTIPLAYER.md in the packages.
+
+Downloads:
+
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.4.1/downloads/DCSMCRAFT-Windows-2.4.1.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.4.1/downloads/DCSMCRAFT-Standalone-v2.4.1.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.4.1/downloads/dcsmcraft-source-v2.4.1.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.4.1/downloads/DCSMCRAFT-Multiplayer-Server-2.4.1.zip)

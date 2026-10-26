@@ -1,0 +1,19 @@
+{
+  "version": "2.4.1",
+  "baseline": "2.4.0",
+  "existingRuntimeAndAssetFilesByteIdentical": 307,
+  "existingRuntimeFilesChanged": [
+    "src/audio.js",
+    "src/claim-audio.js",
+    "src/data.js",
+    "src/invasion.js"
+  ],
+  "generationVersionUnchanged": 14,
+  "itemsBlocksRecipesMobStatsSettingsUnchanged": true,
+  "claimGatesSaveStateUnchanged": true,
+  "devinRecordingUnchanged": true,
+  "newWorldRequired": false,
+  "suppliedMp3Bytes": 32888,
+  "suppliedMp3Sha256": "db8a36c54d1444fb8fe84b80b7b990a561d8fc78fe6aca08ab0f1c4b6fd0b9af",
+  "suppliedMp3Unmodified": true
+}
