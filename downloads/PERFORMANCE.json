@@ -1,0 +1,484 @@
+{
+  "scope": "Same three v3 chunks, seven-iteration medians on this Linux host; CPU-only. Model counts are visible render parts, not measured FPS.",
+  "initial_meshing": {
+    "current": {
+      "medianMs": 39.05,
+      "terrainQueries": 3715,
+      "vertices": 40600
+    },
+    "baseline": {
+      "medianMs": 45.29,
+      "terrainQueries": 9864,
+      "vertices": 40600
+    },
+    "cpuRatio": 1.16
+  },
+  "final_meshing": {
+    "current": {
+      "medianMs": 42.94,
+      "terrainQueries": 3715,
+      "vertices": 40600
+    },
+    "baseline": {
+      "medianMs": 42.46,
+      "terrainQueries": 9864,
+      "vertices": 40600
+    },
+    "cpuRatio": 0.99
+  },
+  "models": {
+    "baseline_v050_visible_meshes": {
+      "cow": 17,
+      "grazer": 14,
+      "woolling": 13,
+      "chicken": 11,
+      "rabbit": 13,
+      "villager": 16,
+      "shade": 10
+    },
+    "current_visible_meshes": {
+      "cow": 12,
+      "grazer": 11,
+      "woolling": 10,
+      "chicken": 9,
+      "rabbit": 9,
+      "villager": 11,
+      "shade": 8
+    },
+    "baseline_total": 94,
+    "current_total": 70
+  },
+  "interpretation": "Terrain queries fell by about 62%; the final CPU timing is approximately unchanged (42.94 vs 42.46 ms), so no consistent meshing-speed or hardware FPS gain is claimed. Batched model render-part count fell from 94 to 70 (about 26%), with additional distant-model/index cleanup and shared drop textures.",
+  "v070_model_fixture": {
+    "scope": "Original seven stationary models, plus new defender/player counted separately. Scene graph counts, not FPS.",
+    "meshes": {
+      "cow": 11,
+      "grazer": 10,
+      "woolling": 9,
+      "chicken": 9,
+      "rabbit": 9,
+      "villager": 14,
+      "shade": 8
+    },
+    "total": 70,
+    "iron_golem": 9,
+    "explorer_with_devin_sword": 27,
+    "notes": "Player rig is built lazily in F5; first person avoids its allocation until needed. Expanded village clearing loops clip to each chunk. Connected villager arm groups add three parts while simpler animal eyes remove three, keeping the seven-model total at 70. Earlier timing samples above are historical v0.6 versus v0.5, not new v0.7 FPS measurements."
+  },
+  "v080_horizon_fixture": {
+    "legacyChunkArrays": 48,
+    "versions": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "seeds": 3,
+    "horizon": {
+      "spanBlocks": 64,
+      "step": 4,
+      "medianMs": 1.77,
+      "vertices": 2876,
+      "voxelChunks": 0
+    },
+    "maxDistancePlanGroups": 361,
+    "scope": "CPU-only on Linux while browser regressions run. Not a hardware FPS benchmark."
+  },
+  "v090_expansion_fixture": {
+    "legacyChunkArrays": 120,
+    "versions": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "dimensions": [
+      "overworld",
+      "cinderwild"
+    ],
+    "seeds": 3,
+    "oreSample": {
+      "chunks": 25,
+      "hellfire": 1097,
+      "brimstone": 1811,
+      "cinderstone": 805125
+    },
+    "horizon": {
+      "spanBlocks": 64,
+      "medianMs": 1.44,
+      "vertices": 1932,
+      "voxelChunks": 0
+    },
+    "scope": "CPU-only measurements on Linux during browser regressions. Not a hardware FPS or universal speed claim.",
+    "renderBudget": {
+      "arcaneParticles": 256,
+      "funnelParticles": 1728,
+      "maxTerrainBlockIds": 85,
+      "usedBlockIds": 77,
+      "notes": "One pooled spell draw call and one batched funnel draw call; atlas dimensions unchanged. Models retain per-material static batching and articulated joints."
+    }
+  },
+  "v100_compatibility_and_horizon": {
+    "legacyChunkArrays": 144,
+    "versions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "dimensions": [
+      "overworld",
+      "cinderwild"
+    ],
+    "seeds": 3,
+    "oreSample": {
+      "chunks": 25,
+      "hellfire": 1097,
+      "brimstone": 1811,
+      "cinderstone": 805125
+    },
+    "horizon": {
+      "spanBlocks": 64,
+      "medianMs": 1.18,
+      "vertices": 1932,
+      "voxelChunks": 0
+    },
+    "scope": "CPU-only measurements on Linux during browser regressions. Not a hardware FPS or universal speed claim."
+  },
+  "adventure_110": {
+    "scope": "CPU-only sampling on this Linux host while browser regressions run; 7 iterations, first 2 discarded, 3 fixed Overworld chunks per iteration. Mesh time includes neighbour generation. Generators produce different geometry, so this is a cost report, not a speedup or FPS claim.",
+    "sample": [
+      {
+        "generator": 8,
+        "generationMs": 7.64,
+        "meshingMs": 129.33,
+        "vertices": 45364,
+        "loadedChunks": 21,
+        "rawVoxelBytes": 2064384
+      },
+      {
+        "generator": 9,
+        "generationMs": 8.91,
+        "meshingMs": 178.54,
+        "vertices": 51020,
+        "loadedChunks": 21,
+        "rawVoxelBytes": 2064384
+      }
+    ]
+  },
+  "adventure_110_compatibility": {
+    "legacyChunkArrays": 168,
+    "versions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "dimensions": [
+      "overworld",
+      "cinderwild"
+    ],
+    "seeds": 3,
+    "oreSample": {
+      "chunks": 25,
+      "hellfire": 1097,
+      "brimstone": 1811,
+      "cinderstone": 805125
+    },
+    "horizon": {
+      "spanBlocks": 64,
+      "medianMs": 1.87,
+      "vertices": 1932,
+      "voxelChunks": 0
+    },
+    "scope": "CPU-only measurements on Linux during browser regressions. Not a hardware FPS or universal speed claim."
+  },
+  "release_1_2_fluid_simulation": {
+    "scope": "CPU-only fixed 480-tick spread/480-tick drain fixtures on Linux while software-rendered browser regressions run. Not FPS or a cross-device performance claim.",
+    "queueBudgetPerTick": 400,
+    "results": [
+      {
+        "dimension": "overworld",
+        "type": "water",
+        "activeFluidCells": 118,
+        "initialRawChunks": 4,
+        "finalRawChunks": 4,
+        "peakQueue": 140,
+        "peakBlockWritesPerTick": 28,
+        "p50TickMs": 0.0004,
+        "p95TickMs": 0.0077,
+        "drainsToZero": true,
+        "pendingAfterDrain": 0
+      },
+      {
+        "dimension": "overworld",
+        "type": "lava",
+        "activeFluidCells": 30,
+        "initialRawChunks": 4,
+        "finalRawChunks": 4,
+        "peakQueue": 60,
+        "peakBlockWritesPerTick": 12,
+        "p50TickMs": 0.0002,
+        "p95TickMs": 0.0004,
+        "drainsToZero": true,
+        "pendingAfterDrain": 0
+      },
+      {
+        "dimension": "cinderwild",
+        "type": "lava",
+        "activeFluidCells": 118,
+        "initialRawChunks": 4,
+        "finalRawChunks": 4,
+        "peakQueue": 140,
+        "peakBlockWritesPerTick": 28,
+        "p50TickMs": 0.0004,
+        "p95TickMs": 0.0049,
+        "drainsToZero": true,
+        "pendingAfterDrain": 0
+      }
+    ]
+  },
+  "v2.2.0HeldBounds": {
+    "version": "2.2.0",
+    "scope": "10,000 held-wrist bounds queries, Node CPU microbenchmark; not game FPS",
+    "oldTraversalMs": 27.446800999999994,
+    "cachedBoundsMs": 1.285310999999993,
+    "ratio": 21.35420999275673
+  },
+  "release_2_5_1_tornado": {
+    "scope": "Controlled Linux/Node CPU fixtures and isolated Chromium/SwiftShader weather. These are not hardware FPS or universal speed guarantees.",
+    "benchmarkCommand": "node scripts/benchmark-weather.mjs; optional --baseline /path/to/installed/2.5.0/source",
+    "before": {
+      "scope": "Node CPU-only, five fresh tornado ticks with 96 remote saved creatures; renderer 550 warm frames. No hardware FPS claim.",
+      "baseline": true,
+      "tornado": {
+        "medianTickMs": 317.784366,
+        "newChunksEachTick": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ],
+        "roofChecksEachTick": [
+          96,
+          96,
+          96,
+          96,
+          96
+        ]
+      },
+      "renderer": [
+        {
+          "particles": "all",
+          "medianUpdateMs": 0.18112299999984316,
+          "p95UpdateMs": 0.403336999999965,
+          "funnelPoints": 1728,
+          "debris": 96
+        },
+        {
+          "particles": "minimal",
+          "medianUpdateMs": 0.11506299999996372,
+          "p95UpdateMs": 0.1542019999999411,
+          "funnelPoints": 1728,
+          "debris": 20
+        }
+      ]
+    },
+    "after": {
+      "scope": "Node CPU-only, five fresh tornado ticks with 96 remote saved creatures; renderer 550 warm frames. No hardware FPS claim.",
+      "baseline": false,
+      "tornado": {
+        "medianTickMs": 0.03922899999997753,
+        "newChunksEachTick": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "roofChecksEachTick": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "renderer": [
+        {
+          "particles": "all",
+          "medianUpdateMs": 0.08768099999997503,
+          "p95UpdateMs": 0.12998499999997648,
+          "funnelPoints": 512,
+          "debris": 48
+        },
+        {
+          "particles": "minimal",
+          "medianUpdateMs": 0.014481999999986783,
+          "p95UpdateMs": 0.02619899999996278,
+          "funnelPoints": 96,
+          "debris": 8
+        }
+      ]
+    },
+    "isolatedWeatherWebGLBefore": {
+      "mode": "before",
+      "renderer": "Chromium SwiftShader, isolated 960x540 weather, gl.finish, 20 warm samples",
+      "results": [
+        {
+          "particles": "all",
+          "distance": 10,
+          "medianFrameMs": 0.6000000238418579,
+          "medianUpdateMs": 0.4000000059604645,
+          "drawCalls": 5,
+          "funnelDraw": 1728,
+          "debris": 96
+        },
+        {
+          "particles": "all",
+          "distance": 50,
+          "medianFrameMs": 0.5999999940395355,
+          "medianUpdateMs": 0.3999999761581421,
+          "drawCalls": 5,
+          "funnelDraw": 1728,
+          "debris": 96
+        },
+        {
+          "particles": "all",
+          "distance": 180,
+          "medianFrameMs": 0.5,
+          "medianUpdateMs": 0.30000001192092896,
+          "drawCalls": 5,
+          "funnelDraw": 1728,
+          "debris": 96
+        },
+        {
+          "particles": "minimal",
+          "distance": 10,
+          "medianFrameMs": 0.30000001192092896,
+          "medianUpdateMs": 0.20000001788139343,
+          "drawCalls": 5,
+          "funnelDraw": 1728,
+          "debris": 20
+        },
+        {
+          "particles": "minimal",
+          "distance": 50,
+          "medianFrameMs": 0.5,
+          "medianUpdateMs": 0.29999998211860657,
+          "drawCalls": 5,
+          "funnelDraw": 1728,
+          "debris": 20
+        },
+        {
+          "particles": "minimal",
+          "distance": 180,
+          "medianFrameMs": 0.4000000059604645,
+          "medianUpdateMs": 0.29999998211860657,
+          "drawCalls": 5,
+          "funnelDraw": 1728,
+          "debris": 20
+        }
+      ]
+    },
+    "isolatedWeatherWebGLAfter": {
+      "mode": "after",
+      "renderer": "Chromium SwiftShader, isolated 960x540 weather, gl.finish, 20 warm samples",
+      "results": [
+        {
+          "particles": "all",
+          "distance": 10,
+          "medianFrameMs": 0.5999999940395355,
+          "medianUpdateMs": 0.4000000059604645,
+          "drawCalls": 4,
+          "funnelDraw": 512,
+          "debris": 48
+        },
+        {
+          "particles": "all",
+          "distance": 50,
+          "medianFrameMs": 0.4000000059604645,
+          "medianUpdateMs": 0.30000001192092896,
+          "drawCalls": 4,
+          "funnelDraw": 512,
+          "debris": 48
+        },
+        {
+          "particles": "all",
+          "distance": 180,
+          "medianFrameMs": 0.4000000059604645,
+          "medianUpdateMs": 0.30000001192092896,
+          "drawCalls": 4,
+          "funnelDraw": 256,
+          "debris": 24
+        },
+        {
+          "particles": "minimal",
+          "distance": 10,
+          "medianFrameMs": 0.29999998211860657,
+          "medianUpdateMs": 0.10000002384185791,
+          "drawCalls": 4,
+          "funnelDraw": 96,
+          "debris": 8
+        },
+        {
+          "particles": "minimal",
+          "distance": 50,
+          "medianFrameMs": 0.29999998211860657,
+          "medianUpdateMs": 0.09999999403953552,
+          "drawCalls": 4,
+          "funnelDraw": 96,
+          "debris": 8
+        },
+        {
+          "particles": "minimal",
+          "distance": 180,
+          "medianFrameMs": 0.30000001192092896,
+          "medianUpdateMs": 0.09999999403953552,
+          "drawCalls": 4,
+          "funnelDraw": 48,
+          "debris": 4
+        }
+      ]
+    },
+    "boundedWork": {
+      "maximumRoofQueriesPerFrame": 32,
+      "maximumRoofCacheEntries": 1024,
+      "nearFunnelParticles": {
+        "all": 512,
+        "decreased": 256,
+        "minimal": 96
+      },
+      "maximumPointSizePixels": 8,
+      "maximumDebrisInstances": 48,
+      "debrisUpdatesPerSecond": 30,
+      "noRemoteWeatherChunkGeneration": true,
+      "staticParticleBuffer": true,
+      "singlePassTransparentShell": true,
+      "roofBudgetScope": "32 precipitation-particle column scans per frame; the player weather view has a separate cached roof sample."
+    },
+    "standaloneStormBrowser": {
+      "scope": "Actual standalone Chromium/SwiftShader storm at 1280x800; uncapped, 2.2 seconds. Not a hardware FPS guarantee.",
+      "samples": 97,
+      "p50FrameMs": 16.700000000000728,
+      "p95FrameMs": 33.399999999999636,
+      "shaderErrors": [],
+      "externalRequests": [],
+      "remoteWeatherTerrainLoads": 0,
+      "staticFunnelBuffer": true,
+      "particleBudgets": {
+        "all": 512,
+        "decreased": 256,
+        "minimal": 96
+      },
+      "savedWorld": "9c6af706-4b09-4017-ba6e-215a1558ce39"
+    }
+  }
+}
