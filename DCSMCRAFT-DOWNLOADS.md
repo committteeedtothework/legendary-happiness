@@ -1,0 +1,20 @@
+DCSMCRAFT 2.5.1 — Tornado Performance Fix
+
+Fixes a reproduced tornado hitch: weather previously queried roofs for every saved entity before checking distance, generating remote chunks that were unloaded and generated again. The controlled 96-entity fixture loaded 96 new chunks per tick in 2.5.0; the patch loads zero. Ordinary simulation now also defers unloaded dropped-item physics and distant persistent-NPC contact checks. Loaded areas near Survival guests still process item physics; unloaded items retain their remaining despawn time until their area becomes active.
+
+The tornado keeps its funnel, moving track, rotating debris, wind, damage and shelter mechanics. Spiral particles now animate on the GPU with static buffers and capped pixel size. Near-storm budgets are 512/256/96 particles for All/Decreased/Minimal, with distance scaling, frustum culling, a single transparent shell pass and at most 48 debris instances updated at 30 Hz. Rain/snow particle roof scans are cached by terrain revision, bounded to 32 per frame and never load terrain. Snow border heat checks no longer load neighboring chunks. Lightning respects graphics toggles, reuses its buffer and refreshes across realms/same-tick strike changes. Swimming uses its real eye/body height for shelter/wind collision.
+
+465 core tests and 16 selected browser scenarios pass. The new exact-offline storm scenario checks all particle settings, static buffers, bounded roof work, remote NPC/drop terrain loads, toggles and saved storms. Retained checks cover snowfall, moving wind/shelter, the Survival loop, death/respawn, save recovery/import/export, Aquatic progression, guest inventories/pickups and boats. The reproducible Node benchmark and scoped Linux/Chromium SwiftShader measurements are included in PERFORMANCE.json and VALIDATION.md. Measurements demonstrate the removed stalls; they are not a universal hardware FPS guarantee.
+
+Existing saves work without regeneration. Compatibility matches 105 chunks across saved generators 2–15 (including ocean terrain), 13 containers, all block/item/mob/recipe statistics/settings, 39 creature-model fingerprints and all 200 existing public assets. Both supplied claim recordings remain byte-identical. No new blocks, items, mobs or recipes are introduced. Existing partial/custom Java Edition 1.20.4 mechanics and co-op restrictions remain documented.
+
+Windows: extract the Windows ZIP and run DCSMCRAFT.exe with Edge/Chrome installed. Alternatively save/open the standalone HTML; singleplayer needs no local server, internet or ChatGPT. The executable embeds the exact tested HTML. Native Windows launch is unverified on the Linux build host; managed Chromium tests that same offline HTML over local HTTP with external requests blocked. The source ZIP includes complete code/assets/dependencies and launch instructions. Use matching 2.5.1 relay/client downloads for co-op.
+
+Downloads:
+
+- [Performance and testing notes](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.1/downloads/VALIDATION.md)
+- [Aquatic feature checklist](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.1/downloads/AQUATIC.md)
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.1/downloads/DCSMCRAFT-Windows-2.5.1.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.1/downloads/DCSMCRAFT-Standalone-v2.5.1.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.1/downloads/dcsmcraft-source-v2.5.1.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.5.1/downloads/DCSMCRAFT-Multiplayer-Server-2.5.1.zip)
