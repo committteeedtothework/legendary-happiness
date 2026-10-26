@@ -1,0 +1,21 @@
+DCSMCRAFT 2.6.0 — Content Expansion I
+
+Playable first stage of the Java Edition 26.3 content update. Adds 713 block types and 818 inventory items (these counts overlap), bringing the build to 2,625 block states, 1,124 inventory entries and 1,292 crafting/stonecutting/smithing recipes. Original family art/models cover compatible wood, stone, mineral, dyed construction, plants, shallow/connected shapes and equipment. Chunk storage now supports 16-bit IDs, with shared atlas tiles and chunk meshes rather than an object per block. Creative search and recipe-book results are paged.
+
+New practical systems include species-specific planks, Copper/Netherite gear, modeled bows/crossbows/arrows, a basic main-hand projectile shield, a falling-smash mace, barrels, smokers/blast furnaces, selected stonecutting outputs, template-based Netherite upgrades preserving enchantments/damage, crops/food/ingredients, sapling growth, shears, compass/clock/spyglass use, and new-world deep stone/ores/wood/flowers/vegetables. Cinderworld gains custom sources for Netherite, templates, Heavy Cores and Breeze Rods. Existing custom quests, creatures, weapons, Stands, weather, supplied textures and claim recordings remain.
+
+This is NOT every missing reference feature and does NOT claim complete Java mechanical parity. CONTENT.md and the full per-entry JSON/CSV audit distinguish added/retained/deferred/excluded content across all 1,286 reference blocks and 1,658 items. Complex automation, additional creatures/eggs, complete workstation/state/food/weapon behavior and other compatible content remain deferred. Original shared material/shape models differ from Mojang assets; some entries remain Creative-only without complete natural sourcing. Unsupported End progression and administrative/debug content are explicitly excluded.
+
+New natural resources require a new generator-16 world. Saved generators 2–15 keep their natural terrain; existing block IDs, equipment stats, default settings, creature models and all 200 public assets are preserved. Birch/pine plank recipe outputs intentionally become birch/spruce; old recipe indices remain stable. Export backups and do not open upgraded worlds in older clients. Multiplayer requires matching protocol-3 clients and relay.
+
+Download the standalone HTML and open it in Edge/Chrome for offline singleplayer, or extract the Windows ZIP and run DCSMCRAFT.exe. The executable embeds the same HTML and requires installed Edge/Chrome. No ChatGPT/local server/internet is required for singleplayer. Native Windows execution and direct file:// navigation are unverified on the Linux test host; the exact offline HTML is tested over local HTTP with outside requests blocked. Tests and compatibility evidence are included in VALIDATION.md and the validation JSON; they do not establish a zero-bug guarantee.
+
+Downloads:
+
+- [Current feature checklist and known limitations](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/CONTENT.md)
+- [Testing and compatibility notes](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/VALIDATION.md)
+- [Complete reference content audit (CSV)](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/content-audit-26.3.csv)
+- [Windows 10/11 x64 ZIP](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/DCSMCRAFT-Windows-2.6.0.zip)
+- [Standalone HTML](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/DCSMCRAFT-Standalone-v2.6.0.html)
+- [Complete source](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/dcsmcraft-source-v2.6.0.zip)
+- [Matching multiplayer relay](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/refs/heads/downloads-v2.6.0/downloads/DCSMCRAFT-Multiplayer-Server-2.6.0.zip)

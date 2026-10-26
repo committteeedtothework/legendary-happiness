@@ -1,0 +1,38 @@
+{
+  "version": "2.6.0",
+  "baseline": "2.5.1",
+  "legacyGenerators": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "legacyChunkCellValuesMatched": 105,
+  "legacyContainersMatched": 13,
+  "existingBlocksItemsMobStatsSettingsUnchanged": true,
+  "legacyRecipeChanges": [
+    "pine_log_planks now produces spruce_planks",
+    "birch_log_planks now produces birch_planks"
+  ],
+  "originalRecipeIndicesPreserved": true,
+  "existingCreatureModelFingerprintsMatched": 39,
+  "existingPublicAssetFilesUnmodified": 200,
+  "bothSuppliedMp3sUnmodified": true,
+  "generator": 16,
+  "newBlocks": 2426,
+  "newItems": 818,
+  "newMobs": 0,
+  "newRecipes": 1151,
+  "newWorldRequiredForTerrain": true,
+  "atlas": "32 columns by 128 rows; state IDs decoupled from shared art tiles"
+}
