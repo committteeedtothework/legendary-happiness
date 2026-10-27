@@ -1,0 +1,94 @@
+{
+  "version": "2.7.4",
+  "stage": "Supplied Overworld Soundtrack",
+  "verifiedAtUtc": "2026-10-27T23:56:12.835518+00:00",
+  "core": {
+    "passed": 519,
+    "failed": 0,
+    "newCases": 8
+  },
+  "browser": {
+    "uniquePassed": 4,
+    "newMusicCases": 2,
+    "retainedCases": 2,
+    "scenarios": [
+      "\u2713  1 tests/browser/overworld-music.spec.js:58:1 \u203a exact offline game plays all four full supplied recordings through native media, cycles after real ended events and leaves no generated Overworld notes (31.5s)",
+      "\u2713  2 tests/browser/overworld-music.spec.js:122:1 \u203a music controls persist, pause resumes the same position, Cinderworld keeps generated music, and quit/reload releases the old player (28.8s)",
+      "\u2713  1 tests/browser/jukebox.spec.js:74:1 \u203a offline real MP3 discs import, play, pause, obey volume, persist without autoplay and eject exactly once (14.5s)",
+      "\u2713  2 tests/browser/performance-menu-audio.spec.js:167:1 \u203a supplied MP3 decodes offline and actual hover/click/back/slider events use the four user-labeled cues; menu mute leaves world sounds available (13.7s)"
+    ],
+    "realNativeMediaAndWebAudioMetrics": {
+      "order": [
+        "sweden",
+        "minecraft",
+        "clark",
+        "subwoofer-lullaby",
+        "sweden"
+      ],
+      "peaks": [
+        0.01036149449646473,
+        0.011302445083856583,
+        0.015252212062478065,
+        0.08096381276845932
+      ],
+      "naturalFirstGap": true,
+      "laterGapsAccelerated": true,
+      "trackEndsReachedBySeeking": true
+    },
+    "exactStandaloneExternalRequestsBlocked": true,
+    "pageOrWebGLErrors": 0,
+    "trackEndsReachedBySeeking": true,
+    "fullDurationRealTimeListeningClaimed": false
+  },
+  "compatibility": {
+    "version": "2.7.4",
+    "previousVersion": "2.7.3",
+    "changedExistingRuntimeFiles": [
+      "src/audio.js",
+      "src/data.js",
+      "src/music.js",
+      "src/ui.js"
+    ],
+    "newRuntimeFiles": [
+      "src/overworld-music.js",
+      "src/overworld-music-data.js",
+      "public/audio/overworld/NOTICE.txt",
+      "public/audio/overworld/subwoofer-lullaby.mp3",
+      "public/audio/overworld/manifest.json",
+      "public/audio/overworld/clark.mp3",
+      "public/audio/overworld/minecraft.mp3",
+      "public/audio/overworld/sweden.mp3"
+    ],
+    "existingPublicAssetsByteIdentical": 202,
+    "allOtherExistingRuntimeFilesByteIdentical": 353,
+    "generation": 16,
+    "protocol": 4,
+    "allExistingGameplayTerrainInventorySaveSourcesByteIdentical": true,
+    "oldMenuClaimRecordingsAndTexturesByteIdentical": true,
+    "suppliedTracks": [
+      {
+        "title": "Clark",
+        "bytes": 3198685,
+        "sha256": "ef5d5828a3c76099fc912b6fb0c5a598997807f8a792fa52beec19f510f6c1aa"
+      },
+      {
+        "title": "Sweden",
+        "bytes": 3577774,
+        "sha256": "50852312f18eb197446dcaf5379682ff6bd9fca65515e18761e0b2614ad808b3"
+      },
+      {
+        "title": "Subwoofer Lullaby",
+        "bytes": 3466596,
+        "sha256": "52add411175cdd07c86705c3fee7b0a09b77343299de1571fa4a54a16db30434"
+      },
+      {
+        "title": "Minecraft",
+        "bytes": 4194681,
+        "sha256": "4d221e17857c0335be369f0542a40a30f74abe4182137b894b8f3fc2e591c608"
+      }
+    ]
+  },
+  "nativeWindowsExecutionTested": false,
+  "windowsCompanionExtractionVerified": true,
+  "testedStandaloneSha256": "57124428633870aa27d8435c6255cabaff5bad13628b3338f5df4e9eb067af78"
+}

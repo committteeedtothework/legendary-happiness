@@ -1,0 +1,48 @@
+{
+  "version": "2.7.4",
+  "previousVersion": "2.7.3",
+  "changedExistingRuntimeFiles": [
+    "src/audio.js",
+    "src/data.js",
+    "src/music.js",
+    "src/ui.js"
+  ],
+  "newRuntimeFiles": [
+    "src/overworld-music.js",
+    "src/overworld-music-data.js",
+    "public/audio/overworld/NOTICE.txt",
+    "public/audio/overworld/subwoofer-lullaby.mp3",
+    "public/audio/overworld/manifest.json",
+    "public/audio/overworld/clark.mp3",
+    "public/audio/overworld/minecraft.mp3",
+    "public/audio/overworld/sweden.mp3"
+  ],
+  "existingPublicAssetsByteIdentical": 202,
+  "allOtherExistingRuntimeFilesByteIdentical": 353,
+  "generation": 16,
+  "protocol": 4,
+  "allExistingGameplayTerrainInventorySaveSourcesByteIdentical": true,
+  "oldMenuClaimRecordingsAndTexturesByteIdentical": true,
+  "suppliedTracks": [
+    {
+      "title": "Clark",
+      "bytes": 3198685,
+      "sha256": "ef5d5828a3c76099fc912b6fb0c5a598997807f8a792fa52beec19f510f6c1aa"
+    },
+    {
+      "title": "Sweden",
+      "bytes": 3577774,
+      "sha256": "50852312f18eb197446dcaf5379682ff6bd9fca65515e18761e0b2614ad808b3"
+    },
+    {
+      "title": "Subwoofer Lullaby",
+      "bytes": 3466596,
+      "sha256": "52add411175cdd07c86705c3fee7b0a09b77343299de1571fa4a54a16db30434"
+    },
+    {
+      "title": "Minecraft",
+      "bytes": 4194681,
+      "sha256": "4d221e17857c0335be369f0542a40a30f74abe4182137b894b8f3fc2e591c608"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "tracks": [
+    {
+      "id": "clark",
+      "title": "Clark",
+      "artist": "C418",
+      "album": "Minecraft Volume Alpha",
+      "file": "clark.mp3",
+      "originalFile": "C418 Clark Minecraft Volume Alpha.mp3",
+      "bytes": 3198685,
+      "sha256": "ef5d5828a3c76099fc912b6fb0c5a598997807f8a792fa52beec19f510f6c1aa",
+      "duration": 191.947755
+    },
+    {
+      "id": "sweden",
+      "title": "Sweden",
+      "artist": "C418",
+      "album": "Minecraft Volume Alpha",
+      "file": "sweden.mp3",
+      "originalFile": "C418 Sweden Minecraft Volume Alpha.mp3",
+      "bytes": 3577774,
+      "sha256": "50852312f18eb197446dcaf5379682ff6bd9fca65515e18761e0b2614ad808b3",
+      "duration": 215.640816
+    },
+    {
+      "id": "subwoofer-lullaby",
+      "title": "Subwoofer Lullaby",
+      "artist": "C418",
+      "album": "Minecraft Volume Alpha",
+      "file": "subwoofer-lullaby.mp3",
+      "originalFile": "C418 Subwoofer Lullaby Minecraft Volume Alpha.mp3",
+      "bytes": 3466596,
+      "sha256": "52add411175cdd07c86705c3fee7b0a09b77343299de1571fa4a54a16db30434",
+      "duration": 208.692245
+    },
+    {
+      "id": "minecraft",
+      "title": "Minecraft",
+      "artist": "C418",
+      "album": "Minecraft Volume Alpha",
+      "file": "minecraft.mp3",
+      "originalFile": "C418 Minecraft Minecraft Volume Alpha.mp3",
+      "bytes": 4194681,
+      "sha256": "4d221e17857c0335be369f0542a40a30f74abe4182137b894b8f3fc2e591c608",
+      "duration": 254.197551
+    }
+  ]
+}
