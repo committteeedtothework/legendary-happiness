@@ -1,0 +1,55 @@
+{
+  "version": "2.7.1",
+  "environment": "Node CPU workloads; no WebGL rendering or hardware FPS claim",
+  "notes": [
+    "Stationary terrain is already built, with no pending jobs/edits. Baseline metadata is matched to its own renderer; this does not inflate the old implementation with repeated fallback rebuilds.",
+    "Light workload has 100,000 saved stone edits and four indexed nearby lights.",
+    "Creature workload updates 96 existing original models represented by lightweight groups; position-clone calls are counted directly.",
+    "CPU timings vary by host/load. Operation counts and LOD vertex counts are the reproducible evidence."
+  ],
+  "terrain": {
+    "before": {
+      "frames": 120,
+      "planEntries": 361,
+      "revisionChecks": 43320,
+      "cpuMs": 36.522647000000006
+    },
+    "after": {
+      "frames": 120,
+      "planEntries": 361,
+      "revisionChecks": 0,
+      "cpuMs": 0.03258899999991627
+    }
+  },
+  "creatureUpdates": {
+    "before": {
+      "frames": 120,
+      "creatures": 96,
+      "positionClones": 11520,
+      "cpuMs": 23.257582999999954
+    },
+    "after": {
+      "frames": 120,
+      "creatures": 96,
+      "positionClones": 0,
+      "cpuMs": 13.342938000000004
+    }
+  },
+  "lightSelection": {
+    "before": {
+      "refreshes": 30,
+      "savedEditsVisited": 3000000,
+      "cpuMs": 201.22260900000003
+    },
+    "after": {
+      "refreshes": 30,
+      "savedEditsVisited": 0,
+      "cpuMs": 0.5199220000000082
+    }
+  },
+  "lodVertices": {
+    "2": 6284,
+    "4": 2632,
+    "8": 1204
+  }
+}

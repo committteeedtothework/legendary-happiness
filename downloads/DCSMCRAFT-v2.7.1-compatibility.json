@@ -1,0 +1,35 @@
+{
+  "version": "2.7.1",
+  "previousVersion": "2.7.0",
+  "newItemKeys": [],
+  "newBlockTypes": 0,
+  "newSpecies": 0,
+  "newRecipes": 0,
+  "newNetherOrEndEntries": 0,
+  "existingCreativeIndicesPreserved": 1125,
+  "oldItemDefinitionsPreserved": 1125,
+  "recipesPreserved": 1292,
+  "blockStatesPreserved": 2625,
+  "oldMobDefinitionsPreserved": 39,
+  "existingPublicAssetsByteIdentical": 200,
+  "newPublicAssets": [
+    "public/audio/MENU-SOUNDS-NOTICE.txt",
+    "public/audio/menu-console-source.mp3"
+  ],
+  "terrainSourceFilesByteIdentical": [
+    "biomes.js",
+    "connected-terrain.js",
+    "expedition-terrain.js",
+    "expedition-structures.js",
+    "edition-generation.js",
+    "ocean-generation.js",
+    "wild-caves.js",
+    "cinderworld.js",
+    "cave-life.js",
+    "random.js"
+  ],
+  "chunkArraysMatched": 24,
+  "generation": 16,
+  "protocol": 4,
+  "existingPreferenceDefaultsPreserved": 40
+}
