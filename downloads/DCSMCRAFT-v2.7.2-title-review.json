@@ -1,0 +1,19 @@
+{
+  "version": "2.7.2",
+  "randomTitleVisits": 200,
+  "distinctSplashes": 24,
+  "noImmediateRepeats": true,
+  "layoutsCheckedAtLargestAnimationPulse": 120,
+  "viewports": [
+    1920,
+    1280,
+    1024,
+    390,
+    320
+  ],
+  "reducedMotionVerified": true,
+  "actualWorldCreationSaveQuitAndContinueVerified": true,
+  "savedWorldTitleLayoutsChecked": 2,
+  "externalRequests": [],
+  "pageOrWebGLErrors": []
+}

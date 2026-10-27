@@ -1,0 +1,17 @@
+{
+  "version": "2.7.2",
+  "previousVersion": "2.7.1",
+  "changedExistingRuntimeFiles": [
+    "src/data.js",
+    "src/pixel-ui.css",
+    "src/ui.js"
+  ],
+  "newRuntimeFiles": [
+    "src/title-splashes.js"
+  ],
+  "existingPublicAssetsByteIdentical": 202,
+  "allOtherExistingRuntimeFilesByteIdentical": 353,
+  "generation": 16,
+  "protocol": 4,
+  "contentGameplayAndSaveSourcesByteIdentical": true
+}

@@ -1,0 +1,30 @@
+{
+  "DCSMCRAFT-Windows-2.7.2.zip": {
+    "bytes": 3226681,
+    "sha256": "ca0706a70759b2dc0ec9d8d979f7c5683bc2340929101aae7d70af4ff466b50e"
+  },
+  "DCSMCRAFT.exe": {
+    "bytes": 3675648,
+    "sha256": "19ff46e5f68ac155516275d5c6a399133d9592456ad5b32aeb4ac1fab323aae2"
+  },
+  "DCSMCRAFT-Standalone-v2.7.2.html": {
+    "bytes": 3496780,
+    "sha256": "f67dbf41fec29ce50f371bc2fa6a1cea59123db8756ab42cffdd2d55f1b6b0bd"
+  },
+  "DCSMCRAFT-Multiplayer-Server-2.7.2.zip": {
+    "bytes": 951056,
+    "sha256": "a21d0f766ffd162269534542b830dcacdb1a5e0fc1cc05e9b4a03858a9cb670f"
+  },
+  "dcsmcraft-source-v2.7.2.zip": {
+    "bytes": 1912580,
+    "sha256": "ab61fd0c9fe21ee6cfdbbef1b10b4d959e8691a9022bcdf6bd50e8d301603601"
+  },
+  "dcsmcraft-build-v2.7.2.zip": {
+    "bytes": 3517470,
+    "sha256": "03079f652a05e2a68c534668a382824a636762049e1fcc89a3e7de8fdf8fa356"
+  },
+  "DCSMCRAFT-Browser-2.7.2.zip": {
+    "bytes": 1024437,
+    "sha256": "49d284c16e19aa4d4260724e9d63b505d6f041baa1844adad60cd0d0e4e500c0"
+  }
+}
