@@ -1,0 +1,15 @@
+{
+  "version": "2.7.3",
+  "previousVersion": "2.7.2",
+  "changedExistingRuntimeFiles": [
+    "src/data.js",
+    "src/pixel-ui.css"
+  ],
+  "newRuntimeFiles": [],
+  "existingPublicAssetsByteIdentical": 202,
+  "allOtherExistingRuntimeFilesByteIdentical": 355,
+  "generation": 16,
+  "protocol": 4,
+  "contentGameplayAudioAndSaveSourcesByteIdentical": true,
+  "splashPoolAndRandomSelectionByteIdentical": true
+}

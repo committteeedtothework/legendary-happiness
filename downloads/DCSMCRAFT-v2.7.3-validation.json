@@ -1,0 +1,57 @@
+{
+  "version": "2.7.3",
+  "stage": "Right-Side Animated Splash",
+  "verifiedAtUtc": "2026-10-27T21:26:55.411493+00:00",
+  "browser": {
+    "version": "2.7.3",
+    "animation": {
+      "running": true,
+      "duration": 1000,
+      "angle": -19.99998485209311,
+      "peakScale": 1.0000003073244528,
+      "troughScale": 0.9399999626180843
+    },
+    "rightAlignedUnderLogo": true,
+    "randomTitleVisits": 200,
+    "distinctSplashes": 24,
+    "noImmediateRepeats": true,
+    "layoutsCheckedAtLargestAnimationPulse": 120,
+    "viewports": [
+      1920,
+      1280,
+      1024,
+      390,
+      320
+    ],
+    "reducedMotionVerified": true,
+    "actualWorldCreationSaveQuitAndContinueVerified": true,
+    "savedWorldTitleLayoutsChecked": 2,
+    "externalRequests": [],
+    "pageOrWebGLErrors": []
+  },
+  "retainedTitleCreationSettingsControlsResponsiveScenarioPassed": true,
+  "currentCoreSuiteRerun": false,
+  "compatibility": {
+    "version": "2.7.3",
+    "previousVersion": "2.7.2",
+    "changedExistingRuntimeFiles": [
+      "src/data.js",
+      "src/pixel-ui.css"
+    ],
+    "newRuntimeFiles": [],
+    "existingPublicAssetsByteIdentical": 202,
+    "allOtherExistingRuntimeFilesByteIdentical": 355,
+    "generation": 16,
+    "protocol": 4,
+    "contentGameplayAudioAndSaveSourcesByteIdentical": true,
+    "splashPoolAndRandomSelectionByteIdentical": true
+  },
+  "nativeWindowsExecutionTested": false,
+  "windowsCompanionExtractionVerified": true,
+  "testedStandaloneSha256": "e12f9622f64f87986706db6f79211e1e3b863c6f4ad2dee8b2f1577a08743886",
+  "lastFullCoreSuite": {
+    "version": "2.7.1",
+    "passed": 511,
+    "historical": true
+  }
+}
