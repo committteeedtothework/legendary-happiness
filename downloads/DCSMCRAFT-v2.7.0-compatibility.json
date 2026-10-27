@@ -1,0 +1,52 @@
+{
+  "version": "2.7.0",
+  "previousVersion": "2.6.1",
+  "newItemKeys": [
+    "milk_bucket"
+  ],
+  "newBlockTypes": 0,
+  "newSpecies": 0,
+  "newNetherOrEndEntries": 0,
+  "existingCreativeIndicesPreserved": 1124,
+  "oldItemDefinitionsPreserved": 1124,
+  "recipesPreserved": 1292,
+  "blockStatesPreserved": 2625,
+  "oldMobDefinitionsPreserved": 39,
+  "existingPublicAssetsByteIdentical": 200,
+  "terrainSourceFilesByteIdentical": [
+    "world.js",
+    "biomes.js",
+    "connected-terrain.js",
+    "expedition-terrain.js",
+    "expedition-structures.js",
+    "edition-generation.js",
+    "ocean-generation.js",
+    "wild-caves.js",
+    "cinderworld.js",
+    "cave-life.js",
+    "random.js"
+  ],
+  "chunkArraysMatched": 24,
+  "changedExistingRuntimeSources": [
+    "src/coop-survival.js",
+    "src/creative-catalog.js",
+    "src/data.js",
+    "src/edition-art.js",
+    "src/edition-interactions.js",
+    "src/equipment.js",
+    "src/hostile-combat.js",
+    "src/inventory.js",
+    "src/main.js",
+    "src/matthew.js",
+    "src/multiplayer.js",
+    "src/relay-connection.js",
+    "src/renderer.js",
+    "src/simulation.js",
+    "src/supplied-pack.js",
+    "src/textures.js",
+    "src/ui.js",
+    "src/worker-code.js"
+  ],
+  "protocol": 4,
+  "oldProtocolsRejected": true
+}
