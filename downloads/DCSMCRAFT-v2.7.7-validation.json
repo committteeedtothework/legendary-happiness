@@ -1,0 +1,120 @@
+{
+  "version": "2.7.7",
+  "stage": "Creative Soundtrack",
+  "verifiedAtUtc": "2026-10-28T03:09:13.538006+00:00",
+  "core": {
+    "passed": 531,
+    "failed": 0,
+    "newCases": 3
+  },
+  "browser": {
+    "uniquePassed": 4,
+    "scenarios": [
+      "\u2713  1 tests/browser/overworld-music.spec.js:76:1 \u203a exact offline game plays all twelve full supplied Survival recordings through native media, cycles after real ended events and leaves no generated Overworld notes (1.1m)",
+      "\u2713  2 tests/browser/overworld-music.spec.js:140:1 \u203a music controls persist, pause resumes the same position, Cinderworld keeps generated music, and quit/reload releases the old player (20.4s)",
+      "\u2713  3 tests/browser/overworld-music.spec.js:216:1 \u203a Creative plays only its six Beta tracks through a complete real native shuffle round (24.0s)",
+      "\u2713  4 tests/browser/overworld-music.spec.js:265:1 \u203a switching modes pauses the old pool, plays only the new pool and resumes each song's own position (12.1s)"
+    ],
+    "nativeMetrics": {
+      "survival": {
+        "order": [
+          "sweden",
+          "minecraft",
+          "subwoofer-lullaby",
+          "oxygene",
+          "clark",
+          "wet-hands",
+          "danny",
+          "key",
+          "mice-on-venus",
+          "haggstrom",
+          "living-mice",
+          "dry-hands",
+          "key"
+        ],
+        "peaks": [
+          0.03603251278400421,
+          0.0199228934943676,
+          0.04945754632353783,
+          0.008918575942516327,
+          0.015252212062478065,
+          0.05277172476053238,
+          0.06548987329006195,
+          0.03209778293967247,
+          0.008036646991968155,
+          0.05460415035486221,
+          0.0016183784464374185,
+          0.06842672824859619
+        ],
+        "naturalFirstGap": true,
+        "laterGapsAccelerated": true,
+        "trackEndsReachedBySeeking": true
+      },
+      "creative": {
+        "order": [
+          "taswell",
+          "haunt-muskie",
+          "blind-spots",
+          "biome-fest",
+          "aria-math",
+          "dreiton",
+          "taswell"
+        ],
+        "peaks": [
+          0.010803744196891785,
+          0.05995425581932068,
+          0.07058380544185638,
+          0.009423710405826569,
+          0.10167331993579865,
+          0.021660856902599335
+        ],
+        "gapsAccelerated": true,
+        "trackEndsReachedBySeeking": true
+      }
+    },
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "trackEndsAndLaterGapsAccelerated": true,
+    "fullDurationRealTimeListeningClaimed": false
+  },
+  "compatibility": {
+    "version": "2.7.7",
+    "previousVersion": "2.7.6",
+    "changedExistingRuntimeFiles": [
+      "server/HOST-PUBLIC.cmd",
+      "server/HOST-SERVER.cmd",
+      "src/audio.js",
+      "src/data.js",
+      "src/music.js",
+      "src/overworld-music-data.js",
+      "src/overworld-music.js",
+      "src/ui.js"
+    ],
+    "newRuntimeFiles": [
+      "public/audio/creative/NOTICE.txt",
+      "public/audio/creative/manifest.json",
+      "public/audio/creative/blind-spots.mp3",
+      "public/audio/creative/taswell.mp3",
+      "public/audio/creative/biome-fest.mp3",
+      "public/audio/creative/haunt-muskie.mp3",
+      "public/audio/creative/dreiton.mp3",
+      "public/audio/creative/aria-math.mp3"
+    ],
+    "survivalDefinitionsAndSourceAudioPreserved": 12,
+    "creativeOnlyTrackCount": 6,
+    "existingPublicAssetsByteIdentical": 216,
+    "allOtherExistingRuntimeFilesByteIdentical": 366,
+    "generation": 16,
+    "protocol": 4,
+    "gameplayTerrainSkyWeatherInventoryAndSaveSourcesByteIdentical": true,
+    "modePoolsRemainSeparate": true,
+    "sourceArchiveRegeneratesEmbeddedCatalogWithNode": true,
+    "windowsPayloadExtractionFlagAdded": true
+  },
+  "testedStandaloneSha256": "cc493aad5ef1442d8deca7f457a690a24db7cc299b6fceebb8ecdb0d891536fa",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}

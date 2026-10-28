@@ -1,0 +1,34 @@
+{
+  "version": "2.7.7",
+  "previousVersion": "2.7.6",
+  "changedExistingRuntimeFiles": [
+    "server/HOST-PUBLIC.cmd",
+    "server/HOST-SERVER.cmd",
+    "src/audio.js",
+    "src/data.js",
+    "src/music.js",
+    "src/overworld-music-data.js",
+    "src/overworld-music.js",
+    "src/ui.js"
+  ],
+  "newRuntimeFiles": [
+    "public/audio/creative/NOTICE.txt",
+    "public/audio/creative/manifest.json",
+    "public/audio/creative/blind-spots.mp3",
+    "public/audio/creative/taswell.mp3",
+    "public/audio/creative/biome-fest.mp3",
+    "public/audio/creative/haunt-muskie.mp3",
+    "public/audio/creative/dreiton.mp3",
+    "public/audio/creative/aria-math.mp3"
+  ],
+  "survivalDefinitionsAndSourceAudioPreserved": 12,
+  "creativeOnlyTrackCount": 6,
+  "existingPublicAssetsByteIdentical": 216,
+  "allOtherExistingRuntimeFilesByteIdentical": 366,
+  "generation": 16,
+  "protocol": 4,
+  "gameplayTerrainSkyWeatherInventoryAndSaveSourcesByteIdentical": true,
+  "modePoolsRemainSeparate": true,
+  "sourceArchiveRegeneratesEmbeddedCatalogWithNode": true,
+  "windowsPayloadExtractionFlagAdded": true
+}
