@@ -1,0 +1,43 @@
+{
+  "version": "2.7.16",
+  "previousVersion": "2.7.15",
+  "changedRuntimeFiles": [
+    "src/arcane-effects.js",
+    "src/data.js",
+    "src/first-person.js",
+    "src/infernal-models.js",
+    "src/night-models.js",
+    "src/overworld-models.js",
+    "src/pistol-model.js",
+    "src/player-model.js",
+    "src/renderer.js",
+    "src/textures.js",
+    "src/weapon-models.js",
+    "src/edition-models.js",
+    "src/java-item-motion.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/weapon-art.js",
+    "src/npc-weapon.js",
+    "src/weapon-poses.js",
+    "src/pixel-weapon-mesh.js",
+    "src/ranged-weapon-models.js"
+  ],
+  "unchangedSourceAndAssetFiles": 381,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesAndTerrainGenerationUnchanged": true,
+  "worldSaveEnvelopeUnchanged": true,
+  "combatHitDetectionControlsDurabilityCooldownsUnchanged": true,
+  "customActionAndPistolRecoilCurvesUnchanged": true,
+  "weaponArtModelsIconsAndDisplayPosesChanged": true,
+  "NPCWeaponArtChangedBodiesUnchanged": true,
+  "firstPersonHiddenArmRuleRetained": true,
+  "skinArtAndPlayerBodyGeometryUnchanged": true,
+  "inventoryAndRecipeBookUnchanged": true,
+  "blockEditPerformanceCodeUnchanged": true,
+  "poseParity": "approximate; original geometry/entity origins/palm translations; hidden held arm; custom abilities/spear combat; old-item equip and remote use/ability replication incomplete",
+  "protocol": 4,
+  "terrainGeneration": 16
+}

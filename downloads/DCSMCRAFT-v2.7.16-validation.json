@@ -1,0 +1,101 @@
+{
+  "version": "2.7.16",
+  "stage": "Pixel Weapon Arsenal",
+  "core": {
+    "passed": 573,
+    "failed": 0,
+    "newCases": 9
+  },
+  "browser": {
+    "uniquePassed": 17,
+    "firstAttemptPassed": 15,
+    "legacyPlacementAndNPCFixtureCorrectedAndPassedSeparately": true,
+    "scenarios": [
+      "tests/browser/interaction-stutter.spec.js \u203a placing/breaking blocks, shaped items and containers uses snapshot workers, coalesces rapid edits, preserves boundaries and survives reload",
+      "tests/browser/inventory-book.spec.js \u203a compact inventory book fills the 2x2 grid, crafts once, tracks the mouse with the equipped skin and disposes its preview",
+      "tests/browser/inventory-book.spec.js \u203a table recipes fill 3x3 from carried materials, missing ingredients are harmless and the book stays usable at small sizes",
+      "tests/browser/item-only.spec.js \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player",
+      "tests/browser/item-only.spec.js \u203a Java-style swing/equip preserve their natural paths through resized views; only custom weapons retain edge-pivot moves",
+      "tests/browser/item-only.spec.js \u203a real bow/crossbow/shield/trident use and release drive the matching held pose; spyglass hides and restores its item",
+      "tests/browser/living-world.spec.js \u203a offline live props: real chest clicks and transfers, blocked lids, original instant doors, burning furnace, book/disc motion, pack changes and removal safety",
+      "tests/browser/living-world.spec.js \u203a offline icy wildlife naturally includes snow leopards and polar bears; Creative eggs spawn them and their models/saves stay valid",
+      "tests/browser/visual-audio-fixes.spec.js \u203a reference hand framing puts the sword at the cropped lower-right angle while held-item actions, hidden arms and camera safety remain",
+      "tests/browser/visual-audio-fixes.spec.js \u203a a naturally generated village chest keeps its loot/floor position with corrected faces in all packs, opens normally, and village doors switch instantly",
+      "tests/browser/visual-audio-fixes.spec.js \u203a actual pistol damage to a distant mob is quiet, live Web Audio voices fade when moving away, and tornado layers follow funnel range",
+      "tests/browser/weapon-style.spec.js \u203a all 61 weapons render real pixel models and matching inventory icons, preserve hidden-arm/action rules and use original shared assets",
+      "tests/browser/weapon-style.spec.js \u203a all 61 third-person weapons remain at the palm through idle, swings and movement; F5 shows distinct pixel models",
+      "tests/browser/weapon-style.spec.js \u203a real bow/crossbow charging and loaded firing, shield blocking and trident windup drive both first/F5 poses and retain ammunition/damage controls",
+      "tests/browser/weapon-style.spec.js \u203a weapon camera transforms stay finite on narrow and ultrawide screens and pack changes keep the same original weapon/icon",
+      "tests/browser/item-only.spec.js \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming",
+      "tests/browser/weapon-style.spec.js \u203a all 61 dropped weapons render as genuine 3D pixel items and equipment on skeletons, Guardians and Dread Knights shares the same art"
+    ],
+    "weaponsEquippedRenderedAndIconsInspected": 61,
+    "thirdPersonWeaponGrips": 61,
+    "droppedWeaponModels": 61,
+    "NPCWeapons": [
+      "bow",
+      "golden_sword",
+      "shield",
+      "hellfire_sword"
+    ],
+    "packs": [
+      "classic",
+      "renewed",
+      "supplied"
+    ],
+    "nativeRightHandDisplayFactsVerified": true,
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.16",
+    "previousVersion": "2.7.15",
+    "changedRuntimeFiles": [
+      "src/arcane-effects.js",
+      "src/data.js",
+      "src/first-person.js",
+      "src/infernal-models.js",
+      "src/night-models.js",
+      "src/overworld-models.js",
+      "src/pistol-model.js",
+      "src/player-model.js",
+      "src/renderer.js",
+      "src/textures.js",
+      "src/weapon-models.js",
+      "src/edition-models.js",
+      "src/java-item-motion.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/weapon-art.js",
+      "src/npc-weapon.js",
+      "src/weapon-poses.js",
+      "src/pixel-weapon-mesh.js",
+      "src/ranged-weapon-models.js"
+    ],
+    "unchangedSourceAndAssetFiles": 381,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesAndTerrainGenerationUnchanged": true,
+    "worldSaveEnvelopeUnchanged": true,
+    "combatHitDetectionControlsDurabilityCooldownsUnchanged": true,
+    "customActionAndPistolRecoilCurvesUnchanged": true,
+    "weaponArtModelsIconsAndDisplayPosesChanged": true,
+    "NPCWeaponArtChangedBodiesUnchanged": true,
+    "firstPersonHiddenArmRuleRetained": true,
+    "skinArtAndPlayerBodyGeometryUnchanged": true,
+    "inventoryAndRecipeBookUnchanged": true,
+    "blockEditPerformanceCodeUnchanged": true,
+    "poseParity": "approximate; original geometry/entity origins/palm translations; hidden held arm; custom abilities/spear combat; old-item equip and remote use/ability replication incomplete",
+    "protocol": 4,
+    "terrainGeneration": 16
+  },
+  "testedStandaloneSha256": "18f0d9784cf543e3de5fe4522833cce97e3ac0d6fd41e4e389a20b6f84f557d2",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}
