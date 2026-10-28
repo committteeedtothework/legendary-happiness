@@ -1,0 +1,96 @@
+{
+  "version": "2.7.15",
+  "stage": "Doors, Chests, Held Position & Sound Distance",
+  "core": {
+    "passed": 564,
+    "failed": 0,
+    "newCases": 8
+  },
+  "browser": {
+    "uniquePassed": 12,
+    "scenarios": [
+      "\u2713   1 tests/browser/interaction-stutter.spec.js:25:1 \u203a placing/breaking blocks, shaped items and containers uses snapshot workers, coalesces rapid edits, preserves boundaries and survives reload (18.8s)",
+      "\u2713   2 tests/browser/inventory-book.spec.js:82:1 \u203a compact inventory book fills the 2x2 grid, crafts once, tracks the mouse with the equipped skin and disposes its preview (16.8s)",
+      "\u2713   3 tests/browser/inventory-book.spec.js:190:1 \u203a table recipes fill 3x3 from carried materials, missing ingredients are harmless and the book stays usable at small sizes (9.4s)",
+      "\u2713   4 tests/browser/item-only.spec.js:74:1 \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming (11.6s)",
+      "\u2713   5 tests/browser/item-only.spec.js:199:1 \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player (10.7s)",
+      "\u2713   6 tests/browser/item-only.spec.js:314:1 \u203a Java-style swing/equip preserve their natural paths through resized views; only custom weapons retain edge-pivot moves (27.0s)",
+      "\u2713   7 tests/browser/item-only.spec.js:415:1 \u203a real bow/crossbow/shield/trident use and release drive the matching held pose; spyglass hides and restores its item (10.3s)",
+      "\u2713   8 tests/browser/living-world.spec.js:83:1 \u203a offline live props: real chest clicks and transfers, blocked lids, original instant doors, burning furnace, book/disc motion, pack changes and removal safety (23.4s)",
+      "\u2713   9 tests/browser/living-world.spec.js:283:1 \u203a offline icy wildlife naturally includes snow leopards and polar bears; Creative eggs spawn them and their models/saves stay valid (35.0s)",
+      "\u2713  10 tests/browser/visual-audio-fixes.spec.js:82:1 \u203a reference hand framing puts the sword at the cropped lower-right angle while held-item actions, hidden arms and camera safety remain (10.4s)",
+      "\u2713  11 tests/browser/visual-audio-fixes.spec.js:162:1 \u203a a naturally generated village chest keeps its loot/floor position with corrected faces in all packs, opens normally, and village doors switch instantly (15.9s)",
+      "\u2713  12 tests/browser/visual-audio-fixes.spec.js:309:1 \u203a actual pistol damage to a distant mob is quiet, live Web Audio voices fade when moving away, and tornado layers follow funnel range (13.0s)"
+    ],
+    "packs": [
+      "classic",
+      "renewed",
+      "supplied"
+    ],
+    "heldItems": 7,
+    "referenceViewport": [
+      854,
+      478
+    ],
+    "villageChestLootPreserved": true,
+    "distantActualMobHitMuted": true,
+    "movingListenerAudioVerified": true,
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.15",
+    "previousVersion": "2.7.14",
+    "changedRuntimeFiles": [
+      "src/audio.js",
+      "src/block-actions.js",
+      "src/block-art.js",
+      "src/data.js",
+      "src/ecology.js",
+      "src/hostile-combat.js",
+      "src/invasion.js",
+      "src/main.js",
+      "src/mesher.js",
+      "src/renderer.js",
+      "src/simulation.js",
+      "src/village-styles.js",
+      "src/villages.js",
+      "src/worker-code.js",
+      "src/world-animation-models.js",
+      "src/item-framing.js",
+      "src/aquatic-gear.js",
+      "src/java-item-motion.js",
+      "src/world-animations.js",
+      "src/world-interactions.js",
+      "src/cinder-flight.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/spatial-audio.js"
+    ],
+    "unchangedSourceAndAssetFiles": 372,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesAndTerrainGenerationUnchanged": true,
+    "worldSaveEnvelopeUnchanged": true,
+    "optionalVillageChestFacingMetadata": true,
+    "chestCellsAndLootPreserved": true,
+    "weaponGeometryUnchanged": true,
+    "firstPersonActionCurvesUnchanged": true,
+    "firstPersonRestPlacementChanged": true,
+    "originalDiscreteDoorMeshesRestored": true,
+    "skinsAndF5ModelsUnchanged": true,
+    "inventoryAndRecipeBookUnchanged": true,
+    "blockEditPerformanceCodeUnchanged": true,
+    "protocol": 4,
+    "terrainGeneration": 16
+  },
+  "testedStandaloneSha256": "2579104795cb46d479d6c680d0a21068bb26f9849c372b3bb40ab7c5cdfdd12a",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}

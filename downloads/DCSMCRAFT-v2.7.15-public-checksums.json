@@ -1,0 +1,14 @@
+{
+  "DCSMCRAFT-Windows-2.7.15.zip": {
+    "bytes": 75247096,
+    "sha256": "c790c4762f3575bd2889df35dcf14b2ffee12b9be08a9c8076f00e290970acfd"
+  },
+  "DCSMCRAFT-Browser-2.7.15.zip": {
+    "bytes": 74808548,
+    "sha256": "16d9e9efb36dd8fb80ebc4d6e5b4fb6e1043644006c7184c937ec16806916cef"
+  },
+  "dcsmcraft-source-v2.7.15.zip": {
+    "bytes": 75050363,
+    "sha256": "68a48c918edf07d09ddd965cf92feef910f0a8add3fb95d7eee2e4e75aa3ae07"
+  }
+}
