@@ -1,0 +1,73 @@
+{
+  "version": "2.7.13",
+  "stage": "Java-Style Item Animation",
+  "core": {
+    "passed": 549,
+    "failed": 0,
+    "newCases": 5
+  },
+  "browser": {
+    "uniquePassed": 6,
+    "scenarios": [
+      "\u2713  1 tests/browser/interaction-stutter.spec.js:25:1 \u203a placing/breaking blocks, shaped items and containers uses snapshot workers, coalesces rapid edits, preserves boundaries and survives reload (16.4s)",
+      "\u2713  2 tests/browser/item-only.spec.js:74:1 \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming (11.3s)",
+      "\u2713  3 tests/browser/item-only.spec.js:199:1 \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player (11.6s)",
+      "\u2713  4 tests/browser/item-only.spec.js:314:1 \u203a Java-style swing/equip preserve their natural paths through resized views; only custom weapons retain edge-pivot moves (27.2s)",
+      "\u2713  5 tests/browser/item-only.spec.js:415:1 \u203a real bow/crossbow/shield/trident use and release drive the matching held pose; spyglass hides and restores its item (9.8s)",
+      "\u2713  6 tests/browser/skin-grip.spec.js:26:1 \u203a wardrobe skins match F5 arms; item-only blocks retain their mount and camera clearance without reserving an invisible hand (20.0s)"
+    ],
+    "newViewportScenario": {
+      "viewports": [
+        [
+          640,
+          960
+        ],
+        [
+          1280,
+          800
+        ],
+        [
+          1920,
+          720
+        ]
+      ],
+      "representativeItems": 10,
+      "equipStates": 5,
+      "actions": 6,
+      "phases": 4
+    },
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.13",
+    "previousVersion": "2.7.12",
+    "changedRuntimeFiles": [
+      "src/animation.js",
+      "src/data.js",
+      "src/renderer.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/java-item-motion.js"
+    ],
+    "unchangedSourceAndAssetFiles": 388,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesGenerationAndSaveFormatUnchanged": true,
+    "weaponGeometryUnchanged": true,
+    "customWeaponActionCurvesUnchanged": true,
+    "skinsAndF5ModelsUnchanged": true,
+    "blockEditPerformanceCodeUnchanged": true,
+    "protocol": 4,
+    "terrainGeneration": 16
+  },
+  "testedStandaloneSha256": "9505001f7cfba183c7561252032c968db6f151b262705f88dfc81ce412db9c28",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}

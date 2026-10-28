@@ -1,0 +1,70 @@
+{
+  "tracks": [
+    {
+      "id": "aria-math",
+      "title": "Aria Math",
+      "artist": "C418",
+      "album": "Minecraft Volume Beta",
+      "file": "aria-math.mp3",
+      "originalFile": "C418 Aria Math Minecraft Volume Beta.mp3",
+      "bytes": 5030035,
+      "sha256": "48e53255c03fc24109fe822e0aaf311c0ed2e86dfdb60e29cd454965fad078b7",
+      "duration": 309.159184
+    },
+    {
+      "id": "dreiton",
+      "title": "Dreiton",
+      "artist": "C418",
+      "album": "Minecraft Volume Beta",
+      "file": "dreiton.mp3",
+      "originalFile": "C418 Dreiton Minecraft Volume Beta.mp3",
+      "bytes": 7966843,
+      "sha256": "52524c552b6b56709139e3fce535a14fb2e8224f178e66f8b485cad8c6919a53",
+      "duration": 496.300408
+    },
+    {
+      "id": "haunt-muskie",
+      "title": "Haunt Muskie",
+      "artist": "C418",
+      "album": "Minecraft Volume Beta",
+      "file": "haunt-muskie.mp3",
+      "originalFile": "C418 Haunt Muskie Minecraft Volume Beta.mp3",
+      "bytes": 5858849,
+      "sha256": "231e151d0553c6b2b27eda1cbae90b32396797defd3746b91dadd09058c55a87",
+      "duration": 360.96
+    },
+    {
+      "id": "blind-spots",
+      "title": "Blind Spots",
+      "artist": "C418",
+      "album": "Minecraft Volume Beta",
+      "file": "blind-spots.mp3",
+      "originalFile": "C418 Blind Spots Minecraft Volume Beta.mp3",
+      "bytes": 5389480,
+      "sha256": "a593f18c8bca5e6d0c54d68bf953a3adc965ad6fd9297ffbe61cac3390eefd31",
+      "duration": 331.62449
+    },
+    {
+      "id": "taswell",
+      "title": "Taswell",
+      "artist": "C418",
+      "album": "Minecraft Volume Beta",
+      "file": "taswell.mp3",
+      "originalFile": "C418 Taswell Minecraft Volume Beta.mp3",
+      "bytes": 8332463,
+      "sha256": "93662af573b440f86f539f41018d2918b4ace1aeb93b00ebff9fd7306044daef",
+      "duration": 514.925714
+    },
+    {
+      "id": "biome-fest",
+      "title": "Biome Fest",
+      "artist": "C418",
+      "album": "Minecraft Volume Beta",
+      "file": "biome-fest.mp3",
+      "originalFile": "C418 Biome Fest Minecraft Volume Beta.mp3",
+      "bytes": 6118819,
+      "sha256": "72e81688a8a022eab2260074627ca7cb48d65c0fd0c5f516cc309ddd02e3689c",
+      "duration": 377.208163
+    }
+  ]
+}
