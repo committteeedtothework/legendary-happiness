@@ -1,0 +1,17 @@
+{
+  "version": "2.7.5",
+  "previousVersion": "2.7.4",
+  "changedExistingRuntimeFiles": [
+    "src/data.js",
+    "src/renderer.js",
+    "src/weather-renderer.js"
+  ],
+  "newRuntimeFiles": [
+    "src/sky-effects.js"
+  ],
+  "existingPublicAssetsByteIdentical": 208,
+  "allOtherExistingRuntimeFilesByteIdentical": 362,
+  "generation": 16,
+  "protocol": 4,
+  "allExistingGameplayTerrainInventoryMusicAndSaveSourcesByteIdentical": true
+}

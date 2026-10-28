@@ -1,0 +1,47 @@
+{
+  "version": "2.7.5",
+  "stage": "Steady Sky & Living Clouds",
+  "verifiedAtUtc": "2026-10-28T01:39:38.200738+00:00",
+  "core": {
+    "passed": 527,
+    "failed": 0,
+    "newCases": 8
+  },
+  "browser": {
+    "uniquePassed": 4,
+    "newSkyWeatherCases": 2,
+    "retainedCases": 2,
+    "scenarios": [
+      "\u2713  1 tests/browser/sky-weather.spec.js:82:1 \u203a sky directions and world precipitation stay fixed through movement, 128-block boundaries and F5 while sky time/wind advance independently (22.5s)",
+      "\u2713  2 tests/browser/sky-weather.spec.js:170:1 \u203a clouds are bright layered batches, blend into storm banks without cell jumps, and respect sky/weather graphics controls (17.6s)",
+      "\u2713  1 tests/browser/climate.spec.js:219:1 \u203a Creative weather controls produce rain snow and dry deserts, respect roofs and persist storms (28.2s)",
+      "\u2713  2 tests/browser/tornado-performance.spec.js:8:1 \u203a offline tornado is bounded through all particle settings, respects toggles, and never streams remote NPC/drop terrain (27.8s)"
+    ],
+    "exactStandaloneExternalRequestsBlocked": true,
+    "pageOrWebGLErrors": 0,
+    "screenshotsInspected": true,
+    "cameraAndF5DirectionsVerified": true,
+    "stationaryInteriorPrecipitationVerified": true,
+    "weatherAndCloudGraphicsTogglesVerified": true
+  },
+  "compatibility": {
+    "version": "2.7.5",
+    "previousVersion": "2.7.4",
+    "changedExistingRuntimeFiles": [
+      "src/data.js",
+      "src/renderer.js",
+      "src/weather-renderer.js"
+    ],
+    "newRuntimeFiles": [
+      "src/sky-effects.js"
+    ],
+    "existingPublicAssetsByteIdentical": 208,
+    "allOtherExistingRuntimeFilesByteIdentical": 362,
+    "generation": 16,
+    "protocol": 4,
+    "allExistingGameplayTerrainInventoryMusicAndSaveSourcesByteIdentical": true
+  },
+  "nativeWindowsExecutionTested": false,
+  "windowsCompanionExtractionVerified": true,
+  "testedStandaloneSha256": "f82bbacc7e4890a65cdbf8ff6ed464651f988fdd57b1443f2e0588473caa75a3"
+}
