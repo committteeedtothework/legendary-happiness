@@ -1,0 +1,18 @@
+{
+  "version": "2.7.10",
+  "previousVersion": "2.7.9",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/first-person.js",
+    "src/renderer.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [],
+  "unchangedRuntimeFiles": 386,
+  "unchangedPublicAssets": 224,
+  "all18SourceRecordingsAndGeneratedCatalogUnchanged": true,
+  "worldSaveGenerationProtocolUnchanged": true,
+  "weaponModelsAndAnimationCurvesUnchanged": true,
+  "skinsAndF5ModelsUnchanged": true,
+  "emptyArmMountUnchanged": true
+}
