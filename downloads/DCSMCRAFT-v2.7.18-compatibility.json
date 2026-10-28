@@ -1,0 +1,40 @@
+{
+  "version": "2.7.18",
+  "previousVersion": "2.7.17",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/first-person.js",
+    "src/hostile-combat.js",
+    "src/main.js",
+    "src/multiplayer.js",
+    "src/player-model.js",
+    "src/realms.js",
+    "src/renderer.js",
+    "src/textures.js",
+    "src/ui.js",
+    "src/weapon-poses.js",
+    "src/java-item-motion.js",
+    "src/ranged-weapon-models.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/embedded-arrows.js",
+    "src/arrow-model.js",
+    "src/refined-item-art.js"
+  ],
+  "unchangedSourceAndAssetFiles": 390,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesRecipesStatsAndTerrainGenerationUnchanged": true,
+  "worldSaveEnvelopeUnchanged": true,
+  "optionalPerRealmEmbeddedArrowsAdded": true,
+  "protocol": 4,
+  "terrainGeneration": 16,
+  "bowChargeDamageVelocityGravityAmmoAndDurabilityUnchanged": true,
+  "armorSkinsAndOtherWeaponArtRetained": true,
+  "refinedItemSprites": 51,
+  "correctedItemPalettes": 24,
+  "singleInventoryCloseButton": true,
+  "silentAirSwings": true,
+  "limitations": "Only recoverable Survival arrows grant ammunition. Entity-hit and airborne-save behavior unchanged. 256 lodged arrows per realm, 1200 active loaded ticks. Matching multiplayer builds recommended."
+}
