@@ -1,0 +1,47 @@
+{
+  "version": "2.7.9",
+  "stage": "Item-Only First Person",
+  "verifiedAtUtc": "2026-10-28T04:47:37.504169+00:00",
+  "core": {
+    "passed": 535,
+    "failed": 0,
+    "newCases": 0
+  },
+  "browser": {
+    "uniquePassed": 3,
+    "scenarios": [
+      "\u2713  1 tests/browser/item-only.spec.js:74:1 \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming (11.0s)",
+      "\u2713  2 tests/browser/item-only.spec.js:158:1 \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player (10.4s)",
+      "\u2713  3 tests/browser/skin-grip.spec.js:26:1 \u203a wardrobe skins match F5 arms, blocks physically contact the hand through actions, and shoulder armor does not recolor the sleeve (16.9s)"
+    ],
+    "skinsVerified": 11,
+    "representativeHeldObjects": 14,
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.9",
+    "previousVersion": "2.7.8",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/first-person.js",
+      "src/renderer.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [],
+    "unchangedRuntimeFiles": 386,
+    "unchangedPublicAssets": 224,
+    "all18SourceRecordingsAndGeneratedCatalogUnchanged": true,
+    "worldSaveGenerationProtocolUnchanged": true,
+    "weaponModelsAndAnimationsUnchanged": true,
+    "skinsAndF5ModelsUnchanged": true
+  },
+  "testedStandaloneSha256": "057d1b4fb91ee739a584240539457d9be56a9a52b5ea3fa6d24e6d5a9d92ee3e",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}
