@@ -1,0 +1,87 @@
+{
+  "version": "2.7.14",
+  "stage": "Player Inventory & Recipe Book",
+  "core": {
+    "passed": 556,
+    "failed": 0,
+    "newCases": 7
+  },
+  "browser": {
+    "uniquePassed": 10,
+    "scenarios": [
+      "\u2713   1 tests/browser/creative-menu.spec.js:62:1 \u203a offline Creative menu matches tabbed five-row layout, sorts varieties, and gives the correct stacks from filtered cells (13.0s)",
+      "\u2713   2 tests/browser/creative-menu.spec.js:127:1 \u203a offline catalog scrollbar reaches its final item, empty searches clear stale cells, tabs support keyboard focus, and narrow layouts fit (10.3s)",
+      "\u2713   3 tests/browser/creative-menu.spec.js:198:1 \u203a offline Stands and player crafting remain accessible through bottom tabs; Survival has no Creative catalog (10.3s)",
+      "\u2713   4 tests/browser/interaction-stutter.spec.js:25:1 \u203a placing/breaking blocks, shaped items and containers uses snapshot workers, coalesces rapid edits, preserves boundaries and survives reload (16.3s)",
+      "\u2713   5 tests/browser/inventory-book.spec.js:82:1 \u203a compact inventory book fills the 2x2 grid, crafts once, tracks the mouse with the equipped skin and disposes its preview (16.7s)",
+      "\u2713   6 tests/browser/inventory-book.spec.js:190:1 \u203a table recipes fill 3x3 from carried materials, missing ingredients are harmless and the book stays usable at small sizes (10.4s)",
+      "\u2713   7 tests/browser/skin-grip.spec.js:26:1 \u203a wardrobe skins match F5 arms; item-only blocks retain their mount and camera clearance without reserving an invisible hand (18.4s)",
+      "\u2713   8 tests/browser/skin-wardrobe.spec.js:50:1 \u203a all eleven skins render in a live shared-rig preview, cycle both ways, rotate with controls/drag and retain saved selection (30.2s)",
+      "\u2713   9 tests/browser/skin-wardrobe.spec.js:162:1 \u203a wardrobe is responsive, respects reduced motion and releases its rendering resources every time it closes (14.1s)",
+      "\u2713  10 tests/browser/skin-wardrobe.spec.js:221:1 \u203a selected outfits use the new model in actual F5 views, retain held-item attachment and survive a saved-world reload (23.6s)"
+    ],
+    "inventoryUI": {
+      "viewports": [
+        [
+          640,
+          720
+        ],
+        [
+          390,
+          700
+        ],
+        [
+          1280,
+          480
+        ]
+      ],
+      "armorSlots": 4,
+      "offhandStorageSlots": 1,
+      "mainSlots": 27,
+      "hotbarSlots": 9,
+      "recipePageSize": 20,
+      "previewFPSMax": 30
+    },
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.14",
+    "previousVersion": "2.7.13",
+    "changedRuntimeFiles": [
+      "src/coop-survival.js",
+      "src/data.js",
+      "src/inventory.js",
+      "src/main.js",
+      "src/pixel-ui.css",
+      "src/ui.js",
+      "src/worker-code.js",
+      "src/skin-preview.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/inventory-ui-art.js"
+    ],
+    "unchangedSourceAndAssetFiles": 384,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesAndTerrainGenerationUnchanged": true,
+    "worldSaveEnvelopeUnchanged": true,
+    "optionalSavedOffhandFieldAdded": true,
+    "weaponGeometryUnchanged": true,
+    "firstPersonAnimationUnchanged": true,
+    "skinsAndF5ModelsUnchanged": true,
+    "blockEditPerformanceCodeUnchanged": true,
+    "protocol": 4,
+    "offhandCommandsRequireMatchingHost": true,
+    "terrainGeneration": 16
+  },
+  "testedStandaloneSha256": "0d7ecb3d4cf64aa3eeec9f43cf153740e70e6b58d703da36f8fc95751fcd2ffb",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}

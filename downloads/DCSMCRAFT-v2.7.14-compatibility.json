@@ -1,0 +1,31 @@
+{
+  "version": "2.7.14",
+  "previousVersion": "2.7.13",
+  "changedRuntimeFiles": [
+    "src/coop-survival.js",
+    "src/data.js",
+    "src/inventory.js",
+    "src/main.js",
+    "src/pixel-ui.css",
+    "src/ui.js",
+    "src/worker-code.js",
+    "src/skin-preview.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/inventory-ui-art.js"
+  ],
+  "unchangedSourceAndAssetFiles": 384,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesAndTerrainGenerationUnchanged": true,
+  "worldSaveEnvelopeUnchanged": true,
+  "optionalSavedOffhandFieldAdded": true,
+  "weaponGeometryUnchanged": true,
+  "firstPersonAnimationUnchanged": true,
+  "skinsAndF5ModelsUnchanged": true,
+  "blockEditPerformanceCodeUnchanged": true,
+  "protocol": 4,
+  "offhandCommandsRequireMatchingHost": true,
+  "terrainGeneration": 16
+}
