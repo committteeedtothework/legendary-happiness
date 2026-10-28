@@ -1,0 +1,25 @@
+{
+  "version": "2.7.11",
+  "previousVersion": "2.7.10",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/first-person.js",
+    "src/renderer.js",
+    "src/terrain-worker.js",
+    "src/worker-code.js",
+    "src/world.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/item-framing.js",
+    "src/mesh-snapshot.js"
+  ],
+  "unchangedRuntimeFiles": 383,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesGenerationAndSaveFormatUnchanged": true,
+  "weaponGeometryAndAnimationCurvesUnchanged": true,
+  "skinsAndF5ModelsUnchanged": true,
+  "protocol": 4,
+  "terrainGeneration": 16
+}

@@ -1,0 +1,266 @@
+{
+  "version": "2.7.11",
+  "stage": "Held Items & Building Performance",
+  "verifiedAtUtc": "2026-10-28T05:35:47.838663+00:00",
+  "core": {
+    "passed": 543,
+    "failed": 0,
+    "newCases": 6
+  },
+  "browser": {
+    "uniquePassed": 4,
+    "scenarios": [
+      "\u2713  1 tests/browser/interaction-stutter.spec.js:25:1 \u203a placing/breaking blocks, shaped items and containers uses snapshot workers, coalesces rapid edits, preserves boundaries and survives reload (15.9s)",
+      "\u2713  2 tests/browser/item-only.spec.js:74:1 \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming (12.5s)",
+      "\u2713  3 tests/browser/item-only.spec.js:198:1 \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player (10.5s)",
+      "\u2713  4 tests/browser/skin-grip.spec.js:26:1 \u203a wardrobe skins match F5 arms; item-only blocks retain their mount and camera clearance without reserving an invisible hand (18.2s)"
+    ],
+    "skinsVerified": 11,
+    "representativeHeldObjects": 14,
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "performance": {
+    "version": "2.7.11",
+    "environment": "Controlled headless Chromium, Linux SwiftShader; not a universal FPS benchmark",
+    "burstDefinition": "Five rapid edits; twelve loadAround scheduling passes per edit. New asynchronous jobs coalesce; timing is main-thread scheduling work, not render completion.",
+    "before": {
+      "version": "2.7.10",
+      "rows": [
+        {
+          "id": 3,
+          "syncRemesh": 5,
+          "loadMs": 315.20000000298023,
+          "revision": 27
+        },
+        {
+          "id": 17,
+          "syncRemesh": 5,
+          "loadMs": 423.19999999552965,
+          "revision": 28
+        },
+        {
+          "id": 1422,
+          "syncRemesh": 5,
+          "loadMs": 290.8999999985099,
+          "revision": 29
+        },
+        {
+          "id": 18,
+          "syncRemesh": 5,
+          "loadMs": 296.6000000014901,
+          "revision": 30
+        },
+        {
+          "id": 0,
+          "syncRemesh": 5,
+          "loadMs": 232.19999999552965,
+          "revision": 31
+        }
+      ]
+    },
+    "after": {
+      "version": "2.7.11",
+      "rows": [
+        {
+          "id": 3,
+          "syncRemesh": 0,
+          "loadMs": 1
+        },
+        {
+          "id": 17,
+          "syncRemesh": 0,
+          "loadMs": 0.20000000298023224
+        },
+        {
+          "id": 1422,
+          "syncRemesh": 0,
+          "loadMs": 0.6000000014901161
+        },
+        {
+          "id": 18,
+          "syncRemesh": 0,
+          "loadMs": 0.19999999552965164
+        },
+        {
+          "id": 0,
+          "syncRemesh": 0,
+          "loadMs": 0.20000000298023224
+        }
+      ],
+      "operations": [
+        {
+          "item": "stone",
+          "placeMs": 3,
+          "breakMs": 1.3999999985098839
+        },
+        {
+          "item": "oak_stairs",
+          "placeMs": 3.600000001490116,
+          "breakMs": 1.2999999970197678
+        },
+        {
+          "item": "glass_pane",
+          "placeMs": 1.6999999955296516,
+          "breakMs": 1
+        },
+        {
+          "item": "oak_fence",
+          "placeMs": 2,
+          "breakMs": 1.1000000014901161
+        },
+        {
+          "item": "chest",
+          "placeMs": 1.5,
+          "breakMs": 0.8999999985098839
+        },
+        {
+          "item": "torch",
+          "placeMs": 1,
+          "breakMs": 1
+        },
+        {
+          "item": "furnace",
+          "placeMs": 0.8999999985098839,
+          "breakMs": 0.7999999970197678
+        },
+        {
+          "item": "glass",
+          "placeMs": 0.7000000029802322,
+          "breakMs": 0.7999999970197678
+        },
+        {
+          "item": "oak_slab",
+          "placeMs": 1.7999999970197678,
+          "breakMs": 1
+        }
+      ],
+      "syncRemesh": 0,
+      "snapshots": 44,
+      "snapshotBytes": 77856768,
+      "staleInstalled": 0,
+      "latencies": [
+        21.600000001490116,
+        22.69999999552965,
+        21.80000000447035,
+        20.200000002980232,
+        45.100000001490116,
+        32.099999994039536,
+        23.700000002980232,
+        39.5,
+        56.5,
+        43.29999999701977,
+        25.600000001490116,
+        47.899999998509884,
+        91.5,
+        154.69999999552965,
+        110.39999999850988,
+        30.5,
+        60.099999994039536,
+        40.69999999552965,
+        30.399999998509884,
+        31.5,
+        50,
+        40.600000001490116,
+        43.399999998509884,
+        30.80000000447035,
+        31.700000002980232,
+        22.19999999552965,
+        23.5,
+        28.700000002980232,
+        29.599999994039536,
+        26.799999997019768,
+        43.100000001490116,
+        27.69999999552965,
+        28.5,
+        29.600000001490116,
+        37.5,
+        23.299999997019768,
+        28.899999998509884,
+        21.899999998509884,
+        28,
+        22,
+        22.100000001490116,
+        21.400000005960464,
+        24.30000000447035
+      ],
+      "allBuffersAttached": true,
+      "currentMeshes": true,
+      "fallback": false
+    },
+    "summary": {
+      "beforeSyncBuilds": 25,
+      "afterSyncBuilds": 0,
+      "beforeSchedulingMsRange": [
+        232.19999999552965,
+        423.19999999552965
+      ],
+      "afterSchedulingMsRange": [
+        0.19999999552965164,
+        1
+      ],
+      "placeHandlerMsRange": [
+        0.7000000029802322,
+        3.600000001490116
+      ],
+      "breakHandlerMsRange": [
+        0.7999999970197678,
+        1.3999999985098839
+      ],
+      "snapshotBytesPerJob": 1769472,
+      "workerRoundtripMsRange": [
+        20.200000002980232,
+        154.69999999552965
+      ]
+    },
+    "limits": [
+      "Physics and save edits apply immediately; visible meshes arrive asynchronously.",
+      "Explicit bootstrap and unavailable/failed-worker fallback remain synchronous.",
+      "GPU uploads, shaders, simulation, disk and other platform stalls are not eliminated."
+    ],
+    "fixture": {
+      "seed": "Wildflower",
+      "editY": 200,
+      "renderDistance": 2,
+      "graphics": 1,
+      "frameLimit": 30,
+      "ambientOcclusion": true,
+      "physicsPausedForIsolation": true,
+      "chunksPreloaded": true,
+      "operationCells": "spawn chunk interior 8,8 and corner 15,15"
+    }
+  },
+  "compatibility": {
+    "version": "2.7.11",
+    "previousVersion": "2.7.10",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/first-person.js",
+      "src/renderer.js",
+      "src/terrain-worker.js",
+      "src/worker-code.js",
+      "src/world.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/item-framing.js",
+      "src/mesh-snapshot.js"
+    ],
+    "unchangedRuntimeFiles": 383,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesGenerationAndSaveFormatUnchanged": true,
+    "weaponGeometryAndAnimationCurvesUnchanged": true,
+    "skinsAndF5ModelsUnchanged": true,
+    "protocol": 4,
+    "terrainGeneration": 16
+  },
+  "testedStandaloneSha256": "8950c5f0f2317e9fb0fa26d46cb5833328fa70fde8648e677007b8fb003161a9",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}
