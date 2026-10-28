@@ -1,0 +1,31 @@
+{
+  "version": "2.7.6",
+  "previousVersion": "2.7.5",
+  "changedExistingRuntimeFiles": [
+    "public/audio/overworld/NOTICE.txt",
+    "public/audio/overworld/manifest.json",
+    "src/data.js",
+    "src/overworld-music-data.js",
+    "src/overworld-music.js",
+    "src/ui.js"
+  ],
+  "newRuntimeFiles": [
+    "public/audio/overworld/dry-hands.mp3",
+    "public/audio/overworld/oxygene.mp3",
+    "public/audio/overworld/key.mp3",
+    "public/audio/overworld/mice-on-venus.mp3",
+    "public/audio/overworld/haggstrom.mp3",
+    "public/audio/overworld/danny.mp3",
+    "public/audio/overworld/wet-hands.mp3",
+    "public/audio/overworld/living-mice.mp3"
+  ],
+  "previousTrackDefinitionsAndBytesPreserved": 4,
+  "catalogTrackCount": 12,
+  "survivalOnlyBackgroundPlaylist": true,
+  "existingPublicAssetsByteIdentical": 206,
+  "allOtherExistingRuntimeFilesByteIdentical": 360,
+  "generation": 16,
+  "protocol": 4,
+  "gameplayTerrainSkyWeatherInventorySaveAndCinderworldMusicSourcesByteIdentical": true,
+  "deliveryPackagingChangedToAvoidDuplicatePayloads": true
+}
