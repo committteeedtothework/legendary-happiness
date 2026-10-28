@@ -1,0 +1,69 @@
+{
+  "version": "2.7.12",
+  "stage": "Item View Polish",
+  "core": {
+    "passed": 544,
+    "failed": 0,
+    "newCases": 1
+  },
+  "browser": {
+    "uniquePassed": 5,
+    "scenarios": [
+      "\u2713  1 tests/browser/interaction-stutter.spec.js:25:1 \u203a placing/breaking blocks, shaped items and containers uses snapshot workers, coalesces rapid edits, preserves boundaries and survives reload (19.4s)",
+      "\u2713  2 tests/browser/item-only.spec.js:74:1 \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming (12.5s)",
+      "\u2713  3 tests/browser/item-only.spec.js:198:1 \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player (11.3s)",
+      "\u2713  4 tests/browser/item-only.spec.js:313:1 \u203a equip and use never uncover an empty gap or skin arm after narrow, desktop and ultrawide resizing (23.5s)",
+      "\u2713  5 tests/browser/skin-grip.spec.js:26:1 \u203a wardrobe skins match F5 arms; item-only blocks retain their mount and camera clearance without reserving an invisible hand (20.0s)"
+    ],
+    "newViewportScenario": {
+      "viewports": [
+        [
+          640,
+          960
+        ],
+        [
+          1280,
+          800
+        ],
+        [
+          1920,
+          720
+        ]
+      ],
+      "representativeItems": 8,
+      "equipStates": 5,
+      "actions": 6,
+      "phases": 4
+    },
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.12",
+    "previousVersion": "2.7.11",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/renderer.js",
+      "src/item-framing.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [],
+    "unchangedSourceAndAssetFiles": 388,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesGenerationAndSaveFormatUnchanged": true,
+    "weaponGeometryAndActionCurvesUnchanged": true,
+    "skinsAndF5ModelsUnchanged": true,
+    "blockEditPerformanceCodeUnchanged": true,
+    "protocol": 4,
+    "terrainGeneration": 16
+  },
+  "testedStandaloneSha256": "41cda4c67037357692fecd24a81d06547107bc46ae2b018e0340931f37df991c",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}

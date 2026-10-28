@@ -1,0 +1,20 @@
+{
+  "version": "2.7.12",
+  "previousVersion": "2.7.11",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/renderer.js",
+    "src/item-framing.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [],
+  "unchangedSourceAndAssetFiles": 388,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesGenerationAndSaveFormatUnchanged": true,
+  "weaponGeometryAndActionCurvesUnchanged": true,
+  "skinsAndF5ModelsUnchanged": true,
+  "blockEditPerformanceCodeUnchanged": true,
+  "protocol": 4,
+  "terrainGeneration": 16
+}
