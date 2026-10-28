@@ -1,0 +1,38 @@
+{
+  "version": "2.7.17",
+  "previousVersion": "2.7.16",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/first-person.js",
+    "src/player-model.js",
+    "src/renderer.js",
+    "src/skins.js",
+    "src/textures.js",
+    "src/skin-art.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/skin-pixels.js",
+    "src/armor-art.js",
+    "src/armor-models.js",
+    "src/pixel-surfaces.js"
+  ],
+  "unchangedSourceAndAssetFiles": 392,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesAndTerrainGenerationUnchanged": true,
+  "worldSaveEnvelopeUnchanged": true,
+  "armorStatsProtectionDurabilityAndControlsUnchanged": true,
+  "weaponArtDisplayPosesAndCombatUnchanged": true,
+  "animationCurvesAndPlayerMotionUnchanged": true,
+  "baseCharacterProportionsAndJointsUnchanged": true,
+  "skinNamesAndBasePalettesRetained": true,
+  "armorAndSkinPixelArtworkUpdated": true,
+  "equippedArmorLayersAndCoveredCostumeVisibilityUpdated": true,
+  "firstPersonHiddenArmRuleRetained": true,
+  "firstPersonEmptyArmSkinsAndArmorUpdated": true,
+  "inventoryAndRecipeBookUIUnchanged": true,
+  "protocol": 4,
+  "terrainGeneration": 16,
+  "limitations": "Original cosmetic designs; fixed bundled skins; dye/trim/import support not added; extreme original-rig pose intersections not universally ruled out."
+}
