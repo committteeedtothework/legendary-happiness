@@ -1,0 +1,75 @@
+{
+  "version": "2.7.8",
+  "stage": "Blocky Skins & 3D Outfit Chest",
+  "verifiedAtUtc": "2026-10-28T03:51:51.105973+00:00",
+  "core": {
+    "passed": 535,
+    "failed": 0,
+    "newCases": 4
+  },
+  "browser": {
+    "uniquePassed": 4,
+    "scenarios": [
+      "\u2713  1 tests/browser/skin-grip.spec.js:26:1 \u203a wardrobe skins match F5 arms, blocks physically contact the hand through actions, and shoulder armor does not recolor the sleeve (18.7s)",
+      "\u2713  2 tests/browser/skin-wardrobe.spec.js:50:1 \u203a all eleven skins render in a live shared-rig preview, cycle both ways, rotate with controls/drag and retain saved selection (29.6s)",
+      "\u2713  3 tests/browser/skin-wardrobe.spec.js:162:1 \u203a wardrobe is responsive, respects reduced motion and releases its rendering resources every time it closes (14.3s)",
+      "\u2713  4 tests/browser/skin-wardrobe.spec.js:221:1 \u203a selected outfits use the new model in actual F5 views, retain held-item attachment and survive a saved-world reload (23.1s)"
+    ],
+    "skinsVerified": 11,
+    "responsiveSizes": [
+      [
+        1280,
+        800
+      ],
+      [
+        960,
+        540
+      ],
+      [
+        620,
+        760
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        360,
+        640
+      ]
+    ],
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "savedWorldReload": true
+  },
+  "compatibility": {
+    "version": "2.7.8",
+    "previousVersion": "2.7.7",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/first-person.js",
+      "src/pixel-ui.css",
+      "src/player-model.js",
+      "src/player-motion.js",
+      "src/skins.js",
+      "src/ui.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/skin-art.js",
+      "src/skin-preview.js"
+    ],
+    "unchangedRuntimeFiles": 380,
+    "unchangedPublicAssets": 224,
+    "all18SourceRecordingsAndGeneratedCatalogUnchanged": true,
+    "worldSaveGenerationProtocolUnchanged": true,
+    "weaponModelAndAudioSourcesUnchanged": true
+  },
+  "testedStandaloneSha256": "9ba9905288f4f2abf6fe7ccdc7f38cfcb9dbdbe274b4d3de9a1a51d810cf17eb",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}
