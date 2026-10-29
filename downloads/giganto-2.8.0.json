@@ -1,0 +1,170 @@
+{
+  "version": "2.8.0",
+  "reference": {
+    "game": "Sonic Frontiers (2022)",
+    "encounter": "Original Kronos Island Giganto, base-game held parry",
+    "source": "https://sirusgaming.com/sonic-frontiers-giganto-boss-guide/",
+    "checked": "2026-10-29",
+    "verified": [
+      "climbing / head Emerald",
+      "one ring per second in Super form",
+      "forgiving held parry",
+      "left arm swing",
+      "right arm slap",
+      "half-health dorsal lasers",
+      "mouth beam struggle",
+      "grab-and-crunch struggle",
+      "finishing sequence"
+    ]
+  },
+  "assets": "Original procedural replacements; no official Sega assets or recordings",
+  "rigs": {
+    "sonic": {
+      "bones": 10,
+      "meshes": 48
+    },
+    "giganto": {
+      "bones": 28,
+      "meshes": 87
+    }
+  },
+  "config": {
+    "enabled": true,
+    "spawnChance": 0.32,
+    "cooldown": 900,
+    "particles": true,
+    "lighting": true,
+    "audio": true,
+    "music": true,
+    "difficulty": "normal",
+    "rings": 360,
+    "drain": 1,
+    "checkpoints": true,
+    "cinematics": true,
+    "strictParry": false
+  },
+  "moves": {
+    "swing": {
+      "label": "LEFT ARM SWING",
+      "tell": 1.5,
+      "strike": 0.42,
+      "recover": 3.1,
+      "side": -1
+    },
+    "slap": {
+      "label": "RIGHT ARM SLAP",
+      "tell": 1.2,
+      "strike": 0.32,
+      "recover": 2.9,
+      "side": 1
+    },
+    "beam": {
+      "label": "MOUTH BEAM · STRUGGLE",
+      "tell": 1.8,
+      "strike": 4.5,
+      "recover": 3.8,
+      "qte": true
+    },
+    "crunch": {
+      "label": "GRAB AND CRUNCH",
+      "tell": 1.75,
+      "strike": 4.2,
+      "recover": 3.6,
+      "qte": true
+    }
+  },
+  "route": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 78,
+      "w": 14
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "z": 59,
+      "w": 14
+    },
+    {
+      "x": 12,
+      "y": 12,
+      "z": 43,
+      "w": 14
+    },
+    {
+      "x": 26,
+      "y": 20,
+      "z": 27,
+      "w": 14
+    },
+    {
+      "x": 32,
+      "y": 28,
+      "z": 9,
+      "w": 14
+    },
+    {
+      "x": 30,
+      "y": 36,
+      "z": -9,
+      "w": 14
+    },
+    {
+      "x": 22,
+      "y": 44,
+      "z": -25,
+      "w": 14
+    },
+    {
+      "x": 4,
+      "y": 52,
+      "z": -33,
+      "w": 14
+    },
+    {
+      "x": -18,
+      "y": 60,
+      "z": -25,
+      "w": 14
+    },
+    {
+      "x": -28,
+      "y": 68,
+      "z": -2,
+      "w": 14
+    },
+    {
+      "x": -18,
+      "y": 76,
+      "z": 19,
+      "w": 14
+    },
+    {
+      "x": -4,
+      "y": 84,
+      "z": 18,
+      "w": 14
+    },
+    {
+      "x": 0,
+      "y": 92,
+      "z": 0,
+      "w": 14
+    }
+  ],
+  "persistence": {
+    "envelope": 1,
+    "terrainGeneration": 16,
+    "protocol": 4,
+    "optionalField": "giganto",
+    "scope": "Singleplayer separate arena scene; original voxel world/player retained",
+    "reward": [
+      "Titan Sigil journal badge",
+      "6 diamonds",
+      "8 Hellfire ingots",
+      "100 XP through existing XP/Mending system"
+    ]
+  },
+  "fidelity": "Partial reference fidelity; GIGANTO.md contains complete substitutions and missing-feature matrix"
+}

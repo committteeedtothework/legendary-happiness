@@ -1,0 +1,36 @@
+{
+  "version": "2.8.0",
+  "previousVersion": "2.7.19",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/main.js",
+    "src/multiplayer.js",
+    "src/ui.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/giganto-view.js",
+    "src/giganto-simulation.js",
+    "src/giganto.css",
+    "src/giganto-audio.js",
+    "src/giganto.js",
+    "src/giganto-models.js"
+  ],
+  "unchangedSourceAndAssetFiles": 404,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "normalRegistriesRecipesStatsTerrainCombatPhysicsAndArtUnchanged": true,
+  "worldSaveEnvelope": 1,
+  "terrainGeneration": 16,
+  "protocol": 4,
+  "optionalTopLevelEncounterField": "giganto",
+  "originalWorldAndPlayerRetained": true,
+  "rewardRollbackAndExactlyOnceLedgerVerified": true,
+  "ordinaryCoopVerified": true,
+  "bossCoopSupported": false,
+  "reference": "Original Sonic Frontiers (2022), Kronos Giganto",
+  "referenceFidelity": "Partial; original low-poly rigs, platform climb, analytic volumes and abbreviated choreography. See GIGANTO.md.",
+  "officialAssetsImported": false,
+  "launcherCSourceUnchanged": true,
+  "directBinaryPayloadAssemblyVerified": true
+}

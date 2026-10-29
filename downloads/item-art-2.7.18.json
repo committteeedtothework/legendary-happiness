@@ -1,0 +1,565 @@
+{
+  "version": "2.7.18",
+  "reference": "Java Edition 26.3",
+  "originalPixelArt": [
+    {
+      "id": "cod",
+      "name": "Raw Cod",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "salmon",
+      "name": "Raw Salmon",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "tropical_fish",
+      "name": "Tropical Fish",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "pufferfish",
+      "name": "Pufferfish",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cooked_cod",
+      "name": "Cooked Cod",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cooked_salmon",
+      "name": "Cooked Salmon",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "dried_kelp",
+      "name": "Dried Kelp",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "arrow",
+      "name": "Arrow",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "baked_potato",
+      "name": "Baked Potato",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "beetroot",
+      "name": "Beetroot",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "beetroot_seeds",
+      "name": "Beetroot Seeds",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "beetroot_soup",
+      "name": "Beetroot Soup",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "bowl",
+      "name": "Bowl",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "breeze_rod",
+      "name": "Breeze Rod",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cocoa_beans",
+      "name": "Cocoa Beans",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cooked_chicken",
+      "name": "Cooked Chicken",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cooked_mutton",
+      "name": "Cooked Mutton",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cooked_porkchop",
+      "name": "Cooked Porkchop",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cooked_rabbit",
+      "name": "Cooked Rabbit",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "cookie",
+      "name": "Cookie",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "enchanted_golden_apple",
+      "name": "Enchanted Golden Apple",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "ghast_tear",
+      "name": "Ghast Tear",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "glow_berries",
+      "name": "Glow Berries",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "glow_ink_sac",
+      "name": "Glow Ink Sac",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "golden_apple",
+      "name": "Golden Apple",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "golden_carrot",
+      "name": "Golden Carrot",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "honey_bottle",
+      "name": "Honey Bottle",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "honeycomb",
+      "name": "Honeycomb",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "melon_seeds",
+      "name": "Melon Seeds",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "melon_slice",
+      "name": "Melon Slice",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "mushroom_stew",
+      "name": "Mushroom Stew",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "mutton",
+      "name": "Mutton",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "netherite_scrap",
+      "name": "Netherite Scrap",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "netherite_upgrade_smithing_template",
+      "name": "Netherite Upgrade Smithing Template",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "poisonous_potato",
+      "name": "Poisonous Potato",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "porkchop",
+      "name": "Porkchop",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "potato",
+      "name": "Potato",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "pumpkin_pie",
+      "name": "Pumpkin Pie",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "pumpkin_seeds",
+      "name": "Pumpkin Seeds",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "rabbit_foot",
+      "name": "Rabbit Foot",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "rabbit_hide",
+      "name": "Rabbit Hide",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "rabbit_stew",
+      "name": "Rabbit Stew",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "resin_brick",
+      "name": "Resin Brick",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "shears",
+      "name": "Shears",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "spider_eye",
+      "name": "Spider Eye",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "spyglass",
+      "name": "Spyglass",
+      "kind": "resource",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "suspicious_stew",
+      "name": "Suspicious Stew",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "sweet_berries",
+      "name": "Sweet Berries",
+      "kind": "food",
+      "resolution": [
+        16,
+        16
+      ]
+    }
+  ],
+  "correctedPalettes": [
+    {
+      "id": "white_dye",
+      "name": "White Dye"
+    },
+    {
+      "id": "orange_dye",
+      "name": "Orange Dye"
+    },
+    {
+      "id": "magenta_dye",
+      "name": "Magenta Dye"
+    },
+    {
+      "id": "light_blue_dye",
+      "name": "Light Blue Dye"
+    },
+    {
+      "id": "yellow_dye",
+      "name": "Yellow Dye"
+    },
+    {
+      "id": "lime_dye",
+      "name": "Lime Dye"
+    },
+    {
+      "id": "pink_dye",
+      "name": "Pink Dye"
+    },
+    {
+      "id": "gray_dye",
+      "name": "Gray Dye"
+    },
+    {
+      "id": "light_gray_dye",
+      "name": "Light Gray Dye"
+    },
+    {
+      "id": "cyan_dye",
+      "name": "Cyan Dye"
+    },
+    {
+      "id": "purple_dye",
+      "name": "Purple Dye"
+    },
+    {
+      "id": "blue_dye",
+      "name": "Blue Dye"
+    },
+    {
+      "id": "brown_dye",
+      "name": "Brown Dye"
+    },
+    {
+      "id": "green_dye",
+      "name": "Green Dye"
+    },
+    {
+      "id": "red_dye",
+      "name": "Red Dye"
+    },
+    {
+      "id": "black_dye",
+      "name": "Black Dye"
+    },
+    {
+      "id": "amethyst_shard",
+      "name": "Amethyst Shard"
+    },
+    {
+      "id": "quartz",
+      "name": "Quartz"
+    },
+    {
+      "id": "gold_nugget",
+      "name": "Gold Nugget"
+    },
+    {
+      "id": "iron_nugget",
+      "name": "Iron Nugget"
+    },
+    {
+      "id": "copper_nugget",
+      "name": "Copper Nugget"
+    },
+    {
+      "id": "glowstone_dust",
+      "name": "Glowstone Dust"
+    },
+    {
+      "id": "magma_cream",
+      "name": "Magma Cream"
+    },
+    {
+      "id": "netherite_ingot",
+      "name": "Netherite Ingot"
+    }
+  ],
+  "registryStatsChanged": false,
+  "suppliedNativeImagesRetained": true
+}
