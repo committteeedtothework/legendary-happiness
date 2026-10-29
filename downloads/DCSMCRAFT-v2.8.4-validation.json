@@ -1,0 +1,253 @@
+{
+  "version": "2.8.4",
+  "core": {
+    "passed": 634,
+    "failed": 0
+  },
+  "browser": {
+    "passed": 13,
+    "skipped": 1,
+    "unresolvedFailures": 0,
+    "directFileOpeningVerified": false,
+    "skipReason": "Managed Chromium rejects file:// before game load",
+    "nativeWindowsExecutionVerified": false,
+    "naturalPortalPreparationClimbVictoryAndReturn": {
+      "before": {
+        "hp": 17,
+        "time": 1029,
+        "rings": 189.66666666674485,
+        "route": 12,
+        "pickups": 28,
+        "battleSeconds": 293.9833333333946,
+        "hpMaximum": 12000,
+        "geometry": 14,
+        "music": {
+          "starts": 4,
+          "state": "paused",
+          "stopped": true
+        }
+      },
+      "restored": {
+        "id": "6117d494-1fc3-4110-9bf9-37248bc63eeb",
+        "health": 17,
+        "dimension": "overworld",
+        "seed": "Wildflower",
+        "ledger": [
+          "browser-titan"
+        ],
+        "inventory": {
+          "slots": [
+            {
+              "id": "diamond_sword",
+              "count": 1,
+              "durability": 500,
+              "enchantments": {
+                "sharpness": 2
+              }
+            },
+            {
+              "id": "diamond",
+              "count": 6
+            },
+            {
+              "id": "hellfire_ingot",
+              "count": 8
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "craft": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "cursor": null,
+          "selected": 0,
+          "stationRecipe": null,
+          "equipment": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "offhand": [
+            null
+          ]
+        },
+        "duplicateExit": false,
+        "cooldown": 17999
+      }
+    },
+    "preludeRingsAndHUDRestore": {
+      "pre": {
+        "duration": 245.179501,
+        "time": 0.351202,
+        "loop": true,
+        "title": "Titan: GIGANTO"
+      },
+      "saved": {
+        "rings": 90,
+        "pickups": [
+          0
+        ],
+        "route": 0
+      },
+      "fight": {
+        "rings": 124.70000000000002,
+        "preReleased": true,
+        "phase": "phaseOne"
+      },
+      "restored": {
+        "active": false,
+        "skin": "explorer",
+        "health": 17,
+        "hud": "visible",
+        "scope": false,
+        "scoreGone": true,
+        "preGone": true
+      }
+    },
+    "battleMusic": {
+      "decoded": {
+        "duration": 264.916462585034,
+        "sampleRate": 44100,
+        "channels": 2,
+        "bytes": 93462528,
+        "section": "phaseOne",
+        "offset": 1.4789115646258502,
+        "starts": 1
+      },
+      "rms": 0.004405899701162453,
+      "cues": {
+        "paused": true,
+        "pausedOffset": 1.4992290249433111,
+        "resumed": 1.4992290249433111,
+        "pickup": 175.14,
+        "chorus": 179.14,
+        "finale": 221.14,
+        "muted": true
+      },
+      "restored": {
+        "offset": 168.7399999999999,
+        "disposed": true,
+        "bufferReleased": true,
+        "voices": 0,
+        "active": false,
+        "ledger": 0
+      }
+    },
+    "visual": {
+      "renderer": "WebKit WebGL",
+      "renderSize": [
+        1280,
+        800
+      ],
+      "medianFrameMs": 1.4000000059604645,
+      "p95FrameMs": 2.399999976158142,
+      "mappingRestored": true,
+      "exposureRestored": true,
+      "lasers": 30,
+      "corona": 48,
+      "padsVisible": false,
+      "camera": [
+        -12.64607285963921,
+        69.49608934609536,
+        64.50029568860967
+      ],
+      "drawCalls": 57
+    },
+    "all46ClipsRenderedAtThreeTimes": true
+  },
+  "testedStandaloneSHA256": "275ad2a2e1d411ef69d77d51c4130b0d0615569f9981a624ffb2eba05b4eca31",
+  "compatibility": {
+    "version": "2.8.4",
+    "previousVersion": "2.8.3",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/titan-imports.js",
+      "src/giganto-view.js",
+      "src/giganto-simulation.js",
+      "src/giganto.css",
+      "src/giganto-audio.js",
+      "src/giganto.js",
+      "public/models/titan/manifest.json",
+      "public/models/titan/sonic.glb",
+      "public/models/titan/giganto.glb",
+      "public/models/titan/LICENSE-AND-NOTES.txt",
+      "desktop/README.md",
+      "desktop/licenses/TITAN-ASSETS.txt"
+    ],
+    "newRuntimeFiles": [
+      "src/titan-kinematics.js",
+      "src/titan-hud.js",
+      "src/titan-foley.js",
+      "src/titan-landscape.js",
+      "src/titan-prelude.js",
+      "public/audio/giganto/prelude-manifest.json",
+      "public/audio/giganto/PRELUDE-NOTICE.txt",
+      "public/audio/giganto/titan-giganto.mp3",
+      "desktop/licenses/TITAN-PRELUDE.txt"
+    ],
+    "normalRegistriesStatsRecipesWorldGenerationControlsAndArtUnchanged": true,
+    "existingRecordingsUnchanged": true,
+    "preludeMP3ByteIdentical": true,
+    "saveEnvelope": 1,
+    "generation": 16,
+    "protocol": 4,
+    "worldRegenerationRequired": false,
+    "legacyBossHealthMigratesProportionally": true,
+    "normalHUDAndRendererRestored": true,
+    "officialFrontiersUIAnimationAndSceneryParity": false
+  },
+  "proofs": {
+    "sourceArchiveExact": true,
+    "sourceRebuildByteIdentical": true,
+    "archivesCRCVerified": true,
+    "PEEmbedsExactHTML": true,
+    "linuxCompanionExtractionVerified": true,
+    "newMP3ByteIdentical": true
+  },
+  "completeCommercialFidelity": false,
+  "limits": [
+    "TITAN-OVERHAUL.md",
+    "GIGANTO.md",
+    "TITAN-ASSETS.md"
+  ]
+}
