@@ -1,0 +1,97 @@
+{
+  "version": "2.8.2",
+  "core": {
+    "passed": 619,
+    "failed": 0
+  },
+  "browser": {
+    "passed": 12,
+    "skipped": 1,
+    "unresolvedFailures": 0,
+    "skipReason": "Managed Chromium blocks file:// before load",
+    "directFileOpeningVerified": false,
+    "nativeWindowsExecutionVerified": false,
+    "fullPortalToReturnVerified": true,
+    "all46ClipsRenderedAtThreeTimes": true,
+    "visual": {
+      "renderer": "WebKit WebGL",
+      "renderSize": [
+        1280,
+        800
+      ],
+      "medianFrameMs": 0.9000000059604645,
+      "p95FrameMs": 1.9000000059604645,
+      "mappingRestored": true,
+      "exposureRestored": true,
+      "lasers": 30,
+      "corona": 48,
+      "padsVisible": false,
+      "camera": [
+        -12.119358245327419,
+        68.199009617727,
+        56.35699453632513
+      ],
+      "drawCalls": 36
+    },
+    "isolatedModels": {
+      "sonic": {
+        "medianMs": 0.19999998807907104,
+        "p95Ms": 0.3999999761581421
+      },
+      "giganto": {
+        "medianMs": 0.5,
+        "p95Ms": 1
+      }
+    }
+  },
+  "testedStandaloneSHA256": "6fe484a29d999c00c1a93e94ca3ae633653d5f20017927085cc38b180651c80b",
+  "compatibility": {
+    "version": "2.8.2",
+    "previousVersion": "2.8.1",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/giganto-view.js",
+      "src/giganto.js",
+      "src/giganto-models.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/titan-imports.js",
+      "public/models/titan/manifest.json",
+      "public/models/titan/sonic.glb",
+      "public/models/titan/giganto.glb",
+      "public/models/titan/LICENSE-AND-NOTES.txt",
+      "desktop/licenses/TITAN-ASSETS.txt"
+    ],
+    "unchangedRuntimeAndPublicFiles": 410,
+    "existingPublicAssetsUnchanged": true,
+    "normalRegistriesRecipesStatsTerrainPhysicsControlsAndCombatUnchanged": true,
+    "gigantoSimulationAndAudioUnchanged": true,
+    "saveEnvelope": 1,
+    "generation": 16,
+    "protocol": 4,
+    "requiresWorldRegeneration": false,
+    "nativeWindowsExecutionTested": false,
+    "directFileNavigationBlockedByManagedBrowserPolicy": true,
+    "creditsSpent": 0,
+    "fidelityLimits": "TITAN-ASSETS.md and GIGANTO.md"
+  },
+  "proofs": {
+    "sourceArchiveExact": true,
+    "sourceRebuildByteIdentical": true,
+    "archivesCRCVerified": true,
+    "PEEmbedsExactHTML": true,
+    "linuxCompanionExtractionVerified": true,
+    "suppliedModelsImported": true,
+    "originalWalkRunRetained": true
+  },
+  "standardGLTFValidation": {
+    "errors": 0,
+    "retainedWarnings": "Source non-root skinned nodes/zero-weight joint indices and optional buffer target hints"
+  },
+  "creditsSpent": 0,
+  "limits": [
+    "TITAN-ASSETS.md",
+    "GIGANTO.md"
+  ]
+}

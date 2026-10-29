@@ -1,0 +1,31 @@
+{
+  "version": "2.8.2",
+  "previousVersion": "2.8.1",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/giganto-view.js",
+    "src/giganto.js",
+    "src/giganto-models.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/titan-imports.js",
+    "public/models/titan/manifest.json",
+    "public/models/titan/sonic.glb",
+    "public/models/titan/giganto.glb",
+    "public/models/titan/LICENSE-AND-NOTES.txt",
+    "desktop/licenses/TITAN-ASSETS.txt"
+  ],
+  "unchangedRuntimeAndPublicFiles": 410,
+  "existingPublicAssetsUnchanged": true,
+  "normalRegistriesRecipesStatsTerrainPhysicsControlsAndCombatUnchanged": true,
+  "gigantoSimulationAndAudioUnchanged": true,
+  "saveEnvelope": 1,
+  "generation": 16,
+  "protocol": 4,
+  "requiresWorldRegeneration": false,
+  "nativeWindowsExecutionTested": false,
+  "directFileNavigationBlockedByManagedBrowserPolicy": true,
+  "creditsSpent": 0,
+  "fidelityLimits": "TITAN-ASSETS.md and GIGANTO.md"
+}
