@@ -1,0 +1,30 @@
+{
+  "version": "2.7.19",
+  "previousVersion": "2.7.18",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/textures.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/completed-item-art.js",
+    "src/completed-block-art.js"
+  ],
+  "unchangedSourceAndAssetFiles": 404,
+  "unchangedPublicAssets": 224,
+  "all18RecordingsAndCatalogUnchanged": true,
+  "registriesRecipesStatsAndTerrainGenerationUnchanged": true,
+  "savesArrowsAndNetworkingSourceUnchanged": true,
+  "modelsAnimationsControlsUISoundsUnchanged": true,
+  "protocol": 4,
+  "terrainGeneration": 16,
+  "blockStateTextureEntries": 651,
+  "expandedCatalogArtOwners": 515,
+  "legacyBlockStateEntries": 136,
+  "updatedAtlasTilesRenewed": 1953,
+  "updatedAtlasTilesSupplied": 1752,
+  "utilityItemSprites": 18,
+  "all1125ClassicIconsAndAtlasCellsUnchanged": true,
+  "finishedArtAndSuppliedNativeImagesPreserved": true,
+  "limitations": "Original material-family motifs, existing simplified shapes and directional/state presentation retained. Classic intentionally remains older. No new items or gameplay features."
+}

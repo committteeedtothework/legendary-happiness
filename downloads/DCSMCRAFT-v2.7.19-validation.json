@@ -1,0 +1,106 @@
+{
+  "version": "2.7.19",
+  "stage": "Remaining Native Pixel Art",
+  "core": {
+    "passed": 597,
+    "failed": 0,
+    "newCases": 5
+  },
+  "browser": {
+    "uniquePassed": 22,
+    "fullRunPassed": 22,
+    "failed": 0,
+    "newCases": 2,
+    "retainedCases": 20,
+    "portablePreviousArtFingerprintsInFinalSuite": true,
+    "scenarios": [
+      "tests/browser/armor-skins.spec.js \u203a all eleven original skins keep their classic models and render continuous clean arm texels, mirrored hairlines and distinct fronts/backs in the real wardrobe",
+      "tests/browser/armor-skins.spec.js \u203a all 38 armor icons match equipped material palettes, and all eleven skins wear every full set without misplaced parts or costume overlays",
+      "tests/browser/armor-skins.spec.js \u203a actual equip actions, inventory preview, empty-arm armor sleeves, held-arm hiding and saved reload retain the selected skin and armor",
+      "tests/browser/completed-art.spec.js \u203a the exact standalone updates only audited atlas/icon art across all packs, preserving Classic and every finished weapon, armor, skin and food icon",
+      "tests/browser/completed-art.spec.js \u203a remaining block and utility art renders in actual hotbar, held and dropped models with readable cutouts and no new arm clipping",
+      "tests/browser/creative-menu.spec.js \u203a offline Creative menu matches tabbed five-row layout, sorts varieties, and gives the correct stacks from filtered cells",
+      "tests/browser/creative-menu.spec.js \u203a offline catalog scrollbar reaches its final item, empty searches clear stale cells, tabs support keyboard focus, and narrow layouts fit",
+      "tests/browser/creative-menu.spec.js \u203a offline Stands and player crafting remain accessible through bottom tabs; Survival has no Creative catalog",
+      "tests/browser/inventory-book.spec.js \u203a compact inventory book fills the 2x2 grid, crafts once, tracks the mouse with the equipped skin and disposes its preview",
+      "tests/browser/inventory-book.spec.js \u203a table recipes fill 3x3 from carried materials, missing ingredients are harmless and the book stays usable at small sizes",
+      "tests/browser/item-arrow-polish.spec.js \u203a all 75 refreshed food/resource icons render crisp distinct original art and remain flat held items without arm clipping",
+      "tests/browser/item-arrow-polish.spec.js \u203a actual Survival bow shots point forward in first/F5, lodge into a wall, persist through reload and return exactly one arrow on pickup",
+      "tests/browser/item-arrow-polish.spec.js \u203a crafting and Creative views have one functional close X, recipe books still toggle, and real empty-hand swings are silent",
+      "tests/browser/item-only.spec.js \u203a held blocks, tools, ordinary items and both pistols render without any arm geometry through actions, armor refresh and swimming",
+      "tests/browser/item-only.spec.js \u203a empty hotbar slots restore each skin arm, glove and armor; switching back hides them and F5 keeps the full player",
+      "tests/browser/item-only.spec.js \u203a Java-style swing/equip preserve their natural paths through resized views; only custom weapons retain edge-pivot moves",
+      "tests/browser/item-only.spec.js \u203a real bow/crossbow/shield/trident use and release drive the matching held pose; spyglass hides and restores its item",
+      "tests/browser/weapon-style.spec.js \u203a all 61 weapons render real pixel models and matching inventory icons, preserve hidden-arm/action rules and use original shared assets",
+      "tests/browser/weapon-style.spec.js \u203a all 61 third-person weapons remain at the palm through idle, swings and movement; F5 shows distinct pixel models",
+      "tests/browser/weapon-style.spec.js \u203a real bow/crossbow charging and loaded firing, shield blocking and trident windup drive both first/F5 poses and retain ammunition/damage controls",
+      "tests/browser/weapon-style.spec.js \u203a weapon camera transforms stay finite on narrow and ultrawide screens and pack changes keep the same original weapon/icon",
+      "tests/browser/weapon-style.spec.js \u203a all 61 dropped weapons render as genuine 3D pixel items and equipment on skeletons, Guardians and Dread Knights shares the same art"
+    ],
+    "beforeAfterAll1125IconsInThreePacks": true,
+    "actualAffectedHeldEntries": 790,
+    "utilityDropsAndBinaryAlpha": 18,
+    "all61WeaponsRegressionPassed": true,
+    "actualSurvivalBowShotSaveReloadPickupRetained": true,
+    "externalRequests": 0,
+    "javascriptWebGLErrors": 0,
+    "exactStandaloneStreamedOverLoopback": true,
+    "directFileNavigationTested": false,
+    "packComparisons": [
+      {
+        "pack": "classic",
+        "changedTiles": 0,
+        "changedItems": 0,
+        "protectedItems": 1125
+      },
+      {
+        "pack": "renewed",
+        "changedTiles": 1953,
+        "changedItems": 790,
+        "protectedItems": 335
+      },
+      {
+        "pack": "supplied",
+        "changedTiles": 1752,
+        "changedItems": 742,
+        "protectedItems": 383
+      }
+    ]
+  },
+  "compatibility": {
+    "version": "2.7.19",
+    "previousVersion": "2.7.18",
+    "changedRuntimeFiles": [
+      "src/data.js",
+      "src/textures.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/completed-item-art.js",
+      "src/completed-block-art.js"
+    ],
+    "unchangedSourceAndAssetFiles": 404,
+    "unchangedPublicAssets": 224,
+    "all18RecordingsAndCatalogUnchanged": true,
+    "registriesRecipesStatsAndTerrainGenerationUnchanged": true,
+    "savesArrowsAndNetworkingSourceUnchanged": true,
+    "modelsAnimationsControlsUISoundsUnchanged": true,
+    "protocol": 4,
+    "terrainGeneration": 16,
+    "blockStateTextureEntries": 651,
+    "expandedCatalogArtOwners": 515,
+    "legacyBlockStateEntries": 136,
+    "updatedAtlasTilesRenewed": 1953,
+    "updatedAtlasTilesSupplied": 1752,
+    "utilityItemSprites": 18,
+    "all1125ClassicIconsAndAtlasCellsUnchanged": true,
+    "finishedArtAndSuppliedNativeImagesPreserved": true,
+    "limitations": "Original material-family motifs, existing simplified shapes and directional/state presentation retained. Classic intentionally remains older. No new items or gameplay features."
+  },
+  "testedStandaloneSha256": "6f0643fdce1d61afa99a92f60a66d514fd8bc48dfc6843df7b26c56428e8d1c0",
+  "nativeWindowsExecutionTested": false,
+  "windowsExtractionFlagAndCmdPathsTested": false,
+  "linuxCompanionPayloadExtractionVerified": true,
+  "initialCompanionCompilerMemoryPressureResolvedBySequentialRetry": true,
+  "sourceArchiveRebuiltByteIdentical": true
+}

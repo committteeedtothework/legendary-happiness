@@ -1,0 +1,4596 @@
+{
+  "version": "2.7.19",
+  "reference": "Minecraft Java Edition 26.3",
+  "scope": "Original remaining native block/utility art only",
+  "blockStateEntries": 651,
+  "editionOwners": 515,
+  "atlasTiles": 1953,
+  "utilityItems": [
+    "cinder_sigil",
+    "fishing_rod",
+    "scute",
+    "nautilus_shell",
+    "heart_of_the_sea",
+    "prismarine_crystals",
+    "ink_sac",
+    "nether_wart",
+    "blaze_rod",
+    "cod_bucket",
+    "salmon_bucket",
+    "tropical_fish_bucket",
+    "pufferfish_bucket",
+    "treasure_map",
+    "glass_bottle",
+    "water_bottle",
+    "awkward_potion",
+    "turtle_master_potion"
+  ],
+  "blocks": [
+    {
+      "id": 5,
+      "key": "water",
+      "kind": "fluid",
+      "artTile": 15,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 14,
+      "key": "crafting_table",
+      "kind": "workstation",
+      "artTile": 42,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 15,
+      "key": "furnace",
+      "kind": "workstation",
+      "artTile": 45,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 16,
+      "key": "chest",
+      "kind": "workstation",
+      "artTile": 48,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 17,
+      "key": "glass",
+      "kind": "glass",
+      "artTile": 51,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 18,
+      "key": "torch",
+      "kind": "plant",
+      "artTile": 54,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 21,
+      "key": "crop",
+      "kind": "crop",
+      "artTile": 63,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 25,
+      "key": "wool",
+      "kind": "cloth",
+      "artTile": 75,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 26,
+      "key": "bed",
+      "kind": "bed",
+      "artTile": 78,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 28,
+      "key": "portal",
+      "kind": "rune",
+      "artTile": 84,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 30,
+      "key": "emberglass",
+      "kind": "glass",
+      "artTile": 90,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 31,
+      "key": "lava",
+      "kind": "fluid",
+      "artTile": 93,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 33,
+      "key": "wild_grass",
+      "kind": "plant",
+      "artTile": 99,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 34,
+      "key": "poppy",
+      "kind": "plant",
+      "artTile": 102,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 35,
+      "key": "cornflower",
+      "kind": "plant",
+      "artTile": 105,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 37,
+      "key": "oak_door",
+      "kind": "door",
+      "artTile": 111,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 38,
+      "key": "oak_door_0_closed_upper",
+      "kind": "door",
+      "artTile": 114,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 39,
+      "key": "oak_door_0_open_lower",
+      "kind": "door",
+      "artTile": 117,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 40,
+      "key": "oak_door_0_open_upper",
+      "kind": "door",
+      "artTile": 120,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 41,
+      "key": "oak_door_1_closed_lower",
+      "kind": "door",
+      "artTile": 123,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 42,
+      "key": "oak_door_1_closed_upper",
+      "kind": "door",
+      "artTile": 126,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 43,
+      "key": "oak_door_1_open_lower",
+      "kind": "door",
+      "artTile": 129,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 44,
+      "key": "oak_door_1_open_upper",
+      "kind": "door",
+      "artTile": 132,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 45,
+      "key": "oak_door_2_closed_lower",
+      "kind": "door",
+      "artTile": 135,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 46,
+      "key": "oak_door_2_closed_upper",
+      "kind": "door",
+      "artTile": 138,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 47,
+      "key": "oak_door_2_open_lower",
+      "kind": "door",
+      "artTile": 141,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 48,
+      "key": "oak_door_2_open_upper",
+      "kind": "door",
+      "artTile": 144,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 49,
+      "key": "oak_door_3_closed_lower",
+      "kind": "door",
+      "artTile": 147,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 50,
+      "key": "oak_door_3_closed_upper",
+      "kind": "door",
+      "artTile": 150,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 51,
+      "key": "oak_door_3_open_lower",
+      "kind": "door",
+      "artTile": 153,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 52,
+      "key": "oak_door_3_open_upper",
+      "kind": "door",
+      "artTile": 156,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 55,
+      "key": "enchanting_table",
+      "kind": "workstation",
+      "artTile": 165,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 57,
+      "key": "sugar_cane",
+      "kind": "plant",
+      "artTile": 171,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 65,
+      "key": "cactus",
+      "kind": "cactus",
+      "artTile": 195,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 66,
+      "key": "fern",
+      "kind": "plant",
+      "artTile": 198,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 67,
+      "key": "ice",
+      "kind": "glass",
+      "artTile": 201,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 70,
+      "key": "ash",
+      "kind": "ground",
+      "artTile": 210,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 74,
+      "key": "glow_crystal",
+      "kind": "light",
+      "artTile": 222,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 76,
+      "key": "bamboo",
+      "kind": "plant",
+      "artTile": 228,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 80,
+      "key": "coal_block",
+      "kind": "rock",
+      "artTile": 240,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 81,
+      "key": "iron_block",
+      "kind": "metal",
+      "artTile": 243,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 82,
+      "key": "copper_block",
+      "kind": "metal",
+      "artTile": 246,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 83,
+      "key": "gold_block",
+      "kind": "metal",
+      "artTile": 249,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 84,
+      "key": "diamond_block",
+      "kind": "metal",
+      "artTile": 252,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 85,
+      "key": "lapis_block",
+      "kind": "metal",
+      "artTile": 255,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 86,
+      "key": "emerald_block",
+      "kind": "metal",
+      "artTile": 258,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 87,
+      "key": "raw_iron_block",
+      "kind": "raw",
+      "artTile": 261,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 88,
+      "key": "raw_copper_block",
+      "kind": "raw",
+      "artTile": 264,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 89,
+      "key": "raw_gold_block",
+      "kind": "raw",
+      "artTile": 267,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 93,
+      "key": "smooth_stone",
+      "kind": "smooth",
+      "artTile": 279,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 94,
+      "key": "granite",
+      "kind": "rock",
+      "artTile": 282,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 95,
+      "key": "diorite",
+      "kind": "rock",
+      "artTile": 285,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 96,
+      "key": "andesite",
+      "kind": "rock",
+      "artTile": 288,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 98,
+      "key": "packed_ice",
+      "kind": "glass",
+      "artTile": 294,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 105,
+      "key": "water_flow_1",
+      "kind": "fluid",
+      "artTile": 315,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 106,
+      "key": "water_flow_2",
+      "kind": "fluid",
+      "artTile": 318,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 107,
+      "key": "water_flow_3",
+      "kind": "fluid",
+      "artTile": 321,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 108,
+      "key": "water_flow_4",
+      "kind": "fluid",
+      "artTile": 324,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 109,
+      "key": "water_flow_5",
+      "kind": "fluid",
+      "artTile": 327,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 110,
+      "key": "water_flow_6",
+      "kind": "fluid",
+      "artTile": 330,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 111,
+      "key": "water_flow_7",
+      "kind": "fluid",
+      "artTile": 333,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 112,
+      "key": "water_flow_8",
+      "kind": "fluid",
+      "artTile": 336,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 113,
+      "key": "lava_flow_1",
+      "kind": "fluid",
+      "artTile": 339,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 114,
+      "key": "lava_flow_2",
+      "kind": "fluid",
+      "artTile": 342,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 115,
+      "key": "lava_flow_3",
+      "kind": "fluid",
+      "artTile": 345,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 116,
+      "key": "lava_flow_4",
+      "kind": "fluid",
+      "artTile": 348,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 117,
+      "key": "lava_flow_5",
+      "kind": "fluid",
+      "artTile": 351,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 118,
+      "key": "lava_flow_6",
+      "kind": "fluid",
+      "artTile": 354,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 119,
+      "key": "lava_flow_7",
+      "kind": "fluid",
+      "artTile": 357,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 120,
+      "key": "lava_flow_8",
+      "kind": "fluid",
+      "artTile": 360,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 121,
+      "key": "matthew_altar",
+      "kind": "workstation",
+      "artTile": 363,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 124,
+      "key": "riftstone",
+      "kind": "rune",
+      "artTile": 372,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 125,
+      "key": "trial_exit",
+      "kind": "rune",
+      "artTile": 375,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 127,
+      "key": "cobweb",
+      "kind": "web",
+      "artTile": 381,
+      "suppliedNativePreserved": true
+    },
+    {
+      "id": 137,
+      "key": "prismarine",
+      "kind": "rock",
+      "artTile": 411,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 138,
+      "key": "prismarine_bricks",
+      "kind": "tiles",
+      "artTile": 414,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 139,
+      "key": "dark_prismarine",
+      "kind": "rock",
+      "artTile": 417,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 140,
+      "key": "sea_lantern",
+      "kind": "light",
+      "artTile": 420,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 141,
+      "key": "magma_block",
+      "kind": "hotrock",
+      "artTile": 423,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 142,
+      "key": "soul_sand",
+      "kind": "ground",
+      "artTile": 426,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 143,
+      "key": "blue_ice",
+      "kind": "glass",
+      "artTile": 429,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 144,
+      "key": "conduit",
+      "kind": "light",
+      "artTile": 432,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 145,
+      "key": "brewing_stand",
+      "kind": "workstation",
+      "artTile": 435,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 146,
+      "key": "kelp",
+      "kind": "plant",
+      "artTile": 438,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 147,
+      "key": "seagrass",
+      "kind": "plant",
+      "artTile": 441,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 148,
+      "key": "tube_coral_block",
+      "kind": "coral",
+      "artTile": 444,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 149,
+      "key": "dead_tube_coral_block",
+      "kind": "coral",
+      "artTile": 447,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 150,
+      "key": "tube_coral",
+      "kind": "plant",
+      "artTile": 450,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 151,
+      "key": "dead_tube_coral",
+      "kind": "plant",
+      "artTile": 453,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 152,
+      "key": "tube_coral_fan",
+      "kind": "plant",
+      "artTile": 456,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 153,
+      "key": "dead_tube_coral_fan",
+      "kind": "plant",
+      "artTile": 459,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 154,
+      "key": "brain_coral_block",
+      "kind": "coral",
+      "artTile": 462,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 155,
+      "key": "dead_brain_coral_block",
+      "kind": "coral",
+      "artTile": 465,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 156,
+      "key": "brain_coral",
+      "kind": "plant",
+      "artTile": 468,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 157,
+      "key": "dead_brain_coral",
+      "kind": "plant",
+      "artTile": 471,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 158,
+      "key": "brain_coral_fan",
+      "kind": "plant",
+      "artTile": 474,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 159,
+      "key": "dead_brain_coral_fan",
+      "kind": "plant",
+      "artTile": 477,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 160,
+      "key": "bubble_coral_block",
+      "kind": "coral",
+      "artTile": 480,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 161,
+      "key": "dead_bubble_coral_block",
+      "kind": "coral",
+      "artTile": 483,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 162,
+      "key": "bubble_coral",
+      "kind": "plant",
+      "artTile": 486,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 163,
+      "key": "dead_bubble_coral",
+      "kind": "plant",
+      "artTile": 489,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 164,
+      "key": "bubble_coral_fan",
+      "kind": "plant",
+      "artTile": 492,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 165,
+      "key": "dead_bubble_coral_fan",
+      "kind": "plant",
+      "artTile": 495,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 166,
+      "key": "fire_coral_block",
+      "kind": "coral",
+      "artTile": 498,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 167,
+      "key": "dead_fire_coral_block",
+      "kind": "coral",
+      "artTile": 501,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 168,
+      "key": "fire_coral",
+      "kind": "plant",
+      "artTile": 504,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 169,
+      "key": "dead_fire_coral",
+      "kind": "plant",
+      "artTile": 507,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 170,
+      "key": "fire_coral_fan",
+      "kind": "plant",
+      "artTile": 510,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 171,
+      "key": "dead_fire_coral_fan",
+      "kind": "plant",
+      "artTile": 513,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 172,
+      "key": "horn_coral_block",
+      "kind": "coral",
+      "artTile": 516,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 173,
+      "key": "dead_horn_coral_block",
+      "kind": "coral",
+      "artTile": 519,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 174,
+      "key": "horn_coral",
+      "kind": "plant",
+      "artTile": 522,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 175,
+      "key": "dead_horn_coral",
+      "kind": "plant",
+      "artTile": 525,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 176,
+      "key": "horn_coral_fan",
+      "kind": "plant",
+      "artTile": 528,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 177,
+      "key": "dead_horn_coral_fan",
+      "kind": "plant",
+      "artTile": 531,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 178,
+      "key": "sea_pickle_1",
+      "kind": "pickles",
+      "artTile": 534,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 179,
+      "key": "turtle_egg_1_0",
+      "kind": "eggs",
+      "artTile": 537,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 180,
+      "key": "turtle_egg_1_1",
+      "kind": "eggs",
+      "artTile": 540,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 181,
+      "key": "turtle_egg_1_2",
+      "kind": "eggs",
+      "artTile": 543,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 182,
+      "key": "sea_pickle_2",
+      "kind": "pickles",
+      "artTile": 546,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 183,
+      "key": "turtle_egg_2_0",
+      "kind": "eggs",
+      "artTile": 549,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 184,
+      "key": "turtle_egg_2_1",
+      "kind": "eggs",
+      "artTile": 552,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 185,
+      "key": "turtle_egg_2_2",
+      "kind": "eggs",
+      "artTile": 555,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 186,
+      "key": "sea_pickle_3",
+      "kind": "pickles",
+      "artTile": 558,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 187,
+      "key": "turtle_egg_3_0",
+      "kind": "eggs",
+      "artTile": 561,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 188,
+      "key": "turtle_egg_3_1",
+      "kind": "eggs",
+      "artTile": 564,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 189,
+      "key": "turtle_egg_3_2",
+      "kind": "eggs",
+      "artTile": 567,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 190,
+      "key": "sea_pickle_4",
+      "kind": "pickles",
+      "artTile": 570,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 191,
+      "key": "turtle_egg_4_0",
+      "kind": "eggs",
+      "artTile": 573,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 192,
+      "key": "turtle_egg_4_1",
+      "kind": "eggs",
+      "artTile": 576,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 193,
+      "key": "turtle_egg_4_2",
+      "kind": "eggs",
+      "artTile": 579,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 194,
+      "key": "nether_wart_0",
+      "kind": "plant",
+      "artTile": 582,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 195,
+      "key": "nether_wart_1",
+      "kind": "plant",
+      "artTile": 585,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 196,
+      "key": "nether_wart_2",
+      "kind": "plant",
+      "artTile": 588,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 197,
+      "key": "nether_wart_3",
+      "kind": "plant",
+      "artTile": 591,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 198,
+      "key": "dried_kelp_block",
+      "kind": "kelp",
+      "artTile": 594,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 199,
+      "key": "acacia_door",
+      "kind": "door",
+      "artTile": 600,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 215,
+      "key": "acacia_fence",
+      "kind": "planks",
+      "artTile": 603,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 216,
+      "key": "acacia_fence_gate",
+      "kind": "planks",
+      "artTile": 606,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 224,
+      "key": "acacia_leaves",
+      "kind": "leaves",
+      "artTile": 609,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 225,
+      "key": "acacia_log",
+      "kind": "log",
+      "artTile": 612,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 228,
+      "key": "acacia_planks",
+      "kind": "planks",
+      "artTile": 615,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 229,
+      "key": "acacia_sapling",
+      "kind": "plant",
+      "artTile": 618,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 241,
+      "key": "acacia_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 621,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 257,
+      "key": "acacia_wood",
+      "kind": "log",
+      "artTile": 624,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 260,
+      "key": "allium",
+      "kind": "plant",
+      "artTile": 627,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 261,
+      "key": "amethyst_block",
+      "kind": "crystal",
+      "artTile": 630,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 262,
+      "key": "ancient_debris",
+      "kind": "rock",
+      "artTile": 633,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 275,
+      "key": "azalea",
+      "kind": "plant",
+      "artTile": 636,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 276,
+      "key": "azalea_leaves",
+      "kind": "leaves",
+      "artTile": 639,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 277,
+      "key": "azure_bluet",
+      "kind": "plant",
+      "artTile": 642,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 278,
+      "key": "bamboo_block",
+      "kind": "stalk",
+      "artTile": 645,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 279,
+      "key": "bamboo_door",
+      "kind": "door",
+      "artTile": 648,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 295,
+      "key": "bamboo_fence",
+      "kind": "planks",
+      "artTile": 651,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 296,
+      "key": "bamboo_fence_gate",
+      "kind": "planks",
+      "artTile": 654,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 304,
+      "key": "bamboo_mosaic",
+      "kind": "mosaic",
+      "artTile": 657,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 316,
+      "key": "bamboo_planks",
+      "kind": "planks",
+      "artTile": 660,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 328,
+      "key": "bamboo_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 663,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 344,
+      "key": "barrel",
+      "kind": "workstation",
+      "artTile": 666,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 345,
+      "key": "big_dripleaf",
+      "kind": "plant",
+      "artTile": 669,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 346,
+      "key": "birch_door",
+      "kind": "door",
+      "artTile": 672,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 362,
+      "key": "birch_fence",
+      "kind": "planks",
+      "artTile": 675,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 363,
+      "key": "birch_fence_gate",
+      "kind": "planks",
+      "artTile": 678,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 371,
+      "key": "birch_planks",
+      "kind": "planks",
+      "artTile": 681,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 372,
+      "key": "birch_sapling",
+      "kind": "plant",
+      "artTile": 684,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 384,
+      "key": "birch_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 687,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 400,
+      "key": "birch_wood",
+      "kind": "log",
+      "artTile": 690,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 403,
+      "key": "black_carpet",
+      "kind": "cloth",
+      "artTile": 693,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 404,
+      "key": "black_concrete",
+      "kind": "smooth",
+      "artTile": 696,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 405,
+      "key": "black_concrete_powder",
+      "kind": "granular",
+      "artTile": 699,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 417,
+      "key": "black_stained_glass",
+      "kind": "glass",
+      "artTile": 702,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 419,
+      "key": "black_terracotta",
+      "kind": "smooth",
+      "artTile": 705,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 420,
+      "key": "black_wool",
+      "kind": "cloth",
+      "artTile": 708,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 432,
+      "key": "blackstone",
+      "kind": "rock",
+      "artTile": 711,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 445,
+      "key": "blast_furnace",
+      "kind": "workstation",
+      "artTile": 714,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 446,
+      "key": "blue_carpet",
+      "kind": "cloth",
+      "artTile": 717,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 447,
+      "key": "blue_concrete",
+      "kind": "smooth",
+      "artTile": 720,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 448,
+      "key": "blue_concrete_powder",
+      "kind": "granular",
+      "artTile": 723,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 460,
+      "key": "blue_orchid",
+      "kind": "plant",
+      "artTile": 726,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 461,
+      "key": "blue_stained_glass",
+      "kind": "glass",
+      "artTile": 729,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 463,
+      "key": "blue_terracotta",
+      "kind": "smooth",
+      "artTile": 732,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 464,
+      "key": "blue_wool",
+      "kind": "cloth",
+      "artTile": 735,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 476,
+      "key": "bone_block",
+      "kind": "pillar",
+      "artTile": 738,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 489,
+      "key": "brown_carpet",
+      "kind": "cloth",
+      "artTile": 741,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 490,
+      "key": "brown_concrete",
+      "kind": "smooth",
+      "artTile": 744,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 491,
+      "key": "brown_concrete_powder",
+      "kind": "granular",
+      "artTile": 747,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 503,
+      "key": "brown_mushroom",
+      "kind": "plant",
+      "artTile": 750,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 504,
+      "key": "brown_mushroom_block",
+      "kind": "mushroom",
+      "artTile": 753,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 505,
+      "key": "brown_stained_glass",
+      "kind": "glass",
+      "artTile": 756,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 507,
+      "key": "brown_terracotta",
+      "kind": "smooth",
+      "artTile": 759,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 508,
+      "key": "brown_wool",
+      "kind": "cloth",
+      "artTile": 762,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 520,
+      "key": "budding_amethyst",
+      "kind": "crystal",
+      "artTile": 765,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 521,
+      "key": "bush",
+      "kind": "plant",
+      "artTile": 768,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 522,
+      "key": "cactus_flower",
+      "kind": "plant",
+      "artTile": 771,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 523,
+      "key": "calcite",
+      "kind": "rock",
+      "artTile": 774,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 524,
+      "key": "cauldron",
+      "kind": "workstation",
+      "artTile": 777,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 525,
+      "key": "cherry_door",
+      "kind": "door",
+      "artTile": 780,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 541,
+      "key": "cherry_fence",
+      "kind": "planks",
+      "artTile": 783,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 542,
+      "key": "cherry_fence_gate",
+      "kind": "planks",
+      "artTile": 786,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 550,
+      "key": "cherry_leaves",
+      "kind": "leaves",
+      "artTile": 789,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 551,
+      "key": "cherry_log",
+      "kind": "log",
+      "artTile": 792,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 554,
+      "key": "cherry_planks",
+      "kind": "planks",
+      "artTile": 795,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 555,
+      "key": "cherry_sapling",
+      "kind": "plant",
+      "artTile": 798,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 567,
+      "key": "cherry_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 801,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 583,
+      "key": "cherry_wood",
+      "kind": "log",
+      "artTile": 804,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 586,
+      "key": "chiseled_cinnabar",
+      "kind": "carved",
+      "artTile": 807,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 587,
+      "key": "chiseled_copper",
+      "kind": "tiles",
+      "artTile": 810,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 588,
+      "key": "chiseled_deepslate",
+      "kind": "carved",
+      "artTile": 813,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 589,
+      "key": "chiseled_nether_bricks",
+      "kind": "carved",
+      "artTile": 816,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 590,
+      "key": "chiseled_polished_blackstone",
+      "kind": "carved",
+      "artTile": 819,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 591,
+      "key": "chiseled_quartz_block",
+      "kind": "carved",
+      "artTile": 822,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 592,
+      "key": "chiseled_red_sandstone",
+      "kind": "carved",
+      "artTile": 825,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 593,
+      "key": "chiseled_resin_bricks",
+      "kind": "carved",
+      "artTile": 828,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 594,
+      "key": "chiseled_sandstone",
+      "kind": "carved",
+      "artTile": 831,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 595,
+      "key": "chiseled_stone_bricks",
+      "kind": "carved",
+      "artTile": 834,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 596,
+      "key": "chiseled_sulfur",
+      "kind": "carved",
+      "artTile": 837,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 597,
+      "key": "chiseled_tuff",
+      "kind": "carved",
+      "artTile": 840,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 598,
+      "key": "chiseled_tuff_bricks",
+      "kind": "carved",
+      "artTile": 843,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 599,
+      "key": "cinnabar",
+      "kind": "rock",
+      "artTile": 846,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 600,
+      "key": "cinnabar_brick_slab",
+      "kind": "tiles",
+      "artTile": 849,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 603,
+      "key": "cinnabar_brick_stairs",
+      "kind": "tiles",
+      "artTile": 852,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 611,
+      "key": "cinnabar_brick_wall",
+      "kind": "tiles",
+      "artTile": 855,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 612,
+      "key": "cinnabar_bricks",
+      "kind": "tiles",
+      "artTile": 858,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 625,
+      "key": "closed_eyeblossom",
+      "kind": "plant",
+      "artTile": 861,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 626,
+      "key": "coarse_dirt",
+      "kind": "ground",
+      "artTile": 864,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 627,
+      "key": "cobbled_deepslate",
+      "kind": "rock",
+      "artTile": 867,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 652,
+      "key": "copper_bars",
+      "kind": "metalwork",
+      "artTile": 870,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 653,
+      "key": "copper_bulb",
+      "kind": "light",
+      "artTile": 873,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 654,
+      "key": "copper_chain",
+      "kind": "metalwork",
+      "artTile": 876,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 655,
+      "key": "copper_door",
+      "kind": "door",
+      "artTile": 879,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 671,
+      "key": "copper_lantern",
+      "kind": "light",
+      "artTile": 882,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 672,
+      "key": "copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 885,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 688,
+      "key": "cracked_deepslate_bricks",
+      "kind": "tiles",
+      "artTile": 888,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 689,
+      "key": "cracked_deepslate_tiles",
+      "kind": "tiles",
+      "artTile": 891,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 690,
+      "key": "cracked_nether_bricks",
+      "kind": "tiles",
+      "artTile": 894,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 691,
+      "key": "cracked_polished_blackstone_bricks",
+      "kind": "tiles",
+      "artTile": 897,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 692,
+      "key": "crimson_door",
+      "kind": "door",
+      "artTile": 900,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 708,
+      "key": "crimson_fence",
+      "kind": "planks",
+      "artTile": 903,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 709,
+      "key": "crimson_fence_gate",
+      "kind": "planks",
+      "artTile": 906,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 717,
+      "key": "crimson_fungus",
+      "kind": "plant",
+      "artTile": 909,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 718,
+      "key": "crimson_hyphae",
+      "kind": "log",
+      "artTile": 912,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 721,
+      "key": "crimson_nylium",
+      "kind": "ground",
+      "artTile": 915,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 722,
+      "key": "crimson_planks",
+      "kind": "planks",
+      "artTile": 918,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 723,
+      "key": "crimson_roots",
+      "kind": "plant",
+      "artTile": 921,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 735,
+      "key": "crimson_stem",
+      "kind": "log",
+      "artTile": 924,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 738,
+      "key": "crimson_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 927,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 754,
+      "key": "crying_obsidian",
+      "kind": "hotrock",
+      "artTile": 930,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 755,
+      "key": "cut_copper",
+      "kind": "tiles",
+      "artTile": 933,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 767,
+      "key": "cut_red_sandstone",
+      "kind": "tiles",
+      "artTile": 936,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 771,
+      "key": "cut_sandstone",
+      "kind": "tiles",
+      "artTile": 939,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 775,
+      "key": "cyan_carpet",
+      "kind": "cloth",
+      "artTile": 942,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 776,
+      "key": "cyan_concrete",
+      "kind": "smooth",
+      "artTile": 945,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 777,
+      "key": "cyan_concrete_powder",
+      "kind": "granular",
+      "artTile": 948,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 789,
+      "key": "cyan_stained_glass",
+      "kind": "glass",
+      "artTile": 951,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 791,
+      "key": "cyan_terracotta",
+      "kind": "smooth",
+      "artTile": 954,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 792,
+      "key": "cyan_wool",
+      "kind": "cloth",
+      "artTile": 957,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 804,
+      "key": "dandelion",
+      "kind": "plant",
+      "artTile": 960,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 805,
+      "key": "dark_oak_door",
+      "kind": "door",
+      "artTile": 963,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 821,
+      "key": "dark_oak_fence",
+      "kind": "planks",
+      "artTile": 966,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 822,
+      "key": "dark_oak_fence_gate",
+      "kind": "planks",
+      "artTile": 969,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 830,
+      "key": "dark_oak_leaves",
+      "kind": "leaves",
+      "artTile": 972,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 831,
+      "key": "dark_oak_log",
+      "kind": "log",
+      "artTile": 975,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 834,
+      "key": "dark_oak_planks",
+      "kind": "planks",
+      "artTile": 978,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 835,
+      "key": "dark_oak_sapling",
+      "kind": "plant",
+      "artTile": 981,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 847,
+      "key": "dark_oak_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 984,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 863,
+      "key": "dark_oak_wood",
+      "kind": "log",
+      "artTile": 987,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 877,
+      "key": "dead_bush",
+      "kind": "plant",
+      "artTile": 990,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 878,
+      "key": "deepslate",
+      "kind": "rock",
+      "artTile": 993,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 879,
+      "key": "deepslate_brick_slab",
+      "kind": "tiles",
+      "artTile": 996,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 882,
+      "key": "deepslate_brick_stairs",
+      "kind": "tiles",
+      "artTile": 999,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 890,
+      "key": "deepslate_brick_wall",
+      "kind": "tiles",
+      "artTile": 1002,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 891,
+      "key": "deepslate_bricks",
+      "kind": "tiles",
+      "artTile": 1005,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 892,
+      "key": "deepslate_coal_ore",
+      "kind": "ore",
+      "artTile": 1008,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 893,
+      "key": "deepslate_copper_ore",
+      "kind": "ore",
+      "artTile": 1011,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 894,
+      "key": "deepslate_diamond_ore",
+      "kind": "ore",
+      "artTile": 1014,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 895,
+      "key": "deepslate_emerald_ore",
+      "kind": "ore",
+      "artTile": 1017,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 896,
+      "key": "deepslate_gold_ore",
+      "kind": "ore",
+      "artTile": 1020,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 897,
+      "key": "deepslate_iron_ore",
+      "kind": "ore",
+      "artTile": 1023,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 898,
+      "key": "deepslate_lapis_ore",
+      "kind": "ore",
+      "artTile": 1026,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 899,
+      "key": "deepslate_tile_slab",
+      "kind": "tiles",
+      "artTile": 1029,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 902,
+      "key": "deepslate_tile_stairs",
+      "kind": "tiles",
+      "artTile": 1032,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 910,
+      "key": "deepslate_tile_wall",
+      "kind": "tiles",
+      "artTile": 1035,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 911,
+      "key": "deepslate_tiles",
+      "kind": "tiles",
+      "artTile": 1038,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 924,
+      "key": "exposed_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 1041,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 925,
+      "key": "exposed_copper",
+      "kind": "metal",
+      "artTile": 1044,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 926,
+      "key": "exposed_copper_bars",
+      "kind": "metalwork",
+      "artTile": 1047,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 927,
+      "key": "exposed_copper_bulb",
+      "kind": "light",
+      "artTile": 1050,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 928,
+      "key": "exposed_copper_chain",
+      "kind": "metalwork",
+      "artTile": 1053,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 929,
+      "key": "exposed_copper_door",
+      "kind": "door",
+      "artTile": 1056,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 945,
+      "key": "exposed_copper_lantern",
+      "kind": "light",
+      "artTile": 1059,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 946,
+      "key": "exposed_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1062,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 962,
+      "key": "exposed_cut_copper",
+      "kind": "tiles",
+      "artTile": 1065,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 974,
+      "key": "firefly_bush",
+      "kind": "plant",
+      "artTile": 1068,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 975,
+      "key": "flower_pot",
+      "kind": "workstation",
+      "artTile": 1071,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 976,
+      "key": "flowering_azalea",
+      "kind": "plant",
+      "artTile": 1074,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 977,
+      "key": "flowering_azalea_leaves",
+      "kind": "leaves",
+      "artTile": 1077,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 978,
+      "key": "gilded_blackstone",
+      "kind": "hotrock",
+      "artTile": 1080,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 980,
+      "key": "glow_lichen",
+      "kind": "plant",
+      "artTile": 1083,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 981,
+      "key": "glowstone",
+      "kind": "light",
+      "artTile": 1086,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 994,
+      "key": "gray_carpet",
+      "kind": "cloth",
+      "artTile": 1089,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 995,
+      "key": "gray_concrete",
+      "kind": "smooth",
+      "artTile": 1092,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 996,
+      "key": "gray_concrete_powder",
+      "kind": "granular",
+      "artTile": 1095,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1008,
+      "key": "gray_stained_glass",
+      "kind": "glass",
+      "artTile": 1098,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1010,
+      "key": "gray_terracotta",
+      "kind": "smooth",
+      "artTile": 1101,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1011,
+      "key": "gray_wool",
+      "kind": "cloth",
+      "artTile": 1104,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1023,
+      "key": "green_carpet",
+      "kind": "cloth",
+      "artTile": 1107,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1024,
+      "key": "green_concrete",
+      "kind": "smooth",
+      "artTile": 1110,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1025,
+      "key": "green_concrete_powder",
+      "kind": "granular",
+      "artTile": 1113,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1037,
+      "key": "green_stained_glass",
+      "kind": "glass",
+      "artTile": 1116,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1039,
+      "key": "green_terracotta",
+      "kind": "smooth",
+      "artTile": 1119,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1040,
+      "key": "green_wool",
+      "kind": "cloth",
+      "artTile": 1122,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1052,
+      "key": "hanging_roots",
+      "kind": "plant",
+      "artTile": 1125,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1053,
+      "key": "honeycomb_block",
+      "kind": "honeycomb",
+      "artTile": 1128,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1054,
+      "key": "infested_chiseled_stone_bricks",
+      "kind": "carved",
+      "artTile": 1131,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1055,
+      "key": "infested_cobblestone",
+      "kind": "rock",
+      "artTile": 1134,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1056,
+      "key": "infested_cracked_stone_bricks",
+      "kind": "tiles",
+      "artTile": 1137,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1057,
+      "key": "infested_deepslate",
+      "kind": "rock",
+      "artTile": 1140,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1058,
+      "key": "infested_mossy_stone_bricks",
+      "kind": "tiles",
+      "artTile": 1143,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1059,
+      "key": "infested_stone",
+      "kind": "rock",
+      "artTile": 1146,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1060,
+      "key": "infested_stone_bricks",
+      "kind": "tiles",
+      "artTile": 1149,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1061,
+      "key": "iron_bars",
+      "kind": "metalwork",
+      "artTile": 1152,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1062,
+      "key": "iron_chain",
+      "kind": "metalwork",
+      "artTile": 1155,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1063,
+      "key": "iron_door",
+      "kind": "door",
+      "artTile": 1158,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1079,
+      "key": "iron_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1161,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1095,
+      "key": "jungle_door",
+      "kind": "door",
+      "artTile": 1164,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1111,
+      "key": "jungle_fence",
+      "kind": "planks",
+      "artTile": 1167,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1112,
+      "key": "jungle_fence_gate",
+      "kind": "planks",
+      "artTile": 1170,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1120,
+      "key": "jungle_leaves",
+      "kind": "leaves",
+      "artTile": 1173,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1121,
+      "key": "jungle_log",
+      "kind": "log",
+      "artTile": 1176,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1124,
+      "key": "jungle_planks",
+      "kind": "planks",
+      "artTile": 1179,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1125,
+      "key": "jungle_sapling",
+      "kind": "plant",
+      "artTile": 1182,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1137,
+      "key": "jungle_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1185,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1153,
+      "key": "jungle_wood",
+      "kind": "log",
+      "artTile": 1188,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1156,
+      "key": "ladder",
+      "kind": "ladder",
+      "artTile": 1191,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1160,
+      "key": "lantern",
+      "kind": "light",
+      "artTile": 1194,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1161,
+      "key": "large_fern",
+      "kind": "plant",
+      "artTile": 1197,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1162,
+      "key": "leaf_litter",
+      "kind": "plant",
+      "artTile": 1200,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1163,
+      "key": "light_blue_carpet",
+      "kind": "cloth",
+      "artTile": 1203,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1164,
+      "key": "light_blue_concrete",
+      "kind": "smooth",
+      "artTile": 1206,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1165,
+      "key": "light_blue_concrete_powder",
+      "kind": "granular",
+      "artTile": 1209,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1177,
+      "key": "light_blue_stained_glass",
+      "kind": "glass",
+      "artTile": 1212,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1179,
+      "key": "light_blue_terracotta",
+      "kind": "smooth",
+      "artTile": 1215,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1180,
+      "key": "light_blue_wool",
+      "kind": "cloth",
+      "artTile": 1218,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1192,
+      "key": "light_gray_carpet",
+      "kind": "cloth",
+      "artTile": 1221,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1193,
+      "key": "light_gray_concrete",
+      "kind": "smooth",
+      "artTile": 1224,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1194,
+      "key": "light_gray_concrete_powder",
+      "kind": "granular",
+      "artTile": 1227,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1206,
+      "key": "light_gray_stained_glass",
+      "kind": "glass",
+      "artTile": 1230,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1208,
+      "key": "light_gray_terracotta",
+      "kind": "smooth",
+      "artTile": 1233,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1209,
+      "key": "light_gray_wool",
+      "kind": "cloth",
+      "artTile": 1236,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1221,
+      "key": "lilac",
+      "kind": "plant",
+      "artTile": 1239,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1222,
+      "key": "lily_of_the_valley",
+      "kind": "plant",
+      "artTile": 1242,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1223,
+      "key": "lime_carpet",
+      "kind": "cloth",
+      "artTile": 1245,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1224,
+      "key": "lime_concrete",
+      "kind": "smooth",
+      "artTile": 1248,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1225,
+      "key": "lime_concrete_powder",
+      "kind": "granular",
+      "artTile": 1251,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1237,
+      "key": "lime_stained_glass",
+      "kind": "glass",
+      "artTile": 1254,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1239,
+      "key": "lime_terracotta",
+      "kind": "smooth",
+      "artTile": 1257,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1240,
+      "key": "lime_wool",
+      "kind": "cloth",
+      "artTile": 1260,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1252,
+      "key": "magenta_carpet",
+      "kind": "cloth",
+      "artTile": 1263,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1253,
+      "key": "magenta_concrete",
+      "kind": "smooth",
+      "artTile": 1266,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1254,
+      "key": "magenta_concrete_powder",
+      "kind": "granular",
+      "artTile": 1269,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1266,
+      "key": "magenta_stained_glass",
+      "kind": "glass",
+      "artTile": 1272,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1268,
+      "key": "magenta_terracotta",
+      "kind": "smooth",
+      "artTile": 1275,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1269,
+      "key": "magenta_wool",
+      "kind": "cloth",
+      "artTile": 1278,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1281,
+      "key": "mangrove_door",
+      "kind": "door",
+      "artTile": 1281,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1297,
+      "key": "mangrove_fence",
+      "kind": "planks",
+      "artTile": 1284,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1298,
+      "key": "mangrove_fence_gate",
+      "kind": "planks",
+      "artTile": 1287,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1306,
+      "key": "mangrove_leaves",
+      "kind": "leaves",
+      "artTile": 1290,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1307,
+      "key": "mangrove_log",
+      "kind": "log",
+      "artTile": 1293,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1310,
+      "key": "mangrove_planks",
+      "kind": "planks",
+      "artTile": 1296,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1311,
+      "key": "mangrove_propagule",
+      "kind": "plant",
+      "artTile": 1299,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1323,
+      "key": "mangrove_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1302,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1339,
+      "key": "mangrove_wood",
+      "kind": "log",
+      "artTile": 1305,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1342,
+      "key": "melon",
+      "kind": "stalk",
+      "artTile": 1308,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1343,
+      "key": "moss_carpet",
+      "kind": "ground",
+      "artTile": 1311,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1344,
+      "key": "mossy_cobblestone",
+      "kind": "ground",
+      "artTile": 1314,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1369,
+      "key": "mud",
+      "kind": "ground",
+      "artTile": 1317,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1370,
+      "key": "mud_brick_slab",
+      "kind": "tiles",
+      "artTile": 1320,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1373,
+      "key": "mud_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1323,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1381,
+      "key": "mud_brick_wall",
+      "kind": "tiles",
+      "artTile": 1326,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1382,
+      "key": "mud_bricks",
+      "kind": "tiles",
+      "artTile": 1329,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1383,
+      "key": "muddy_mangrove_roots",
+      "kind": "ground",
+      "artTile": 1332,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1384,
+      "key": "mushroom_stem",
+      "kind": "log",
+      "artTile": 1335,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1387,
+      "key": "mycelium",
+      "kind": "ground",
+      "artTile": 1338,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1388,
+      "key": "nether_brick_fence",
+      "kind": "planks",
+      "artTile": 1341,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1389,
+      "key": "nether_brick_slab",
+      "kind": "tiles",
+      "artTile": 1344,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1392,
+      "key": "nether_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1347,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1400,
+      "key": "nether_brick_wall",
+      "kind": "tiles",
+      "artTile": 1350,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1401,
+      "key": "nether_bricks",
+      "kind": "tiles",
+      "artTile": 1353,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1402,
+      "key": "nether_gold_ore",
+      "kind": "ore",
+      "artTile": 1356,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1403,
+      "key": "nether_quartz_ore",
+      "kind": "ore",
+      "artTile": 1359,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1404,
+      "key": "nether_sprouts",
+      "kind": "plant",
+      "artTile": 1362,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1405,
+      "key": "nether_wart_block",
+      "kind": "rock",
+      "artTile": 1365,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1406,
+      "key": "netherite_block",
+      "kind": "metal",
+      "artTile": 1368,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1407,
+      "key": "netherrack",
+      "kind": "rock",
+      "artTile": 1371,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1408,
+      "key": "note_block",
+      "kind": "workstation",
+      "artTile": 1374,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1418,
+      "key": "oak_sapling",
+      "kind": "plant",
+      "artTile": 1377,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1430,
+      "key": "oak_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1380,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1446,
+      "key": "oak_wood",
+      "kind": "log",
+      "artTile": 1383,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1449,
+      "key": "ochre_froglight",
+      "kind": "light",
+      "artTile": 1386,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1450,
+      "key": "open_eyeblossom",
+      "kind": "plant",
+      "artTile": 1389,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1451,
+      "key": "orange_carpet",
+      "kind": "cloth",
+      "artTile": 1392,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1452,
+      "key": "orange_concrete",
+      "kind": "smooth",
+      "artTile": 1395,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1453,
+      "key": "orange_concrete_powder",
+      "kind": "granular",
+      "artTile": 1398,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1465,
+      "key": "orange_poplar_leaves",
+      "kind": "leaves",
+      "artTile": 1401,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1466,
+      "key": "orange_stained_glass",
+      "kind": "glass",
+      "artTile": 1404,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1468,
+      "key": "orange_terracotta",
+      "kind": "smooth",
+      "artTile": 1407,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1469,
+      "key": "orange_tulip",
+      "kind": "plant",
+      "artTile": 1410,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1470,
+      "key": "orange_wool",
+      "kind": "cloth",
+      "artTile": 1413,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1482,
+      "key": "oxeye_daisy",
+      "kind": "plant",
+      "artTile": 1416,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1483,
+      "key": "oxidized_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 1419,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1484,
+      "key": "oxidized_copper",
+      "kind": "metal",
+      "artTile": 1422,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1485,
+      "key": "oxidized_copper_bars",
+      "kind": "metalwork",
+      "artTile": 1425,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1486,
+      "key": "oxidized_copper_bulb",
+      "kind": "light",
+      "artTile": 1428,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1487,
+      "key": "oxidized_copper_chain",
+      "kind": "metalwork",
+      "artTile": 1431,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1488,
+      "key": "oxidized_copper_door",
+      "kind": "door",
+      "artTile": 1434,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1504,
+      "key": "oxidized_copper_lantern",
+      "kind": "light",
+      "artTile": 1437,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1505,
+      "key": "oxidized_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1440,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1521,
+      "key": "oxidized_cut_copper",
+      "kind": "tiles",
+      "artTile": 1443,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1533,
+      "key": "packed_mud",
+      "kind": "ground",
+      "artTile": 1446,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1534,
+      "key": "pale_moss_block",
+      "kind": "ground",
+      "artTile": 1449,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1535,
+      "key": "pale_moss_carpet",
+      "kind": "ground",
+      "artTile": 1452,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1536,
+      "key": "pale_oak_door",
+      "kind": "door",
+      "artTile": 1455,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1552,
+      "key": "pale_oak_fence",
+      "kind": "planks",
+      "artTile": 1458,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1553,
+      "key": "pale_oak_fence_gate",
+      "kind": "planks",
+      "artTile": 1461,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1561,
+      "key": "pale_oak_leaves",
+      "kind": "leaves",
+      "artTile": 1464,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1562,
+      "key": "pale_oak_log",
+      "kind": "log",
+      "artTile": 1467,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1565,
+      "key": "pale_oak_planks",
+      "kind": "planks",
+      "artTile": 1470,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1566,
+      "key": "pale_oak_sapling",
+      "kind": "plant",
+      "artTile": 1473,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1578,
+      "key": "pale_oak_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1476,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1594,
+      "key": "pale_oak_wood",
+      "kind": "log",
+      "artTile": 1479,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1597,
+      "key": "pearlescent_froglight",
+      "kind": "light",
+      "artTile": 1482,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1598,
+      "key": "peony",
+      "kind": "plant",
+      "artTile": 1485,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1599,
+      "key": "petrified_oak_slab",
+      "kind": "planks",
+      "artTile": 1488,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1602,
+      "key": "pink_carpet",
+      "kind": "cloth",
+      "artTile": 1491,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1603,
+      "key": "pink_concrete",
+      "kind": "smooth",
+      "artTile": 1494,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1604,
+      "key": "pink_concrete_powder",
+      "kind": "granular",
+      "artTile": 1497,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1616,
+      "key": "pink_petals",
+      "kind": "plant",
+      "artTile": 1500,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1617,
+      "key": "pink_stained_glass",
+      "kind": "glass",
+      "artTile": 1503,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1619,
+      "key": "pink_terracotta",
+      "kind": "smooth",
+      "artTile": 1506,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1620,
+      "key": "pink_tulip",
+      "kind": "plant",
+      "artTile": 1509,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1621,
+      "key": "pink_wool",
+      "kind": "cloth",
+      "artTile": 1512,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1633,
+      "key": "pitcher_plant",
+      "kind": "plant",
+      "artTile": 1515,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1634,
+      "key": "podzol",
+      "kind": "ground",
+      "artTile": 1518,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1635,
+      "key": "polished_andesite",
+      "kind": "smooth",
+      "artTile": 1521,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1647,
+      "key": "polished_basalt",
+      "kind": "pillar",
+      "artTile": 1524,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1648,
+      "key": "polished_blackstone",
+      "kind": "smooth",
+      "artTile": 1527,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1649,
+      "key": "polished_blackstone_brick_slab",
+      "kind": "tiles",
+      "artTile": 1530,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1652,
+      "key": "polished_blackstone_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1533,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1660,
+      "key": "polished_blackstone_brick_wall",
+      "kind": "tiles",
+      "artTile": 1536,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1661,
+      "key": "polished_blackstone_bricks",
+      "kind": "tiles",
+      "artTile": 1539,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1674,
+      "key": "polished_cinnabar",
+      "kind": "smooth",
+      "artTile": 1542,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1687,
+      "key": "polished_deepslate",
+      "kind": "smooth",
+      "artTile": 1545,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1700,
+      "key": "polished_diorite",
+      "kind": "smooth",
+      "artTile": 1548,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1712,
+      "key": "polished_granite",
+      "kind": "smooth",
+      "artTile": 1551,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1724,
+      "key": "polished_sulfur",
+      "kind": "smooth",
+      "artTile": 1554,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1737,
+      "key": "polished_tuff",
+      "kind": "smooth",
+      "artTile": 1557,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1750,
+      "key": "poplar_door",
+      "kind": "door",
+      "artTile": 1560,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1766,
+      "key": "poplar_fence",
+      "kind": "planks",
+      "artTile": 1563,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1767,
+      "key": "poplar_fence_gate",
+      "kind": "planks",
+      "artTile": 1566,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1775,
+      "key": "poplar_log",
+      "kind": "log",
+      "artTile": 1569,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1778,
+      "key": "poplar_planks",
+      "kind": "planks",
+      "artTile": 1572,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1779,
+      "key": "poplar_sapling",
+      "kind": "plant",
+      "artTile": 1575,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1791,
+      "key": "poplar_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1578,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1807,
+      "key": "poplar_wood",
+      "kind": "log",
+      "artTile": 1581,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1810,
+      "key": "potent_sulfur",
+      "kind": "rock",
+      "artTile": 1584,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1834,
+      "key": "pumpkin",
+      "kind": "stalk",
+      "artTile": 1587,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1835,
+      "key": "purple_carpet",
+      "kind": "cloth",
+      "artTile": 1590,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1836,
+      "key": "purple_concrete",
+      "kind": "smooth",
+      "artTile": 1593,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1837,
+      "key": "purple_concrete_powder",
+      "kind": "granular",
+      "artTile": 1596,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1849,
+      "key": "purple_stained_glass",
+      "kind": "glass",
+      "artTile": 1599,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1851,
+      "key": "purple_terracotta",
+      "kind": "smooth",
+      "artTile": 1602,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1852,
+      "key": "purple_wool",
+      "kind": "cloth",
+      "artTile": 1605,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1864,
+      "key": "quartz_block",
+      "kind": "smooth",
+      "artTile": 1608,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1865,
+      "key": "quartz_bricks",
+      "kind": "tiles",
+      "artTile": 1611,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1866,
+      "key": "quartz_pillar",
+      "kind": "pillar",
+      "artTile": 1614,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1878,
+      "key": "red_carpet",
+      "kind": "cloth",
+      "artTile": 1617,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1879,
+      "key": "red_concrete",
+      "kind": "smooth",
+      "artTile": 1620,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1880,
+      "key": "red_concrete_powder",
+      "kind": "granular",
+      "artTile": 1623,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1892,
+      "key": "red_mushroom",
+      "kind": "plant",
+      "artTile": 1626,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1893,
+      "key": "red_mushroom_block",
+      "kind": "mushroom",
+      "artTile": 1629,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1894,
+      "key": "red_nether_brick_slab",
+      "kind": "tiles",
+      "artTile": 1632,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1897,
+      "key": "red_nether_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1635,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1905,
+      "key": "red_nether_brick_wall",
+      "kind": "tiles",
+      "artTile": 1638,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1906,
+      "key": "red_nether_bricks",
+      "kind": "tiles",
+      "artTile": 1641,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1907,
+      "key": "red_poplar_leaves",
+      "kind": "leaves",
+      "artTile": 1644,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1908,
+      "key": "red_sandstone",
+      "kind": "ground",
+      "artTile": 1647,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1921,
+      "key": "red_shrub",
+      "kind": "plant",
+      "artTile": 1650,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1922,
+      "key": "red_stained_glass",
+      "kind": "glass",
+      "artTile": 1653,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1924,
+      "key": "red_terracotta",
+      "kind": "smooth",
+      "artTile": 1656,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1925,
+      "key": "red_tulip",
+      "kind": "plant",
+      "artTile": 1659,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1926,
+      "key": "red_wool",
+      "kind": "cloth",
+      "artTile": 1662,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1938,
+      "key": "reinforced_deepslate",
+      "kind": "carved",
+      "artTile": 1665,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1939,
+      "key": "resin_block",
+      "kind": "rock",
+      "artTile": 1668,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1940,
+      "key": "resin_brick_slab",
+      "kind": "tiles",
+      "artTile": 1671,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1943,
+      "key": "resin_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1674,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1951,
+      "key": "resin_brick_wall",
+      "kind": "tiles",
+      "artTile": 1677,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1952,
+      "key": "resin_bricks",
+      "kind": "tiles",
+      "artTile": 1680,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1953,
+      "key": "rose_bush",
+      "kind": "plant",
+      "artTile": 1683,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1966,
+      "key": "short_dry_grass",
+      "kind": "plant",
+      "artTile": 1686,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1967,
+      "key": "shroomlight",
+      "kind": "light",
+      "artTile": 1689,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1968,
+      "key": "small_dripleaf",
+      "kind": "plant",
+      "artTile": 1692,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1969,
+      "key": "smithing_table",
+      "kind": "workstation",
+      "artTile": 1695,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1970,
+      "key": "smoker",
+      "kind": "workstation",
+      "artTile": 1698,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1971,
+      "key": "smooth_basalt",
+      "kind": "pillar",
+      "artTile": 1701,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1972,
+      "key": "smooth_quartz",
+      "kind": "smooth",
+      "artTile": 1704,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1984,
+      "key": "smooth_red_sandstone",
+      "kind": "smooth",
+      "artTile": 1707,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 1996,
+      "key": "smooth_sandstone",
+      "kind": "smooth",
+      "artTile": 1710,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2011,
+      "key": "soul_lantern",
+      "kind": "light",
+      "artTile": 1713,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2012,
+      "key": "soul_soil",
+      "kind": "ground",
+      "artTile": 1716,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2013,
+      "key": "sponge",
+      "kind": "sponge",
+      "artTile": 1719,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2014,
+      "key": "spore_blossom",
+      "kind": "plant",
+      "artTile": 1722,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2015,
+      "key": "spruce_door",
+      "kind": "door",
+      "artTile": 1725,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2031,
+      "key": "spruce_fence",
+      "kind": "planks",
+      "artTile": 1728,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2032,
+      "key": "spruce_fence_gate",
+      "kind": "planks",
+      "artTile": 1731,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2040,
+      "key": "spruce_planks",
+      "kind": "planks",
+      "artTile": 1734,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2041,
+      "key": "spruce_sapling",
+      "kind": "plant",
+      "artTile": 1737,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2053,
+      "key": "spruce_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1740,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2069,
+      "key": "spruce_wood",
+      "kind": "log",
+      "artTile": 1743,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2095,
+      "key": "stonecutter",
+      "kind": "workstation",
+      "artTile": 1746,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2096,
+      "key": "stripped_acacia_log",
+      "kind": "log",
+      "artTile": 1749,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2099,
+      "key": "stripped_acacia_wood",
+      "kind": "log",
+      "artTile": 1752,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2102,
+      "key": "stripped_bamboo_block",
+      "kind": "stalk",
+      "artTile": 1755,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2103,
+      "key": "stripped_birch_log",
+      "kind": "log",
+      "artTile": 1758,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2106,
+      "key": "stripped_birch_wood",
+      "kind": "log",
+      "artTile": 1761,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2109,
+      "key": "stripped_cherry_log",
+      "kind": "log",
+      "artTile": 1764,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2112,
+      "key": "stripped_cherry_wood",
+      "kind": "log",
+      "artTile": 1767,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2115,
+      "key": "stripped_crimson_hyphae",
+      "kind": "log",
+      "artTile": 1770,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2118,
+      "key": "stripped_crimson_stem",
+      "kind": "log",
+      "artTile": 1773,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2121,
+      "key": "stripped_dark_oak_log",
+      "kind": "log",
+      "artTile": 1776,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2124,
+      "key": "stripped_dark_oak_wood",
+      "kind": "log",
+      "artTile": 1779,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2127,
+      "key": "stripped_jungle_log",
+      "kind": "log",
+      "artTile": 1782,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2130,
+      "key": "stripped_jungle_wood",
+      "kind": "log",
+      "artTile": 1785,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2133,
+      "key": "stripped_mangrove_log",
+      "kind": "log",
+      "artTile": 1788,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2136,
+      "key": "stripped_mangrove_wood",
+      "kind": "log",
+      "artTile": 1791,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2139,
+      "key": "stripped_oak_log",
+      "kind": "log",
+      "artTile": 1794,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2142,
+      "key": "stripped_oak_wood",
+      "kind": "log",
+      "artTile": 1797,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2145,
+      "key": "stripped_pale_oak_log",
+      "kind": "log",
+      "artTile": 1800,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2148,
+      "key": "stripped_pale_oak_wood",
+      "kind": "log",
+      "artTile": 1803,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2151,
+      "key": "stripped_poplar_log",
+      "kind": "log",
+      "artTile": 1806,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2154,
+      "key": "stripped_poplar_wood",
+      "kind": "log",
+      "artTile": 1809,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2157,
+      "key": "stripped_spruce_log",
+      "kind": "log",
+      "artTile": 1812,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2160,
+      "key": "stripped_spruce_wood",
+      "kind": "log",
+      "artTile": 1815,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2163,
+      "key": "stripped_warped_hyphae",
+      "kind": "log",
+      "artTile": 1818,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2166,
+      "key": "stripped_warped_stem",
+      "kind": "log",
+      "artTile": 1821,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2169,
+      "key": "sulfur",
+      "kind": "rock",
+      "artTile": 1824,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2170,
+      "key": "sulfur_brick_slab",
+      "kind": "tiles",
+      "artTile": 1827,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2173,
+      "key": "sulfur_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1830,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2181,
+      "key": "sulfur_brick_wall",
+      "kind": "tiles",
+      "artTile": 1833,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2182,
+      "key": "sulfur_bricks",
+      "kind": "tiles",
+      "artTile": 1836,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2195,
+      "key": "sunflower",
+      "kind": "plant",
+      "artTile": 1839,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2196,
+      "key": "tall_dry_grass",
+      "kind": "plant",
+      "artTile": 1842,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2197,
+      "key": "tall_grass",
+      "kind": "plant",
+      "artTile": 1845,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2198,
+      "key": "tinted_glass",
+      "kind": "glass",
+      "artTile": 1848,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2199,
+      "key": "torchflower",
+      "kind": "plant",
+      "artTile": 1851,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2200,
+      "key": "tuff",
+      "kind": "rock",
+      "artTile": 1854,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2201,
+      "key": "tuff_brick_slab",
+      "kind": "tiles",
+      "artTile": 1857,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2204,
+      "key": "tuff_brick_stairs",
+      "kind": "tiles",
+      "artTile": 1860,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2212,
+      "key": "tuff_brick_wall",
+      "kind": "tiles",
+      "artTile": 1863,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2213,
+      "key": "tuff_bricks",
+      "kind": "tiles",
+      "artTile": 1866,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2226,
+      "key": "twisting_vines",
+      "kind": "plant",
+      "artTile": 1869,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2227,
+      "key": "verdant_froglight",
+      "kind": "light",
+      "artTile": 1872,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2228,
+      "key": "vine",
+      "kind": "plant",
+      "artTile": 1875,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2232,
+      "key": "warped_door",
+      "kind": "door",
+      "artTile": 1878,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2248,
+      "key": "warped_fence",
+      "kind": "planks",
+      "artTile": 1881,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2249,
+      "key": "warped_fence_gate",
+      "kind": "planks",
+      "artTile": 1884,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2257,
+      "key": "warped_fungus",
+      "kind": "plant",
+      "artTile": 1887,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2258,
+      "key": "warped_hyphae",
+      "kind": "log",
+      "artTile": 1890,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2261,
+      "key": "warped_nylium",
+      "kind": "ground",
+      "artTile": 1893,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2262,
+      "key": "warped_planks",
+      "kind": "planks",
+      "artTile": 1896,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2263,
+      "key": "warped_roots",
+      "kind": "plant",
+      "artTile": 1899,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2275,
+      "key": "warped_stem",
+      "kind": "log",
+      "artTile": 1902,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2278,
+      "key": "warped_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1905,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2294,
+      "key": "warped_wart_block",
+      "kind": "rock",
+      "artTile": 1908,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2295,
+      "key": "waxed_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 1911,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2296,
+      "key": "waxed_copper_bars",
+      "kind": "metalwork",
+      "artTile": 1914,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2297,
+      "key": "waxed_copper_block",
+      "kind": "metal",
+      "artTile": 1917,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2298,
+      "key": "waxed_copper_bulb",
+      "kind": "light",
+      "artTile": 1920,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2299,
+      "key": "waxed_copper_chain",
+      "kind": "metalwork",
+      "artTile": 1923,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2300,
+      "key": "waxed_copper_door",
+      "kind": "door",
+      "artTile": 1926,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2316,
+      "key": "waxed_copper_lantern",
+      "kind": "light",
+      "artTile": 1929,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2317,
+      "key": "waxed_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1932,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2333,
+      "key": "waxed_cut_copper",
+      "kind": "tiles",
+      "artTile": 1935,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2345,
+      "key": "waxed_exposed_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 1938,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2346,
+      "key": "waxed_exposed_copper",
+      "kind": "metal",
+      "artTile": 1941,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2347,
+      "key": "waxed_exposed_copper_bars",
+      "kind": "metalwork",
+      "artTile": 1944,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2348,
+      "key": "waxed_exposed_copper_bulb",
+      "kind": "light",
+      "artTile": 1947,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2349,
+      "key": "waxed_exposed_copper_chain",
+      "kind": "metalwork",
+      "artTile": 1950,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2350,
+      "key": "waxed_exposed_copper_door",
+      "kind": "door",
+      "artTile": 1953,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2366,
+      "key": "waxed_exposed_copper_lantern",
+      "kind": "light",
+      "artTile": 1956,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2367,
+      "key": "waxed_exposed_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1959,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2383,
+      "key": "waxed_exposed_cut_copper",
+      "kind": "tiles",
+      "artTile": 1962,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2395,
+      "key": "waxed_oxidized_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 1965,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2396,
+      "key": "waxed_oxidized_copper",
+      "kind": "metal",
+      "artTile": 1968,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2397,
+      "key": "waxed_oxidized_copper_bars",
+      "kind": "metalwork",
+      "artTile": 1971,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2398,
+      "key": "waxed_oxidized_copper_bulb",
+      "kind": "light",
+      "artTile": 1974,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2399,
+      "key": "waxed_oxidized_copper_chain",
+      "kind": "metalwork",
+      "artTile": 1977,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2400,
+      "key": "waxed_oxidized_copper_door",
+      "kind": "door",
+      "artTile": 1980,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2416,
+      "key": "waxed_oxidized_copper_lantern",
+      "kind": "light",
+      "artTile": 1983,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2417,
+      "key": "waxed_oxidized_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 1986,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2433,
+      "key": "waxed_oxidized_cut_copper",
+      "kind": "tiles",
+      "artTile": 1989,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2445,
+      "key": "waxed_weathered_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 1992,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2446,
+      "key": "waxed_weathered_copper",
+      "kind": "metal",
+      "artTile": 1995,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2447,
+      "key": "waxed_weathered_copper_bars",
+      "kind": "metalwork",
+      "artTile": 1998,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2448,
+      "key": "waxed_weathered_copper_bulb",
+      "kind": "light",
+      "artTile": 2001,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2449,
+      "key": "waxed_weathered_copper_chain",
+      "kind": "metalwork",
+      "artTile": 2004,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2450,
+      "key": "waxed_weathered_copper_door",
+      "kind": "door",
+      "artTile": 2007,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2466,
+      "key": "waxed_weathered_copper_lantern",
+      "kind": "light",
+      "artTile": 2010,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2467,
+      "key": "waxed_weathered_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 2013,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2483,
+      "key": "waxed_weathered_cut_copper",
+      "kind": "tiles",
+      "artTile": 2016,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2495,
+      "key": "weathered_chiseled_copper",
+      "kind": "tiles",
+      "artTile": 2019,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2496,
+      "key": "weathered_copper",
+      "kind": "metal",
+      "artTile": 2022,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2497,
+      "key": "weathered_copper_bars",
+      "kind": "metalwork",
+      "artTile": 2025,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2498,
+      "key": "weathered_copper_bulb",
+      "kind": "light",
+      "artTile": 2028,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2499,
+      "key": "weathered_copper_chain",
+      "kind": "metalwork",
+      "artTile": 2031,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2500,
+      "key": "weathered_copper_door",
+      "kind": "door",
+      "artTile": 2034,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2516,
+      "key": "weathered_copper_lantern",
+      "kind": "light",
+      "artTile": 2037,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2517,
+      "key": "weathered_copper_trapdoor",
+      "kind": "trapdoor",
+      "artTile": 2040,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2533,
+      "key": "weathered_cut_copper",
+      "kind": "tiles",
+      "artTile": 2043,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2545,
+      "key": "weeping_vines",
+      "kind": "plant",
+      "artTile": 2046,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2546,
+      "key": "wet_sponge",
+      "kind": "sponge",
+      "artTile": 2049,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2548,
+      "key": "white_concrete",
+      "kind": "smooth",
+      "artTile": 2052,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2549,
+      "key": "white_concrete_powder",
+      "kind": "granular",
+      "artTile": 2055,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2561,
+      "key": "white_stained_glass",
+      "kind": "glass",
+      "artTile": 2058,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2563,
+      "key": "white_terracotta",
+      "kind": "smooth",
+      "artTile": 2061,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2564,
+      "key": "white_tulip",
+      "kind": "plant",
+      "artTile": 2064,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2576,
+      "key": "wildflowers",
+      "kind": "plant",
+      "artTile": 2067,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2577,
+      "key": "wither_rose",
+      "kind": "plant",
+      "artTile": 2070,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2578,
+      "key": "yellow_carpet",
+      "kind": "cloth",
+      "artTile": 2073,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2579,
+      "key": "yellow_concrete",
+      "kind": "smooth",
+      "artTile": 2076,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2580,
+      "key": "yellow_concrete_powder",
+      "kind": "granular",
+      "artTile": 2079,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2592,
+      "key": "yellow_poplar_leaves",
+      "kind": "leaves",
+      "artTile": 2082,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2593,
+      "key": "yellow_stained_glass",
+      "kind": "glass",
+      "artTile": 2085,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2595,
+      "key": "yellow_terracotta",
+      "kind": "smooth",
+      "artTile": 2088,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2596,
+      "key": "yellow_wool",
+      "kind": "cloth",
+      "artTile": 2091,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2608,
+      "key": "carrots__0",
+      "kind": "crop",
+      "artTile": 2094,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2609,
+      "key": "carrots__1",
+      "kind": "crop",
+      "artTile": 2097,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2610,
+      "key": "carrots__2",
+      "kind": "crop",
+      "artTile": 2100,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2611,
+      "key": "carrots__3",
+      "kind": "crop",
+      "artTile": 2103,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2612,
+      "key": "potatoes__0",
+      "kind": "crop",
+      "artTile": 2106,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2613,
+      "key": "potatoes__1",
+      "kind": "crop",
+      "artTile": 2109,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2614,
+      "key": "potatoes__2",
+      "kind": "crop",
+      "artTile": 2112,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2615,
+      "key": "potatoes__3",
+      "kind": "crop",
+      "artTile": 2115,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2616,
+      "key": "beetroots__0",
+      "kind": "crop",
+      "artTile": 2118,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2617,
+      "key": "beetroots__1",
+      "kind": "crop",
+      "artTile": 2121,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2618,
+      "key": "beetroots__2",
+      "kind": "crop",
+      "artTile": 2124,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2619,
+      "key": "beetroots__3",
+      "kind": "crop",
+      "artTile": 2127,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2620,
+      "key": "sweet_berry_bush__0",
+      "kind": "crop",
+      "artTile": 2130,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2621,
+      "key": "sweet_berry_bush__1",
+      "kind": "crop",
+      "artTile": 2133,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2622,
+      "key": "sweet_berry_bush__2",
+      "kind": "crop",
+      "artTile": 2136,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2623,
+      "key": "sweet_berry_bush__3",
+      "kind": "crop",
+      "artTile": 2139,
+      "suppliedNativePreserved": false
+    },
+    {
+      "id": 2624,
+      "key": "heavy_core",
+      "kind": "workstation",
+      "artTile": 2142,
+      "suppliedNativePreserved": false
+    }
+  ],
+  "preserved": [
+    "Classic archive",
+    "All existing weapon models/icons/poses",
+    "38 armor entries and eleven skins",
+    "75 item improvements from 2.7.18",
+    "Already-authored Renewed natural terrain",
+    "All supplied native images",
+    "UI, audio, gameplay, animation, controls, saves, realms and network"
+  ]
+}
