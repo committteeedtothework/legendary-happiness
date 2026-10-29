@@ -1,0 +1,123 @@
+{
+  "version": "2.8.1",
+  "core": {
+    "passed": 614,
+    "failed": 0
+  },
+  "browser": {
+    "uniquePassed": 11,
+    "broad": {
+      "passed": 10,
+      "skipped": 1
+    },
+    "finalFocused": {
+      "passed": 5,
+      "skipped": 1
+    },
+    "controlledVisualFixturePassed": 1,
+    "unresolvedFailures": 0,
+    "skipReason": "Managed Chromium blocks file:// with ERR_BLOCKED_BY_ADMINISTRATOR before game load",
+    "directFileOpeningVerified": false,
+    "nativeWindowsExecutionVerified": false,
+    "lighting": {
+      "packs": [
+        {
+          "pack": "renewed",
+          "vertices": 12,
+          "minAlpha": 255,
+          "lightMax": 1.306666612625122
+        },
+        {
+          "pack": "classic",
+          "vertices": 12,
+          "minAlpha": 255,
+          "lightMax": 1.306666612625122
+        },
+        {
+          "pack": "soft",
+          "vertices": 12,
+          "minAlpha": 255,
+          "lightMax": 1.306666612625122
+        },
+        {
+          "pack": "supplied",
+          "vertices": 12,
+          "minAlpha": 255,
+          "lightMax": 1.306666612625122
+        }
+      ],
+      "lighting": {
+        "first": 355104,
+        "unlit": 26691,
+        "far": 355104,
+        "turned": 355104,
+        "before": 740.9066637903452,
+        "after": 740.9066637903452,
+        "pointLights": 0
+      },
+      "dropped": [
+        25,
+        200,
+        8,
+        15
+      ],
+      "loaded": {
+        "lamps": 6,
+        "lit": true,
+        "drops": 1
+      },
+      "errors": []
+    },
+    "fullPortalToReturnVerified": true,
+    "sourceRebuildByteIdentical": true
+  },
+  "testedStandaloneSHA256": "2f4e03cb479e725c9d4334ddc437709c6c5754994dac26201908a7c60d87361a",
+  "compatibility": {
+    "version": "2.8.1",
+    "previousVersion": "2.8.0",
+    "changedRuntimeFiles": [
+      "src/block-art.js",
+      "src/data.js",
+      "src/graphics.js",
+      "src/mesher.js",
+      "src/renderer.js",
+      "src/terrain-worker.js",
+      "src/ui.js",
+      "src/worker-code.js",
+      "src/world.js",
+      "src/giganto-view.js",
+      "src/edition-interactions.js",
+      "src/giganto.css",
+      "src/mesh-snapshot.js",
+      "src/giganto-models.js",
+      "desktop/README.md"
+    ],
+    "newRuntimeFiles": [
+      "src/block-light.js"
+    ],
+    "unchangedRuntimeAndPublicFiles": 399,
+    "publicAssetsUnchanged": true,
+    "normalRegistriesRecipesStatsTerrainPhysicsControlsAndCombatUnchanged": true,
+    "gigantoSimulationControllerAndAudioUnchanged": true,
+    "saveEnvelope": 1,
+    "generation": 16,
+    "protocol": 4,
+    "lightingDerivedFromExistingBlocksAndDrops": true,
+    "requiresWorldRegeneration": false,
+    "nativeWindowsExecutionTested": false,
+    "directFileNavigationBlockedByManagedBrowserPolicy": true,
+    "referenceFidelity": "Partial original low-poly interpretation; GIGANTO.md",
+    "lightingLimits": "Loaded detailed terrain, finite range; LIGHTING.md"
+  },
+  "proofs": {
+    "sourceArchiveExact": true,
+    "archivesCRCVerified": true,
+    "PEEmbedsExactHTML": true,
+    "linuxCompanionExtractionVerified": true,
+    "officialGigantoAssetsImported": false
+  },
+  "limits": [
+    "LIGHTING.md",
+    "GIGANTO.md"
+  ]
+}
