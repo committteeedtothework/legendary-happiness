@@ -1,0 +1,34 @@
+{
+  "version": "2.8.6",
+  "previousVersion": "2.8.5",
+  "changedRuntimeFiles": [
+    "src/data.js",
+    "src/titan-imports.js",
+    "src/giganto-view.js",
+    "src/giganto-simulation.js",
+    "src/titan-kinematics.js",
+    "src/giganto-audio.js",
+    "src/titan-contact.js",
+    "src/giganto.js",
+    "src/titan-combat.js",
+    "desktop/README.md"
+  ],
+  "newRuntimeFiles": [
+    "src/titan-boost.js",
+    "src/titan-cyloop.js",
+    "public/audio/giganto/boost-manifest.json",
+    "public/audio/giganto/sonic-power-boost.mp3",
+    "public/audio/giganto/BOOST-NOTICE.txt",
+    "desktop/licenses/TITAN-BOOST.txt"
+  ],
+  "normalRegistriesStatsRecipesWorldGenerationControlsAndArtUnchanged": true,
+  "existingRecordingsUnchanged": true,
+  "preludeMP3ByteIdentical": true,
+  "saveEnvelope": 1,
+  "generation": 16,
+  "protocol": 4,
+  "worldRegenerationRequired": false,
+  "legacyBossHealthMigratesProportionally": true,
+  "normalHUDAndRendererRestored": true,
+  "officialFrontiersUIAnimationAndSceneryParity": false
+}
