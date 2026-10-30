@@ -1,0 +1,35 @@
+{
+  "sourceCommit": "20c5fc686365caddced71d4ac828d90200ec861c",
+  "published": false,
+  "runtimeDelta": [
+    "src/completed-block-art.js"
+  ],
+  "unitPassed": 661,
+  "pixelComparisonPassed": true,
+  "restoredWoolColors": 16,
+  "restoredWaterStates": 9,
+  "restoredFacesAcrossThreePacks": 225,
+  "otherAtlasPixelsUnchanged": true,
+  "files": {
+    "DCSMCRAFT-Wool-Water-Fix-Browser.zip": {
+      "bytes": 94701722,
+      "sha256": "706490bc9adf0d1c15c9c28a5692d7e2621aaf6119cddb00e9b0daafe9ff511d"
+    },
+    "DCSMCRAFT-Wool-Water-Fix-Source.zip": {
+      "bytes": 94998595,
+      "sha256": "67b54f9034892d12fb0b937d5ccfd32d362eadedd31df080dac6f70e6f8d87ec"
+    },
+    "DCSMCRAFT-Wool-Water-Fix-Verification.zip": {
+      "bytes": 380157,
+      "sha256": "3adc16bf283ecd3207daf8a4074e59e8af48dccf3640d538d2c3f68af7bea7bc"
+    },
+    "DCSMCRAFT-Wool-Water-Fix-Windows.zip": {
+      "bytes": 94798038,
+      "sha256": "c53813248d52324451b04e5a64e4456b0d9fbd437a8746d8b40f9b23a106032d"
+    },
+    "DCSMCRAFT-Wool-Water-Fix.html": {
+      "bytes": 133734259,
+      "sha256": "b3e30cea28f4988163e2538dbae1e0bd2d4619f3175c649d7db9d4aa2f8ed5d1"
+    }
+  }
+}
