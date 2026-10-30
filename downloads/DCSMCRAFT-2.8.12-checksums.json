@@ -1,0 +1,14 @@
+{
+  "DCSMCRAFT-Windows-2.8.12.zip": {
+    "bytes": 95759033,
+    "sha256": "1101511f1ff7c4370d03716c544eaa2a5b6c373e090181eeac16b1ef2002e622"
+  },
+  "DCSMCRAFT-Browser-2.8.12.zip": {
+    "bytes": 94990075,
+    "sha256": "6f4510361acd2a3675dabf4e3c1485b98bfee65d4984e30f23151bdcdc998699"
+  },
+  "dcsmcraft-source-v2.8.12.zip": {
+    "bytes": 95091224,
+    "sha256": "ba7573cd2df5e8bff6808786f983b15debb4410b7cebee12039f1e66aa2c1be5"
+  }
+}
