@@ -1,13 +1,13 @@
-# Wyvern music · 2.11.2
+# Wyvern music · 2.11.5
 
 The supplied **Titan WYVERN** recording loops in the arena entrance, tower, ribbon chase and transformation. Combat switches to **Break Through It All**:
 
 | Encounter | Source segment | Behavior |
 | --- | --- | --- |
-| Phase 1 | 1:00–1:43 (60–103 seconds) | Loop |
+| Phase 1 | 0:00–1:43 (0–103 seconds) | Loop |
 | Phase 2, starting with its transition | 1:44–4:09 (104–249 seconds) | Loop |
 
-Phase 2 seeks immediately when the encounter changes phase. Counters, QTEs and the final cinematic keep the active phase's music continuous. Victory fades it over three seconds. Death stops it; retry selects the checkpoint's phase. Returning releases both players and restores the overworld audio route. Music/master settings and pause remain arena-specific. An explicitly imported custom battle track still overrides the bundled battle recording.
+Phase 1 starts at 0:00 and every repeat returns to 0:00, including after retry. Existing saved playback positions remain resumable. Phase 2 seeks immediately when the encounter changes phase. Counters, QTEs and the final cinematic keep the active phase's music continuous. Victory fades it over three seconds. Death stops it; retry selects the checkpoint's phase. Returning releases both players and restores the overworld audio route. Music/master settings and pause remain arena-specific. An explicitly imported custom battle track still overrides the bundled battle recording.
 
 Web Audio buffer-source loop points own combat timing; rendering frame delays never seek/restart the song. Loop edges use a 2 ms PCM taper. Source timestamps remain unchanged. Saving/restoring retains track identity and playback position. The prelude uses a single streaming media element; only the battle recording is decoded into a PCM buffer, lazily after music is enabled.
 

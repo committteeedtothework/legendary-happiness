@@ -37,7 +37,7 @@ These establish the tower, digital chase, final Emerald, missile reflection, one
 
 The user-supplied **Wyvern** GLB credits **_____Xler_____**, CC BY 4.0, at https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f . Credits are retained in the GLB and `public/models/wyvern/NOTICE.txt`. Sonic/Wyvern and their designs remain Sega properties. The source upload contains 132,775 triangles, 403 joints and no animations. It was optimized with glTF-Transform 4.2.1 to approximately 67,205 triangles, 1K WebP textures and Meshopt geometry, then given eleven original skeletal clips with `scripts/author-wyvern-clips.py`. The shipped GLB embeds textures and animations and is under 4 MB. Three's bundled Meshopt decoder loads it offline.
 
-The user-supplied **Titan WYVERN** prelude and **Break Through It All** battle recording play offline. Phase 1 loops 1:00–1:43; Phase 2 loops 1:44–4:09. See [WYVERN-MUSIC.md](WYVERN-MUSIC.md). Custom local battle tracks remain supported.
+The user-supplied **Titan WYVERN** prelude and **Break Through It All** battle recording play offline. Phase 1 loops 0:00–1:43; Phase 2 loops 1:44–4:09. See [WYVERN-MUSIC.md](WYVERN-MUSIC.md). Custom local battle tracks remain supported.
 
 ## Fidelity limits
 
