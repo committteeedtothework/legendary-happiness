@@ -1,4 +1,4 @@
-DCSMCRAFT Mobile 2.10.0
+DCSMCRAFT Mobile 2.11.0
 
 
 
@@ -129,6 +129,11 @@ The user supplied Sonic Frontiers Power Boosting Sound Effect.mp3 (metadata titl
 The arena uses Barlow Condensed (600 and 800), by Jeremy Tribby, distributed under the SIL Open Font License 1.1. The unchanged license is included at public/fonts/frontiers/OFL.txt, and the font is embedded in the standalone CSS for offline play. Sources: https://fonts.google.com/specimen/Barlow+Condensed and https://github.com/google/fonts/tree/main/ofl/barlowcondensed. This is an open substitute for the reference game's typography. SEGA's manual screenshots informed layout only; none of their images, logos, fonts or interface artwork are shipped in this update.
 
 
+## User-supplied Wyvern model · 2.11.0
+
+Wyvern by **_____Xler_____**, supplied by the user, lists CC BY 4.0 in its GLB metadata: https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f . License: https://creativecommons.org/licenses/by/4.0/ . Sega retains character/design rights. Modifications include Meshopt simplification, 1K WebP textures, normalization, PBR tuning, suppression of embedded accessory effect meshes, and eleven original animation clips for its 403-joint skeleton. Attribution remains embedded and in public/models/wyvern/NOTICE.txt. This asset is outside the project MIT license. No official Wyvern animation or soundtrack was supplied; the new score, scenery, choreography and effects are original replacements. See WYVERN.md.
+
+
 TITAN-ASSETS.md
 # DCSMCRAFT 2.8.2 — Imported Sonic and Giganto rigs
 
@@ -179,6 +184,24 @@ Climbing remains the existing platform route, and damage uses the existing analy
 ## 2.8.4 motion revision
 
 The same source meshes, textures and skin budgets are retained, with refreshed original body keyframes, timing-aligned specials and less abrupt transitions. The live game adds two-bone arm targeting, head tracking, a visual strike lunge and optional Cyloop/finale presentation. Runtime posing/camera layers are not baked into reusable GLB clips. Named clip counts remain 22/24. No new Sonic finger/facial bones or official animation data are introduced. reference/titan-assets/animation-overhaul-2.8.4.json records the revised file hashes. TITAN-OVERHAUL.md gives current arena, balance, audio and UI changes.
+
+
+## Wyvern · 2.11.0
+
+The user-supplied Wyvern GLB is optimized at public/models/wyvern/wyvern.glb. Its 403-joint skin and embedded textures are retained. Eleven new clips are authored with scripts/author-wyvern-clips.py: flight, idle, missile_launch, claw_left, claw_right, bite, roar, stagger, tail_slam, dorsal_deploy and defeat. No animation data accompanied the original. scripts/embed-wyvern-model.mjs generates the standalone payload; the mobile builder uses the same GLB as a hashed offline asset. Full credits, research, build parameters and limitations are in WYVERN.md. Existing Sonic/Giganto assets are unchanged.
+
+
+public/models/wyvern/NOTICE.txt
+Wyvern model: "Wyvern" by _____Xler_____, supplied by the user.
+Source: https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f
+Author: https://sketchfab.com/_____Xler_____
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+Changes by DCSMCRAFT: optimized geometry, Meshopt compression, WebP textures
+limited to 1024 pixels; original local-bone flight, claw, jaw, reaction and
+cinematic animation clips. The supplied model contained no animation clips.
+Sonic Frontiers and character names belong to their respective rights holders.
+This fan encounter is not an official SEGA product or a claim of endorsement.
 
 
 public/audio/DEVIN-CLAIM-NOTICE.txt

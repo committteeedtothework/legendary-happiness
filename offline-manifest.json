@@ -1,17 +1,17 @@
 {
-  "version": "2.10.0",
-  "id": "83da53532703e219",
-  "cache": "dcsmcraft-mobile-83da53532703e219",
+  "version": "2.11.0",
+  "id": "47c8eb3e597c0031",
+  "cache": "dcsmcraft-mobile-47c8eb3e597c0031",
   "files": [
     {
       "url": "./NOTICES.txt",
-      "bytes": 36332,
-      "sha256": "0cfca585c0de9269d253abecb824873b47785333a5963fae66b22e55863b86ec"
+      "bytes": 38437,
+      "sha256": "c3828a6589c7a60826b887b9005b2417d247c0710ef4647623c94a11cd05b00c"
     },
     {
-      "url": "./app.eb6f3e0a1d94.js",
-      "bytes": 3446947,
-      "sha256": "eb6f3e0a1d9436467ccc6741bcb4b362a04ba3fc1db08da2665672cde655a7c4"
+      "url": "./app.bc958ad3a39f.js",
+      "bytes": 3524436,
+      "sha256": "bc958ad3a39fb04e81f26231e2d06f90604d52385ace7375026417dbce9c86cb"
     },
     {
       "url": "./assets/aria-math.48e53255c03f.mp3",
@@ -144,6 +144,11 @@
       "sha256": "1af7d0ab71b37ae6c00cf91d8d327361fd1dd7c2da63980ab1cb1d717ab15b4c"
     },
     {
+      "url": "./assets/wyvern.f12f269f3c76.glb",
+      "bytes": 3845068,
+      "sha256": "f12f269f3c7647b0e9797d80961024ebc708cab1f215f1438094a940036f5555"
+    },
+    {
       "url": "./icon-180.png",
       "bytes": 845,
       "sha256": "72f9ce3f4565ab32377b24c05fb8cb364d9e5738d2f8d38503161ab6721c1ace"
@@ -161,7 +166,7 @@
     {
       "url": "./index.html",
       "bytes": 992,
-      "sha256": "0b8474c4f78fe2931b88828be6f9769d08544acfd77dc2653fdf12ccfec9d898"
+      "sha256": "436e9fba388068ee9d7e9d9224417246d5a202a6c3cf6284c70cb5b6b2b8e531"
     },
     {
       "url": "./manifest.webmanifest",
@@ -169,9 +174,9 @@
       "sha256": "27b10d5e945cb9a980ce71074ca33f147c001e0139fc3b0f711512b629381644"
     },
     {
-      "url": "./style.1fa749d2afd9.css",
-      "bytes": 386117,
-      "sha256": "1fa749d2afd96d9340936386619f858dc7b77a80f7eeccd514eb8c3da7899ae2"
+      "url": "./style.abe96c8c8c8c.css",
+      "bytes": 386627,
+      "sha256": "abe96c8c8c8c03b66cfdb3691c1ae19b0bd8423e82540f4011c2c8078d02acdd"
     }
   ]
 }
