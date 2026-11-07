@@ -1,10 +1,10 @@
-# DCSMCRAFT Mobile · 2.11.2
+# DCSMCRAFT Mobile · 2.11.3
 
 The mobile edition runs the existing game with touch input, a smaller initial download, and an installable web app. World rules, arena balance and save format are unchanged. Desktop HTML and Windows builds remain available.
 
 ## iPhone and iPad
 
-Open the hosted mobile edition in Safari. Tap **Share → Add to Home Screen → Add**, then open DCSMCRAFT from its icon. Use **Mobile & Offline → Download for offline play** and keep the app open until **Offline ready** appears. The complete download is about 102 MB; installation initially caches only the roughly 4 MB game core. The two character models and audio load separately when needed.
+Open the hosted mobile edition in Safari. Tap **Share → Add to Home Screen → Add**, then open DCSMCRAFT from its icon. Use **Mobile & Offline → Download for offline play** and keep the app open until **Offline ready** appears. The complete download is about 112 MB; installation initially caches only the roughly 4 MB game core. The two character models and audio load separately when needed.
 
 Home Screen installation requires an HTTPS website; opening the mobile ZIP or an HTML attachment in Files does not install the app. Safari 16.4 or later with WebGL 2 is the target. Landscape is recommended, with portrait menus also supported. Android Chrome can use its Install app action.
 
@@ -12,12 +12,15 @@ iOS can remove website storage under storage pressure. Export world backups from
 
 ## Touch controls
 
-- Left stick: move. Drag the open view: look. Independent fingers allow moving, looking and holding another action together.
-- Mine: hold to mine/attack. Use: place/interact/eat. Jump, Crouch and Sprint use their named buttons. Tap any hotbar slot to select it.
-- Inventory: tap slots to move stacks. Select Split to place/take individual portions; Quick move transfers between available sections. Done closes the inventory. Crafting and recipe buttons work by tapping.
-- Actions: weapon ability, item drops, view, coordinates, journal, chat, flight in Creative, and configured Stand actions. These invoke the same game actions as keyboard/controller input.
-- Arena: Attack, Parry, Rise, Down, Dodge and Boost. Actions opens the move tray, including targeting, climbing, all current specials and held Draw loop. The Inventory button opens arena controls. Touching the screen restores touch control after controller use.
-- Pause: normal world or isolated arena settings. App switching, cancelled touches and pause release held input. Changing touch sensitivity and opacity is under Touch Controls.
+- Choose **Joystick & crosshair** or **D-pad & crosshair** in **Options → Touch Controls**. Move on the left and drag the view to look. Independent fingers can move, aim and hold another action together.
+- Push the joystick past its upper edge to sprint; moving it back stops automatic sprint. The Sprint button toggles manual sprint. Double-tap forward on the D-pad to sprint while holding it.
+- Hold Mine to mine/attack. Use places/interacts/eats. Drag either held button to adjust aim. Jump also swims/rises; double-tap Jump for Creative flight. Sneak toggles by default and can be changed to hold. Down and Dismount appear when relevant.
+- Tap a hotbar slot to select it; **⋯** beside the hotbar opens Inventory. Tap slots to move stacks, use Split for individual portions or Quick move for transfers. Done closes the inventory. Crafting and recipes work by tapping.
+- **Moves** opens custom controls without pausing. Matthew's Air Trick and the Devin Sword's Seeker also get a quick button when equipped. Weapon use/dash/pulse remains on Use; configured Stand abilities are in Moves. **More…** retains drops, view, coordinates, journal, Creative flight and the original action menu.
+- In the arena: Attack, Parry, Rise, Down, Dodge and Boost. Moves includes the existing Sonic specials, targeting, climbing and held Draw loop. **?** opens the arena controls guide. The top Chat and Pause buttons keep those actions directly accessible.
+- Touch Controls also offers button size, opacity, look sensitivity, toggle sneak, joystick sprint, floating joystick and a left-handed layout. Mobile layout preferences are stored separately from desktop settings. Rotation, app switching, cancelled touches and pause release held input.
+
+See [MOBILE-CONTROLS.md](MOBILE-CONTROLS.md) for references, tests and differences from Bedrock.
 
 Mobile defaults use near terrain, reduced particles, 30 FPS and disabled distant terrain/shadows/AO on first run. Existing preferences are preserved. Arena Auto quality follows the selected world graphics tier. Increase quality only if the device can sustain it; the imported Titan encounter remains demanding on phones.
 
