@@ -1,4 +1,4 @@
-# Wyvern · 2.11.1
+# Wyvern · 2.11.2
 
 A separate orange Titan portal leads to Wyvern. Giganto's portal, configuration, victories and cooldown remain independent. In Creative, Pause → World… → Giganto → **Find Wyvern portal** locates a clear nearby site. Natural portals use seeded 160-block cells, a 38% candidate chance, safe ground checks, and a 20-minute cooldown after returning. Encounters are single-player; portals do not activate in connected multiplayer worlds.
 
@@ -35,11 +35,11 @@ These establish the tower, digital chase, final Emerald, missile reflection, one
 
 The user-supplied **Wyvern** GLB credits **_____Xler_____**, CC BY 4.0, at https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f . Credits are retained in the GLB and `public/models/wyvern/NOTICE.txt`. Sonic/Wyvern and their designs remain Sega properties. The source upload contains 132,775 triangles, 403 joints and no animations. It was optimized with glTF-Transform 4.2.1 to approximately 67,205 triangles, 1K WebP textures and Meshopt geometry, then given eleven original skeletal clips with `scripts/author-wyvern-clips.py`. The shipped GLB embeds textures and animations and is under 4 MB. Three's bundled Meshopt decoder loads it offline.
 
-No **Break Through It All** recording was supplied. Wyvern uses an original adaptive synthesized score, independent of Giganto's recordings. A local MP3 can be selected in arena audio settings with editable phase cues. Existing user-supplied boost/Foley resources remain available. No new official recording, terrain, UI art or production animation was downloaded.
+The user-supplied **Titan WYVERN** prelude and **Break Through It All** battle recording play offline. Phase 1 loops 1:00–1:43; Phase 2 loops 1:44–4:09. See [WYVERN-MUSIC.md](WYVERN-MUSIC.md). Custom local battle tracks remain supported.
 
 ## Fidelity limits
 
-This is a playable fan interpretation, not a 1:1 recreation. The desert, tower, runway, ruins and effects are original procedural replacements. Shared Sonic techniques include game-specific additions. Wyvern's eleven new clips, flight and cinematic paths are locally authored; the supplied model has no official choreography. Analytic head, neck and claw hit regions approximate the animated surface. Flight uses a moving scenery reference frame around a stable boss, with free player movement; it is not a full open-world dragon navigation system. The jaw/explosion ending uses animated skinning, original effects and fades rather than destructive topology. No official voices or Wyvern soundtrack are bundled. Physical iOS, controller hardware and Windows execution require device checks beyond Linux Chromium validation.
+This is a playable fan interpretation, not a 1:1 recreation. The desert, tower, runway, ruins and effects are original procedural replacements. Shared Sonic techniques include game-specific additions. Wyvern's eleven new clips, flight and cinematic paths are locally authored; the supplied model has no official choreography. Analytic head, neck and claw hit regions approximate the animated surface. Flight uses a moving scenery reference frame around a stable boss, with free player movement; it is not a full open-world dragon navigation system. The jaw/explosion ending uses animated skinning, original effects and fades rather than destructive topology. No official voices are bundled; the two requested user-supplied soundtrack recordings are included. Physical iOS, controller hardware and Windows execution require device checks beyond Linux Chromium validation.
 
 ## Feature status
 

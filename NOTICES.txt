@@ -1,4 +1,4 @@
-DCSMCRAFT Mobile 2.11.1
+DCSMCRAFT Mobile 2.11.2
 
 
 
@@ -137,6 +137,10 @@ Wyvern by **_____Xler_____**, supplied by the user, lists CC BY 4.0 in its GLB m
 ## Wyvern video reference · 2.11.1
 
 The user supplied https://www.youtube.com/watch?v=dkzQALlpzPc&t=360s as a visual reference. Gemini native YouTube analysis informed original scene, camera, effects and choreography changes. No video/audio was downloaded or embedded; no new official soundtrack or animation assets were imported. The existing supplied model and audio credits still apply. Provenance, analysis conflicts and substitutions are documented in WYVERN-VIDEO.md and reference/wyvern-video-2.11.1.json.
+
+## Supplied Wyvern soundtrack · 2.11.2
+
+The user supplied Titan WYVERN and Break Through It All for Wyvern-only playback. Rights remain with Sega and the respective rights holders. These are outside the MIT license; no independent redistribution license accompanied the uploads. Playback copies are encoded at 96/128 kbps; uploaded-source and playback hashes appear in public/audio/wyvern/manifest.json. See WYVERN-MUSIC.md. Earlier notes about absent Wyvern music describe 2.11.0/2.11.1, before these uploads.
 
 
 TITAN-ASSETS.md
@@ -281,6 +285,10 @@ Sonic Frontiers soundtrack recording supplied by the user. Rights remain with Se
 The original MP3, cover and metadata are retained unchanged. It plays locally during portal intro, ring gathering, ascent and transformation, then the existing supplied Undefeatable recording takes over during aerial combat. No online service is contacted.
 Original bytes: 4093287
 SHA-256: eb2b0a275d6a0ece37d1f36a0cad5a2e4b4dc8667c4fe65def5f6fb6450c9f67
+
+
+public/audio/wyvern/NOTICE.txt
+User-supplied Sonic Frontiers recordings: Titan WYVERN and Break Through It All. Rights remain with Sega and the respective composers, performers and rights holders. These recordings are outside the project MIT license. No independent redistribution license accompanied the uploads. Playback copies use 96 kbps (prelude) and 128 kbps (battle) MP3 encoding to keep offline downloads compact; source and playback hashes are recorded in manifest.json. No online music service is contacted.
 
 
 public/audio/giganto/BOOST-NOTICE.txt

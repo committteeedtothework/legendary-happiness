@@ -1,17 +1,17 @@
 {
-  "version": "2.11.1",
-  "id": "26ddc9ca90926f91",
-  "cache": "dcsmcraft-mobile-26ddc9ca90926f91",
+  "version": "2.11.2",
+  "id": "0664bd63f12727ae",
+  "cache": "dcsmcraft-mobile-0664bd63f12727ae",
   "files": [
     {
       "url": "./NOTICES.txt",
-      "bytes": 38953,
-      "sha256": "8cf5582bdff15613be9050104c5f6c3e3c66604f2a6143050a3801a6ece52d4f"
+      "bytes": 39986,
+      "sha256": "850d9ee0ff99a3072c9bf8aca7572160957a991aeaae3b11a59427fba01723a1"
     },
     {
-      "url": "./app.c00f9ed98b49.js",
-      "bytes": 3533825,
-      "sha256": "c00f9ed98b493e570f7283bbe74f806dd37deb9f321202ed6ce189f71c353967"
+      "url": "./app.65837da0a50c.js",
+      "bytes": 3534503,
+      "sha256": "65837da0a50c500a57854e389f2243648ea23989f4c46c3429479a9a887be130"
     },
     {
       "url": "./assets/aria-math.48e53255c03f.mp3",
@@ -27,6 +27,11 @@
       "url": "./assets/blind-spots.a593f18c8bca.mp3",
       "bytes": 5389480,
       "sha256": "a593f18c8bca5e6d0c54d68bf953a3adc965ad6fd9297ffbe61cac3390eefd31"
+    },
+    {
+      "url": "./assets/break-through-it-all.7becd1543b6b.mp3",
+      "bytes": 3993643,
+      "sha256": "7becd1543b6ba78be4b75a5a9baa42c05898bba38172f36bbefbe32ffb9fe69f"
     },
     {
       "url": "./assets/clark.ef5d5828a3c7.mp3",
@@ -134,6 +139,11 @@
       "sha256": "eb2b0a275d6a0ece37d1f36a0cad5a2e4b4dc8667c4fe65def5f6fb6450c9f67"
     },
     {
+      "url": "./assets/titan-wyvern.b237dfc485bf.mp3",
+      "bytes": 2656383,
+      "sha256": "b237dfc485bfcf209119d74c61de0f603cf0445c623756be7ce55d16c3eba30a"
+    },
+    {
       "url": "./assets/undefeatable.aa97147596f1.mp3",
       "bytes": 4493052,
       "sha256": "aa97147596f13886f98c4d9b1e2a70b9d4e864daf2367d65902b1b4349cb7cb6"
@@ -166,7 +176,7 @@
     {
       "url": "./index.html",
       "bytes": 992,
-      "sha256": "e5138d40d595e8876958935c1a9bce7e5799e25d59dbb56bf56aa7d224434b30"
+      "sha256": "59d23ba4f29e73a97d0f7100587d944114c374fac43fd02a64ef9823735704db"
     },
     {
       "url": "./manifest.webmanifest",
