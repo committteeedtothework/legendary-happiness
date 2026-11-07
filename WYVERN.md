@@ -1,6 +1,8 @@
-# Wyvern · 2.11.0
+# Wyvern · 2.11.1
 
-A separate orange Titan portal leads to Wyvern. Giganto's portal, configuration, victories and cooldown remain independent. In Creative, Pause → Titan options → **Find Wyvern portal** locates a clear nearby site. Natural portals use seeded 160-block cells, a 38% candidate chance, safe ground checks, and a 20-minute cooldown after returning. Encounters are single-player; portals do not activate in connected multiplayer worlds.
+A separate orange Titan portal leads to Wyvern. Giganto's portal, configuration, victories and cooldown remain independent. In Creative, Pause → World… → Giganto → **Find Wyvern portal** locates a clear nearby site. Natural portals use seeded 160-block cells, a 38% candidate chance, safe ground checks, and a 20-minute cooldown after returning. Encounters are single-player; portals do not activate in connected multiplayer worlds.
+
+The 2.11.1 recording-based refinements, timing, save conversion and fidelity limits are documented in [WYVERN-VIDEO.md](WYVERN-VIDEO.md). The health and per-move tuning below remain unchanged.
 
 ## Route and controls
 

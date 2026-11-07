@@ -1,4 +1,4 @@
-# DCSMCRAFT Mobile · 2.11.0
+# DCSMCRAFT Mobile · 2.11.1
 
 The mobile edition runs the existing game with touch input, a smaller initial download, and an installable web app. World rules, arena balance and save format are unchanged. Desktop HTML and Windows builds remain available.
 
@@ -44,6 +44,6 @@ This is a web app, not an App Store IPA. Browser/iOS permissions and memory limi
 
 ## Published files and website activation
 
-The tested mobile site files are uploaded to the repository's `mobile-v2.11.0` branch. GitHub's integration returned HTTP 403 when enabling Pages; the site is not live yet. The repository owner can open **Settings → Pages**, choose **Deploy from a branch**, select **mobile-v2.11.0**, **/ (root)** and Save. After GitHub completes deployment, its Pages screen provides the HTTPS play link. The default/source branch is unchanged. This is required before iOS Home Screen installation can be used through GitHub Pages.
+The tested mobile site files are uploaded to the repository's `mobile-v2.11.1` branch. GitHub's integration returned HTTP 403 when enabling Pages; the site is not live yet. The repository owner can open **Settings → Pages**, choose **Deploy from a branch**, select **mobile-v2.11.1**, **/ (root)** and Save. After GitHub completes deployment, its Pages screen provides the HTTPS play link. The default/source branch is unchanged. This is required before iOS Home Screen installation can be used through GitHub Pages.
 
-The 2.11.0 mobile package includes Wyvern, its rig and textures as a hashed offline asset. Download the complete offline content before disconnecting; Titan models are loaded when entering their arenas.
+The 2.11.1 mobile package includes Wyvern, its rig and textures as a hashed offline asset. Download the complete offline content before disconnecting; Titan models are loaded when entering their arenas.

@@ -1,4 +1,4 @@
-DCSMCRAFT Mobile 2.11.0
+DCSMCRAFT Mobile 2.11.1
 
 
 
@@ -132,6 +132,11 @@ The arena uses Barlow Condensed (600 and 800), by Jeremy Tribby, distributed und
 ## User-supplied Wyvern model · 2.11.0
 
 Wyvern by **_____Xler_____**, supplied by the user, lists CC BY 4.0 in its GLB metadata: https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f . License: https://creativecommons.org/licenses/by/4.0/ . Sega retains character/design rights. Modifications include Meshopt simplification, 1K WebP textures, normalization, PBR tuning, suppression of embedded accessory effect meshes, and eleven original animation clips for its 403-joint skeleton. Attribution remains embedded and in public/models/wyvern/NOTICE.txt. This asset is outside the project MIT license. No official Wyvern animation or soundtrack was supplied; the new score, scenery, choreography and effects are original replacements. See WYVERN.md.
+
+
+## Wyvern video reference · 2.11.1
+
+The user supplied https://www.youtube.com/watch?v=dkzQALlpzPc&t=360s as a visual reference. Gemini native YouTube analysis informed original scene, camera, effects and choreography changes. No video/audio was downloaded or embedded; no new official soundtrack or animation assets were imported. The existing supplied model and audio credits still apply. Provenance, analysis conflicts and substitutions are documented in WYVERN-VIDEO.md and reference/wyvern-video-2.11.1.json.
 
 
 TITAN-ASSETS.md
