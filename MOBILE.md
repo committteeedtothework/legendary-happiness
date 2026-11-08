@@ -1,4 +1,4 @@
-# DCSMCRAFT Mobile · 2.11.6
+# DCSMCRAFT Mobile · 2.12.0
 
 The mobile edition runs the existing game with touch input, a smaller initial download, and an installable web app. World rules, arena balance and save format are unchanged. Desktop HTML and Windows builds remain available.
 

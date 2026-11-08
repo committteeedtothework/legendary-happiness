@@ -1,4 +1,4 @@
-# Wyvern · 2.11.6
+# Wyvern · 2.12.0
 
 A separate orange Titan portal leads to Wyvern. Giganto's portal, configuration, victories and cooldown remain independent. In Creative, Pause → World… → Giganto → **Find Wyvern portal** locates a clear nearby site. Natural portals use seeded 160-block cells, a 38% candidate chance, safe ground checks, and a 20-minute cooldown after returning. Encounters are single-player; portals do not activate in connected multiplayer worlds.
 
@@ -18,7 +18,7 @@ The 2.11.4 spine, clearance, shared ability and vertical Cyloop changes are docu
 
 ## Tuning and saves
 
-Default health is 62,500 / 100,000 / 137,500 for Easy / Normal / Hard, multiplied by the arena health setting. Shared per-move Sonic damage remains configurable through the existing combat settings. Damage openings last ten seconds; Quick Cyloop can extend an opening once, up to thirteen seconds. Missile/claw/energy-ring hits remove 20/30/16 rings before the existing boss-power multiplier. The fight transitions at 50%, 12% and 4% health. Normal starts with 80 rings; traversal and flight pickups can raise this to 400. Default drain is inherited from the arena configuration.
+Default health is 137,500 / 220,000 / 302,500 for Easy / Normal / Hard, multiplied by the arena health setting. Shared per-move Sonic damage remains configurable through the existing combat settings. Damage openings last ten seconds; Quick Cyloop can extend an opening once, up to thirteen seconds. Missile/claw/energy-ring hits remove 20/30/16 rings before the existing boss-power multiplier. The fight transitions at 50%, 12% and 4% health. Normal starts with 80 rings; traversal and flight pickups can raise this to 400. Default drain is inherited from the arena configuration.
 
 The separate `giganto.wyvern` save record retains the portal, used cells, reward ledger, cooldown and encounter checkpoint. `activeTitan: "wyvern"` identifies an interrupted Wyvern session; older saves need no migration. Saves preserve traversal progress, pickups, health, phase, energy, cooldowns and partial QTEs. Reload re-telegraphs an interrupted missile/claw sequence rather than resuming an invisible hit. Retry uses the last transformation/phase checkpoint. The existing transactional return-save and reward ledger prevent duplicate rewards.
 
@@ -61,3 +61,5 @@ This is a playable fan interpretation, not a 1:1 recreation. The desert, tower, 
 The implementation adds `src/wyvern-{integration,simulation,space,model,view,audio}.js` and `src/wyvern.css`. Conditional hooks in `src/giganto.js`, `src/giganto-simulation.js`, `src/titan-contact.js` and `src/titan-imports.js` reuse the existing encounter owner, Sonic combat and save transaction. Asset authoring/embedding, build scripts, attribution/reference records and Wyvern unit/browser tests accompany the change. No existing `public/` or `reference/` asset was changed.
 
 See WYVERN-PURSUIT.md for the 2.11.6 health, flight, timed parry and terrain changes.
+
+The current canyon pursuit, larger Titan, shared Super cooldown removal, jump and quill changes are documented in [TITAN-PURSUIT.md](TITAN-PURSUIT.md).
