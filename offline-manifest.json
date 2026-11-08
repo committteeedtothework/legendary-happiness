@@ -1,17 +1,17 @@
 {
-  "version": "2.14.0",
-  "id": "792a6f8453e6f481",
-  "cache": "dcsmcraft-mobile-792a6f8453e6f481",
+  "version": "2.15.0",
+  "id": "fe115971a3a5d535",
+  "cache": "dcsmcraft-mobile-fe115971a3a5d535",
   "files": [
     {
       "url": "./NOTICES.txt",
       "bytes": 39986,
-      "sha256": "daaaf461c14b0ba694a85f3e04a3c127711cd8b552efd2afffb0010c1989b839"
+      "sha256": "f1217b67b45e7c95fd9f95a51c1b11929830ff46e60e309c28dea61044b93300"
     },
     {
-      "url": "./app.71d7b8dfaf31.js",
-      "bytes": 3994209,
-      "sha256": "71d7b8dfaf312dcde566e9ca007ee8de3bf585d12cdf104f2c03e259db8ee128"
+      "url": "./app.8085c5c05d41.js",
+      "bytes": 4000745,
+      "sha256": "8085c5c05d4180911c929b54f9cbcac9c629649d77fd7c9d0f8f8ed402b2af9f"
     },
     {
       "url": "./assets/aria-math.48e53255c03f.mp3",
@@ -176,7 +176,7 @@
     {
       "url": "./index.html",
       "bytes": 992,
-      "sha256": "1111c87e75ff9910727d2b0444872b83681b9c595ab1846a079a8370bc26ed01"
+      "sha256": "ecc9a53ad68baeed7a0c7e35a50eb1fd89654205fbb54be52d22a89db740e621"
     },
     {
       "url": "./manifest.webmanifest",

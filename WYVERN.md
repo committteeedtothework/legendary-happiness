@@ -67,3 +67,6 @@ The current canyon pursuit, larger Titan, shared Super cooldown removal, jump an
 See TITAN-COUNTER.md for the 2.13.0 chase, missile blink, curled jump, shadows and slower arena sky. Earlier release notes describe historical tuning.
 
 See TITAN-FREEDOM.md for the 2.14.0 physical road, larger tower, base moves and canyon passages. Earlier notes describe historical mechanics.
+
+
+Current jump, platform collision and controller changes: [ARENA-FOOTING.md](ARENA-FOOTING.md).

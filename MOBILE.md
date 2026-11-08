@@ -1,4 +1,4 @@
-# DCSMCRAFT Mobile · 2.14.0
+# DCSMCRAFT Mobile · 2.15.0
 
 The mobile edition runs the existing game with touch input, a smaller initial download, and an installable web app. World rules, arena balance and save format are unchanged. Desktop HTML and Windows builds remain available.
 
@@ -50,3 +50,6 @@ This is a web app, not an App Store IPA. Browser/iOS permissions and memory limi
 The HTTPS play site is https://committteeedtothework.github.io/legendary-happiness/ . On iOS, open it in Safari and use Share → Add to Home Screen. Update the cached offline content to receive new builds. The existing deployment branch is mobile-v2.11.0; its name is retained to preserve the installed site URL.
 
 The 2.11.1 mobile package includes Wyvern, its rig and textures as a hashed offline asset. Download the complete offline content before disconnecting; Titan models are loaded when entering their arenas.
+
+
+Current jump, platform collision and controller changes: [ARENA-FOOTING.md](ARENA-FOOTING.md).
