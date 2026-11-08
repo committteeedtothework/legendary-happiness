@@ -65,3 +65,5 @@ See WYVERN-PURSUIT.md for the 2.11.6 health, flight, timed parry and terrain cha
 The current canyon pursuit, larger Titan, shared Super cooldown removal, jump and quill changes are documented in [TITAN-PURSUIT.md](TITAN-PURSUIT.md).
 
 See TITAN-COUNTER.md for the 2.13.0 chase, missile blink, curled jump, shadows and slower arena sky. Earlier release notes describe historical tuning.
+
+See TITAN-FREEDOM.md for the 2.14.0 physical road, larger tower, base moves and canyon passages. Earlier notes describe historical mechanics.
