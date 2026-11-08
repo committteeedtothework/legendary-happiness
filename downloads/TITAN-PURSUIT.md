@@ -1,0 +1,26 @@
+# Titan pursuit · 2.12.0
+
+Wyvern follows a closed, arc-length sampled canyon route through the desert. The land now has broad valleys, steep layered cliffs and mountain ridges around that route. Balanced and High quality blend original triplanar rock strata onto steep faces; the valley floor stays dry and sandy. Boss motion and player motion are separate: when Sonic stops during pursuit, his world position stays fixed and Wyvern gains distance. Boost and steering close the gap. Lock-on plus boost with no directional input guides Sonic toward the target in three dimensions; any directional input takes control immediately. Unlock with the existing target button for free flight. The boss waits beyond the distant pursuit limit rather than teleporting Sonic back to it. The arena's outer world border and terrain remain solid.
+
+Catching Wyvern brings its missiles into close range; it does not grant free damage. Reflect a missile, parry the claw (both claws in phase two), and use the opening. Incoming missiles follow Sonic; dodging commits them to the evaded trajectory. Missile origins, targets and reflected return paths use the same world/flight-frame conversion as Sonic, keeping them aligned during fast turns. Reflections produce a contact effect on Wyvern. Existing timed parries, the successful finger flick and short slow motion remain.
+
+Wyvern is now 1.65 times the previous uniform model size: approximately 462 arena metres along its largest dimension. The skeleton, body regions, contact padding, head deck, Emerald, Cyloop radius and cinematic targets use the same scale; Sonic keeps his size. Throws and finishing cinematics smoothly gain altitude so the enlarged body clears the canyon walls, then blend back into the fight. Health before the existing multiplier is 137,500 / 220,000 / 302,500 on Easy / Normal / Hard. Relative to 2.11.6, health is 2.2 times larger. The chase travels at 96 m/s in phase one and 108 m/s in phase two. Super Sonic's free flight is 62 m/s and boost is 175 m/s. Super flight boost uses rings through the existing encounter drain rather than consuming the attack-energy meter.
+
+Super Sonic has no move cooldown timers in either Titan fight, including dodge and restored timers. Each move still has its animation/contact sequence, energy cost where applicable, reach and recovery; Quick Cyloop retains its hit-filled charges. Boss attack openings, ring drain, defensive windows and per-contact damage checks remain. This prevents one input from duplicating hits while allowing another move immediately after recovery. Base Sonic's existing non-Super limits remain.
+
+Boost audio is predecoded on arena entry and synchronized again after the movement step. Playback starts at the supplied recording's audible attack (0.425 seconds) in the current audio frame, with an 8 ms gain ramp. The original MP3 and its loop region remain unchanged. Pause, release, retry and exit stop the same owned voice.
+
+Base Sonic has takeoff, tucked spinning ascent, falling and landing clips with faster, smooth pose blending. Jump height responds to release; a second press permits one air jump. Ground and air steering are more responsive. Jump state survives saves without granting another used air jump. The raised Super quills use one continuous head deformation instead of six separated row pivots; face vertices and bone scale remain unchanged, and the deformed shape has matching normals. Per-encounter geometry is released on exit.
+
+The existing portal, tower, ribbon, final Emerald, transformation, phase/QTE sequence, victory portal, rewards and original-world return remain. Existing saves preserve health fraction, route progress, jump state and music positions. Legacy arena saves acquire the new route without changing their original Overworld return state. Overworld generation, assets, combat, inventories and save schema are unchanged.
+
+References used:
+
+- https://www.gamepur.com/guides/how-to-defeat-the-wyvern-in-sonic-frontiers
+- https://www.destructoid.com/sonic-frontiers-how-to-beat-wyvern-boss-guide/
+- https://store.steampowered.com/app/1237320/Sonic_Frontiers/
+- The user's Wyvern recording: https://www.youtube.com/watch?v=dkzQALlpzPc&t=360s and its retained analysis in WYVERN-VIDEO.md.
+
+The written guides describe the original game's guided pursuit, boost catch-up, reflected missiles, phase-two double claw and finishing QTEs. This release deliberately gives the player a manual canyon chase and retains the requested timed parry; the original standard parry can be held. Character clips, terrain, camera staging and quill correction are original adaptations using the supplied models. Official motion capture and production terrain are not included; exact frame-for-frame animation, geography or complete mesh-level collision parity is not claimed. The previously documented video analysis is reused; there was no new independent frame-by-frame video verification.
+
+Quality settings continue to scale shadows, post-processing, particles and optional speed effects. Terrain height samples are cached, scenery and missiles remain instanced, and the route is evaluated independently of rendering. Physical controller hardware, iOS/Safari and native Windows launch require device testing; Chromium software WebGL is not a hardware performance benchmark.
