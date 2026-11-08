@@ -8,7 +8,7 @@ The 2.11.1 recording-based refinements, timing, save conversion and fidelity lim
 
 Climb the spiral tower, then **X** at its summit to jump to Wyvern's three-lane runway. Use **A/D** to change lanes, **Shift** to boost, and **X/Space** near the red bars to cross the three gaps. Collect rings and reach the final Chaos Emerald on Wyvern's head to transform.
 
-In combat, fly with **WASD**, **Space/Ctrl** vertically and **Shift** to boost. Tap **RMB** near contact to parry; **Q** dodges; **Tab** toggles targeting. Reflect a missile, parry the claw, then attack during the opening. Phase two adds two claw strikes and dorsal energy rings. Every fourth attack cycle substitutes a bite. Each press deflects one attack; release before the next strike. Strict Parry narrows the timing window.
+In combat, fly with **WASD**, **Space/Ctrl** vertically and **Shift** to boost. Tap **RMB** near contact to parry; **Q** dodges; **Tab** toggles targeting. Reflect a missile to blink in front and attack during the opening in either phase. Each press deflects one attack; release before the next parry. Phase two retains dorsal energy rings and the finishing QTE sequence. Strict Parry narrows the timing window.
 
 **LMB** basic combo, **X** homing attack, **E** Quick Cyloop (hit-earned charge), **R** Sonic Boom, **F** Wild Rush, **C** Cross Slash, **V** Homing Shot, **G** Spin Slash, **Z** Stomp, **B** Cyclone Kick. These reuse the existing Sonic attack system, energy, cooldowns and swept body contacts. **C** draws a freehand Cyloop before transformation. **H** opens the shared controls guide; **Esc** pauses. Controller mappings and mobile touch actions follow the existing input system.
 
@@ -18,7 +18,7 @@ The 2.11.4 spine, clearance, shared ability and vertical Cyloop changes are docu
 
 ## Tuning and saves
 
-Default health is 137,500 / 220,000 / 302,500 for Easy / Normal / Hard, multiplied by the arena health setting. Shared per-move Sonic damage remains configurable through the existing combat settings. Damage openings last ten seconds; Quick Cyloop can extend an opening once, up to thirteen seconds. Missile/claw/energy-ring hits remove 20/30/16 rings before the existing boss-power multiplier. The fight transitions at 50%, 12% and 4% health. Normal starts with 80 rings; traversal and flight pickups can raise this to 400. Default drain is inherited from the arena configuration.
+Default health is 137,500 / 220,000 / 302,500 for Easy / Normal / Hard, multiplied by the arena health setting. Shared per-move Sonic damage remains configurable through the existing combat settings. Missile damage openings last twelve seconds; Quick Cyloop can extend an opening once, up to thirteen seconds. Missile/claw/energy-ring hits remove 20/30/16 rings before the existing boss-power multiplier. The fight transitions at 50%, 12% and 4% health. Normal starts with 80 rings; traversal and flight pickups can raise this to 400. Default drain is inherited from the arena configuration.
 
 The separate `giganto.wyvern` save record retains the portal, used cells, reward ledger, cooldown and encounter checkpoint. `activeTitan: "wyvern"` identifies an interrupted Wyvern session; older saves need no migration. Saves preserve traversal progress, pickups, health, phase, energy, cooldowns and partial QTEs. Reload re-telegraphs an interrupted missile/claw sequence rather than resuming an invisible hit. Retry uses the last transformation/phase checkpoint. The existing transactional return-save and reward ledger prevent duplicate rewards.
 
@@ -63,3 +63,5 @@ The implementation adds `src/wyvern-{integration,simulation,space,model,view,aud
 See WYVERN-PURSUIT.md for the 2.11.6 health, flight, timed parry and terrain changes.
 
 The current canyon pursuit, larger Titan, shared Super cooldown removal, jump and quill changes are documented in [TITAN-PURSUIT.md](TITAN-PURSUIT.md).
+
+See TITAN-COUNTER.md for the 2.13.0 chase, missile blink, curled jump, shadows and slower arena sky. Earlier release notes describe historical tuning.
