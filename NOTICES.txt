@@ -1,4 +1,4 @@
-DCSMCRAFT Mobile 2.15.0
+DCSMCRAFT Mobile 2.16.0
 
 
 

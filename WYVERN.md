@@ -70,3 +70,6 @@ See TITAN-FREEDOM.md for the 2.14.0 physical road, larger tower, base moves and 
 
 
 Current jump, platform collision and controller changes: [ARENA-FOOTING.md](ARENA-FOOTING.md).
+
+
+Energy removal and physical post-parry Homing Attack: [ARENA-HOMING.md](ARENA-HOMING.md).

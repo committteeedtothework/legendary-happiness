@@ -1,4 +1,4 @@
-# DCSMCRAFT Mobile · 2.15.0
+# DCSMCRAFT Mobile · 2.16.0
 
 The mobile edition runs the existing game with touch input, a smaller initial download, and an installable web app. World rules, arena balance and save format are unchanged. Desktop HTML and Windows builds remain available.
 
@@ -53,3 +53,6 @@ The 2.11.1 mobile package includes Wyvern, its rig and textures as a hashed offl
 
 
 Current jump, platform collision and controller changes: [ARENA-FOOTING.md](ARENA-FOOTING.md).
+
+
+Energy removal and physical post-parry Homing Attack: [ARENA-HOMING.md](ARENA-HOMING.md).
