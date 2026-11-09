@@ -1,30 +1,31 @@
-# Windows build repair — package 0.1.1
+# Automatic Unity build repair — package 0.1.2
 
-This patch fixes the blank “Unity exited with code .” launcher error and both build blockers confirmed by the supplied Unity log. It does not change gameplay, content, assets, saves or the native port's unfinished status.
+The pasted log is from the earlier interactive Editor session (`BatchMode: 0`), still showing the invalid inputlegacy package and CS0266. It is not evidence of a new batch-build cause: either the log is stale or the complete repair did not reach the project. This package automatically installs and verifies all four required files.
 
-## Apply to your existing project
+## Existing project: automatic repair
 
-1. Close Unity Editor for this project and close any previous build windows.
-2. Extract **DCSMCRAFT-Unity-Build-Fix-v0.1.1.zip directly into your existing DCSMCRAFT-Unity folder** (the folder containing Assets, Packages and ProjectSettings). Replace all supplied files when prompted: Build-Windows.cmd, tools/Build-Windows.ps1, Packages/manifest.json and Assets/DCSMCRAFT/Editor/BuildCli.cs. Do not extract into Assets or create a second nested project folder.
-3. Double-click Build-Windows.cmd again and leave the window open. Asset restoration verifies the existing files and only downloads missing assets.
-4. A successful actual Unity build produces Builds/Windows/DCSMCRAFT-Unity.exe and its supporting files. This patch itself is not a game executable.
+1. Close Unity Editor and previous build windows.
+2. Extract **DCSMCRAFT-Unity-Automatic-Repair-v0.1.2.zip** anywhere, using Extract All first. Open the extracted DCSMCRAFT-Unity-Repair folder.
+3. Double-click **Apply-Fix.cmd**. It finds the original project under Downloads automatically when there is one matching project; otherwise select the existing DCSMCRAFT-Unity folder containing Assets, Packages and ProjectSettings.
+4. Wait for **Repair applied and verified**. It prints the actual project path and saves backups. Then double-click **Build-Windows.cmd in that project**, with Unity Editor closed.
 
-The full Project-v0.1.1.zip is also available for a fresh extraction. It uses the same Media/Models-Art v0.1.0 bundles; those files do not need updating.
+The installer verifies its full payload before changing anything, backs up the four original files under `.buildfix-backups`, copies the corrected files, checks every installed SHA-256 and writes `Verification/build-repair-v0.1.2.json`. It does not delete Library, source content, assets or saves. Payload corruption, invalid targets and unexpected paths are rejected. The separate full Project-v0.1.2.zip is also corrected for a fresh extraction; Media and Models-Art v0.1.0 remain unchanged.
 
-## Cause and fix
+## Corrections
 
-The actual Unity 6000.0.62f1 log identified two additional project errors. The manifest incorrectly requested com.unity.modules.inputlegacy@1.0.0, which is not an installable package; that entry has been removed (the engine already supplies its legacy input module). The build receipt declared errors as uint while BuildSummary.totalErrors returns int, causing CS0266; the receipt now uses int. Other resolved packages and gameplay code are unchanged.
+- Removes nonexistent `com.unity.modules.inputlegacy@1.0.0`; Unity already supplies its legacy input engine module.
+- Changes the Editor build receipt's error count from uint to int, matching Unity 6 `BuildSummary.totalErrors`, fixing CS0266.
+- Waits for the Unity process using Start-Process -Wait -PassThru and reads its ExitCode directly instead of relying on LASTEXITCODE for a Windows GUI executable.
+- Quotes project/log paths; requires fresh successful receipts and output; prints actual Unity diagnostics.
+- Rejects a partially repaired manifest or Editor script before starting Unity.
+- Writes the current failure's error matches and log tail to **BuildLogs/BuildFailure.txt**. If Unity still fails, attach that file, rather than the old interactive Editor log. Previous Unity.log/receipts are retained with `.previous` suffixes.
 
-The old launcher used PowerShell's LASTEXITCODE after directly starting Unity.exe. For a Windows GUI executable that variable can remain unset, so the launcher immediately raised a failure with no number before reliably waiting for the Editor.
+This is a build repair, not a completed game port or a precompiled executable. It cannot claim to fix an unseen new compiler/package/license error. A successful actual build must produce Builds/Windows/DCSMCRAFT-Unity.exe plus supporting files.
 
-The replacement explicitly starts Unity with Start-Process -Wait -PassThru and reads that process's ExitCode. Quoted project/log paths preserve spaces. Unity failures print their real numeric exit code and log details. Missing logs no longer cause a second Get-Content error. Previous log/receipt files are retained as .previous; a fresh successful receipt and output are required so an old EXE cannot mask a failed or incomplete run. The CMD wrapper preserves failure codes and keeps the result visible.
+## Verification
 
-If Unity reports an additional compiler, package, licensing or project-already-open error, BuildLogs/Unity.log contains the actual issue; share that log to diagnose it. This launcher repair does not claim to resolve an unseen Unity compiler/license error.
+- 12 launcher scenarios pass in actual PowerShell 7.4.13 on Linux against a delayed stand-in process: completion, EditorCheck, environment editor selection, numeric failure, no log, missing output, stale output, failed/malformed receipt, missing Editor, old manifest and old Editor script.
+- Six installer scenarios pass against isolated old-project fixtures: successful hash-verified repair with backup/gameplay/cache/save preservation, repeat repair, corrupt payload rejection, duplicate manifest rejection, traversal rejection and invalid project rejection.
+- Three prior build checks cover actual BuildCli compilation against a narrow API fixture with the documented int totalErrors signature, reproduction of CS0266 with the old unsigned field, and absence of the invalid package.
 
-## Validation
-
-10 regression scenarios passed using real PowerShell 7.4.13 on Linux and a delayed stand-in Editor process: Windows-target success, EditorCheck success, editor supplied through UNITY_EDITOR, nonzero exit with compiler-style log, failure without a log, exit zero without output, stale prior output/receipt, failed receipt, malformed receipt, and missing Editor. Paths include spaces, ampersands and Unicode. The stand-in is a test fixture, not Unity or a game executable.
-
-Three additional checks passed: the actual BuildCli source compiles against a narrow API fixture with int totalErrors, restoring the old uint field reproduces CS0266, and the invalid package is absent. The fixture uses the return type verified in Unity 6 documentation; it is not Unity Editor. See Tests/EditorCompile/results.json.
-
-Actual Windows GUI launch behavior, Windows PowerShell 5.1 execution and Unity compilation still need confirmation on the user's PC. The reported faulty LASTEXITCODE code path has been removed. Tests/Launcher/results.json records the test scope.
+These are build-tool tests, not actual Unity Editor/Windows runtime tests. Automatic Downloads discovery, the Windows folder dialog, Windows file locking and a real Unity build still require confirmation on the user's PC. Installer source is in tools/repair; the distributable repair ZIP adds its generated payload and hash manifest.

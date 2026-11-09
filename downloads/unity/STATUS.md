@@ -1,8 +1,8 @@
 # DCSMCRAFT Unity native migration
 
-**Build repair package 0.1.1** fixes the blank Windows exit-code error, removes the invalid inputlegacy dependency, and fixes the Editor build receipt CS0266 error. Native gameplay remains the unfinished 0.1.0 foundation. Existing browser/Windows/mobile builds and saves are unchanged.
+**Automatic build repair package 0.1.2** automatically applies and SHA-verifies all four required project files, keeps backups, catches partially applied repairs, and saves current failure diagnostics. Includes the previous package/type/launcher corrections. Native gameplay remains the unfinished 0.1.0 foundation. Existing browser/Windows/mobile builds and saves are unchanged.
 
-[Small patch for an existing Unity project](DCSMCRAFT-Unity-Build-Fix-v0.1.1.zip?raw=true) · [Updated full source project](DCSMCRAFT-Unity-Project-v0.1.1.zip?raw=true) · [Apply the repair](LAUNCHER-FIX.md)
+[Small patch for an existing Unity project](DCSMCRAFT-Unity-Automatic-Repair-v0.1.2.zip?raw=true) · [Updated full source project](DCSMCRAFT-Unity-Project-v0.1.2.zip?raw=true) · [Apply the repair](LAUNCHER-FIX.md)
 
 The Media/Models-Art v0.1.0 archives are unchanged and restored automatically. Close Unity before running the Windows build script.
 
@@ -105,3 +105,7 @@ The complete browser builds remain available independently; this foundation is n
 10 launcher regression scenarios passed with actual PowerShell 7.4.13 on Linux and a delayed stand-in process. These test process completion, exit/error reporting, argument quoting, output receipts and stale-output rejection. They do not run Unity, Windows GUI behavior or Windows PowerShell 5.1. See Tests/Launcher/results.json and LAUNCHER-FIX.md. The supplied real Unity log additionally identified a missing inputlegacy package and CS0266 in the Editor build receipt; both are corrected. Only Editor build C# changed, not native gameplay C#.
 
 Three build-regression checks additionally compile the actual Editor script against a narrow API fixture with int BuildSummary.totalErrors, reproduce CS0266 when the old uint field is restored, and confirm the nonexistent package entry is absent. This is not a real Unity Editor compilation; see Tests/EditorCompile/results.json.
+
+## Automatic repair package 0.1.2
+
+12 process-control launcher scenarios and six isolated repair-installer scenarios pass in real PowerShell 7.4.13 on Linux. The installer verifies all four payload files, backs up old files, verifies installed hashes, preserves unrelated gameplay/cache/save data, and rejects corruption/duplicates/traversal/invalid project targets before mutation. The launcher catches a partially applied repair and saves current failure details to BuildLogs/BuildFailure.txt. Windows UI/locking/autodiscovery and actual Unity compilation remain unverified. See Tests/Launcher/results.json, Tests/Repair/results.json and LAUNCHER-FIX.md.
