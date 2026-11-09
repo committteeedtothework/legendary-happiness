@@ -1,12 +1,10 @@
-# DCSMCRAFT Unity — separate native migration
+# DCSMCRAFT Unity native migration
 
-The original playable builds remain unchanged. **This is an unfinished source project, not a tested Windows executable or a completed gameplay port.**
+**Build repair package 0.1.1** fixes the blank Windows exit-code error, removes the invalid inputlegacy dependency, and fixes the Editor build receipt CS0266 error. Native gameplay remains the unfinished 0.1.0 foundation. Existing browser/Windows/mobile builds and saves are unchanged.
 
-- [DCSMCRAFT-Unity-Media-v0.1.0.zip](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/22720628de2e8b349d99075a94b959f9cf72765d/downloads/unity/DCSMCRAFT-Unity-Media-v0.1.0.zip)
-- [DCSMCRAFT-Unity-Models-Art-v0.1.0.zip](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/22720628de2e8b349d99075a94b959f9cf72765d/downloads/unity/DCSMCRAFT-Unity-Models-Art-v0.1.0.zip)
-- [DCSMCRAFT-Unity-Project-v0.1.0.zip](https://raw.githubusercontent.com/committteeedtothework/legendary-happiness/22720628de2e8b349d99075a94b959f9cf72765d/downloads/unity/DCSMCRAFT-Unity-Project-v0.1.0.zip)
+[Small patch for an existing Unity project](DCSMCRAFT-Unity-Build-Fix-v0.1.1.zip?raw=true) · [Updated full source project](DCSMCRAFT-Unity-Project-v0.1.1.zip?raw=true) · [Apply the repair](LAUNCHER-FIX.md)
 
-Download Project, install/activate Unity 6000.0.62f1 with Windows Build Support, then run Build-Windows.cmd. Assets can be restored from local Media/Models-Art ZIPs or the script’s verified HTTPS downloads.
+The Media/Models-Art v0.1.0 archives are unchanged and restored automatically. Close Unity before running the Windows build script.
 
 
 ---
@@ -101,3 +99,9 @@ No Unity Editor compilation, Package Manager resolution, PlayMode session, shade
 On an actual Unity PC, first run EditorCheck/build. Then test new/load/save recovery; gather wood→craft→mine→smelt→build→death/respawn; boundary lighting and rapid edits; all quality/texture settings; all skin/weapon/mob imports; keyboard/controller focus; and repeated Titan enter/transform/phase/defeat/retry/victory/return with audio pause/exit. Compare native features against FEATURE-STATUS.md. Finish missing systems before calling this a full port.
 
 The complete browser builds remain available independently; this foundation is not a replacement stable release.
+
+## Launcher repair validation (package 0.1.1)
+
+10 launcher regression scenarios passed with actual PowerShell 7.4.13 on Linux and a delayed stand-in process. These test process completion, exit/error reporting, argument quoting, output receipts and stale-output rejection. They do not run Unity, Windows GUI behavior or Windows PowerShell 5.1. See Tests/Launcher/results.json and LAUNCHER-FIX.md. The supplied real Unity log additionally identified a missing inputlegacy package and CS0266 in the Editor build receipt; both are corrected. Only Editor build C# changed, not native gameplay C#.
+
+Three build-regression checks additionally compile the actual Editor script against a narrow API fixture with int BuildSummary.totalErrors, reproduce CS0266 when the old uint field is restored, and confirm the nonexistent package entry is absent. This is not a real Unity Editor compilation; see Tests/EditorCompile/results.json.
