@@ -1,0 +1,21 @@
+{
+  "version": "2.17.0",
+  "kind": "previous Windows HTML/browser launcher, current game",
+  "buildCommand": "npm run build:desktop:legacy",
+  "requires": "installed Microsoft Edge or Google Chrome",
+  "offlineSingleplayer": true,
+  "originalProfile": "%LOCALAPPDATA%\\DCSMCRAFT\\DesktopProfile",
+  "standaloneHTML_SHA256": "b388075a5f0292ba3b3b1030ea0f8f962db55f8b0b6c787d4ddbf976168c4e7c",
+  "companionExtractionMatches": true,
+  "windowsPEEmbeddedPayloadMatches": true,
+  "windowsPEPayloadOffset": 163408,
+  "windowsEXE_SHA256": "228b6ce11126afc200c4c947b511ac991d50f87f5b3e53ed6207b0b077f4079e",
+  "zipVerified": true,
+  "nativeWindowsExecutionTested": false,
+  "gameCodeChanged": false,
+  "zip": {
+    "name": "DCSMCRAFT-Windows-HTML-2.17.0.zip",
+    "bytes": 104415278,
+    "sha256": "7e9cb04c28b681ad3bf7a65eac2c0c7bc906ef616cfe8fabbcab347a38b3e4cc"
+  }
+}

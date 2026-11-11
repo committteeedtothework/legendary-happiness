@@ -14,5 +14,13 @@
   "DCSMCRAFT-Verification-2.17.0.zip": {
     "bytes": 2238218,
     "sha256": "c896951ab16716ab67ccdd08544d3edf363ee67f1b12c24a92cf204888666892"
+  },
+  "DCSMCRAFT-Windows-HTML-2.17.0.zip": {
+    "bytes": 104415278,
+    "sha256": "7e9cb04c28b681ad3bf7a65eac2c0c7bc906ef616cfe8fabbcab347a38b3e4cc"
+  },
+  "DCSMCRAFT-Windows-HTML-2.17.0-verification.json": {
+    "bytes": 863,
+    "sha256": "ebc197a2119f196bee7a78bfbf1cc03ce478088fa53514a81ef7f91e7eb423d1"
   }
 }

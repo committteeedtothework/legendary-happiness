@@ -1,3 +1,11 @@
+## Choose your Windows edition
+
+- [Bundled runtime app](https://github.com/committteeedtothework/legendary-happiness/raw/refs/heads/downloads-v2.17.0/DCSMCRAFT-2.17.0-Portable.exe): contains Electron/Chromium and runs independently of an installed browser.
+- [Previous Windows HTML launcher](https://github.com/committteeedtothework/legendary-happiness/raw/refs/heads/downloads-v2.17.0/DCSMCRAFT-Windows-HTML-2.17.0.zip): extract the ZIP and run DCSMCRAFT.exe; requires installed Microsoft Edge or Chrome. Uses the original DesktopProfile save location.
+- [Standalone browser HTML](https://github.com/committteeedtothework/legendary-happiness/raw/refs/heads/downloads-v2.17.0/DCSMCRAFT-Browser-2.17.0.zip): extract and open DCSMCRAFT.html in a desktop browser.
+
+All three contain the same 2.17.0 game updates and work offline in singleplayer. Profiles are separate; use world backup export/import when switching. The Windows HTML launcher's embedded payload matches the tested browser build byte for byte. Both Windows executables are unsigned; native Windows launch is unverified on this Linux host. [Launcher verification](https://github.com/committteeedtothework/legendary-happiness/raw/refs/heads/downloads-v2.17.0/DCSMCRAFT-Windows-HTML-2.17.0-verification.json).
+
 DCSMCRAFT 2.17.0
 
 The Windows download is a self-contained portable app. Run DCSMCRAFT-2.17.0-Portable.exe; no separate browser, HTML file, Node.js, local server or Unity is required. The existing game still uses HTML/JavaScript internally. Singleplayer works offline; multiplayer needs its relay.
