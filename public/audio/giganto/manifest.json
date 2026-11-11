@@ -1,0 +1,12 @@
+{
+  "version": "2.8.3",
+  "originalName": "Undefeatable.mp3",
+  "file": "undefeatable.mp3",
+  "bytes": 4493052,
+  "sha256": "aa97147596f13886f98c4d9b1e2a70b9d4e864daf2367d65902b1b4349cb7cb6",
+  "probeDurationSeconds": 264.96,
+  "cueModule": "src/giganto-score-timeline.js",
+  "timingAnalysis": "local vocal landmarks and 200 BPM onset analysis; original MP3 retained",
+  "source": "user upload",
+  "reference": "Sonic Frontiers (2022) Giganto, custom adaptive edit; not official game markers"
+}

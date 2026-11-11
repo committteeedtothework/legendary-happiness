@@ -1,0 +1,33 @@
+{
+  "version": "2.8.15",
+  "referenceGame": "Sonic Frontiers (2022), original Kronos/Giganto encounter",
+  "guide": {
+    "url": "https://sirusgaming.com/sonic-frontiers-giganto-boss-guide/",
+    "title": "How to beat Giganto in Sonic Frontiers: Boss Fight Guide",
+    "author": "Dave Acu\u00f1a",
+    "published": "2022-11-10",
+    "accessed": "2026-10-30",
+    "verified": [
+      "ring preparation before ascent",
+      "final Emerald on Giganto",
+      "Super Sonic aerial combat",
+      "half-health dorsal-emitter phase",
+      "cinematic beam/grab counters",
+      "finisher at zero HP"
+    ]
+  },
+  "linkedFootage": {
+    "url": "https://www.youtube.com/watch?v=M2XRHLJMGVQ",
+    "uploader": "YTSunny",
+    "access": "HTTP proxy tunnel returned 403; footage was not reviewed",
+    "verifiedCinematicTimestamps": false
+  },
+  "music": {
+    "source": "existing user-supplied Titan: GIGANTO and Undefeatable MP3 files",
+    "newCommercialAudioDownloaded": false,
+    "officialStemsAvailable": false,
+    "officialEventMarkersAvailable": false,
+    "defaultCues": "Retained custom adaptive edit; source-local landmarks and 200 BPM grid from the existing analysis. Not official markers."
+  },
+  "scope": "Giganto music/cinematic timing only; overworld assets and audio retained"
+}

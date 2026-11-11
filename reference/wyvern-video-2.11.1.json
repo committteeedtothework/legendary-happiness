@@ -1,0 +1,42 @@
+{
+  "version": "2.11.1",
+  "sourceURL": "https://www.youtube.com/watch?v=dkzQALlpzPc&t=360s",
+  "canonicalURL": "https://www.youtube.com/watch?v=dkzQALlpzPc",
+  "focusSeconds": 360,
+  "method": "analyze-youtube, Gemini native video, question mode, store=false",
+  "model": "gemini-3.7-flash",
+  "successfulPasses": 2,
+  "independentFrameVerification": false,
+  "metadataVerified": false,
+  "directPlayback": "CONNECT proxy HTTP 403",
+  "analysisSHA256": "790c52ee88048f5838c952c5defed4fc9889ff7ab918c90cdf1492310fa7f651",
+  "verificationSHA256": "78ca88b5332b848e65e02bc4abe9cc1c08e25d4b015fff5616138cb81016d9f5",
+  "agreed": [
+    "coastal desert at night",
+    "long red chase ribbon",
+    "seven Emerald transformation",
+    "aerial pursuit",
+    "claw counters and throws",
+    "dorsal energy rings",
+    "night to daylight",
+    "red shrinking timing ring and white target",
+    "missile and jaw ending"
+  ],
+  "disputed": [
+    "exact claw count",
+    "uninterrupted ring drain",
+    "initial laser-beam claim rejected by verification"
+  ],
+  "retainedMechanics": [
+    "one/two claw pattern from prior written guides",
+    "existing configurable health and move damage",
+    "existing rewards and world return"
+  ],
+  "substitutions": [
+    "original procedural coastline and sea",
+    "authored local flight frame and camera curves",
+    "original animation timing and tail bending",
+    "original adaptive score; official Wyvern music not supplied"
+  ],
+  "notes": "WYVERN-VIDEO.md"
+}

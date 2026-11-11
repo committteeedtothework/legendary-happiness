@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "status": "2.8.2 imported GLBs integrated; custom animation/mesh-contact differences in TITAN-ASSETS.md",
+  "engine": "Three.js 0.180.0",
+  "container": "glTF 2.0 binary GLB; all buffers and images embedded",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "origin": "between feet at ground level"
+  },
+  "textures": {
+    "minimum": 1024,
+    "maximum": 2048,
+    "formats": [
+      "image/png",
+      "image/jpeg",
+      "image/webp"
+    ],
+    "exceptions": [
+      "One supplied uniform 32x32 Giganto eye/utility image intentionally retained"
+    ]
+  },
+  "animation": {
+    "locomotion": "in place; simulation owns world position",
+    "scale": "retain current game scale through a parent normalization node",
+    "transitions": "AnimationMixer crossfades; one-shot attacks synchronized to existing simulation clocks"
+  },
+  "commonClips": [
+    "idle",
+    "move",
+    "attack_windup",
+    "attack",
+    "recovery",
+    "damage",
+    "defeat"
+  ],
+  "sonic": {
+    "file": "public/models/titan/sonic.glb",
+    "targetTriangles": [
+      10000,
+      30000
+    ],
+    "additionalClips": [
+      "run",
+      "boost",
+      "jump",
+      "fall",
+      "fly",
+      "parry",
+      "transform",
+      "counter",
+      "sonic_boom",
+      "wild_rush",
+      "quick_cyloop"
+    ],
+    "attachments": [
+      "socket_aura",
+      "socket_hand_left",
+      "socket_hand_right",
+      "socket_foot_left",
+      "socket_foot_right"
+    ],
+    "requirements": [
+      "continuous deforming limbs and smooth skin weights",
+      "separate selectable blue and golden material variants",
+      "articulated quills for raised Super form",
+      "red shoes, glove cuffs and readable face",
+      "named clips contain real keyed animation"
+    ]
+  },
+  "giganto": {
+    "file": "public/models/titan/giganto.glb",
+    "targetTriangles": [
+      30000,
+      60000
+    ],
+    "additionalClips": [
+      "arm_swing_windup",
+      "arm_swing",
+      "arm_swing_recovery",
+      "arm_slap_windup",
+      "arm_slap",
+      "arm_slap_recovery",
+      "grab_windup",
+      "grab",
+      "grab_recovery",
+      "jaw_open",
+      "jaw_close",
+      "dorsal_extend",
+      "dorsal_pulse",
+      "beam_charge",
+      "beam_fire",
+      "phase_transition",
+      "stagger"
+    ],
+    "attachments": [
+      "socket_mouth",
+      "socket_hand_left",
+      "socket_hand_right",
+      "socket_dorsal_01",
+      "socket_dorsal_02",
+      "socket_dorsal_03",
+      "socket_dorsal_04",
+      "socket_dorsal_05",
+      "socket_dorsal_06",
+      "socket_dorsal_07",
+      "socket_dorsal_08",
+      "socket_dorsal_09",
+      "socket_dorsal_10"
+    ],
+    "requirements": [
+      "reference-guided dark broad mantle and narrow waist",
+      "long tapered arms and articulated claws",
+      "independently animated jaw",
+      "independently animated dorsal emitters",
+      "User-supplied Sketchfab asset with creator/license attribution; no separate model extraction performed"
+    ]
+  },
+  "integrationChecks": [
+    "actual GLTFLoader parse with embedded textures and no external requests",
+    "finite skinned bounds through every clip",
+    "no missing bone targets",
+    "no root-motion displacement of the gameplay avatar",
+    "mouth and dorsal VFX follow animated sockets",
+    "portal entry and return retain original player and world state",
+    "phase transitions, defeat, retry, save/reload and exactly-once rewards unchanged",
+    "standalone embeds exact validated GLB bytes",
+    "native-resolution visual review",
+    "measured frame time, draw calls and geometry memory in browser"
+  ],
+  "delivery": [
+    "two separate reusable GLB files",
+    "complete source assets and animation names/durations",
+    "provenance and actual generation costs if Tripo is used",
+    "updated standalone HTML and Windows payload after integration",
+    "honest list of custom/approximate/missing animation features"
+  ],
+  "verification": "VALIDATION.md; all clips and complete portal-to-return browser flow"
+}

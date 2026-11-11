@@ -1,0 +1,17 @@
+{
+  "version": "2.11.4",
+  "video": "https://www.youtube.com/watch?v=ao6-F7-WP8k",
+  "analysis": "Gemini native YouTube, store=false; only normal Sonic training is shown",
+  "evidence": {
+    "quickCyloop": "01:27\u201301:28",
+    "phantomRush": "01:29\u201301:45",
+    "sonicBoom": "01:46\u201301:49",
+    "wildRush": "02:09\u201302:12",
+    "cyclone": "02:13\u201302:18",
+    "spinSlash": "02:19\u201302:27",
+    "crossSlash": "02:28\u201302:33",
+    "homingShot": "02:40\u201302:45"
+  },
+  "assets": "Existing supplied GLBs and recordings unchanged; new original runtime code only",
+  "notes": "TITAN-COMBAT.md"
+}

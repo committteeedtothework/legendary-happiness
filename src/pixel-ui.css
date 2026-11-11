@@ -1,0 +1,1470 @@
+/* Shared pixel controls and inventory chrome. Kept separate from legacy themes. */
+/* Reserve space for the tilted splash, including its largest pulse and wrapping.
+   Legacy title offsets must not push it under buttons or beyond narrow screens. */
+#overlay .block-title {
+  flex: 1 0 auto;
+}
+#overlay .block-title .hero {
+  width: min(640px, 100%);
+  flex-shrink: 0;
+}
+#overlay .block-title .hero h1 {
+  margin: 0;
+}
+#overlay .title-splash-space {
+  min-height: 184px;
+  display: grid;
+  align-items: center;
+  justify-items: end;
+  padding-inline: clamp(12px, 2.5vw, 32px);
+}
+#overlay .title-splash {
+  position: static;
+  margin: 0;
+  max-width: min(70%, 320px);
+  font-size: clamp(11px, 1.65vw, 16px);
+  line-height: 1.7;
+  text-align: center;
+  overflow-wrap: anywhere;
+  transform: rotate(-20deg);
+  animation: title-splash-pulse 1s ease-in-out infinite;
+}
+@keyframes title-splash-pulse {
+  0%,
+  50%,
+  100% {
+    transform: rotate(-20deg) scale(1);
+  }
+  25%,
+  75% {
+    transform: rotate(-20deg) scale(0.94);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #overlay .title-splash {
+    animation: none;
+  }
+}
+#ui {
+  --stone-top: #b8b8b8;
+  --stone-bottom: #393939;
+  --slot-dark: #373737;
+  font-family: DCSMPixel, monospace;
+}
+#overlay :is(button, input, select, label, h2, h3, p, small, output),
+#tooltip,
+#toast,
+#titan-boss {
+  font-family: DCSMPixel, monospace;
+  letter-spacing: 0;
+}
+#overlay
+  :is(
+    .primary,
+    .secondary,
+    .text-button,
+    .import-button,
+    .tabs button,
+    .close
+  ) {
+  border: 2px solid #111;
+  border-radius: 0;
+  color: #f4f4f4;
+  text-shadow: 2px 2px #353535;
+  background: repeating-linear-gradient(0deg, #777 0 2px, #737373 2px 4px);
+  box-shadow:
+    inset 2px 2px var(--stone-top),
+    inset -2px -2px var(--stone-bottom);
+  transition: none;
+}
+#overlay
+  :is(
+    .primary,
+    .secondary,
+    .text-button,
+    .import-button,
+    .tabs button,
+    .close
+  ):hover:not(:disabled),
+#overlay
+  :is(
+    .primary,
+    .secondary,
+    .text-button,
+    .import-button,
+    .tabs button,
+    .close
+  ):focus-visible {
+  background: #7f829a;
+  color: #fff8bd;
+  outline: 2px solid #f3f3ff;
+  outline-offset: -4px;
+  box-shadow:
+    inset 2px 2px #bfc1d4,
+    inset -2px -2px #414355;
+}
+#overlay
+  :is(
+    .primary,
+    .secondary,
+    .text-button,
+    .import-button,
+    .tabs button,
+    .close
+  ):active:not(:disabled) {
+  box-shadow:
+    inset 2px 2px #353541,
+    inset -2px -2px #a6a6bc;
+}
+#overlay button:disabled {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+#overlay .dialog .close {
+  background-color: #737373;
+  color: #fff;
+}
+/* Options and pause use the world/dirt backdrop, with no desktop-style card. */
+#overlay :is(.pause-dialog, .settings-dialog, .video-dialog, .skin-dialog) {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #fff;
+}
+#overlay
+  :is(.pause-dialog, .settings-dialog, .video-dialog, .skin-dialog)
+  :is(h2, h3, p, label, .muted, .fine, .settings-note, .pause-foot),
+#overlay :is(.settings-dialog, .video-dialog) .range-label :is(span, output) {
+  color: #e8e8e8;
+  text-shadow: 2px 2px #242424;
+}
+#overlay :is(.pause-dialog, .settings-dialog, .video-dialog, .skin-dialog) h2 {
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+#overlay .video-group {
+  border: 0;
+  border-top: 2px solid #ffffff30;
+  background: #17171738;
+  box-shadow: none;
+  padding: 14px 12px;
+}
+#overlay .video-group h3 {
+  color: #fff4bc;
+  font-size: 13px;
+}
+#overlay .video-group > p {
+  font-size: 10px;
+  min-height: 44px;
+}
+#overlay .video-fields button {
+  border-left: 2px solid #111;
+}
+#overlay .video-fields button[aria-pressed="true"] {
+  color: #e4ffcf;
+}
+#overlay .video-fields button[aria-pressed="false"] {
+  color: #ddd;
+}
+#overlay .video-dialog .title-button-grid {
+  background: #29231fed;
+  padding: 10px 0 0;
+}
+/* Real native inputs retain keyboard/assistive behavior under pixel styling. */
+#overlay input[type="range"],
+#jukebox-dock input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 26px;
+  min-height: 26px;
+  padding: 0;
+  border: 2px solid #111;
+  border-radius: 0;
+  background: #202020;
+  box-shadow:
+    inset 2px 2px #080808,
+    inset -2px -2px #555;
+  cursor: pointer;
+}
+#overlay input[type="range"]::-webkit-slider-thumb,
+#jukebox-dock input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 24px;
+  background: #999;
+  border: 2px solid #111;
+  border-radius: 0;
+  box-shadow:
+    inset 2px 2px #ddd,
+    inset -2px -2px #555;
+}
+#overlay input[type="range"]::-moz-range-thumb,
+#jukebox-dock input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 20px;
+  background: #999;
+  border: 2px solid #111;
+  border-radius: 0;
+  box-shadow:
+    inset 2px 2px #ddd,
+    inset -2px -2px #555;
+}
+#overlay input:is([type="checkbox"], [type="radio"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  padding: 0;
+  margin: 0 7px 0 0;
+  vertical-align: middle;
+  border: 2px solid #202020;
+  border-radius: 0;
+  background: #727272;
+  box-shadow:
+    inset 2px 2px #424242,
+    inset -2px -2px #ddd;
+}
+#overlay input:is([type="checkbox"], [type="radio"]):checked::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #d6f1b5;
+  clip-path: polygon(0 40%, 30% 65%, 85% 0, 100% 20%, 35% 100%, 0 65%);
+}
+#overlay .dialog select {
+  appearance: none;
+  padding-right: 32px;
+  background:
+    linear-gradient(45deg, transparent 50%, #eee 50%) calc(100% - 17px) 50% /
+      6px 6px no-repeat,
+    linear-gradient(135deg, #eee 50%, transparent 50%) calc(100% - 11px) 50% /
+      6px 6px no-repeat,
+    #333;
+  cursor: pointer;
+  font-size: 11px;
+}
+#overlay
+  :is(
+    .recipe-book input,
+    .inventory-main input,
+    .dialog input:not([type="range"]):not([type="checkbox"]):not([type="radio"])
+  ) {
+  border: 2px solid #777;
+  border-radius: 0;
+  color: #fff;
+  background: #171717;
+  box-shadow: inset 2px 2px #080808;
+  font:
+    11px/1.6 DCSMPixel,
+    monospace;
+}
+#overlay input::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+#overlay
+  :is(.recipe-list, .creative-catalog, .skin-dialog, .pause-dialog, .dialog) {
+  scrollbar-color: #8b8b8b #303030;
+  scrollbar-width: thin;
+}
+/* Workbench slots and recipe pages use the same stone bevel at every scale. */
+#overlay .inventory-window {
+  border: 3px solid #141414;
+}
+#overlay .inventory-window :is(h2, h3) {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0;
+}
+#overlay .inventory-main {
+  padding: 20px;
+}
+#overlay .inventory-title {
+  margin-bottom: 16px;
+}
+#overlay .inventory-divider {
+  border-color: #888;
+  color: #333;
+}
+#overlay .inventory-divider small,
+#overlay .inventory-foot,
+#overlay .grid-caption,
+#overlay .equipment-panel small,
+#overlay .craft-tip {
+  color: #444;
+  text-shadow: none;
+}
+#overlay .recipe-book {
+  padding: 20px 14px 0;
+  background: #b6b6b6;
+}
+#overlay .recipe-book h3 {
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+#overlay .recipe-list {
+  padding: 0 4px 12px;
+  margin: 12px -4px 0;
+}
+#overlay .recipe-card {
+  padding: 6px;
+  margin: 0 0 5px;
+  min-height: 48px;
+  gap: 8px;
+}
+#overlay .recipe-card img {
+  background: #8b8b8b;
+  padding: 3px;
+  width: 36px;
+  height: 36px;
+  box-shadow:
+    inset 2px 2px #373737,
+    inset -2px -2px #ddd;
+}
+#overlay .recipe-card > span {
+  color: #fff;
+  text-shadow: 1px 1px #333;
+  font-size: 10px;
+  line-height: 1.5;
+}
+#overlay .recipe-card small {
+  color: #eee;
+  font-size: 8px;
+  line-height: 1.5;
+}
+#overlay .recipe-card:hover {
+  background: #83879e;
+}
+#overlay .tabs {
+  gap: 4px;
+}
+#overlay .tabs button {
+  padding: 8px 10px;
+  font-size: 10px;
+}
+#overlay .tabs button.active {
+  background: #c6c6c6;
+  color: #333;
+  text-shadow: none;
+  box-shadow: inset 2px 2px #fff;
+}
+#overlay .slot img,
+.hotbar-slot img {
+  image-rendering: pixelated;
+  filter: none;
+}
+#overlay .craft-arrow,
+#overlay .smelt-arrow > span {
+  display: inline-block;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 24px;
+  font-size: 0;
+  background: #858585;
+  clip-path: polygon(0 30%, 60% 30%, 60% 0, 100% 50%, 60% 100%, 60% 70%, 0 70%);
+}
+#overlay #furnace-flame {
+  font-size: 0;
+  margin: 8px auto;
+  width: 24px;
+  height: 30px;
+  background: #807b72;
+  clip-path: polygon(
+    35% 0,
+    70% 25%,
+    70% 45%,
+    90% 35%,
+    100% 75%,
+    80% 100%,
+    15% 100%,
+    0 70%,
+    20% 40%,
+    20% 65%,
+    40% 45%
+  );
+}
+#overlay #furnace-flame.burning {
+  background: linear-gradient(
+    0deg,
+    #ffd671 0 35%,
+    #ed893e 35% 70%,
+    #b84930 70%
+  );
+}
+#tooltip {
+  border: 2px solid #241148;
+  outline: 2px solid #100714;
+  border-radius: 0;
+  background: #160c20f5;
+  color: #fff;
+  box-shadow: none;
+  text-shadow: 2px 2px #302736;
+  padding: 9px 11px;
+  font-size: 12px;
+}
+#toast {
+  border-radius: 0;
+  box-shadow:
+    inset 2px 2px #ffffff35,
+    inset -2px -2px #0007;
+}
+#titan-boss i {
+  background: repeating-linear-gradient(90deg, #bc3159 0 8px, #97304a 8px 10px);
+  box-shadow: inset 0 2px #ed7e98;
+}
+@media (max-width: 760px) {
+  #overlay .video-group > p {
+    min-height: 0;
+  }
+  #overlay .inventory-main {
+    padding: 12px;
+  }
+  #overlay .recipe-book {
+    padding: 12px 8px 0;
+  }
+}
+
+#overlay .options-sliders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+}
+#overlay .settings-dialog:not(.video-dialog) {
+  width: min(800px, 96vw);
+}
+#overlay .options-sliders .range-label {
+  min-width: 0;
+  margin: 18px 0 4px;
+}
+#overlay .video-fields button[aria-pressed="true"],
+#overlay .video-fields button[aria-pressed="false"] {
+  border-left: 2px solid #111;
+}
+@media (max-width: 650px) {
+  #overlay .options-sliders {
+    grid-template-columns: 1fr;
+  }
+}
+
+#overlay .create-dialog .radio-card :is(b, small),
+#overlay .create-dialog label > small {
+  color: #3b3b3b;
+  text-shadow: none;
+}
+#overlay .create-dialog .radio-card > span:last-child {
+  display: none;
+}
+#overlay .settings-dialog .cycle-settings legend {
+  color: #eee;
+  text-shadow: 2px 2px #242424;
+}
+#overlay .smelt-arrow small {
+  color: #444;
+  text-shadow: none;
+  font-size: 8px;
+}
+/* The brewing rack has three bottles, one ingredient and one fuel slot. */
+#overlay .brewing-layout > .slot-grid {
+  grid-template-columns: repeat(5, minmax(44px, 52px));
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+  margin: 16px 0;
+}
+#overlay .brewing-layout .slot {
+  width: 100%;
+  height: 52px;
+}
+#overlay .brewing-layout > p {
+  color: #373737;
+  text-shadow: none;
+}
+
+/* Creative inventory: original pixel chrome, icon tabs and a five-row catalog. */
+#overlay .creative-window {
+  --creative-cell: min(52px, calc((100vw - 64px) / 9));
+  width: calc(var(--creative-cell) * 9 + 40px);
+  position: relative;
+  margin: max(65px, calc((100vh - (var(--creative-cell) * 6 + 112px)) / 2)) auto
+    65px;
+  color: #333;
+  flex-shrink: 0;
+}
+#overlay .creative-body {
+  position: relative;
+  padding: 12px;
+  border: 3px solid #171717;
+  background: #c6c6c6;
+  box-shadow:
+    inset 3px 3px #fff,
+    inset -3px -3px #555;
+}
+#overlay .creative-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 26px;
+  margin: 0 0 4px;
+}
+#overlay .creative-heading h2 {
+  font-size: 15px;
+  font-weight: normal;
+  color: #383838;
+  text-shadow: none;
+  margin: 0;
+  line-height: 1.3;
+}
+#overlay .creative-heading .close {
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  flex: 0 0 22px;
+  font-size: 15px;
+  line-height: 16px;
+  padding: 0;
+}
+#overlay .creative-window #creative-search {
+  display: block;
+  width: 100%;
+  height: 28px;
+  min-height: 0;
+  padding: 3px 6px;
+  margin: 0 0 8px;
+  border: 2px solid #777;
+  border-radius: 0;
+  background: #e4e4e4;
+  box-shadow: inset 2px 2px #aaa;
+  color: #292929;
+  font:
+    13px/18px DCSMPixel,
+    monospace;
+  outline-offset: 1px;
+}
+#overlay .creative-window #creative-search::placeholder {
+  color: #686868;
+}
+#overlay .creative-window .creative-catalog {
+  position: relative;
+  display: block;
+  height: calc(var(--creative-cell) * 5);
+  max-height: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  background: #888;
+  scrollbar-gutter: stable;
+  scrollbar-width: auto;
+  scrollbar-color: #c6c6c6 #858585;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+#overlay .creative-catalog::-webkit-scrollbar {
+  width: 16px;
+}
+#overlay .creative-catalog::-webkit-scrollbar-track {
+  background: #858585;
+  box-shadow:
+    inset 2px 2px #555,
+    inset -2px -2px #eee;
+}
+#overlay .creative-catalog::-webkit-scrollbar-thumb {
+  min-height: 30px;
+  background: #c6c6c6;
+  border: 2px solid #555;
+  box-shadow:
+    inset 2px 2px #eee,
+    inset -2px -2px #888;
+}
+#overlay .creative-scroll-space {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+#overlay .creative-visible-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-auto-rows: var(--creative-row-height, 52px);
+  gap: 0;
+}
+#overlay .creative-window .slot {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 3px;
+  border: 0;
+  border-radius: 0;
+  background: #8b8b8b;
+  box-shadow:
+    inset 2px 2px #373737,
+    inset -2px -2px #fff;
+}
+#overlay .creative-window .slot:hover:not(.creative-empty-slot) {
+  background: #bbb;
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+#overlay .creative-window .slot:focus-visible {
+  outline: 2px solid #fff5ad;
+  outline-offset: -3px;
+}
+#overlay .creative-window .slot img {
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+#overlay .creative-window .slot b {
+  font-size: 13px;
+  bottom: 3px;
+  right: 3px;
+}
+#overlay .creative-empty-slot {
+  display: block;
+  pointer-events: none;
+}
+#overlay .creative-catalog-status {
+  height: 21px;
+  padding-top: 4px;
+  color: #505050;
+  font:
+    10px/15px DCSMPixel,
+    monospace;
+  text-shadow: none;
+}
+#overlay .creative-hotbar {
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-auto-rows: var(--creative-cell);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid #777;
+}
+#overlay .creative-tabs {
+  position: absolute;
+  display: flex;
+  gap: 3px;
+  left: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+}
+#overlay .creative-tabs-top {
+  bottom: calc(100% - 3px);
+  align-items: flex-end;
+}
+#overlay .creative-tabs-bottom {
+  top: calc(100% - 3px);
+  align-items: flex-start;
+}
+#overlay .creative-tab {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: calc(var(--creative-cell, 46px) + 4px);
+  height: calc(var(--creative-cell, 46px) + 8px);
+  min-height: 0;
+  padding: 6px;
+  border: 3px solid #171717;
+  border-radius: 0;
+  color: #333;
+  background: #a9a9a9;
+  box-shadow:
+    inset 3px 3px #eee,
+    inset -3px -3px #555;
+  cursor: pointer;
+  transition: none;
+}
+#overlay .creative-tab img {
+  width: 32px;
+  height: 32px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+#overlay .creative-tab:hover {
+  background: #bfbfbf;
+}
+#overlay .creative-tab:focus-visible {
+  outline: 2px solid #fff2a6;
+  outline-offset: -6px;
+}
+#overlay .creative-tab.active {
+  background: #c6c6c6;
+  z-index: 3;
+}
+#overlay .creative-tabs-top .creative-tab.active {
+  height: calc(var(--creative-cell, 46px) + 12px);
+  border-bottom-color: #c6c6c6;
+  box-shadow:
+    inset 3px 3px #fff,
+    inset -3px 0 #555;
+}
+#overlay .creative-tabs-bottom .creative-tab.active {
+  height: calc(var(--creative-cell, 46px) + 12px);
+  border-top-color: #c6c6c6;
+  box-shadow:
+    inset 3px 0 #fff,
+    inset -3px -3px #555;
+}
+#overlay .creative-tab .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+#overlay .creative-stand-content {
+  max-height: 330px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+  padding: 4px;
+}
+#overlay .creative-player-screen {
+  --creative-cell: min(46px, calc((100vw - 64px) / 9));
+  position: relative;
+  margin: 65px 0;
+  overflow: visible;
+}
+@media (max-height: 650px) and (min-width: 600px) {
+  #overlay .creative-window {
+    --creative-cell: 40px;
+    margin: 52px 0;
+  }
+  #overlay .creative-player-screen {
+    --creative-cell: 36px;
+    margin: 48px 0;
+  }
+}
+
+#overlay:has(.creative-window) {
+  background: #0006;
+}
+#overlay .creative-catalog-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18px;
+  gap: 5px;
+  align-items: start;
+}
+#overlay .creative-window .creative-catalog {
+  scrollbar-width: none;
+  scrollbar-gutter: auto;
+}
+#overlay .creative-catalog::-webkit-scrollbar {
+  display: none;
+}
+#overlay #creative-scrollbar {
+  appearance: none;
+  writing-mode: vertical-lr;
+  direction: ltr;
+  width: 18px;
+  min-width: 18px;
+  padding: 0;
+  margin: 0;
+  background: #888;
+  border: 2px solid #555;
+  border-radius: 0;
+  box-shadow:
+    inset 2px 2px #666,
+    inset -2px -2px #eee;
+  cursor: pointer;
+}
+#overlay #creative-scrollbar::-webkit-slider-runnable-track {
+  width: 14px;
+  height: 100%;
+  background: transparent;
+}
+#overlay #creative-scrollbar::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 32px;
+  border: 2px solid #333;
+  border-radius: 0;
+  background:
+    linear-gradient(#eee 0 2px, transparent 2px),
+    repeating-linear-gradient(0deg, #b8b8b8 0 4px, #ddd 4px 5px);
+  box-shadow:
+    inset 2px 0 #eee,
+    inset -2px -2px #777;
+}
+#overlay #creative-scrollbar::-moz-range-thumb {
+  width: 12px;
+  height: 28px;
+  border: 2px solid #333;
+  border-radius: 0;
+  background: #c6c6c6;
+  box-shadow:
+    inset 2px 2px #eee,
+    inset -2px -2px #777;
+}
+#overlay #creative-scrollbar:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+@media (max-height: 650px) and (min-width: 600px) {
+  #overlay .creative-window {
+    margin: max(52px, calc((100vh - 352px) / 2)) auto 52px;
+  }
+}
+/* Keep the player/crafting tab inside the same visible tab frame. */
+#overlay .creative-player-screen {
+  --player-cell: min(44px, calc((100vw - 68px) / 9));
+  margin: 65px auto;
+}
+#overlay .creative-player-screen .inventory-main {
+  padding: 16px;
+}
+#overlay .creative-player-screen .inventory-title h2 {
+  margin-bottom: 12px;
+}
+#overlay .creative-player-screen .equipment-panel {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+#overlay .creative-player-screen .crafting-layout {
+  min-height: 106px;
+  margin: 0 0 12px 6px;
+  gap: 16px;
+}
+#overlay .creative-player-screen .slot {
+  height: var(--player-cell);
+}
+#overlay .creative-player-screen .slot img {
+  width: min(32px, 80%);
+  height: min(32px, 80%);
+}
+#overlay .creative-player-screen .craft-grid {
+  grid-template-columns: repeat(var(--cols), var(--player-cell));
+}
+#overlay .creative-player-screen .craft-grid .slot {
+  width: var(--player-cell);
+}
+#overlay .creative-player-screen .equipment-slots .slot {
+  height: 36px;
+  width: 36px;
+}
+#overlay .creative-player-screen .inventory-divider {
+  padding-top: 10px;
+  margin-bottom: 8px;
+}
+#overlay .creative-player-screen .inventory-hotbar {
+  margin-top: 9px;
+}
+#overlay .creative-player-screen .inventory-foot {
+  margin-top: 10px;
+}
+@media (max-height: 650px) and (min-width: 600px) {
+  #overlay .creative-player-screen {
+    --player-cell: 36px;
+    margin: 48px auto;
+  }
+  #overlay .creative-player-screen .recipe-list {
+    height: 300px;
+  }
+}
+
+/* Performance presets use the same pixel buttons as all existing menus. */
+.graphics-presets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 4px;
+}
+
+/* Outfit Chest: one shared-rig 3D stage and a compact, keyboard-friendly list. */
+#overlay .skin-dialog.wardrobe {
+  width: min(880px, 96vw);
+  max-width: 880px;
+  padding: 22px;
+  color: #f4f1e8;
+  background-color: #36332e;
+  border: 3px solid #171714;
+  box-shadow:
+    inset 2px 2px #77736a,
+    inset -2px -2px #211f1c,
+    0 12px 0 #0005;
+}
+#overlay .wardrobe h2 {
+  margin: 0;
+  text-align: center;
+  color: #fff2ce;
+}
+#overlay .wardrobe-intro {
+  margin: 6px 0 18px;
+  color: #cec7b9;
+}
+.wardrobe-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(280px, 1.1fr);
+  gap: 20px;
+}
+.wardrobe-display {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.wardrobe-stage {
+  position: relative;
+  height: 390px;
+  overflow: hidden;
+  border: 3px solid #171714;
+  box-shadow: inset 2px 2px #0005;
+  background: linear-gradient(#303d43, #596c67 70%, #343b33 70%);
+}
+.wardrobe-stage::before {
+  content: "";
+  position: absolute;
+  inset: 70% 0 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 23px, #b9ccad12 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, #b9ccad12 23px 24px);
+  pointer-events: none;
+}
+.wardrobe-stage canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  cursor: grab;
+  touch-action: none;
+}
+.wardrobe-stage canvas:active {
+  cursor: grabbing;
+}
+.wardrobe-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #e5e8d7;
+  font-size: 10px;
+  pointer-events: none;
+  z-index: 1;
+  text-shadow: 2px 2px #222;
+}
+.wardrobe-turn {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 10px;
+  color: #d2ccbe;
+}
+#overlay .wardrobe-turn button {
+  flex: 0 0 48px;
+  min-width: 0;
+  width: 48px;
+  min-height: 34px;
+  padding: 4px;
+  font-size: 20px;
+}
+.wardrobe-picker {
+  min-width: 0;
+}
+.wardrobe-cycle {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  min-height: 54px;
+}
+#overlay .wardrobe-cycle button {
+  padding: 5px;
+  min-height: 36px;
+}
+.wardrobe-cycle h3 {
+  margin: 0 0 6px;
+  font:
+    14px/1.5 DCSMPixel,
+    monospace;
+  color: #fff0b5;
+}
+#skin-number {
+  font-size: 9px;
+  color: #c3d6ac;
+  line-height: 1.5;
+}
+#skin-story {
+  min-height: 44px;
+  font-size: 10px;
+  line-height: 1.6;
+  margin: 10px 0;
+  color: #e5ddcb;
+}
+.wardrobe-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+#overlay .wardrobe-choice {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 7px 8px;
+  min-height: 43px;
+  text-align: left;
+  font:
+    10px/1.5 DCSMPixel,
+    monospace;
+}
+.outfit-swatch {
+  flex-shrink: 0;
+  width: 13px;
+  height: 18px;
+  background: var(--outfit);
+  border: 2px solid #1c1a18;
+  box-shadow: inset 0 -4px var(--trim);
+}
+.outfit-check {
+  margin-left: auto;
+  color: #e4cf82;
+  visibility: hidden;
+}
+#overlay .wardrobe-choice[aria-pressed="true"] {
+  border-color: #ded0a0;
+  background: #4e6243;
+  color: #fff4c5;
+  box-shadow:
+    inset 2px 2px #91a477,
+    inset -2px -2px #2e3c28;
+}
+.wardrobe-choice[aria-pressed="true"] .outfit-check {
+  visibility: visible;
+}
+#overlay .wardrobe-note {
+  font-size: 9px;
+  line-height: 1.7;
+  color: #cfc8ba;
+  margin: 14px 0;
+}
+.preview-error {
+  position: absolute;
+  inset: 30% 10%;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.8;
+}
+@media (max-width: 620px) {
+  #overlay .skin-dialog.wardrobe {
+    padding: 14px;
+  }
+  .wardrobe-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .wardrobe-stage {
+    height: 270px;
+  }
+  #skin-story {
+    min-height: 0;
+  }
+}
+@media (max-height: 650px) and (min-width: 621px) {
+  .wardrobe-stage {
+    height: 320px;
+  }
+  #overlay .skin-dialog.wardrobe {
+    padding: 14px;
+  }
+}
+
+/* Player inventory: compact stone frame, armor, a live mannequin and the book. */
+#overlay .inventory-window.compact-inventory {
+  --inv-cell: clamp(28px, calc((100vw - 48px) / 9), 40px);
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  margin: max(24px, calc((100vh - 390px) / 2)) auto 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+  box-shadow: none;
+}
+#overlay .compact-inventory .inventory-main {
+  position: relative;
+  flex: none;
+  box-sizing: content-box;
+  width: calc(var(--inv-cell) * 9);
+  padding: 12px;
+  border: 3px solid #151515;
+  border-radius: 0;
+  background: #c6c6c6;
+  box-shadow:
+    inset 3px 3px #fff,
+    inset -3px -3px #555;
+}
+#overlay .compact-inventory .dialog-top {
+  position: absolute;
+  inset: 4px 5px auto auto;
+  z-index: 2;
+  margin: 0;
+}
+#overlay .compact-inventory .dialog-top .eyebrow,
+#overlay .compact-inventory .inventory-foot,
+#overlay .compact-inventory .inventory-divider small {
+  display: none;
+}
+#overlay .compact-inventory .close {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0;
+  line-height: 14px;
+  font-size: 14px;
+  border: 0;
+  color: #555;
+  background: transparent;
+  box-shadow: none;
+}
+#overlay .compact-inventory .slot-grid {
+  gap: 0;
+  width: auto;
+}
+#overlay .compact-inventory .nine {
+  display: grid;
+  grid-template-columns: repeat(9, var(--inv-cell));
+  width: calc(var(--inv-cell) * 9);
+}
+#overlay .compact-inventory .slot {
+  box-sizing: border-box;
+  width: var(--inv-cell);
+  height: var(--inv-cell);
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: #8b8b8b;
+  box-shadow:
+    inset 2px 2px #373737,
+    inset -2px -2px #fff;
+  padding: 2px;
+}
+#overlay .compact-inventory .slot:hover {
+  background: #aaa;
+  outline: none;
+}
+#overlay .compact-inventory .slot img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+#overlay .compact-inventory .slot b {
+  right: 3px;
+  bottom: 1px;
+  font-size: 12px;
+}
+#overlay .compact-inventory .equipment-placeholder {
+  width: 80%;
+  height: 80%;
+  opacity: 0.9;
+}
+#overlay .player-inventory-top {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--inv-cell) calc(var(--inv-cell) * 2.4) 1fr;
+  gap: 4px;
+  height: calc(var(--inv-cell) * 4);
+  margin-bottom: 10px;
+}
+#overlay .armor-column {
+  display: grid;
+  grid-template-rows: repeat(4, var(--inv-cell));
+}
+#overlay .inventory-model {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #080808;
+  box-shadow:
+    inset 2px 2px #373737,
+    inset -2px -2px #fff;
+}
+#overlay .inventory-model canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#overlay .offhand-pocket {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--inv-cell) * 3.6);
+}
+#overlay .personal-crafting {
+  margin-left: calc(var(--inv-cell) * 0.55);
+  padding-top: 2px;
+}
+#overlay .compact-inventory h2 {
+  margin: 0 0 6px;
+  color: #3e3e3e;
+  text-shadow: none;
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+#overlay .personal-craft-row,
+#overlay .table-craft-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#overlay .compact-inventory .craft-grid {
+  grid-template-columns: repeat(var(--cols), var(--inv-cell));
+  margin: 0;
+}
+#overlay .compact-inventory .craft-arrow {
+  width: 24px;
+  flex: 0 0 24px;
+  color: #8b8b8b;
+  text-shadow: 1px 1px #eee;
+  padding: 0;
+  font-size: 25px;
+}
+#overlay .compact-inventory .output-slot {
+  width: calc(var(--inv-cell) * 1.15);
+  height: calc(var(--inv-cell) * 1.15);
+}
+#overlay .recipe-book-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 30px;
+  min-height: 0;
+  padding: 2px 4px;
+  margin: 8px 0 0;
+  border: 2px solid #373737;
+  border-radius: 0;
+  background: #c6c6c6;
+  box-shadow:
+    inset 2px 2px #fff,
+    inset -2px -2px #777;
+}
+#overlay .recipe-book-toggle svg {
+  width: 27px;
+  height: 22px;
+}
+#overlay .recipe-book-toggle:hover {
+  background: #dedede;
+}
+#overlay .recipe-book-toggle[aria-expanded="true"] {
+  background: #a5b493;
+}
+#overlay .table-crafting-top {
+  position: relative;
+  padding: 0 0 10px;
+  min-height: calc(var(--inv-cell) * 3.8);
+}
+#overlay .table-craft-row {
+  justify-content: center;
+  gap: 18px;
+}
+#overlay .table-crafting-top .recipe-book-toggle {
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+}
+#overlay .compact-inventory .inventory-divider {
+  border: 0;
+  padding: 0;
+  margin: 0 0 4px;
+  min-height: 0;
+  font-size: 10px;
+  color: #444;
+}
+#overlay .compact-inventory .inventory-hotbar {
+  margin-top: 9px;
+}
+#overlay .inventory-window > .recipe-book[hidden] {
+  display: none !important;
+}
+#overlay .inventory-window > .recipe-book {
+  position: relative;
+  box-sizing: border-box;
+  flex: 0 0 258px;
+  width: 258px;
+  min-height: 344px;
+  max-height: min(540px, calc(100vh - 70px));
+  padding: 12px;
+  border: 3px solid #151515;
+  border-radius: 0;
+  background: #b6b6b6;
+  box-shadow:
+    inset 3px 3px #ddd,
+    inset -3px -3px #555;
+}
+#overlay .recipe-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#overlay .inventory-window .recipe-heading h3 {
+  font-size: 13px;
+  color: #333;
+  margin: 0 0 10px;
+}
+#overlay .inventory-window .recipe-book input[type="text"],
+#overlay .inventory-window #recipe-search {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px;
+  font-size: 11px;
+}
+#overlay .craftable-filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+  font-size: 10px;
+  color: #333;
+}
+#overlay .craftable-filter input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #557e39;
+}
+#overlay .inventory-window .recipe-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-content: start;
+  gap: 4px;
+  height: auto;
+  min-height: 210px;
+  max-height: 310px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 2px 0 0;
+}
+#overlay .inventory-window .recipe-card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 39px;
+  padding: 2px;
+  margin: 0;
+  aspect-ratio: 1;
+  border: 1px solid #555;
+  background: #8b8b8b;
+  box-shadow:
+    inset 1px 1px #eee,
+    inset -1px -1px #555;
+}
+#overlay .inventory-window .recipe-card.ready {
+  background: #879d71;
+  border-color: #486431;
+}
+#overlay .inventory-window .recipe-card.missing {
+  background: #a08b86;
+}
+#overlay .inventory-window .recipe-card:hover {
+  background: #c0c6b6;
+  outline: 1px solid #fff;
+}
+#overlay .inventory-window .recipe-card img {
+  padding: 0;
+  width: 31px;
+  height: 31px;
+  background: none;
+  box-shadow: none;
+}
+#overlay .recipe-card b {
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+  color: #fff;
+  font-size: 10px;
+  text-shadow: 1px 1px #333;
+}
+#overlay .recipe-list .catalog-pages {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 0;
+  gap: 4px;
+}
+#overlay .recipe-list .catalog-pages button {
+  padding: 1px;
+  width: 28px;
+  height: 24px;
+  min-height: 0;
+  flex: none;
+}
+#overlay .recipe-list .catalog-pages span {
+  color: #333;
+  font-size: 10px;
+}
+#overlay .recipe-empty {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  color: #444;
+}
+#overlay .recipe-help {
+  font-size: 9px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+  color: #333;
+}
+@media (max-width: 720px) {
+  #overlay .compact-inventory.with-recipes {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 16px;
+  }
+  #overlay .compact-inventory > .recipe-book {
+    width: 100%;
+    flex: none;
+    min-height: 0;
+    max-height: none;
+  }
+  #overlay .compact-inventory > .recipe-book .recipe-list {
+    max-height: 190px;
+    min-height: 0;
+  }
+}
+@media (max-height: 520px) and (min-width: 721px) {
+  #overlay .inventory-window.compact-inventory {
+    --inv-cell: 32px;
+    margin-top: 12px;
+  }
+}
+#overlay .compact-inventory :is(h2, h3, .inventory-divider),
+#overlay .inventory-window > .recipe-book {
+  font-family: DCSMPixel, monospace;
+}
+#overlay .personal-crafting .recipe-book-toggle {
+  margin-left: calc(var(--inv-cell) * 0.6);
+}
+#overlay .compact-inventory .craft-arrow svg {
+  display: block;
+  width: 24px;
+  height: 18px;
+}
+#overlay .compact-inventory.creative-player-screen {
+  margin-top: max(60px, calc((100vh - 390px) / 2));
+  margin-bottom: 60px;
+}

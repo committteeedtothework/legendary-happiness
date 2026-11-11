@@ -1,0 +1,28 @@
+{
+  "version": "2.9.1",
+  "reference": "Minecraft Java Edition 26.3",
+  "sources": [
+    {
+      "url": "https://www.minecraft.net/en-us/accessibility",
+      "observed": "Accessible menu/control configuration and readable UI conventions."
+    },
+    {
+      "url": "https://www.minecraft.net/en-us/article/minecraft-controls",
+      "observed": "Official control documentation; existing input semantics retained."
+    },
+    {
+      "url": "https://minecraft.wiki/w/Options",
+      "observed": "Java options screenshot inspected: paired rectangular gray controls, white pixel text and background view."
+    },
+    {
+      "url": "https://minecraft.wiki/w/Menu_screen",
+      "observed": "Menu descriptions and link to Title Screen; standalone Title Screen fetch unavailable."
+    }
+  ],
+  "assets": "Original DCSMCRAFT lettering and CSS control artwork; no reference media redistributed. Existing inventory artwork and fonts retained.",
+  "adaptations": [
+    "Custom skins, controller mapping, World tools and browser download actions",
+    "Arena remains a separate Frontiers interface",
+    "Not exact official branding or every official menu page"
+  ]
+}

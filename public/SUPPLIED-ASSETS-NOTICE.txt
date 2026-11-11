@@ -1,0 +1,9 @@
+The optional "Supplied Assets" texture pack contains selected Minecraft PNG
+artwork supplied by the user in assets.zip. Minecraft artwork belongs to
+Mojang/Microsoft and is not original DCSMCRAFT artwork or covered by the
+DCSMCRAFT MIT license. All rights of the respective owners are retained.
+DCSMCRAFT is independent and is not affiliated with or endorsed by Mojang or
+Microsoft. See supplied-pack/manifest.json in the source/web build for the
+individual source paths, SHA-256 hashes, frame selection and color transforms.
+The original Renewed, Soft and Classic packs remain available. No Minecraft
+code, models, sounds, fonts, text, shaders or gameplay data were imported.

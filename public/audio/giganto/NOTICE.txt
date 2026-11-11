@@ -1,0 +1,6 @@
+User-supplied recording: Undefeatable.mp3
+Metadata: Undefeatable (feat. Kellin Quinn); artist SEGA SOUND TEAM - Topic.
+Sonic Frontiers soundtrack recording supplied by the user. Rights remain with Sega and the respective composers, performers and rights holders; this recording is not covered by the DCSMCRAFT MIT license. No independent redistribution license accompanied the upload. No external audio service is contacted.
+The original MP3 is preserved unchanged. Playback uses locally selected phase cues, loop-edge tapers and crossfades. It is an adaptive fan edit, not the original game's audio implementation or a promise of identical cinematic timing.
+Original bytes: 4493052
+SHA-256: aa97147596f13886f98c4d9b1e2a70b9d4e864daf2367d65902b1b4349cb7cb6

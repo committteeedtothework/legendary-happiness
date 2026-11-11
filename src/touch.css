@@ -1,0 +1,277 @@
+#touch-controls {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  touch-action: none;
+  --touch-opacity: 0.8;
+}
+#touch-controls[hidden],
+#touch-controls [hidden] {
+  display: none !important;
+}
+#touch-controls button {
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  min-width: 48px;
+  min-height: 44px;
+  border: 2px solid #ddd9;
+  color: #fff;
+  background: #272727d9;
+  box-shadow:
+    inset 2px 2px #fff3,
+    inset -2px -2px #0007;
+  border-radius: 6px;
+  font: 14px monospace;
+  text-shadow: 1px 1px #000;
+  opacity: var(--touch-opacity);
+  padding: 6px;
+}
+#touch-controls button.held,
+#touch-controls button[aria-pressed="true"] {
+  background: #647449e8;
+  border-color: #fff;
+}
+#touch-joystick {
+  position: absolute;
+  left: max(22px, env(safe-area-inset-left));
+  bottom: max(70px, calc(env(safe-area-inset-bottom) + 65px));
+  width: 116px;
+  height: 116px;
+  background: #2227;
+  border: 2px solid #fff7;
+  border-radius: 50%;
+  pointer-events: auto;
+  opacity: var(--touch-opacity);
+  touch-action: none;
+}
+#touch-joystick i {
+  position: absolute;
+  left: 32px;
+  top: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #777c;
+  border: 2px solid #eee9;
+  pointer-events: none;
+}
+.touch-top {
+  position: absolute;
+  right: max(8px, env(safe-area-inset-right));
+  top: max(8px, env(safe-area-inset-top));
+  display: flex;
+  gap: 6px;
+}
+.touch-buttons {
+  position: absolute;
+  bottom: max(70px, calc(env(safe-area-inset-bottom) + 65px));
+  right: max(12px, env(safe-area-inset-right));
+  display: grid;
+  grid-template-columns: repeat(2, 62px);
+  gap: 8px;
+}
+#touch-tray {
+  pointer-events: auto;
+  position: absolute;
+  right: max(8px, env(safe-area-inset-right));
+  top: max(58px, calc(env(safe-area-inset-top) + 50px));
+  max-height: 55dvh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(70px, 110px));
+  gap: 5px;
+  background: #151515df;
+  padding: 7px;
+  border: 2px solid #aaa;
+}
+#touch-inventory {
+  pointer-events: auto;
+  position: absolute;
+  bottom: max(6px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  width: max-content;
+  max-width: 100%;
+  padding: 3px;
+  background: #222d;
+}
+.touch-layout #game-canvas {
+  touch-action: none;
+}
+.touch-layout .hotbar-slot {
+  pointer-events: auto;
+  touch-action: none;
+  min-width: 0 !important;
+}
+.touch-layout .hotbar {
+  width: min(410px, 94vw);
+  gap: 2px;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+.touch-layout .hotbar-slot {
+  width: auto;
+  height: 38px;
+  padding: 2px;
+}
+.touch-layout .hotbar-slot small {
+  display: none;
+}
+.touch-layout .hud-bottom {
+  bottom: max(5px, env(safe-area-inset-bottom));
+}
+.touch-layout .hud-hint {
+  display: none;
+}
+.touch-layout .world-clock {
+  right: max(8px, env(safe-area-inset-right));
+  top: max(64px, calc(env(safe-area-inset-top) + 54px));
+}
+.touch-layout #overlay {
+  padding: max(12px, env(safe-area-inset-top))
+    max(10px, env(safe-area-inset-right)) max(62px, env(safe-area-inset-bottom))
+    max(10px, env(safe-area-inset-left));
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.touch-layout #overlay :is(input, textarea, select) {
+  font-size: 16px !important;
+}
+.touch-layout #overlay .dialog {
+  max-height: calc(100dvh - 80px);
+  overflow: auto;
+}
+.touch-layout #overlay .inventory-window {
+  max-width: 100%;
+  margin: auto;
+  max-height: calc(100dvh - 75px);
+  overflow: auto;
+}
+.touch-layout .inventory-main {
+  min-width: 0 !important;
+}
+.touch-layout .slot-grid .slot {
+  min-width: 0 !important;
+}
+.touch-layout .inventory-foot,
+.touch-layout .inventory-divider small {
+  display: none;
+}
+.touch-layout .titan-abilities {
+  pointer-events: auto;
+}
+.touch-layout [data-ability] {
+  pointer-events: auto;
+  touch-action: none;
+}
+.touch-layout #titan-controls {
+  display: none;
+}
+.touch-layout .titan-stats {
+  left: 8px;
+  bottom: 200px;
+  transform: scale(0.65);
+  transform-origin: bottom left;
+}
+.touch-layout .titan-speedometer {
+  bottom: 65px;
+  right: 150px;
+  transform: scale(0.55);
+  transform-origin: bottom right;
+}
+@media (max-width: 600px) {
+  .touch-layout #weapon-moves {
+    max-width: 52vw;
+    font-size: 10px;
+  }
+  .touch-layout .titan-abilities {
+    max-width: 95vw;
+    overflow-x: auto;
+  }
+  .touch-layout .titan-health {
+    width: 60vw;
+  }
+  .touch-layout .recipe-book {
+    width: 100% !important;
+  }
+  .touch-layout .inventory-window.with-recipes {
+    display: block !important;
+  }
+  .touch-layout #titan-help {
+    max-height: 70dvh;
+    overflow: auto;
+  }
+  .touch-layout .title-layout {
+    padding-top: max(20px, env(safe-area-inset-top));
+  }
+}
+@media (max-height: 500px) {
+  #touch-joystick {
+    width: 100px;
+    height: 100px;
+    bottom: 56px;
+    left: max(12px, env(safe-area-inset-left));
+  }
+  #touch-joystick i {
+    left: 24px;
+    top: 24px;
+  }
+  .touch-buttons {
+    bottom: 55px;
+    grid-template-columns: repeat(3, 54px);
+    gap: 5px;
+  }
+  #touch-controls button {
+    font-size: 12px;
+    min-height: 40px;
+  }
+  .touch-top {
+    gap: 4px;
+  }
+  .touch-layout .titan-stats {
+    display: none;
+  }
+  .touch-layout .titan-speedometer {
+    display: none;
+  }
+  .touch-layout #survival-bars {
+    transform: scale(0.8);
+    transform-origin: bottom center;
+  }
+}
+body:has(.touch-layout) {
+  overscroll-behavior: none;
+}
+html,
+body,
+#app {
+  min-height: 100dvh;
+}
+
+/* Touch action buttons carry the labels; the arena ribbon keeps cooldowns. */
+.touch-layout #titan-hud .titan-abilities {
+  bottom: max(8px, env(safe-area-inset-bottom));
+  gap: 6px;
+  max-width: 94vw;
+}
+.touch-layout #titan-hud .titan-abilities > div {
+  width: 32px;
+  height: 36px;
+  flex: 0 0 32px;
+}
+.touch-layout #titan-hud .titan-abilities :is(kbd, span) {
+  display: none;
+}
+.touch-layout #titan-hud .titan-speedometer {
+  display: none;
+}
+.touch-layout #titan-hud .titan-energy-readout {
+  display: flex;
+}
+.touch-layout #titan-hud .titan-target-state {
+  bottom: 52px;
+}

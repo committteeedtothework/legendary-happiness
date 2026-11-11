@@ -1,0 +1,30 @@
+{
+  "version": "2.9.0",
+  "sources": [
+    {
+      "url": "https://manuals.sega.com/sonicfrontiers/en/",
+      "observed": "Condensed white/cyan HUD, skill diagrams, Sonic silhouette and controller conventions; skill screenshots inspected."
+    },
+    {
+      "url": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/",
+      "observed": "Official gallery and Showdown Trailer inspected as local sampled frames, including gold aura, running, Cyloop and huge armored enemies. Not a complete boss playthrough."
+    },
+    {
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3043795839",
+      "observed": "Final Horizon Hard trial guide describes climb, punch/stomp combos, spin parry, right-hook parry and phase-two laser. Distinct from story difficulty."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API",
+      "observed": "Polling, standard mapping, connection state, axes and browser exposure limitations."
+    }
+  ],
+  "substitutions": [
+    "Original rotational clips and procedural terrain/material detail",
+    "No official animation set or new commercial assets",
+    "User-supplied existing audio retained byte-for-byte"
+  ],
+  "limitations": [
+    "Not exact Sonic Frontiers encounter parity",
+    "No physical controller hardware or native Windows launch available"
+  ]
+}

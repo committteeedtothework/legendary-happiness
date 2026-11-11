@@ -1,0 +1,12 @@
+{
+  "first58BlocksAtlasFNV": 2112158167,
+  "meshes": {
+    "cow": 18,
+    "grazer": 15,
+    "woolling": 14,
+    "chicken": 12,
+    "rabbit": 14,
+    "villager": 17,
+    "shade": 11
+  }
+}

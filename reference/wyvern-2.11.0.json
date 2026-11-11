@@ -1,0 +1,27 @@
+{
+  "version": "2.11.0",
+  "reference": "Sonic Frontiers (2022), original Wyvern encounter, standard hold parry",
+  "consultedUTC": "2026-11-07",
+  "sources": [
+    "https://www.destructoid.com/sonic-frontiers-how-to-beat-wyvern-boss-guide/",
+    "https://www.gamepur.com/guides/how-to-defeat-the-wyvern-in-sonic-frontiers",
+    "https://sirusgaming.com/how-to-beat-wyvern-in-sonic-frontiers-boss-fight-guide/",
+    "https://retrododo.com/how-to-defeat-the-wyvern-in-sonic-frontiers/"
+  ],
+  "verifiedSequence": ["spiral tower", "three-lane digital chase and gaps", "final Chaos Emerald", "Super Sonic", "missile reflection", "one claw parry in phase one", "two claw parries in phase two", "dorsal energy rings", "timing prompts", "tail grab and rock slam", "dive", "jaw struggle", "missiles down throat and explosion"],
+  "asset": {
+    "author": "_____Xler_____",
+    "source": "https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f",
+    "license": "CC-BY-4.0",
+    "inputBytes": 24430560,
+    "inputTriangles": 132775,
+    "joints": 403,
+    "inputAnimationClips": 0,
+    "optimization": "glTF-Transform 4.2.1, Meshopt, simplify ratio .45 error .0005, 1024 textures WebP; original 24 fps quaternion clips",
+    "output": "public/models/wyvern/wyvern.glb",
+    "outputBytes": 3845068,
+    "outputSHA256": "f12f269f3c7647b0e9797d80961024ebc708cab1f215f1438094a940036f5555"
+  },
+  "substitutions": ["Original procedural desert, ruins, tower and digital road", "Original skeletal animation and cinematic curves; no official motion capture", "Original adaptive score; no Break Through It All recording supplied", "Analytic head, neck and claw hit regions", "Moving scenery flight reference frame; shared Sonic moves"],
+  "documentation": "WYVERN.md"
+}

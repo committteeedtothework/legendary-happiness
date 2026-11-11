@@ -1,0 +1,24 @@
+{
+  "tracks": [
+    {
+      "file": "titan-wyvern.mp3",
+      "title": "Titan WYVERN",
+      "bytes": 2656383,
+      "sha256": "b237dfc485bfcf209119d74c61de0f603cf0445c623756be7ce55d16c3eba30a",
+      "duration": 221.33551,
+      "sourceName": "Titan_ WYVERN - Sonic Frontiers [OST].mp3",
+      "sourceSHA256": "1fa1aea6c9834385e8007675db7061651cfef5b6af24258ecb94c9a2714f334c",
+      "encoding": "96 kbps MP3"
+    },
+    {
+      "file": "break-through-it-all.mp3",
+      "title": "Break Through It All",
+      "bytes": 3993643,
+      "sha256": "7becd1543b6ba78be4b75a5a9baa42c05898bba38172f36bbefbe32ffb9fe69f",
+      "duration": 249.573878,
+      "sourceName": "Break Through It All.mp3",
+      "sourceSHA256": "3c78718b30106869cca374ffd180f69a64a733dca2578e73416dce443ca4bb21",
+      "encoding": "128 kbps MP3"
+    }
+  ]
+}

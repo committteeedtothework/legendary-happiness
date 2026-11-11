@@ -1,0 +1,254 @@
+{
+  "schema": 1,
+  "sonic": {
+    "file": "sonic.glb",
+    "bytes": 2353860,
+    "clips": {
+      "move": {
+        "duration": 1.0666667222976685,
+        "loop": true,
+        "origin": "User-supplied animation"
+      },
+      "run": {
+        "duration": 0.6666666865348816,
+        "loop": true,
+        "origin": "User-supplied animation"
+      },
+      "idle": {
+        "duration": 3,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "boost": {
+        "duration": 0.7,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "jump": {
+        "duration": 0.7,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "fall": {
+        "duration": 1,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "fly": {
+        "duration": 2,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "parry": {
+        "duration": 1.2,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "transform": {
+        "duration": 6,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "attack_windup": {
+        "duration": 0.4,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "attack": {
+        "duration": 0.28,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "attack_left": {
+        "duration": 0.28,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "attack_right": {
+        "duration": 0.28,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "recovery": {
+        "duration": 0.4,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "damage": {
+        "duration": 0.75,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "defeat": {
+        "duration": 2,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "counter": {
+        "duration": 1.2,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "sonic_boom": {
+        "duration": 0.65,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "wild_rush": {
+        "duration": 0.8,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "quick_cyloop": {
+        "duration": 1.6,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "dodge": {
+        "duration": 0.5,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "super_quills": {
+        "duration": 1,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      }
+    }
+  },
+  "giganto": {
+    "file": "giganto.glb",
+    "bytes": 12494320,
+    "clips": {
+      "idle": {
+        "duration": 4,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "move": {
+        "duration": 2.1,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "attack_windup": {
+        "duration": 1.5,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "attack": {
+        "duration": 0.42,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "recovery": {
+        "duration": 3.1,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "damage": {
+        "duration": 0.5,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "defeat": {
+        "duration": 7,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "arm_swing_windup": {
+        "duration": 1.5,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "arm_swing": {
+        "duration": 0.42,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "arm_swing_recovery": {
+        "duration": 3.1,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "arm_slap_windup": {
+        "duration": 1.2,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "arm_slap": {
+        "duration": 0.32,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "arm_slap_recovery": {
+        "duration": 2.9,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "grab_windup": {
+        "duration": 1.75,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "grab": {
+        "duration": 4.2,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "grab_recovery": {
+        "duration": 3.6,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "jaw_open": {
+        "duration": 1,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "jaw_close": {
+        "duration": 1,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "beam_charge": {
+        "duration": 1.8,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "beam_fire": {
+        "duration": 4.5,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "phase_transition": {
+        "duration": 4,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "stagger": {
+        "duration": 2,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "dorsal_extend": {
+        "duration": 4,
+        "loop": false,
+        "origin": "DCSMCRAFT authored keyframes"
+      },
+      "dorsal_pulse": {
+        "duration": 2,
+        "loop": true,
+        "origin": "DCSMCRAFT authored keyframes"
+      }
+    }
+  },
+  "cost": {
+    "paidGenerationCredits": 0,
+    "workflow": "User-supplied Sketchfab files; entirely local processing"
+  },
+  "limits": [
+    "Original Sonic skeleton has no finger/facial bones; glove/facial animation remains approximate",
+    "Combat/cinematic keyframes are original approximations, not official Frontiers clips",
+    "Existing game hit volumes and stationary boss behavior are unchanged"
+  ]
+}

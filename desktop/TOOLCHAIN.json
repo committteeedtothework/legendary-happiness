@@ -1,0 +1,9 @@
+{
+  "package": "@oven/zig-linux-x64",
+  "version": "0.12.0-dev.1286",
+  "integrity": "sha512-8vT8FO4smHeurOHFdJ7zyUvOifxkTtii2Y7+lEkkSKBEHozsHUKSnElSV8q7hNl3pH5Rl4u/rw9eWsF+ejGNLg==",
+  "host": "linux-x86_64",
+  "target": "x86_64-windows-gnu",
+  "language": "C11",
+  "runtime": "installed Microsoft Edge or Chrome; original offline game embedded"
+}

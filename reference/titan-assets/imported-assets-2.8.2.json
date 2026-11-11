@@ -1,0 +1,33 @@
+{
+  "version": "2.8.2",
+  "source": "User-supplied Sketchfab downloads",
+  "originalFiles": [
+    {
+      "name": "giganto_-_sonic_frontiers.glb",
+      "bytes": 18187844,
+      "sha256": "dce5f46526b81bdb5e712beb7c924f2a09445d35dfd88d3639159ae133646efb"
+    },
+    {
+      "name": "3d-sonic-rigged.zip",
+      "bytes": 22323652,
+      "sha256": "b11943329f0ac258cfe422154414808f39ab6fd565e1ab56235ff40c50d4fdca"
+    }
+  ],
+  "sourceURLs": {
+    "sonic": "https://sketchfab.com/3d-models/3d-sonic-rigged-cf9837777ff142b6b2e83d9569c8f4c6",
+    "giganto": "https://sketchfab.com/3d-models/giganto-sonic-frontiers-f4cbf7a0363a4692883ace2deb8193cf"
+  },
+  "creditsSpent": 0,
+  "processedModels": {
+    "sonic": {
+      "sha256": "045f90c55dd928631616d933e1ec5b137186a29a780d9b45d72d3ebcdc54dc80",
+      "bytes": 2354072
+    },
+    "giganto": {
+      "sha256": "239177fdac9a237cca4b1597e862ecea6edce0e67c0a3c016024f2738dc2dd37",
+      "bytes": 12494320
+    }
+  },
+  "script": "scripts/build-titan-assets.mjs",
+  "texturePipeline": "scripts/prepare-titan-textures.py"
+}

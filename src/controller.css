@@ -1,0 +1,136 @@
+/* Controller overlays follow the existing DCSMCRAFT menu, not the arena theme. */
+.controller-dialog {
+  width: min(800px, 94vw);
+  max-height: 94dvh;
+  overflow-y: auto;
+}
+.controller-dialog > label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 15px 0;
+}
+.controller-dialog select {
+  max-width: 55%;
+}
+.controller-dialog details {
+  margin: 20px 0;
+}
+.controller-dialog summary {
+  cursor: pointer;
+}
+.controller-mapping {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+}
+.controller-mapping label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  text-transform: capitalize;
+}
+.controller-mapping input {
+  width: 70px;
+}
+#controller-live {
+  font: 12px monospace;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+.pad-focus {
+  outline: 3px solid #fff3a3 !important;
+  outline-offset: -3px !important;
+}
+.titan-active .pad-focus {
+  outline-color: #84dffc !important;
+}
+#controller-keyboard {
+  position: fixed;
+  z-index: 190;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, 94vw);
+  padding: 20px;
+  background: #333e43;
+  border: 3px solid #111;
+  box-shadow: 0 0 0 100vmax #07121b99;
+  color: #fff;
+  font:
+    16px DCSMPixel,
+    monospace;
+  pointer-events: auto;
+}
+#controller-keyboard h2 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+#controller-keyboard output {
+  display: block;
+  overflow-wrap: anywhere;
+  background: #10191c;
+  border: 2px solid #6c7c80;
+  min-height: 45px;
+  padding: 10px;
+  margin: 12px 0;
+}
+#controller-keyboard .pad-key-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 4px;
+}
+#controller-keyboard button {
+  font:
+    14px DCSMPixel,
+    monospace;
+  border: 2px solid #1b2327;
+  background: #738086;
+  color: #fff;
+  min-height: 36px;
+  padding: 4px;
+}
+#controller-keyboard .pad-key-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+#controller-actions {
+  max-width: 600px;
+  max-height: 90dvh;
+  overflow-y: auto;
+}
+#controller-actions button {
+  margin: 6px 0;
+}
+#controller-hint {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 95;
+  color: #fff;
+  padding: 5px 8px;
+  font: 12px sans-serif;
+  background: #172a3bcc;
+  pointer-events: auto;
+  cursor: pointer;
+  border: 1px solid #8aabbc;
+}
+#controller-hint:empty {
+  display: none;
+}
+@media (max-width: 600px) {
+  .controller-mapping {
+    grid-template-columns: 1fr;
+  }
+  #controller-keyboard {
+    padding: 12px;
+  }
+  #controller-keyboard button {
+    font-size: 11px;
+    min-height: 32px;
+  }
+}

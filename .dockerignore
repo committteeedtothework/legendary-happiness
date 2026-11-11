@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+.desktop-cache
+desktop/payload.hpp
+test-results
+playwright-report
+
+src/overworld-music-data.js
+src/overworld-music-data.js.*.tmp

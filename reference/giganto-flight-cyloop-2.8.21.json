@@ -1,0 +1,23 @@
+{
+  "version": "2.8.21",
+  "sources": [
+    {
+      "url": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/",
+      "authority": "SEGA product description on Steam",
+      "usedFor": [
+        "dodges, parries, counters and combos as the combat vocabulary",
+        "Cyloop as a strategic Titan ability"
+      ]
+    },
+    {
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3043795839",
+      "authority": "Mineragrl community guide, Final Horizon Master King Trial on Hard",
+      "usedFor": [
+        "Giganto climb, attack and stomp combos, parry/counter follow-ups",
+        "second-phase laser pressure followed by Quick Cyloop and renewed attacks"
+      ],
+      "limit": "Final Horizon trial difficulty differs from the original story fight; no numeric tuning is copied"
+    }
+  ],
+  "implementation": "DCSMCRAFT tuning, keyboard controls, original rotational animation and ring-drop mechanics are adaptations, not verified exact original-game data. No new third-party assets or code were downloaded into the game."
+}

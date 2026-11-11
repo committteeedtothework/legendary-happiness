@@ -1,0 +1,33 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+*.log
+
+.desktop-cache/
+desktop/payload.hpp
+
+# Generated from the supplied MP3 manifests by npm prebuild/predev/pretest.
+src/overworld-music-data.js
+src/overworld-music-data.js.*.tmp
+
+# Reproducibly embedded from public/models/titan/*.glb
+src/titan-model-data.js
+
+# Reproducible supplied battle recording embed
+src/giganto-score-data.js
+
+src/titan-prelude-data.js
+
+src/titan-boost-data.js
+
+# Rebuilt before dev/build; release artifacts are never source files.
+src/worker-code.js
+artifacts/
+coverage/
+
+# Reproducible Wyvern embed; source GLB is checked in.
+src/wyvern-model-data.js
+
+# Rebuilt from supplied Wyvern MP3s.
+src/wyvern-music-data.js

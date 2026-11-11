@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "status": "cancelled by user; use Sketchfab instead; no paid tasks submitted",
+  "estimatedTotalCredits": 200,
+  "failedTasksRefunded": true,
+  "assets": [
+    {
+      "asset": "sonic",
+      "generationCommandArguments": [
+        "make",
+        "Sonic the Hedgehog, a polished stylized real-time 3D game character, full body, neutral symmetrical T-pose facing forward, arms horizontal, open white gloved hands with separated fingers, feet slightly apart on the ground. Recognizable blue swept-back hedgehog quills, large expressive connected white eye area with green pupils, small black nose and warm beige muzzle and oval belly, slim flexible limbs, substantial white glove cuffs, iconic red shoes with white straps and gold buckles, clean layered shoe soles. Appealing confident expression. Continuous watertight body surfaces, clean deformation-friendly joints at shoulders, elbows, hips, knees and ankles. Clearly separated pointed quills with clean roots, ears with beige inner faces. High-quality authored character silhouette and balanced proportions, smooth controlled surfaces, detailed original materials and painted color textures, restrained material roughness, no photoreal skin or fur. One character only, no floor, no background objects, no aura, no weapons, no text, no watermark. Prepared for biped skeletal rigging and in-place locomotion in Three.js. Generate an original fan-made model, not an extracted commercial mesh.",
+        "--for",
+        "anim",
+        "--then",
+        "rig-check,convert:format=GLTF,texture_size=2048,texture_format=PNG,rig:spec=tripo,out_format=glb",
+        "-p",
+        "face_limit=24000",
+        "-p",
+        "texture_quality=detailed",
+        "--seed",
+        "28121",
+        "--name",
+        "dcsmcraft-sonic-hero",
+        "-o",
+        "./assets/titan-generation"
+      ],
+      "validatedDryRun": "reference/titan-assets/sonic-dry-run.json",
+      "steps": [
+        {
+          "name": "text-to-model",
+          "endpoint": "/v3/generation/text-to-model",
+          "task_type": "text_to_model",
+          "payload": {
+            "prompt": "Sonic the Hedgehog, a polished stylized real-time 3D game character, full body, neutral symmetrical T-pose facing forward, arms horizontal, open white gloved hands with separated fingers, feet slightly apart on the ground. Recognizable blue swept-back hedgehog quills, large expressive connected white eye area with green pupils, small black nose and warm beige muzzle and oval belly, slim flexible limbs, substantial white glove cuffs, iconic red shoes with white straps and gold buckles, clean layered shoe soles. Appealing confident expression. Continuous watertight body surfaces, clean deformation-friendly joints at shoulders, elbows, hips, knees and ankles. Clearly separated pointed quills with clean roots, ears with beige inner faces. High-quality authored character silhouette and balanced proportions, smooth controlled surfaces, detailed original materials and painted color textures, restrained material roughness, no photoreal skin or fur. One character only, no floor, no background objects, no aura, no weapons, no text, no watermark. Prepared for biped skeletal rigging and in-place locomotion in Three.js. Generate an original fan-made model, not an extracted commercial mesh.",
+            "model": "v3.1-20260211",
+            "texture": true,
+            "pbr": true,
+            "face_limit": 24000,
+            "texture_quality": "detailed",
+            "model_seed": 28121
+          },
+          "estimatedCredits": 30
+        },
+        {
+          "name": "rig-check",
+          "endpoint": "/v3/animations/rig-check",
+          "task_type": "animate_prerigcheck",
+          "payload": {
+            "input": "<upstream>"
+          },
+          "estimatedCredits": 0
+        },
+        {
+          "name": "convert",
+          "endpoint": "/v3/models/convert",
+          "task_type": "convert_model",
+          "payload": {
+            "input": "<upstream>",
+            "format": "GLTF",
+            "texture_size": 2048,
+            "texture_format": "PNG"
+          },
+          "estimatedCredits": 10
+        },
+        {
+          "name": "rig",
+          "endpoint": "/v3/animations/rig",
+          "task_type": "animate_rig",
+          "payload": {
+            "input": "<upstream>",
+            "spec": "tripo",
+            "out_format": "glb",
+            "model": "v2.5-20260210"
+          },
+          "estimatedCredits": 25
+        },
+        {
+          "name": "retarget",
+          "endpoint": "/v3/animations/retarget",
+          "payload": {
+            "input": "<sonic rig task ID from the approved generation>",
+            "animations": [
+              "preset:idle",
+              "preset:walk",
+              "preset:run",
+              "preset:jump"
+            ],
+            "out_format": "glb",
+            "animate_in_place": true
+          },
+          "estimatedCredits": 40,
+          "source": "tripo anim retarget --help / tripo docs --topic commands/process; processing commands do not expose --dry-run"
+        }
+      ],
+      "estimatedCredits": 105,
+      "finalFile": "public/models/titan/sonic.glb",
+      "warnings": [
+        "--then overrides the default anim processing chain",
+        "non-default convert options use the \"complex convert\" price tier"
+      ],
+      "status": "pending account authorization and explicit credit-plan approval"
+    },
+    {
+      "asset": "giganto",
+      "generationCommandArguments": [
+        "make",
+        "Giganto from Sonic Frontiers, an original stylized real-time 3D game interpretation of a colossal ancient alien mechanical titan. Full-body neutral upright symmetrical T-pose for a biped skeleton, both long arms extended sideways, open clawed hands, feet planted slightly apart. Huge broad rounded layered shoulder mantle, powerful tapered chest, narrow waist, long angular legs, exceptionally long tapered blade-like forearms and articulated three-pronged pale metal claws. Dark charcoal and blue-black overlapping armor plates, fine etched geometric circuit markings, sparse restrained glowing crimson seams and red eyes, recessed small helmet-like face, a distinct pale serrated lower jaw that can be articulated. Ten clearly separated cylindrical dorsal emitters rising from the upper back and shoulders, dark shafts with crimson caps. Silhouette is imposing and alien rather than a generic human robot. Clean sharp panel edges, controlled bevels, subtle original PBR surface detail, readable joints at shoulders/elbows/wrists/hips/knees. Balanced continuous mesh surfaces suitable for smooth skin weights. No bulky human boots, no weapons, no pedestal, no terrain, no laser beams, no background, no text, no watermark, one character only. Browser-game hero asset for Three.js, original fan-made geometry and materials rather than an extracted production mesh.",
+        "--for",
+        "anim",
+        "--then",
+        "rig-check,convert:format=GLTF,texture_size=2048,texture_format=PNG,rig:spec=tripo,out_format=glb",
+        "-p",
+        "face_limit=48000",
+        "-p",
+        "texture_quality=detailed",
+        "--seed",
+        "28122",
+        "--name",
+        "dcsmcraft-giganto-hero",
+        "-o",
+        "./assets/titan-generation"
+      ],
+      "validatedDryRun": "reference/titan-assets/giganto-dry-run.json",
+      "steps": [
+        {
+          "name": "text-to-model",
+          "endpoint": "/v3/generation/text-to-model",
+          "task_type": "text_to_model",
+          "payload": {
+            "prompt": "Giganto from Sonic Frontiers, an original stylized real-time 3D game interpretation of a colossal ancient alien mechanical titan. Full-body neutral upright symmetrical T-pose for a biped skeleton, both long arms extended sideways, open clawed hands, feet planted slightly apart. Huge broad rounded layered shoulder mantle, powerful tapered chest, narrow waist, long angular legs, exceptionally long tapered blade-like forearms and articulated three-pronged pale metal claws. Dark charcoal and blue-black overlapping armor plates, fine etched geometric circuit markings, sparse restrained glowing crimson seams and red eyes, recessed small helmet-like face, a distinct pale serrated lower jaw that can be articulated. Ten clearly separated cylindrical dorsal emitters rising from the upper back and shoulders, dark shafts with crimson caps. Silhouette is imposing and alien rather than a generic human robot. Clean sharp panel edges, controlled bevels, subtle original PBR surface detail, readable joints at shoulders/elbows/wrists/hips/knees. Balanced continuous mesh surfaces suitable for smooth skin weights. No bulky human boots, no weapons, no pedestal, no terrain, no laser beams, no background, no text, no watermark, one character only. Browser-game hero asset for Three.js, original fan-made geometry and materials rather than an extracted production mesh.",
+            "model": "v3.1-20260211",
+            "texture": true,
+            "pbr": true,
+            "face_limit": 48000,
+            "texture_quality": "detailed",
+            "model_seed": 28122
+          },
+          "estimatedCredits": 30
+        },
+        {
+          "name": "rig-check",
+          "endpoint": "/v3/animations/rig-check",
+          "task_type": "animate_prerigcheck",
+          "payload": {
+            "input": "<upstream>"
+          },
+          "estimatedCredits": 0
+        },
+        {
+          "name": "convert",
+          "endpoint": "/v3/models/convert",
+          "task_type": "convert_model",
+          "payload": {
+            "input": "<upstream>",
+            "format": "GLTF",
+            "texture_size": 2048,
+            "texture_format": "PNG"
+          },
+          "estimatedCredits": 10
+        },
+        {
+          "name": "rig",
+          "endpoint": "/v3/animations/rig",
+          "task_type": "animate_rig",
+          "payload": {
+            "input": "<upstream>",
+            "spec": "tripo",
+            "out_format": "glb",
+            "model": "v2.5-20260210"
+          },
+          "estimatedCredits": 25
+        },
+        {
+          "name": "retarget",
+          "endpoint": "/v3/animations/retarget",
+          "payload": {
+            "input": "<giganto rig task ID from the approved generation>",
+            "animations": [
+              "preset:idle",
+              "preset:walk",
+              "preset:hurt"
+            ],
+            "out_format": "glb",
+            "animate_in_place": true
+          },
+          "estimatedCredits": 30,
+          "source": "tripo anim retarget --help / tripo docs --topic commands/process; processing commands do not expose --dry-run"
+        }
+      ],
+      "estimatedCredits": 95,
+      "finalFile": "public/models/titan/giganto.glb",
+      "warnings": [
+        "--then overrides the default anim processing chain",
+        "non-default convert options use the \"complex convert\" price tier"
+      ],
+      "status": "pending account authorization and explicit credit-plan approval"
+    }
+  ],
+  "localWork": [
+    "inspect previews before accepting meshes",
+    "combine and author additional named animations",
+    "add Super Sonic material/quill variants and jaw/dorsal articulation",
+    "validate GLBs in Three.js and preserve combat/save behavior",
+    "embed GLBs in standalone and Windows builds",
+    "profile rendering and verify portal-to-return sequence"
+  ],
+  "approval": {
+    "estimatedTotalCredits": 200,
+    "approvedByUser": true,
+    "rerollsApproved": false,
+    "cancelledByUser": true,
+    "cancellationReason": "User has no Tripo balance and requested Sketchfab"
+  }
+}

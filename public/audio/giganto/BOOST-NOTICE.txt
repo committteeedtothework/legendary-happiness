@@ -1,0 +1,3 @@
+User-supplied Sonic Frontiers Power Boosting Sound Effect.mp3. Original bytes retained.
+Metadata uploader/artist: J0LLY F3LL0W. Sound rights remain with Sega and respective rightsholders; no separate redistribution license accompanied the upload. Not covered by the project MIT license.
+Playback uses the original intro, sustaining the 3.0–8.8 second portion while boosting, with a short release fade.

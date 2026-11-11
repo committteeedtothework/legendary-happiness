@@ -1,0 +1,22 @@
+import {test,expect} from '@playwright/test';
+import {createServer} from 'node:http';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+const html=readFileSync('dist/DCSMCRAFT-Standalone.html');let server,origin;
+test.beforeAll(async()=>{server=createServer((q,r)=>{r.setHeader('Content-Type','text/html');r.end(html);});await new Promise(r=>server.listen(0,'127.0.0.1',r));origin=`http://127.0.0.1:${server.address().port}`;});
+test.afterAll(async()=>{server?.closeAllConnections();if(server)await new Promise(r=>server.close(r));});
+test('controller triggers mine and place real world blocks and release cleanly on pause',async({page})=>{
+ test.setTimeout(90000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.addInitScript(()=>{localStorage.setItem('dcsmcraft-settings',JSON.stringify({graphics:1,renderDistance:2,distantTerrain:false,volume:0,musicEnabled:false,ambientSounds:false,frameLimit:30}));window.pad={id:'Xbox Wireless',connected:true,index:0,mapping:'standard',axes:[0,0,0,0],buttons:Array.from({length:18},()=>({pressed:false,value:0}))};Object.defineProperty(navigator,'getGamepads',{value:()=>[pad]});});
+ await page.goto(origin);await page.waitForFunction(()=>window.dcsmcraft?.initialized);await page.locator('[data-action=create]').click();await page.locator('[name=mode][value=creative]').check();await page.locator('[data-action=start-world]').click();await page.waitForFunction(()=>dcsmcraft.running);
+ await page.evaluate(()=>{const g=dcsmcraft;g.entities=[];g.inventory.slots.fill(null);g.inventory.selected=0;g.inventory.slots[0]={id:'dirt',count:64};for(let x=-2;x<3;x++)for(let z=-3;z<6;z++)g.world.set(x,199,z,3);for(let y=200;y<205;y++)for(let z=-2;z<5;z++)g.world.set(0,y,z,0);g.world.set(0,201,0,3);Object.assign(g.player,{x:.5,y:200,z:3.5,vx:0,vy:0,vz:0,yaw:0,pitch:0,flying:false,onGround:true});g.pointerLockFallback=true;});
+ await page.waitForFunction(()=>dcsmcraft.target?.x===0&&dcsmcraft.target?.y===201&&dcsmcraft.target?.z===0);
+ await page.evaluate(()=>{pad.buttons[7]={pressed:true,value:1};dcsmcraft.controller.frame(1/60);});
+ await page.waitForFunction(()=>dcsmcraft.world.get(0,201,0)===0);
+ await page.evaluate(()=>{pad.buttons[7]={pressed:false,value:0};dcsmcraft.controller.frame(1/60);dcsmcraft.world.set(0,201,-1,3);});
+ await page.waitForFunction(()=>dcsmcraft.target?.z===-1);
+ await page.evaluate(()=>{pad.buttons[6]={pressed:true,value:1};dcsmcraft.controller.frame(1/60);});
+ await page.waitForFunction(()=>dcsmcraft.world.get(0,201,0)!==0);
+ await page.evaluate(()=>{pad.buttons[6]={pressed:false,value:0};dcsmcraft.controller.frame(1/60);pad.buttons[7]={pressed:true,value:1};dcsmcraft.controller.frame(1/60);dcsmcraft.pause();});
+ expect(await page.evaluate(()=>({mine:dcsmcraft.mouseDown,use:dcsmcraft.rightMouseDown,primary:!!dcsmcraft.controller.primary,secondary:!!dcsmcraft.controller.secondary}))).toEqual({mine:false,use:false,primary:false,secondary:false});expect(errors).toEqual([]);
+ const out=process.env.DCSMCRAFT_CONTROLLER_ARTIFACTS||'test-results/controller';mkdirSync(out,{recursive:true});writeFileSync(out+'/world-interaction.json',JSON.stringify({mined:true,placed:true,pauseReleased:true,errors},null,2));
+});

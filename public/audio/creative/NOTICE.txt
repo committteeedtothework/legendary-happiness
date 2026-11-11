@@ -1,0 +1,9 @@
+User-supplied Creative Overworld recordings
+
+Aria Math; Dreiton; Haunt Muskie; Blind Spots; Taswell; Biome Fest — C418, Minecraft Volume Beta.
+These six unchanged MP3 recordings were supplied by the user for Creative-only
+Overworld playback. They are third-party recordings, not original DCSMCRAFT audio
+and not covered by the project MIT license. Rights remain with C418 and the
+respective rights holders. No independent redistribution license accompanied the uploads.
+The manifest records original filenames, sizes, durations and SHA-256 hashes.
+These recordings are embedded offline; no external audio service is contacted.

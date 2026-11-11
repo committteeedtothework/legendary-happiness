@@ -1,0 +1,51 @@
+# Giganto counters and finisher — 2.8.9
+
+This stage continues [GIGANTO-MOBILITY.md](GIGANTO-MOBILITY.md) and [GIGANTO-REFINEMENT.md](GIGANTO-REFINEMENT.md). Changes remain inside the encounter. The portal, preparation/rings, final Emerald, transformation, two phases, rewards, retry checkpoints and original-world return are retained. Overworld mechanics, artwork, multiplayer and save formats are unchanged; earlier wool/water and torch fixes remain.
+
+## Working changes
+
+- Successful mouth-beam and grab struggles lead into a 1.65-second protected counter. Sonic braces, breaks free and lands a kick at 0.85 seconds. The base 300 counter damage is applied at that contact, once, with the existing damage tuning and Phantom Rush rules. The counter then separates from Giganto and restores free movement. Incoming attacks/projectiles and ring drain cannot interfere during it. Ordinary movement/combat remains free outside existing QTEs and these brief, skippable cinematic moments.
+- Beam struggles use a two-handed brace and reflected energy beam. Grab struggles use a separate brace; the released hands ease back rather than immediately dropping to rest. The counter has a coordinated kick and boss recoil. Short root motion plus leg IK closes the visible contact gap without scaling or stretching the character.
+- The seven-second finisher now has charge, launch, contact, rupture and recovery beats, with a closing camera, contact-aligned kick, upper-body reaction, kneeling collapse, planted feet (including a smooth landing from an interrupted step), debris, restrained flash/shake, and a wide aftermath view. The simulated avatar follows the flight path; victory retains its endpoint rather than snapping Sonic back to his last combat position.
+- Contact (3.6 seconds) and rupture (4.8 seconds) lie on the existing 200 BPM score grid. They occur at recording positions 224.74 and 225.94 seconds within the existing finale section. This is an authored arrangement of the supplied recording, not verification of the commercial game's exact timeline. Phase/finale poses still follow the actual active score cursor. No new soundtrack or effects recordings were downloaded.
+- Simulation events trigger each cinematic sound/effect once. Consumed cues survive normal scene progress; loading suppresses past cues. Frame hitches consume crossed cues but mark their age, so outdated whooshes/impacts are not played late on top of a later beat. The transport reopens before the first resumed simulation step so a contact on that frame is audible. Pause stops effect voices; skip clears them; retry/exit retain existing cleanup. The old render-time explosion trigger is removed.
+- Counter success, impact, completion and skip request an encounter checkpoint through the existing save queue. An earned counter persists its elapsed time, captured contact and whether damage has landed. Loading before contact preserves the pending earned hit; loading afterward cannot award it again. Corrupt sequence data returns to the existing protected neutral combat state. An unfinished QTE still resumes neutrally as before. A failed struggle that exhausts rings now enters defeat immediately.
+- Four new Sonic and three Giganto quaternion-only runtime clips use the supplied rigs. Runtime libraries now contain 29 clips each; the embedded GLBs still have their original 22 Sonic / 24 Giganto clips. Meshes, textures, joint lengths, bind scales and recordings are unchanged. Cinematic settings, quality, particles, lighting, camera shake, effects and music controls remain arena-only.
+
+## Controls and tuning
+
+Tap Space or LMB during a beam/grab struggle. Successful struggles begin the counter automatically. Enter skips it while resolving the earned strike once; it also skips the existing entrance, transformation, phase and finisher scenes. Escape pauses. Turn off **Battle Settings → Combat → Cinematics** to resolve successful counters immediately. Other combat controls and base damage/energy/cooldowns are unchanged.
+
+The counter lasts 1.65 seconds, launches at 0.2 seconds and contacts at 0.85 seconds. Its recovery restores at least one second of protection and the existing 3.5-second boss recovery / 3-second stagger window. Normal boss health remains 12,000; Easy 8,000 and Hard 16,000. Ring drain and damage remain individually configurable. The finisher is seven seconds: charge 0.35, launch 1.9, contact 3.6 and rupture 4.8 seconds. These constants and shared composition/path helpers are in src/titan-cinematics.js.
+
+## Changed files
+
+- Sequence state, input, damage, saves: src/giganto-simulation.js, src/titan-cinematics.js, src/titan-contact.js.
+- Shared motion/rigging and protected movement: src/titan-motion-clips.js, src/titan-imports.js, src/titan-kinematics.js, src/titan-mobility.js, src/titan-trails.js, src/titan-boost.js.
+- Camera, beam, impacts and debris: src/giganto-view.js.
+- Cue timing and voice lifecycle: src/giganto-audio.js. Existing score transport/recording files are retained.
+- Arena HUD: src/giganto.js, src/titan-hud.js, src/giganto.css.
+- Verification: tests/titan-cinematics.test.js, tests/titan-assets.test.js, tests/titan-refinement.test.js, tests/browser/giganto.spec.js.
+- Version, packaging and notes: package.json, package-lock.json (version only), src/data.js (version only), scripts/package-release.py, README.md, desktop/README.md, VALIDATION.md and this report.
+
+## Remaining work and approximations
+
+This remains a custom playable interpretation. The full official ability roster/choreography, production cutscenes, direct climbing on the moving/skinned mesh, facial/finger animation, photographic terrain/materials, cascaded/contact shadows and velocity-buffer motion blur remain incomplete or approximate. Existing tactical steps, analytic collision regions, homing, Cyloop, Sonic Boom and Wild Rush retain their documented limits. The new finisher is an original kick/reaction/collapse sequence, not the official tearing/splitting animation or a destructible Giganto mesh.
+
+IK targets authored contact points and approximate body regions, not exact animated triangles. The supplied stereo music has no official stems/cinematic markers; the chosen cue grid is documented above and exact commercial sync is not claimed. No paid model generation, extra official assets or new external reference lookup was used for this stage. Credits and user-supplied asset license notes remain in TITAN-ASSETS.md and THIRD_PARTY.md.
+
+## Verification
+
+The final unit suite passes **705/705 tests**. Added checks cover counter damage/recovery at 30/60/144 simulation rates, skip-before/after-contact, saved pending/already-landed strikes, phase/victory transitions, finite camera/path geometry, floor safety, milestone-only checkpoint requests, once-only/late cinematic cues, actual rig foot contact/bind scales/paused poses, planted collapse feet after an interrupted tactical step, and deduplicated/stopped cinematic Foley. Ordinary sandbox, assets, inventory, content, weather, server and save tests remain green.
+
+The exact final standalone HTML passes **16 browser cases**, with **one explicit managed-policy skip**, in 13.5 minutes. Tests use Chromium/SwiftShader WebGL over loopback, blocking external assets in encounter fixtures. The suite covers the complete portal → rings/ascent → Emerald → transformation → both phases → finisher → victory/return sequence, failure/retry, pause/reload, failed reward saves, inventory overflow, both 29-clip runtime libraries (58 clips), real soundtrack/boost/prelude decoding, music timing/cleanup, settings isolation, repeated entry/exit, targeting/camera, walking/Cyloop/stomp contacts and retained worker torch seams/occlusion. No JavaScript/WebGL errors were observed in passing fixtures.
+
+The new cinematic browser scenario starts an actual beam struggle, uses fresh Space taps, pauses/saves during the earned counter and reloads before its hit. It then resumes immediately before contact with audio paused: **the first resumed impact sound plays**, the hit removes exactly 300 HP once, the reflected beam is visible, rings are protected and controls unlock. Skipping another earned counter removes another 300 HP once. The finisher emits charge/launch/contact/rupture once each, with contact inside the 0.3-metre rig assertion, both feet at their 1.48-metre ankle/zero sole height during collapse, one Sonic mesh and zero active effect voices at victory. Exit restores 17 health and one reward ledger entry. Separate unit coverage verifies a walking pose settles before collapse.
+
+The natural controls-driven encounter completed in 134.77 simulated seconds including preparation, ascent and cinematics; this is not an isolated combat-duration measurement. Normal HP remains 12,000. The original world clock, health and equipment are restored, and a repeated exit cannot duplicate rewards.
+
+The production web smoke test passes (**1/1**), including playable world creation, inventory and save/reload of seam edits, inventory and health. Standalone, web and Windows x64 builds succeed. The Windows launcher contains the tested HTML; Linux companion extraction is byte-identical. Native Windows execution remains untested on this Linux host. Managed Chromium blocks file:// before game load (ERR_BLOCKED_BY_ADMINISTRATOR), so that case is explicitly skipped; policy was not bypassed. The exact standalone bytes are tested over loopback.
+
+The isolated warmed 1280×800 software-render fixture records 92 draw calls, median 1.8 ms and p95 5.8 ms. This is not a whole-game or Windows hardware FPS benchmark. The existing embedded-audio bundle warning remains (about 133.6 MB production JS / 133.8 MB standalone HTML).
+
+All supplied/static assets are byte-identical to 2.8.8. Frozen source/runtime/assets/tests/HTML hashes are checked during packaging, followed by ZIP CRC, source archive byte comparison and launcher payload checks. Save schema 1, generation 16 and protocol 4 remain. Evidence is retained under /workspace/.cache/dcsmcraft-titan-cinematics/ on the build host and copied with local delivery artifacts. Earlier failing attempts (contact override and raised walking foot) are retained in logs and are not counted as passes.

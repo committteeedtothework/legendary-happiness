@@ -1,0 +1,6 @@
+User-supplied pre-fight recording: Titan GIGANTO Sonic Frontiers OST.mp3
+Metadata title: Titan: GIGANTO - Sonic Frontiers [OST]; uploader/artist tag: DeoxysPrime.
+Sonic Frontiers soundtrack recording supplied by the user. Rights remain with Sega and the respective composers, performers and rightsholders. Not original DCSMCRAFT synthesis or covered by the MIT license; no independent redistribution license accompanied this upload.
+The original MP3, cover and metadata are retained unchanged. It plays locally during portal intro, ring gathering, ascent and transformation, then the existing supplied Undefeatable recording takes over during aerial combat. No online service is contacted.
+Original bytes: 4093287
+SHA-256: eb2b0a275d6a0ece37d1f36a0cad5a2e4b4dc8667c4fe65def5f6fb6450c9f67

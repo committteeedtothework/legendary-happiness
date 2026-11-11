@@ -1,0 +1,10 @@
+Wyvern model: "Wyvern" by _____Xler_____, supplied by the user.
+Source: https://sketchfab.com/3d-models/wyvern-59695baa3ad24d7691fef625cb8a7d0f
+Author: https://sketchfab.com/_____Xler_____
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+Changes by DCSMCRAFT: optimized geometry, Meshopt compression, WebP textures
+limited to 1024 pixels; original local-bone flight, claw, jaw, reaction and
+cinematic animation clips. The supplied model contained no animation clips.
+Sonic Frontiers and character names belong to their respective rights holders.
+This fan encounter is not an official SEGA product or a claim of endorsement.

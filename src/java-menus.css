@@ -1,0 +1,685 @@
+/* Original Java-inspired menu chrome. Game world assets and arena UI are separate. */
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) {
+  --paper: #181818;
+  --ink: #fff;
+  --muted: #b1b1b1;
+  --line: #777;
+  --green: #a0a0a0;
+  --accent: #ffff55;
+  color: #fff;
+  font-family: DCSMPixel, monospace;
+  text-shadow: 2px 2px #303030;
+}
+#app:not(.titan-active)
+  #overlay.visible:not([data-screen="inventory"]):not([data-screen="chat"]) {
+  background: #0008;
+  backdrop-filter: blur(2px);
+  padding: 24px 16px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])[data-screen="title"] {
+  background: #0003;
+  backdrop-filter: blur(1px);
+}
+#app:not(.titan-active)
+  #overlay
+  :is(
+    .dialog,
+    .world-panel,
+    .hero,
+    .session-panel,
+    .multiplayer-choices > div,
+    .video-group,
+    .skin-dialog,
+    .wardrobe-picker,
+    .wardrobe-display
+  ) {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  border: 0;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .dialog {
+  padding: 12px 8px;
+  width: min(760px, 96vw);
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  :is(h2, h3, legend) {
+  color: #fff;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: inherit;
+  text-shadow: 2px 2px #303030;
+  font-weight: 400;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) h2 {
+  font-size: 24px;
+  text-align: center;
+  margin: 0 0 26px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) h3 {
+  font-size: 17px;
+}
+#app:not(.titan-active)
+  #overlay
+  :is(
+    p,
+    small,
+    label,
+    .fine,
+    .muted,
+    .eyebrow,
+    .range-label,
+    .video-description,
+    .settings-note
+  ) {
+  color: #ddd;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: inherit;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  :is(button, .import-button),
+#app:not(.titan-active) #controller-keyboard button {
+  min-height: 38px;
+  border: 2px solid #151515;
+  border-radius: 0;
+  color: #eee;
+  font:
+    16px DCSMPixel,
+    monospace;
+  background: repeating-linear-gradient(0deg, #737373 0 2px, #707070 2px 4px);
+  box-shadow:
+    inset 2px 2px #aaa,
+    inset -2px -2px #444;
+  text-shadow: 2px 2px #333;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: none;
+  padding: 8px 12px;
+  transform: none;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  :is(button, .import-button):hover,
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  button.pad-focus,
+#app:not(.titan-active) #controller-keyboard button.pad-focus {
+  background: #85859e;
+  color: #ffffa0;
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+  box-shadow:
+    inset 2px 2px #b7b7ce,
+    inset -2px -2px #49495d;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  button:disabled {
+  color: #aaa;
+  background: #333;
+  box-shadow:
+    inset 2px 2px #555,
+    inset -2px -2px #222;
+  opacity: 1;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) button:active {
+  box-shadow:
+    inset 2px 2px #3d3d3d,
+    inset -2px -2px #aaa;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 1px;
+}
+#app:not(.titan-active)
+  #overlay
+  :is(
+    input:not([type="range"]):not([type="radio"]):not([type="checkbox"]),
+    textarea,
+    select
+  ) {
+  border: 2px solid #8b8b8b;
+  border-radius: 0;
+  background: #080808;
+  color: white;
+  box-shadow: none;
+  font:
+    16px DCSMPixel,
+    monospace;
+  min-height: 36px;
+  padding: 8px;
+  text-shadow: none;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) select {
+  background: #656565;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) option {
+  background: #252525;
+  color: white;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) fieldset {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 10px 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  input[type="range"] {
+  appearance: none;
+  background: #222;
+  border: 2px solid #111;
+  height: 20px;
+  border-radius: 0;
+  box-shadow: inset 0 2px #000;
+  width: 100%;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 24px;
+  background: #888;
+  border: 2px solid #151515;
+  box-shadow:
+    inset 2px 2px #bbb,
+    inset -2px -2px #444;
+  border-radius: 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 22px;
+  background: #888;
+  border: 2px solid #151515;
+  border-radius: 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  input:is([type="radio"], [type="checkbox"]) {
+  accent-color: #ababab;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .title-layout.block-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  flex: 0 0 auto;
+  width: min(720px, 98vw);
+  margin: auto;
+  padding: 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .block-title
+  .hero {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0 0 50px;
+  width: min(620px, 90vw);
+  min-height: 0;
+  text-align: center;
+  overflow: visible;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .block-title
+  .hero
+  h1 {
+  font-size: 0;
+  line-height: 0;
+  letter-spacing: 0;
+  transform: none;
+  margin: 0;
+  filter: none;
+  text-shadow: none;
+  background: none;
+}
+.dcsm-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  image-rendering: pixelated;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .title-splash-space {
+  position: absolute;
+  right: -15px;
+  bottom: 4px;
+  width: 240px;
+  min-height: 0;
+  height: 34px;
+  pointer-events: none;
+  z-index: 2;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .title-splash {
+  position: absolute;
+  inset: auto 0 0 auto;
+  max-width: 260px;
+  width: max-content;
+  white-space: nowrap;
+  color: #ffff55;
+  font:
+    17px DCSMPixel,
+    monospace;
+  text-shadow: 2px 2px #3f3f00;
+  transform-origin: center;
+  animation: java-splash 0.65s ease-in-out infinite alternate;
+}
+@keyframes java-splash {
+  from {
+    transform: rotate(-18deg) scale(0.94);
+  }
+  to {
+    transform: rotate(-18deg) scale(1.04);
+  }
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .world-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(400px, 88vw);
+  padding: 0;
+  margin: 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .world-panel
+  > button {
+  margin: 0;
+  width: 100%;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  #recent-world:empty {
+  display: none;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .recent-world {
+  min-height: 38px;
+  max-height: 48px;
+  margin: 0;
+  width: 100%;
+  font-size: 12px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .recent-world
+  small {
+  font-size: 10px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .recent-world
+  .world-thumb {
+  width: 25px;
+  height: 25px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) #world-count {
+  display: none;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .title-button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 8px 0 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .title-button-grid
+  button {
+  width: 100%;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .title-footer {
+  position: fixed;
+  bottom: 6px;
+  left: 10px;
+  right: 10px;
+  margin: 0;
+  padding: 0;
+  color: white;
+  z-index: 1;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .footer-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .footer-line
+  button {
+  min-height: 24px;
+  font-size: 12px;
+  padding: 3px 10px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .pause-dialog {
+  width: min(420px, 92vw);
+  overflow: visible;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .pause-dialog
+  h2 {
+  margin-bottom: 44px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .pause-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 16px 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .pause-actions
+  button {
+  width: 100%;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .pause-shade {
+  display: none;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .compact {
+  width: min(480px, 95vw);
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .compact
+  > button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .dialog-top {
+  height: 32px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .close {
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  float: right;
+  font-size: 18px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .options-sliders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .range-label {
+  display: block;
+  margin: 8px 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .range-label
+  > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) output {
+  color: #eee;
+  font:
+    14px DCSMPixel,
+    monospace;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .radio-card {
+  border: 2px solid #555;
+  background: #252525;
+  border-radius: 0;
+  box-shadow: none;
+  color: #ddd;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .radio-card:has(input:checked) {
+  border-color: #eee;
+  background: #484848;
+  box-shadow: none;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .world-list {
+  background: #090909b3;
+  border: 2px solid #555;
+  border-radius: 0;
+  max-height: 50dvh;
+  min-height: 120px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .world-row {
+  border: 2px solid #777;
+  border-radius: 0;
+  background: #222b;
+  color: white;
+  margin: 6px;
+  padding: 12px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .world-row h3 {
+  color: #fff;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .world-list-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .video-group {
+  border-bottom: 1px solid #555;
+  padding: 10px 0;
+  margin: 0 0 12px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .video-group
+  h3 {
+  margin: 0 0 12px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .video-group p {
+  font-size: 11px;
+  color: #aaa;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .graphics-presets {
+  gap: 8px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .video-groups {
+  gap: 24px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .wardrobe-stage {
+  border: 2px solid #777;
+  border-radius: 0;
+  background: #1119;
+  box-shadow: inset 0 0 0 2px #222;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .wardrobe-choice[aria-pressed="true"] {
+  outline: 2px solid white;
+  outline-offset: -2px;
+  background: #66667e;
+}
+#app:not(.titan-active)
+  #overlay
+  :is(.wardrobe-turn, .wardrobe-cycle, .wardrobe-list) {
+  border-radius: 0;
+  background: transparent;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .wardrobe-list {
+  max-height: 340px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) kbd {
+  border-radius: 0;
+  background: #303030;
+  color: #eee;
+  border: 1px solid #888;
+  box-shadow: 0 2px #111;
+}
+#app:not(.titan-active)
+  #overlay
+  :is(.session-panel, .multiplayer-choices > div) {
+  border: 1px solid #555;
+  padding: 16px;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .settings-note {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #aaa;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .pause-options-nav {
+  background: #2229;
+  border: 1px solid #555;
+  border-radius: 0;
+  margin-bottom: 15px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .pause-options-nav
+  button {
+  font-size: 12px;
+  padding: 5px;
+  min-height: 28px;
+}
+#app:not(.titan-active) #controller-keyboard {
+  border: 3px solid #111;
+  background: #252525;
+  color: white;
+  border-radius: 0;
+  box-shadow: inset 2px 2px #777;
+}
+#app:not(.titan-active) #controller-keyboard output {
+  background: #080808;
+  color: white;
+  border: 2px solid #777;
+  border-radius: 0;
+}
+@media (max-width: 600px) {
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .options-sliders {
+    grid-template-columns: 1fr;
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .block-title
+    .hero {
+    margin-bottom: 44px;
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .title-splash-space {
+    right: 0;
+    width: 190px;
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .title-splash {
+    font-size: 12px;
+    max-width: 230px;
+  }
+  #app:not(.titan-active) #overlay:not([data-screen="inventory"]) .dialog {
+    max-height: calc(100dvh - 30px);
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    :is(button, .import-button) {
+    font-size: 13px;
+    min-height: 34px;
+  }
+}
+@media (max-height: 550px) {
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .block-title
+    .hero {
+    width: min(410px, 65vw);
+    margin-bottom: 24px;
+  }
+  #app:not(.titan-active) #overlay:not([data-screen="inventory"]) .world-panel {
+    gap: 4px;
+    width: min(360px, 80vw);
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .world-panel
+    button {
+    min-height: 29px;
+    padding: 4px;
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .title-button-grid {
+    margin-top: 3px;
+  }
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .pause-dialog
+    h2 {
+    margin-bottom: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #app:not(.titan-active)
+    #overlay:not([data-screen="inventory"])
+    .title-splash {
+    animation: none;
+    transform: rotate(-18deg);
+  }
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .java-options {
+  width: min(640px, 94vw);
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .options-pages {
+  margin: 25px 0 38px;
+  gap: 8px 12px;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .java-options
+  > button[data-action="back"] {
+  display: block;
+  width: min(400px, 100%);
+  margin: 26px auto 0;
+}
+#app:not(.titan-active)
+  #overlay:not([data-screen="inventory"])
+  .video-group
+  > p {
+  display: none;
+}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) .title-footer {
+  background: none;
+  box-shadow: none;
+  border: 0;
+}
+#app:not(.titan-active) .pad-focus {outline-color:#fff !important;}
+#app:not(.titan-active) #overlay:not([data-screen="inventory"]) :is(.stand-summary,.stand-energy,.stand-abilities>div,.stand-collection,.local-disc-grid>div,.session-player) {background:#202020b3;border:1px solid #666;border-radius:0;box-shadow:none;}

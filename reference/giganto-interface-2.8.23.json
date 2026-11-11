@@ -1,0 +1,36 @@
+{
+  "version": "2.8.23",
+  "scope": "Giganto arena UI only",
+  "sources": [
+    {
+      "url": "https://manuals.sega.com/sonicfrontiers/en/",
+      "publisher": "SEGA",
+      "viewedAssets": [
+        "img/wm_271.jpg",
+        "img/wm_291.jpg",
+        "img/wm_131.jpg"
+      ],
+      "observations": [
+        "Unboxed condensed ring counter with smaller capacity and vertical secondary counts.",
+        "Thin compass, pale objective ribbon, white target triangle and corner speed/boost gauge.",
+        "Diagonal cross stat arrangement at lower left.",
+        "Pale grey-blue menu surface and cyan selected top tab, with footer input prompts."
+      ]
+    },
+    {
+      "url": "https://store.steampowered.com/app/1237320/Sonic_Frontiers/",
+      "publisher": "SEGA",
+      "observations": [
+        "Official promotional screenshots inspected; no HUD is visible."
+      ]
+    }
+  ],
+  "substitutions": [
+    "Barlow Condensed under SIL OFL replaces the commercial font.",
+    "Original vectors and CSS recreate layout conventions.",
+    "Only real DCSMCRAFT resources and existing options are shown; no fake leveling or unavailable menu pages.",
+    "PC key prompts and six current skill indicators adapt the interface to this build."
+  ],
+  "referenceImagesShipped": false,
+  "commercialFontOrArtworkImported": false
+}

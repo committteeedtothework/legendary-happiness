@@ -1,0 +1,10 @@
+User-supplied menu recording
+File supplied by the user: Minecraft Console Menu Sounds.mp3
+Title metadata: Minecraft Console Menu Sounds
+Artist metadata: Imthecoolguy6
+Reference link: https://youtu.be/EDR551hzTTY
+This recording is third-party audio, not original DCSMCRAFT synthesis. Rights remain with the respective owners.
+The MP3 is preserved unchanged and embedded in the offline HTML; playback uses short offset/duration windows, with gain/fades for comfortable menu feedback.
+SHA-256: f025b026bf2740b1225a9cb36bb9b7358fdbc5223038e448c993e788d426bc0c
+
+User-confirmed cue order: Select (about 0.94 s), Hover (about 2.27 s), Exit (about 4.39 s), Slide (about 6.37 s).

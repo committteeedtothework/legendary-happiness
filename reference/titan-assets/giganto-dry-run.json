@@ -1,0 +1,69 @@
+{
+  "dry_run": true,
+  "valid": true,
+  "input": "Giganto from Sonic Frontiers, an original stylized real-time 3D game interpretation of a colossal ancient alien mechanical titan. Full-body neutral upright symmetrical T-pose for a biped skeleton, both long arms extended sideways, open clawed hands, feet planted slightly apart. Huge broad rounded layered shoulder mantle, powerful tapered chest, narrow waist, long angular legs, exceptionally long tapered blade-like forearms and articulated three-pronged pale metal claws. Dark charcoal and blue-black overlapping armor plates, fine etched geometric circuit markings, sparse restrained glowing crimson seams and red eyes, recessed small helmet-like face, a distinct pale serrated lower jaw that can be articulated. Ten clearly separated cylindrical dorsal emitters rising from the upper back and shoulders, dark shafts with crimson caps. Silhouette is imposing and alien rather than a generic human robot. Clean sharp panel edges, controlled bevels, subtle original PBR surface detail, readable joints at shoulders/elbows/wrists/hips/knees. Balanced continuous mesh surfaces suitable for smooth skin weights. No bulky human boots, no weapons, no pedestal, no terrain, no laser beams, no background, no text, no watermark, one character only. Browser-game hero asset for Three.js, original fan-made geometry and materials rather than an extracted production mesh.",
+  "scenario": "anim",
+  "model": "v3.1-20260211",
+  "model_reason": "explicit --model",
+  "steps": [
+    {
+      "name": "text-to-model",
+      "endpoint": "/v3/generation/text-to-model",
+      "task_type": "text_to_model",
+      "payload": {
+        "prompt": "Giganto from Sonic Frontiers, an original stylized real-time 3D game interpretation of a colossal ancient alien mechanical titan. Full-body neutral upright symmetrical T-pose for a biped skeleton, both long arms extended sideways, open clawed hands, feet planted slightly apart. Huge broad rounded layered shoulder mantle, powerful tapered chest, narrow waist, long angular legs, exceptionally long tapered blade-like forearms and articulated three-pronged pale metal claws. Dark charcoal and blue-black overlapping armor plates, fine etched geometric circuit markings, sparse restrained glowing crimson seams and red eyes, recessed small helmet-like face, a distinct pale serrated lower jaw that can be articulated. Ten clearly separated cylindrical dorsal emitters rising from the upper back and shoulders, dark shafts with crimson caps. Silhouette is imposing and alien rather than a generic human robot. Clean sharp panel edges, controlled bevels, subtle original PBR surface detail, readable joints at shoulders/elbows/wrists/hips/knees. Balanced continuous mesh surfaces suitable for smooth skin weights. No bulky human boots, no weapons, no pedestal, no terrain, no laser beams, no background, no text, no watermark, one character only. Browser-game hero asset for Three.js, original fan-made geometry and materials rather than an extracted production mesh.",
+        "model": "v3.1-20260211",
+        "texture": true,
+        "pbr": true,
+        "face_limit": 48000,
+        "texture_quality": "detailed",
+        "model_seed": 28122
+      }
+    },
+    {
+      "name": "rig-check",
+      "endpoint": "/v3/animations/rig-check",
+      "task_type": "animate_prerigcheck",
+      "payload": {
+        "input": "<upstream>"
+      }
+    },
+    {
+      "name": "convert",
+      "endpoint": "/v3/models/convert",
+      "task_type": "convert_model",
+      "payload": {
+        "input": "<upstream>",
+        "format": "GLTF",
+        "texture_size": 2048,
+        "texture_format": "PNG"
+      }
+    },
+    {
+      "name": "rig",
+      "endpoint": "/v3/animations/rig",
+      "task_type": "animate_rig",
+      "payload": {
+        "input": "<upstream>",
+        "spec": "tripo",
+        "out_format": "glb",
+        "model": "v2.5-20260210"
+      }
+    }
+  ],
+  "pending_uploads": [],
+  "deliverables": [
+    "GLB",
+    "FBX"
+  ],
+  "candidates": 1,
+  "warnings": [
+    "--then overrides the default anim processing chain",
+    "non-default convert options use the \"complex convert\" price tier"
+  ],
+  "errors": [],
+  "cost_notes": [
+    "texture_quality detailed: higher price tier",
+    "non-default convert options bill as complex convert"
+  ]
+}

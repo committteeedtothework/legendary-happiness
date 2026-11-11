@@ -1,0 +1,47 @@
+{
+  "version": "2.9.2",
+  "references": [
+    {
+      "url": "https://asia.sega.com/SonicFrontiers/en/",
+      "kind": "official product page",
+      "status": 200
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Sonic_Frontiers",
+      "kind": "gameplay description and Kronos gameplay screenshot",
+      "status": 200
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Sonic_Frontiers_-_Sonic_on_Kronos_Island.jpg",
+      "kind": "viewed external research image; not redistributed",
+      "status": 200
+    },
+    {
+      "url": "https://progameguides.com/sonic/sonic-frontiers-boss-fight-guide-how-to-beat-giganto/",
+      "kind": "Giganto arm swings, parry damage, dorsal lasers and struggle sequences",
+      "status": 200
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=M2XRHLJMGVQ",
+      "kind": "previous user reference; unavailable through current proxy",
+      "status": 403
+    }
+  ],
+  "visualObservations": [
+    "Layered woodland on grassy rock terraces, open patches and exposed strata",
+    "Slender trunks, open irregular leaf crowns, foreground scrub and meadow plants",
+    "Blue atmospheric depth, isolated ruined towers and partial stone rings"
+  ],
+  "combatAdaptation": {
+    "health": {
+      "easy": 80000,
+      "normal": 120000,
+      "hard": 160000
+    },
+    "playerDamageUnchanged": true,
+    "healthMigration": "preserve in-progress percentage; do not rescale revision-five custom damage",
+    "moves": "one buffered intent; recovery cancels after completed successful contact/emission; costs and cooldowns retained",
+    "camera": "live Sonic shoulder shots and avatar-relative camera transport; protected cinematics retain their own shots"
+  },
+  "assetPolicy": "All new foliage, landmarks and impact Foley are generated original replacements. External reference images are research only. No 1:1 art or choreography claim."
+}

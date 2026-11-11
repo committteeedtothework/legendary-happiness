@@ -1,0 +1,158 @@
+/* Original touch artwork, isolated to the mobile build's PocketTouchInput. */
+.pocket-controls {
+  --pocket-size: 1;
+  --pocket-side: max(18px, calc(env(safe-area-inset-left) + 10px));
+  --pocket-bottom: max(80px, calc(env(safe-area-inset-bottom) + 75px));
+}
+.pocket-controls button {
+  border-radius: 2px !important;
+  border: 2px solid #f4f4f4aa !important;
+  background: #2727278c !important;
+  box-shadow: inset 0 0 0 2px #15151585 !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  min-height: 48px !important;
+  min-width: 48px;
+  color: white;
+}
+.pocket-controls button.held,
+.pocket-controls button[aria-pressed="true"] {
+  background: #a2a2a29c !important;
+  box-shadow: inset 0 0 0 2px #fff9 !important;
+}
+.pocket-controls .touch-top {
+  left: 50%; right: auto;
+  transform: translateX(-50%);
+  gap: 4px;
+  top: max(6px, env(safe-area-inset-top));
+}
+.pocket-controls .touch-top button { min-width: 44px; min-height: 40px !important; padding: 4px 8px; }
+.pocket-controls .touch-top [data-touch="pause"] { font-size: 22px !important; }
+.pocket-controls .touch-top [data-touch="chat"] { font-size: 22px !important; }
+.pocket-controls > .pocket-inventory {
+  position: absolute;
+  bottom: max(6px, env(safe-area-inset-bottom));
+  left: calc(50% + min(168px, calc(50vw - 45px)));
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  font-size: 26px !important;
+  background: #777c !important;
+}
+#touch-controls.pocket-controls > .pocket-inventory {
+  box-sizing: border-box;
+  width: 44px;
+  min-width: 44px;
+}
+.pocket-controls[data-arena="true"] .pocket-inventory {
+  position: absolute;
+  left: calc(50% + 86px);
+  top: max(6px, env(safe-area-inset-top));
+  bottom: auto;
+  font-size: 18px !important;
+  height: 40px;
+}
+.pocket-controls #touch-joystick {
+  width: calc(112px * var(--pocket-size));
+  height: calc(112px * var(--pocket-size));
+  left: var(--pocket-side);
+  bottom: var(--pocket-bottom);
+  border-radius: 4px;
+  border: 2px solid #eeeeee66;
+  background: #15151566;
+  box-shadow: inset 0 0 0 4px #15151533;
+}
+.pocket-controls #touch-joystick::before,
+.pocket-controls #touch-joystick::after {
+  content: ""; position: absolute; pointer-events: none; background: #eee4;
+}
+.pocket-controls #touch-joystick::before { width: 2px; height: 100%; left: 50%; }
+.pocket-controls #touch-joystick::after { height: 2px; width: 100%; top: 50%; }
+.pocket-controls #touch-joystick i {
+  width: 44px; height: 44px;
+  left: calc(50% - 24px); top: calc(50% - 24px);
+  z-index: 1; border-radius: 3px;
+  background: #b9b9b9a8;
+  border: 2px solid #fff9;
+  box-shadow: inset 2px 2px #fff5, inset -2px -2px #0008;
+}
+#touch-dpad {
+  position: absolute; pointer-events: auto; touch-action: none;
+  left: var(--pocket-side); bottom: var(--pocket-bottom);
+  width: calc(144px * var(--pocket-size)); height: calc(144px * var(--pocket-size));
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+  opacity: var(--touch-opacity);
+}
+#touch-dpad span {
+  display: grid; place-items: center; border: 2px solid #ddd8;
+  background: #25252588; color: #eee; text-shadow: 2px 2px #111;
+  font-size: 22px; user-select: none; -webkit-user-select: none;
+}
+#touch-dpad [data-direction="center"] { color: #ccc9; font-size: 12px; }
+#touch-dpad :is([data-direction="nw"], [data-direction="ne"], [data-direction="sw"], [data-direction="se"]) { border-color: #ccc3; font-size: 15px; }
+.pocket-controls .touch-buttons {
+  right: max(16px, calc(env(safe-area-inset-right) + 10px));
+  bottom: var(--pocket-bottom);
+  display: grid; grid-template-columns: repeat(2, calc(58px * var(--pocket-size)));
+  gap: 8px;
+}
+.pocket-controls .touch-buttons button { height: calc(52px * var(--pocket-size)); padding: 4px; }
+.pocket-controls .touch-buttons button {
+  position: relative; padding: 23px 3px 3px; font-size: 10px !important;
+  display: flex; align-items: flex-end; justify-content: center;
+  box-sizing: border-box; line-height: 1;
+}
+.pocket-controls .touch-buttons button::before {
+  content: ""; position: absolute; width: 18px; height: 18px;
+  left: calc(50% - 9px); top: 4px; background: #eee;
+  filter: drop-shadow(1px 1px #111); pointer-events: none;
+  mask: var(--pocket-icon) center / contain no-repeat;
+  -webkit-mask: var(--pocket-icon) center / contain no-repeat;
+}
+.pocket-controls [data-touch="attack"] { --pocket-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M11 1h4v4l-7 7-2-2-3 4H1v-2l4-3-2-2 2-2 2 2z'/%3E%3C/svg%3E"); }
+.pocket-controls [data-touch="use"] { --pocket-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 1h4v5h5v4h-5v5H6v-5H1V6h5z'/%3E%3C/svg%3E"); }
+.pocket-controls [data-touch="jump"] { --pocket-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 1h4v2h2v2h2v3h-4v7H6V8H2V5h2V3h2z'/%3E%3C/svg%3E"); }
+.pocket-controls [data-touch="down"] { --pocket-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 1h4v7h4v3h-2v2h-2v2H6v-2H4v-2H2V8h4z'/%3E%3C/svg%3E"); }
+.pocket-controls :is([data-touch="sprint"], [data-touch="boost"], [data-touch="dodge"]) { --pocket-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 2h3v2h2v2h2v4H6v2H4v2H1v-4h2V6H1zM9 2h2v2h2v2h2v4h-2v2h-2v2H9v-4h2V6H9z'/%3E%3C/svg%3E"); }
+.pocket-controls [data-touch="jump"] { border-radius: 3px !important; }
+.pocket-controls [data-touch="sprint"] { grid-column: 1 / 3; height: 44px !important; }
+.pocket-controls .pocket-utility {
+  position: absolute; right: max(16px, calc(env(safe-area-inset-right) + 10px));
+  bottom: calc(var(--pocket-bottom) + 3 * (52px * var(--pocket-size) + 8px));
+}
+.pocket-controls #touch-tray {
+  top: max(54px, calc(env(safe-area-inset-top) + 48px));
+  right: max(12px, env(safe-area-inset-right));
+  max-height: min(46dvh, 290px);
+  grid-template-columns: repeat(3, minmax(78px, 105px));
+  gap: 6px; background: #272727ed; border: 2px solid #ddd9;
+  padding: 8px; overscroll-behavior: contain; touch-action: pan-y;
+}
+.pocket-controls #touch-tray button { min-height: 50px !important; }
+.pocket-controls[data-left-handed="true"] #touch-joystick,
+.pocket-controls[data-left-handed="true"] #touch-dpad { left: auto; right: max(18px, calc(env(safe-area-inset-right) + 10px)); }
+.pocket-controls[data-left-handed="true"] .touch-buttons,
+.pocket-controls[data-left-handed="true"] .pocket-utility { right: auto; left: var(--pocket-side); }
+.pocket-layout .hud-bottom { width: min(414px, calc(100vw - 12px)); max-width: none; }
+.pocket-layout .hotbar { width: calc(100% - 46px); margin-right: 46px; }
+.pocket-layout .hotbar-slot { height: 44px; }
+.pocket-layout .hud-bottom { bottom: max(6px, env(safe-area-inset-bottom)); }
+.pocket-layout .world-clock { top: max(55px, calc(env(safe-area-inset-top) + 48px)); font-size: 11px; }
+.pocket-layout #weapon-moves { display: none; }
+.pocket-layout #toast {
+  top: max(58px, calc(env(safe-area-inset-top) + 52px));
+  bottom: auto !important;
+  height: max-content;
+  max-width: calc(100vw - 24px);
+}
+.pocket-layout #titan-hud .titan-health { top: max(60px, calc(env(safe-area-inset-top) + 54px)); }
+.pocket-layout #titan-hud .titan-target-state { bottom: 62px; }
+@media (max-height: 500px) {
+  .pocket-controls { --pocket-bottom: max(68px, calc(env(safe-area-inset-bottom) + 57px)); }
+  .pocket-controls #touch-joystick { width: calc(100px * var(--pocket-size)); height: calc(100px * var(--pocket-size)); }
+  .pocket-controls #touch-dpad { width: calc(132px * var(--pocket-size)); height: calc(132px * var(--pocket-size)); }
+  .pocket-controls .touch-buttons { grid-template-columns: repeat(2, calc(56px * var(--pocket-size))); gap: 5px; }
+  .pocket-controls .touch-buttons button { height: calc(46px * var(--pocket-size)); }
+  .pocket-controls [data-touch="sprint"] { height: 40px !important; min-height: 40px !important; }
+  .pocket-controls .pocket-utility { bottom: calc(var(--pocket-bottom) + 3 * (48px * var(--pocket-size) + 5px)); }
+}

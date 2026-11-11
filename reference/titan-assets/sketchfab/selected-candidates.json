@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "source": "Sketchfab public Data API",
+  "status": "Originally researched candidates; user subsequently supplied downloads, integrated in 2.8.2. See ../imported-assets-2.8.2.json",
+  "tripoCancelled": true,
+  "tripoCreditsSpent": 0,
+  "credentialsRequested": false,
+  "selectedCandidates": [
+    {
+      "role": "sonic",
+      "uid": "cf9837777ff142b6b2e83d9569c8f4c6",
+      "name": "3D sonic rigged",
+      "url": "https://sketchfab.com/3d-models/3d-sonic-rigged-cf9837777ff142b6b2e83d9569c8f4c6",
+      "author": "ily20111",
+      "creatorAttribution": "ily20111",
+      "triangles": 10414,
+      "listedAnimationCount": 1,
+      "downloadableListing": true,
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "officialDownloadStatus": {
+        "status": 401,
+        "message": "{\"detail\":\"Authentication credentials were not provided.\"}"
+      },
+      "thumbnailReviewed": true,
+      "modelFilesRetrieved": false,
+      "rigAndAnimationContentsVerified": false,
+      "importedIntoGame": false
+    },
+    {
+      "role": "giganto",
+      "uid": "f4cbf7a0363a4692883ace2deb8193cf",
+      "name": "Giganto - Sonic Frontiers",
+      "url": "https://sketchfab.com/3d-models/giganto-sonic-frontiers-f4cbf7a0363a4692883ace2deb8193cf",
+      "author": "Logandium",
+      "creatorAttribution": "This model is originally created by HiGuys920 on DeviantArt. if you want to see more of his 3D Models, here is the link: https://www.deviantart.com/higuys920",
+      "triangles": 42081,
+      "listedAnimationCount": 0,
+      "downloadableListing": true,
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "officialDownloadStatus": {
+        "status": 401,
+        "message": "{\"detail\":\"Authentication credentials were not provided.\"}"
+      },
+      "thumbnailReviewed": true,
+      "modelFilesRetrieved": false,
+      "rigAndAnimationContentsVerified": false,
+      "importedIntoGame": false
+    }
+  ],
+  "nextRequiredInput": "Download the chosen archives through Sketchfab and upload GLB/glTF ZIP files, including textures. No game asset replacement has occurred.",
+  "checksCompleted": [
+    "public listing downloadable flags",
+    "public triangle counts",
+    "public license metadata",
+    "public reported animation counts",
+    "reference thumbnail review",
+    "official download endpoint authentication check"
+  ],
+  "checksPending": [
+    "actual skeleton and skin weights",
+    "texture dimensions and embedding",
+    "real animation tracks and retargeting",
+    "custom combat/jaw/dorsal clips",
+    "existing engine/save integration",
+    "in-game performance and playthrough"
+  ]
+}

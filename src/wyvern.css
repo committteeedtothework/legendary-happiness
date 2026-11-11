@@ -1,0 +1,32 @@
+#titan-hud[data-encounter="wyvern"] .titan-title {
+  letter-spacing: 0.08em;
+}
+#titan-hud .wyvern-timing .qte-time {
+  transform-origin: 60px 60px;
+  stroke: #fc476a !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  transition: none !important;
+}
+#titan-hud .wyvern-timing .qte-effort {
+  transform-origin: 60px 60px;
+  stroke: #fff !important;
+  stroke-width: 9px !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  transition: none !important;
+}
+#titan-hud[data-encounter="wyvern"] .titan-detail {
+  max-width: 600px;
+}
+.wyvern-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #fff1f7;
+  opacity: 0;
+  z-index: 2;
+}
+#titan-hud:not([data-encounter="wyvern"]) .wyvern-flash {
+  display: none;
+}

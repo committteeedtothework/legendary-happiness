@@ -1,0 +1,24 @@
+{
+  "version": "2.8.4",
+  "sourceModels": "unchanged user-supplied Sketchfab meshes/textures, revised original keyframes",
+  "runtime": "src/titan-kinematics.js and titan-imports.js; damped animation transitions and two-bone arm targets",
+  "clips": {
+    "sonic": 22,
+    "giganto": 24
+  },
+  "models": {
+    "sonic": {
+      "sha256": "a3cf34828a9462d33cfb870bb934a98d3df5f2ea946b1bb9fc29e234f5176878",
+      "bytes": 2353860
+    },
+    "giganto": {
+      "sha256": "35053758d63b06aa8636ee7ac07e6e6380889181a4b09fcd2a0685fee823c8f6",
+      "bytes": 12494320
+    }
+  },
+  "limits": [
+    "no new finger/facial bones",
+    "analytic combat volumes retained",
+    "runtime IK and presentation movement are engine layers, not baked into reusable GLB animation clips"
+  ]
+}
