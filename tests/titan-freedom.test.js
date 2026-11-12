@@ -14,11 +14,11 @@ import {sonicTraversalInput,applySonicTraversal} from '../src/sonic-traversal.js
 const variants=[['giganto',titanSession,titanInput,stepTitan,restoreTitanSession],['wyvern',wyvernSession,wyvernInput,stepWyvern,restoreWyvernSession]];
 const wrap=x=>Math.atan2(Math.sin(x),Math.cos(x));
 for(const [name,make,input,step,restore] of variants){
- test(name+' retains the last body heading on release, responds to idle look and preserves it on save',()=>{
+ test(name+' retains body heading while the idle camera turns and preserves it on save',()=>{
   const s=make({drain:0});s.stage='traversal';s.original={};Object.assign(s.avatar,{x:0,y:0,z:150,yaw:0,onGround:true});
   for(let i=0;i<20;i++)step(s,{right:true});const facing=s.avatar.facingYaw;
   for(let i=0;i<90;i++)step(s,{});assert.ok(Math.abs(wrap(s.avatar.facingYaw-facing))<1e-8);
-  s.avatar.yaw+=0.7;step(s,{});assert.ok(Math.abs(wrap(s.avatar.facingYaw-facing)-0.7)<1e-8);
+  s.avatar.yaw+=0.7;step(s,{});assert.ok(Math.abs(wrap(s.avatar.facingYaw-facing))<1e-8);
   const r=restore(JSON.parse(JSON.stringify(s)));assert.ok(r);assert.ok(Math.abs(wrap(r.avatar.facingYaw-s.avatar.facingYaw))<1e-8);
  });
  test(name+' exposes jump, double jump, air dash, stomp, slide, roll, parry and attack before combat without boss damage',()=>{

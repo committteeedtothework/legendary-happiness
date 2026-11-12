@@ -38,45 +38,14 @@ export function clearTitanCamera(s, camera, clearance) {
     regions = titanBodyRegions(s);
   if(s.titan!=="wyvern")camera=clearBoxCamera(camera,focus,titanBoulderBounds());
   if (!blocked(regions, focus, camera)) return { ...camera };
-  const center = titanWorldPoint(s, { x: 0, y: 0, z: -7.5 }),
-    angle = Math.atan2(p.x - center.x, p.z - center.z),
-    target = Math.atan2(camera.x - center.x, camera.z - center.z),
-    delta = Math.atan2(Math.sin(target - angle), Math.cos(target - angle)),
-    radius = Math.max(
-      clearance + 8,
-      Math.hypot(p.x - center.x, p.z - center.z) + 14,
-    ),
-    preferred = Math.max(-0.95, Math.min(0.95, delta));
-  for (const offset of [preferred, -preferred, 0, 0.55, -0.55]) {
-    const candidate = point(
-      center.x + Math.sin(angle + offset) * radius,
-      Math.max(2.5, camera.y, p.y + 4),
-      center.z + Math.cos(angle + offset) * radius,
-    );
-    if (!blocked(regions, focus, candidate)) return candidate;
+  // Shorten the existing boom; never orbit or teleport to the other side.
+  // Ignore the first centimetres when an attacking limb briefly covers focus.
+  let safe={...focus}, entered=false;
+  for(let i=1;i<=64;i++) {
+    const u=i/64,candidate=point(focus.x+(camera.x-focus.x)*u,focus.y+(camera.y-focus.y)*u,focus.z+(camera.z-focus.z)*u);
+    if(blocked(regions,candidate,candidate)) {if(entered)break;continue;}
+    if(entered&&blocked(regions,safe,candidate))break;
+    safe=candidate;entered=true;
   }
-  // Last resort: shorten the boom from Sonic's side of the obstruction.
-  let last = point(focus.x, focus.y + 1.5, focus.z);
-  for (let i = 1; i <= 16; i++) {
-    const u = i / 16,
-      candidate = point(
-        focus.x + (camera.x - focus.x) * u,
-        focus.y + (camera.y - focus.y) * u,
-        focus.z + (camera.z - focus.z) * u,
-      );
-    if (blocked(regions, focus, candidate)) break;
-    last = candidate;
-  }
-  if (
-    Math.hypot(last.x - (s.boss?.x || 0), last.z - (s.boss?.z || 0)) >=
-    clearance
-  )
-    return last;
-  // A transient attacking limb may cover the focus itself. Keep the camera
-  // outside the giant rather than pulling it inside the mantle with Sonic.
-  return point(
-    center.x + Math.sin(angle + preferred) * radius,
-    Math.max(2.5, camera.y, p.y + 4),
-    center.z + Math.cos(angle + preferred) * radius,
-  );
+  return safe;
 }

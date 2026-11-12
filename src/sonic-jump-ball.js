@@ -32,7 +32,7 @@ export class SonicJumpBall {
   }
   if(!this.group.visible)return;
   const gold=!!s.emerald;this.core.material.color.set(gold?'#ffd331':'#047ee9');this.core.material.emissive.set(gold?'#b88b05':'#0359bc');this.halo.material.color.set(gold?'#ffe690':'#2caaff');
-  const k=sonicLength(s,1);this.group.position.set(s.avatar.x,s.avatar.y+1.65*k,s.avatar.z);this.group.scale.setScalar(k*(0.7+0.3*this.weight));
+  const k=sonicLength(s,1);this.group.position.set(s.avatar.x,s.avatar.y+1.08*k,s.avatar.z);this.group.scale.setScalar(k*(0.7+0.3*this.weight));
   this.core.rotation.set(s.time*17,s.time*2.5,s.time*1.3);
   this.halo.visible=s.config.particles!==false;this.halo.material.opacity=0.14*this.weight;
   this.rings.forEach((m,i)=>{m.material.color.set(s.emerald?'#fff1b6':'#8addff');m.visible=s.config.particles!==false;m.rotation.set(s.time*(4+i),i*0.9,s.time*(i%2?-6:6));m.material.opacity=0.5*this.weight;});

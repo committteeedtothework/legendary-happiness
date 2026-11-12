@@ -1,3 +1,4 @@
+import {playAchievementCue, achievementEnvelope, ACHIEVEMENT_NOTICE} from "./achievement-feedback.js";
 import { ACHIEVEMENTS, ACHIEVEMENT_CATEGORIES } from "./achievement-data.js";
 import { achievementState, achievementSummary } from "./achievements.js";
 import { iconURL } from "./textures.js";
@@ -61,7 +62,7 @@ export class AchievementView {
     const tabs = [["all", "All"], ...ACHIEVEMENT_CATEGORIES];
     g.ui.setScreen(
       "achievements",
-      `<main class="dialog achievement-window" aria-labelledby="achievement-title"><header class="achievement-heading"><div><h2 id="achievement-title">Achievements</h2><p>${completed} / ${total} unlocked</p></div><button data-action="back">Done</button></header><nav class="achievement-tabs" aria-label="Achievement categories">${tabs.map(([id, label]) => `<button data-ach-category="${id}" aria-pressed="${this.category === id}">${label}</button>`).join("")}</nav><div class="achievement-tools"><input id="achievement-search" type="search" placeholder="Search achievements…" aria-label="Search achievements" value="${esc(this.query)}" maxlength="100"><div role="group" aria-label="Achievement status">${[
+      `<main class="dialog achievement-window ${g.giganto?.active ? "achievement-arena" : "achievement-overworld"}" aria-labelledby="achievement-title"><header class="achievement-heading"><div><h2 id="achievement-title">Achievements</h2><p>${completed} / ${total} unlocked</p></div><button data-action="back">Done</button></header><nav class="achievement-tabs" aria-label="Achievement categories">${tabs.map(([id, label]) => `<button data-ach-category="${id}" aria-pressed="${this.category === id}">${label}</button>`).join("")}</nav><div class="achievement-tools"><input id="achievement-search" type="search" placeholder="Search achievements…" aria-label="Search achievements" value="${esc(this.query)}" maxlength="100"><div role="group" aria-label="Achievement status">${[
         ["all", "All"],
         ["locked", "Locked"],
         ["unlocked", "Unlocked"],
@@ -137,12 +138,17 @@ export class AchievementView {
     if (this.remaining > 0) this.remaining = Math.max(0, this.remaining - dt);
     if (!this.remaining && this.queue.length) {
       const entry = this.queue.shift();
-      this.remaining = 4;
+      this.remaining = ACHIEVEMENT_NOTICE.duration;
+      this.toast.dataset.theme = g.giganto?.active ? "arena" : "overworld";
       this.toast.innerHTML = `<img alt="" src="${iconURL(entry.icon)}"><div><span>${entry.challenge ? "Challenge complete!" : "Achievement unlocked!"}</span><strong>${esc(entry.title)}</strong></div>`;
       this.toast.classList.toggle("challenge", !!entry.challenge);
       this.toast.hidden = false;
-      // Use the existing menu bus: independent volume, pause and mute behavior.
-      g.audio.menu("select");
+      if(g.giganto?.active)playAchievementCue(g.audio.context,g.giganto.audio?.bus,{arena:true,challenge:!!entry.challenge});
+      else g.audio.achievement({challenge:!!entry.challenge});
     }
+    const envelope=achievementEnvelope(ACHIEVEMENT_NOTICE.duration-(this.remaining || 0));
+    this.toast.style.opacity=String(envelope);
+    this.toast.style.setProperty('--notice-offset', `${(1-envelope)*18}px`);
+    if(!this.remaining)this.toast.hidden=true;
   }
 }

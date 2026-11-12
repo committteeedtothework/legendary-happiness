@@ -43,25 +43,27 @@ export function platformHeight(t,x,z){
 export function platformCandidates(x,z){return wyvernPlatforms().cells.get(Math.floor(x/CELL)+':'+Math.floor(z/CELL))||[];}
 // The same triangles draw and support each floor. Substeps sweep fast falls,
 // stomps and dashes; separate head tests make each slab solid from below.
-export function resolveWyvernPlatforms(p,from){
+export function resolveWyvernPlatforms(p,from,{radius=0.8,height=3.7}={}){
  const dx=p.x-from.x,dy=p.y-from.y,dz=p.z-from.z,count=Math.min(256,Math.max(1,Math.ceil(Math.hypot(dx,dy,dz)/0.35)));
  p.x=from.x;p.y=from.y;p.z=from.z;let support=null,sx=dx/count,sy=dy/count,sz=dz/count;
  for(let i=0;i<count;i++){
   const old={x:p.x,y:p.y,z:p.z,onGround:!!p.onGround};p.x+=sx;p.y+=sy;p.z+=sz;
   let floor=null,ceiling=Infinity,overlap=false;
-  for(const tri of platformCandidates(p.x,p.z)){
-   const q=platformHeight(tri,p.x,p.z);if(!q)continue;
+  const centered=platformCandidates(p.x,p.z).some(t=>platformHeight(t,p.x,p.z));
+  const offsets=centered?[[0,0]]:[[0,0],[radius*0.7,0],[-radius*0.7,0],[0,radius*0.7],[0,-radius*0.7]];
+  for(const [ox,oz] of offsets)for(const tri of platformCandidates(p.x+ox,p.z+oz)){
+   const q=platformHeight(tri,p.x+ox,p.z+oz);if(!q)continue;
    if(p.vy<=0 && p.y<=q.y+(old.onGround?0.8:0.051) && old.y>=q.y-(old.onGround?1.8:0.015) && (!floor||q.y>floor.y))floor=q;
    const underside=q.y-q.depth;
-   if(q.depth>0&&p.y<q.y-0.001&&p.y+3.7>underside+0.001)overlap=true;
-   if(q.depth>0&&p.vy>0&&old.y+3.7<=underside+0.01&&p.y+3.7>=underside)ceiling=Math.min(ceiling,underside);
+   if(q.depth>0&&p.y<q.y-0.001&&p.y+height>underside+0.001)overlap=true;
+   if(q.depth>0&&p.vy>0&&old.y+height<=underside+0.01&&p.y+height>=underside)ceiling=Math.min(ceiling,underside);
   }
   p.onGround=false;
   if(floor){p.y=floor.y+0.05;p.vy=0;sy=0;p.onGround=true;support=floor;}
-  else if(Number.isFinite(ceiling)){p.y=ceiling-3.705;p.vy=0;sy=0;}
+  else if(Number.isFinite(ceiling)){p.y=ceiling-height-0.005;p.vy=0;sy=0;}
   else if(overlap){
    let wasInside=false;
-   for(const tri of platformCandidates(old.x,old.z)){const q=platformHeight(tri,old.x,old.z);if(q&&q.depth>0&&old.y<q.y-0.001&&old.y+3.7>q.y-q.depth+0.001){wasInside=true;break;}}
+   for(const tri of platformCandidates(old.x,old.z)){const q=platformHeight(tri,old.x,old.z);if(q&&q.depth>0&&old.y<q.y-0.001&&old.y+height>q.y-q.depth+0.001){wasInside=true;break;}}
    if(!wasInside){p.x=old.x;p.z=old.z;p.vx=p.vz=0;sx=sz=0;}
   }
   const terrain=wyvernGround(p.x,p.z);

@@ -134,3 +134,18 @@
     min-height: 32px;
   }
 }
+#controller-cursor {position:fixed;left:0;top:0;width:18px;height:18px;margin:-9px;z-index:2200;pointer-events:none;filter:drop-shadow(0 1px 2px #000);border:1px solid #fff8;border-radius:50%;}
+#controller-cursor::before,#controller-cursor::after {content:"";position:absolute;background:white;box-shadow:0 0 1px #000;}
+#controller-cursor::before {width:24px;height:2px;left:-4px;top:7px;}
+#controller-cursor::after {height:24px;width:2px;left:7px;top:-4px;}
+#controller-cursor[hidden]{display:none;}
+#app kbd.pad-glyph,#app [data-controller-glyph].pad-glyph {display:inline-flex;justify-content:center;align-items:center;min-width:1.65em;min-height:1.65em;padding:0.08em 0.36em;box-sizing:border-box;border:1px solid #dbe8ee;background:#18222e;color:#fff;border-radius:0.4em;box-shadow:0 2px 0 #0009;font-family:Arial,sans-serif;font-weight:700;text-shadow:none;vertical-align:middle;line-height:1.2;}
+#app .pad-glyph[data-pad-face]:not([data-pad-face="control"]) {border-radius:50%;padding:0.08em;}
+#app .pad-glyph[data-pad-family="xbox"][data-pad-face="a"]{color:#8be78b;}
+#app .pad-glyph[data-pad-family="xbox"][data-pad-face="b"]{color:#ff8d8d;}
+#app .pad-glyph[data-pad-family="xbox"][data-pad-face="x"]{color:#86c3ff;}
+#app .pad-glyph[data-pad-family="xbox"][data-pad-face="y"]{color:#ffe27f;}
+#app .pad-glyph[data-pad-family="playstation"][data-pad-face="cross"]{color:#9ebcff;}
+#app .pad-glyph[data-pad-family="playstation"][data-pad-face="circle"]{color:#ff9d9d;}
+#app .pad-glyph[data-pad-family="playstation"][data-pad-face="square"]{color:#f0a5e4;}
+#app .pad-glyph[data-pad-family="playstation"][data-pad-face="triangle"]{color:#88e7bf;}

@@ -1,3 +1,4 @@
+import {ControllerCursor} from "./controller-cursor.js";
 import {
   controllerConfig,
   readController,
@@ -50,10 +51,11 @@ export class ControllerInput {
         return;
       game.touch?.deactivate();
       this.handoffRead = this.lastRead || null;
-      this.restorePrompts();
+      if(this.lastDevice!=="keyboard")this.restorePrompts();
       document
         .querySelectorAll(".pad-focus")
         .forEach((n) => n.classList.remove("pad-focus"));
+      this.cursor?.hide();
       this.lastDevice = "keyboard";
       document.querySelector("#app").dataset.input = "keyboard";
     };
@@ -92,6 +94,7 @@ export class ControllerInput {
         this.pad = null;
       }
     });
+    this.cursor=new ControllerCursor(this);
     installControllerUI(this);
   }
   status() {
@@ -104,6 +107,7 @@ export class ControllerInput {
     return new Set([...keys, ...this.padKeys]);
   }
   clear() {
+    this.cursor?.hide();
     this.padKeys.clear();
     this.arenaKeys.clear();
     this.move = { x: 0, y: 0 };
@@ -419,6 +423,8 @@ export class ControllerInput {
         n.getAttribute("aria-hidden") !== "true",
     );
     for (const n of nodes) if (n.matches(".slot[data-ref]")) n.tabIndex = 0;
+    if(g.ui.screen==='inventory'&&!this.keyboard&&this.config.inventoryCursor!==false){this.cursor.frame(r,edge,dt,names,nodes);return;}
+    this.cursor.hide();
     const tabs = [
       ...root.querySelectorAll('[role="tab"],[data-titan-tab]'),
     ].filter(activeNode);
@@ -728,6 +734,9 @@ export class ControllerInput {
     root.append(back);
   }
   decorate() {
+    const key=`${this.family}:${this.lastDevice}:${this.game.ui.screen}`;
+    if(this.promptKey===key)return;
+    this.promptKey=key;
     if (this.game.prompts) this.game.prompts.dirty = true;
   }
   restorePrompts() {

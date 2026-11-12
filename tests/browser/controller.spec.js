@@ -171,6 +171,7 @@ test("controller creates a world, operates analog movement, inventory transfers,
   expect(await page.evaluate(() => dcsmcraft.ui.screen)).toBe("inventory");
   await page.evaluate(() => {
     const g = dcsmcraft;
+    g.settings.controller.inventoryCursor=false; // Exercise the optional focus mode; free cursor has its own transaction test.
     g.inventory.slots.fill(null);
     g.inventory.slots[9] = { id: "dirt", count: 12 };
     g.ui.creativeTab = "inventory";

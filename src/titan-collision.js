@@ -18,12 +18,19 @@ export function boxContact(p,box,radius=0.9,height=3.7){
  const v={x:0,y:0,z:0},k=['x','y','z'][axis];v[k]=((k==='x'?x:k==='y'?y:z)>=0?1:-1)*(depths[axis]+0.001);
  return {x:v.x*c+v.z*a,y:v.y,z:v.z*c-v.x*a};
 }
-export function constrainBoxes(p,boxes,radius=0.9,height=3.7){
- for(let pass=0;pass<3;pass++)for(const b of boxes){const q=boxContact(p,b,radius,height);if(!q)continue;p.x+=q.x;p.y+=q.y;p.z+=q.z;
+export function constrainBoxes(p,boxes,radius=0.9,height=3.7,floor=-Infinity){
+ for(let pass=0;pass<3;pass++)for(const b of boxes){let q=boxContact(p,b,radius,height);if(!q)continue;
+  if(q.y<0&&p.y+q.y<floor){
+    const c=Math.cos(b.yaw||0),a=Math.sin(b.yaw||0),dx=p.x-b.x,dz=p.z-b.z,x=dx*c-dz*a,z=dz*c+dx*a;
+    const px=b.w/2+radius-Math.abs(x)+0.001,pz=b.d/2+radius-Math.abs(z)+0.001;
+    const ux=px<pz?(x>=0?px:-px):0,uz=px<pz?0:(z>=0?pz:-pz);
+    q={x:ux*c+uz*a,y:0,z:uz*c-ux*a};
+  }p.x+=q.x;p.y+=q.y;p.z+=q.z;
   const n=Math.hypot(q.x,q.y,q.z),dot=(p.vx||0)*q.x+(p.vy||0)*q.y+(p.vz||0)*q.z;
   if(dot<0&&n>0){p.vx-=q.x*dot/(n*n);p.vy-=q.y*dot/(n*n);p.vz-=q.z*dot/(n*n);}
   if(q.y>0)p.onGround=true;
  }
+ if(p.y<floor){p.y=floor;p.vy=Math.max(0,p.vy||0);p.onGround=p.vy===0;}
 }
 export function clearBoxCamera(camera,focus,boxes){
  const dx=camera.x-focus.x,dy=camera.y-focus.y,dz=camera.z-focus.z;let safe=1;

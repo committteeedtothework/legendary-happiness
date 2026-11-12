@@ -1,3 +1,4 @@
+import {titanTargetContact} from "./titan-targeting.js";
 import {SonicTraversalFX} from "./sonic-traversal-fx.js";
 import { SonicJumpBall } from "./sonic-jump-ball.js";
 import { titanEmeraldPoint } from "./titan-metrics.js";
@@ -1276,7 +1277,7 @@ export class TitanView {
           : titanCinematicShot(s, this.sonic.position);
     const moveShot = shot ? null : titanMoveShot(s);
     const closeGameplay =
-      s.stage === "combat" && s.config.moveCamera !== false && !shot;
+      ["combat","traversal","victory"].includes(s.stage) && !shot;
     this.cameraFollow ||= {};
     const transport = titanCameraTransport(this.cameraFollow, s);
     if (!shot && this.camReady) {
@@ -1322,7 +1323,7 @@ export class TitanView {
       target.set(centre.x + rx * 0.72, p.y + 2, centre.z + rz * 0.72);
       desired.set(centre.x + rx * 1.42, p.y + 10, centre.z + rz * 1.42);
     } else if (superForm && s.lock) {
-      const hit = nearestTitanSurface(s, {
+      const hit = titanTargetContact(s, {
           x: p.x,
           y: p.y + sonicLength(s, 1.8),
           z: p.z,
@@ -1489,7 +1490,7 @@ export class TitanView {
     this.sky.material.uniforms.skyTime.value = s.time;
     this.sky.material.uniforms.atmosphere.value =
       s.config.atmosphere === false ? 0 : 1;
-    const surface = nearestTitanSurface(s, {
+    const surface = titanTargetContact(s, {
       x: p.x,
       y: p.y + sonicLength(s, 1.8),
       z: p.z,

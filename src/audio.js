@@ -1,3 +1,4 @@
+import {playAchievementCue} from "./achievement-feedback.js";
 import {
   positionMix,
   distanceGain,
@@ -75,6 +76,10 @@ export class AudioEngine {
     } catch {
       /* Audio availability must never prevent a menu or world from opening. */
     }
+  }
+  achievement(options = {}) {
+    if (!this.settings.volume || this.settings.menuSounds === false) return false;
+    return playAchievementCue(this.context, this.master, {...options, volume: options.volume ?? this.settings.menuVolume ?? 1});
   }
   updateVolume() {
     if (this.master && this.appliedMasterVolume !== this.settings.volume) {

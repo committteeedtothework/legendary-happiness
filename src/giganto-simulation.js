@@ -1,9 +1,11 @@
+import {titanTargetContact,toggleTitanTarget,tickTitanTarget} from "./titan-targeting.js";
+import {sonicCollider} from "./sonic-collider.js";
 import {TITAN_HOMING,makeTitanHoming,steerTitanHoming,finishTitanHoming,homingBlocked} from './titan-homing.js';
 import {titanBoulderBounds} from "./titan-landscape.js";
 import {constrainBoxes} from "./titan-collision.js";
 import {sonicTraversalInput,applySonicTraversal,restoreSonicTraversal} from "./sonic-traversal.js";
 import {sweepTitanMotion} from "./titan-collision.js";
-import { sonicJump, tickSonicMovement, clearSuperCooldowns, superMoveReady, restoreSonicMovement } from "./sonic-movement.js";
+import { sonicHandling, sonicJump, tickSonicMovement, clearSuperCooldowns, superMoveReady, restoreSonicMovement } from "./sonic-movement.js";
 import { registerTitanHit, tickTitanCombo, breakTitanCombo, restoreTitanCombo, TITAN_COMBO } from "./titan-combo.js";
 import { WYVERN_SCALE, wyvernDamageGate, wyvernDamageTransition } from "./wyvern-space.js";
 import { titanEmeraldPoint } from "./titan-metrics.js";
@@ -622,7 +624,7 @@ export function titanInput(s, action, held = false) {
   if(s.stage==='traversal'&&sonicTraversalInput(s,action,TITAN_RING_TRAILS.map(r=>({...r,y:0.5})),(type,data)=>emit(s,type,data)))return true;
   if (s.stage !== "combat" || s.counterScene) return false;
   if (action === "target") {
-    s.lock = !s.lock;
+    toggleTitanTarget(s);
     if(s.strike?.homing){s.strike=null;s.queuedMove=null;s.actionTime=0;s.action="idle";}
     return true;
   }
@@ -707,7 +709,7 @@ function beginStrike(s, move, damageKind, parryHoming=false) {
     ? "punch"
     : move;
   s.actionTime = m.duration;
-  const target = nearestTitanSurface(s, s.avatar);
+  const target = titanTargetContact(s, s.avatar);
   const dx = s.lock ? target.point.x - s.avatar.x : -Math.sin(s.avatar.yaw),
     dy = s.lock ? target.point.y - (s.avatar.y + sonicLength(s, 1.8)) : 0,
     dz = s.lock ? target.point.z - s.avatar.z : -Math.cos(s.avatar.yaw),
@@ -790,7 +792,7 @@ function advanceStrike(s, from, dt, oldClock) {
           s.avatar.y + sonicLength(s, 1.8),
           s.avatar.z,
         ),
-        target = nearestTitanSurface(s, source).point;
+        target = titanTargetContact(s, source).point;
       const aim = s.lock
         ? point(target.x - source.x, target.y - source.y, target.z - source.z)
         : a.direction;
@@ -1015,6 +1017,7 @@ export function stepTitan(s, input = {}, dt = 1 / 60) {
     s[k] = Math.max(0, s[k] - dt);
   tickTitanCombo(s, dt);
   clearSuperCooldowns(s);
+  tickTitanTarget(s,dt);
   tickSonicMovement(s,input,dt);
   if (s.actionTime === 0 && !s.strike) s.action = "idle";
   if (input.parry) {
@@ -1127,13 +1130,7 @@ export function stepTitan(s, input = {}, dt = 1 / 60) {
   }
   const yaw = p.yaw,
     boost = !!input.boost,
-    speed = boost
-      ? s.stage === "combat"
-        ? 36
-        : 30
-      : s.stage === "combat"
-        ? 17
-        : 13,
+    speed = boost ? (s.stage === "combat" ? sonicHandling(s).flightBoost : sonicHandling(s).boost) : (s.stage === "combat" ? sonicHandling(s).flight : sonicHandling(s).run),
     dx = x * Math.cos(yaw) - z * Math.sin(yaw),
     dz = -x * Math.sin(yaw) - z * Math.cos(yaw),
     acc = 1 - Math.exp(-dt * (s.stage === "combat" ? 7 : p.onGround ? 18 : 12));
@@ -1194,7 +1191,7 @@ export function stepTitan(s, input = {}, dt = 1 / 60) {
         p.vy = 0;
         p.onGround = true;
       }
-    sweepTitanMotion(s,from,q=>constrainBoxes(q,titanBoulderBounds(),sonicLength(s,0.8),sonicLength(s,3.4)));
+    sweepTitanMotion(s,from,q=>constrainBoxes(q,titanBoulderBounds(),sonicCollider(s).radius,sonicCollider(s).height,from.y>=-0.1&&Math.abs(q.x)<180&&Math.abs(q.z)<180?0:-Infinity));
     const next = TITAN_ROUTE[s.route + 1];
     if (
       !armorMode(s) &&
@@ -1343,7 +1340,7 @@ export function stepTitan(s, input = {}, dt = 1 / 60) {
     return;
   }
   p.vy = lerp(p.vy, (+!!input.up - +!!input.down) * speed, acc);
-  approachTitanMelee(s, nearestTitanSurface(s, sonicContact(s)), dt);
+  approachTitanMelee(s, titanTargetContact(s, sonicContact(s)), dt);
   if (s.strike && ["stomp", "cyclone", "cross"].includes(s.strike.move)) {
     const q = techniquePosition(s, s.strike, s.strike.elapsed + dt);
     if (q) {
@@ -1391,7 +1388,7 @@ export function stepTitan(s, input = {}, dt = 1 / 60) {
     p.z += p.vz * dt;
     p.onGround = p.y <= 0.051;
   }
-  sweepTitanMotion(s,from,(q,regions)=>{constrainTitanBody(q,s,regions);constrainBoxes(q,titanBoulderBounds(),sonicLength(s,0.8),sonicLength(s,3.4));});
+  sweepTitanMotion(s,from,(q,regions)=>{constrainTitanBody(q,s,regions);constrainBoxes(q,titanBoulderBounds(),sonicCollider(s).radius,sonicCollider(s).height,from.y>=-0.1&&Math.abs(q.x)<180&&Math.abs(q.z)<180?0:-Infinity);});
   const r = Math.hypot(p.x, p.z);
   if (r > 145) {
     p.x *= 145 / r;

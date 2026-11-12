@@ -52,3 +52,9 @@ The 2.18.0 request authorizes a game-wide achievement system, Minecraft web
 reference research, custom-item/Stand/Titan goals, UI, persistence, verification
 and separate runtime/browser-based Windows downloads. Preserve existing game
 rules, art, assets, saves, main branch and hosted mobile version.
+
+The 2.19.0 request authorizes achievement presentation/audio, Titan camera,
+collision, Super Sonic targeting and Wyvern/shared Sonic handling fixes, and
+inventory controller cursor plus device-specific glyphs. Preserve assets,
+achievement ledgers, saves, main and hosted mobile. Separate Windows editions
+remain authorized for publishing on dedicated source/download branches.

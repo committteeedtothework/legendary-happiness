@@ -1,3 +1,4 @@
+import {titanCameraBlocked} from "../src/titan-camera.js";
 import { TitanView, titanCameraClearance } from "../src/giganto-view.js";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -313,7 +314,7 @@ test("locked and unlocked aerial movement keep the manual camera basis without o
     assert.ok(s.avatar.x < 60);
   }
 });
-test("classic camera smoothing stays outside the Titan keep-out cylinder even during extreme orbit reversals", () => {
+test("free camera smoothing resolves the actual Titan body during extreme orbit reversals", () => {
   const ow = globalThis.innerWidth,
     oh = globalThis.innerHeight;
   globalThis.innerWidth = 854;
@@ -327,15 +328,14 @@ test("classic camera smoothing stays outside the Titan keep-out cylinder even du
   s.config.moveCamera = false;
   try {
     for (let n = 0; n < 80; n++) {
-      s.avatar.x = 20 * Math.sin(n * 0.5);
-      s.avatar.z = 20 * Math.cos(n * 0.5);
+      s.avatar.x = 65 * Math.sin(n * 0.5);
+      s.avatar.z = 65 * Math.cos(n * 0.5);
       s.avatar.yaw = n * 0.8;
       view.draw(s, 1 / 30);
       const p = view.camera.position;
       assert.ok(p.toArray().every(Number.isFinite));
       assert.ok(p.y >= 2.5);
-      if (p.y < 93)
-        assert.ok(Math.hypot(p.x, p.z) >= titanCameraClearance(p.y) - 0.001);
+      assert.equal(titanCameraBlocked(s,p),false);
       assert.equal(view.game.renderer.gl.toneMapping, undefined);
       assert.equal(view.arena.userData.platforms.visible, false);
     }

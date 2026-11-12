@@ -1,3 +1,5 @@
+import {titanTargetContact} from "./titan-targeting.js";
+import {titanMoveShot,titanCameraTransport} from "./titan-move-camera.js";
 import {ribbonMeshData} from "./wyvern-platforms.js";
 import {SonicTraversalFX} from "./sonic-traversal-fx.js";
 import {wyvernRoutePoint} from "./wyvern-route.js";
@@ -716,44 +718,24 @@ export class WyvernView {
       desired = wyvernShotOffset(s,30+a*45,78+a*12,60+a*50);
       focus = new T.Vector3(0, 66, -10);
     } else {
-      const distance = s.emerald
-        ? s.strike && s.config.moveCamera
-          ? 12
-          : 20
-        : 9;
-      desired = v(p).add(
-        new T.Vector3(
-          Math.sin(p.yaw) * distance + 4,
-          4.5 + p.pitch * 9,
-          Math.cos(p.yaw) * distance,
-        ),
-      );
-      focus = v(p).add(new T.Vector3(0, 1.7, 0));
-      if (s.emerald && s.lock && !s.won)
-        focus.lerp(new T.Vector3(0, 66, 0), 0.3);
-      if (s.stage === "combat" && !w.open && w.mode === "missiles" && s.lock) {
-        desired = v(p).add(new T.Vector3(0, 7, 26));
-        focus = v(p).lerp(new T.Vector3(0, 66, -15), 0.55);
-      }
+      const moveShot=titanMoveShot(s),back=s.emerald?12:20,cp=Math.cos(p.pitch);
+      desired=moveShot?v(moveShot.position):v(p).add(new T.Vector3(Math.sin(p.yaw)*back*cp+Math.cos(p.yaw)*2.4,3.8+Math.sin(p.pitch)*back,Math.cos(p.yaw)*back*cp-Math.sin(p.yaw)*2.4));
+      focus=moveShot?v(moveShot.target):v(p).add(new T.Vector3(0,1.9,0));
+      if(s.emerald&&s.lock&&!s.won){const hit=v(titanTargetContact(s).point);focus.lerp(hit,Math.min(0.08,0.65/Math.max(0.001,focus.distanceTo(hit))));}
     }
+    this.cameraFollow ||= {};
+    const transport=titanCameraTransport(this.cameraFollow,s);
+    if(this.lastDrawn){this.camera.position.add(transport);this.look.add(transport);}
     const flickWeight = s.stage === "combat" && !s.strike && s.config.cinematicCamera !== false
       ? ease((w.flickAge || 0) / 0.08) * (1-ease(((w.flickAge ?? 1)-0.3)/0.22)) : 0;
     if (flickWeight > 0) {
       desired.lerp(v(p).add(new T.Vector3(Math.sin(p.yaw)*9+4,3.8,Math.cos(p.yaw)*9)),flickWeight);
       focus.lerp(v(p).add(new T.Vector3(0,2.1,0)),flickWeight*0.8);
     }
-    const rad = Math.hypot(desired.x - TOWER.x, desired.z - TOWER.z);
-    if (this.tower.visible && rad < 33 && desired.y < TOWER.height+2) {
-      desired.x =
-        TOWER.x + ((desired.x - TOWER.x) / Math.max(0.01, rad)) * 33.5;
-      desired.z =
-        TOWER.z + ((desired.z - TOWER.z) / Math.max(0.01, rad)) * 33.5;
-    }
-    desired.y = Math.max(desired.y, wyvernGround(desired.x, desired.z) + 2);
     if (s.emerald) desired.copy(v(clearTitanCamera(s,desired,15)));
     desired.copy(v(clearWyvernTerrainCamera(s,desired,{x:p.x,y:p.y+1.9,z:p.z})));
     desired.copy(v(clearWyvernSceneryCamera(s,desired,{x:p.x,y:p.y+1.9,z:p.z})));
-    const a = dt > 0 ? 1 - Math.exp(-dt * 5) : this.lastDrawn ? 0 : 1;
+    const a = dt > 0 ? 1 - Math.exp(-dt * 9) : this.lastDrawn ? 0 : 1;
     this.camera.position.lerp(desired, a);
     if (s.emerald) this.camera.position.copy(v(clearTitanCamera(s,this.camera.position,15)));
     this.camera.position.copy(v(clearWyvernTerrainCamera(s,this.camera.position,{x:p.x,y:p.y+1.9,z:p.z})));
@@ -764,6 +746,9 @@ export class WyvernView {
       this.camera.position.x +=
         Math.sin(s.time * 90) * this.shake * s.config.cameraShake * 0.1;
     }
+    this.camera.position.copy(v(clearWyvernTerrainCamera(s,this.camera.position,{x:p.x,y:p.y+1.9,z:p.z})));
+    this.camera.position.copy(v(clearWyvernSceneryCamera(s,this.camera.position,{x:p.x,y:p.y+1.9,z:p.z})));
+    if(s.emerald)this.camera.position.copy(v(clearTitanCamera(s,this.camera.position,15)));
     this.camera.lookAt(this.flightRoot.localToWorld(this.look.clone()));
     if(s.stage==='combat'&&s.config.cinematicCamera!==false){const turn=wyvernRoutePoint(w.routeDistance||0).bend||0;this.camera.rotateZ(clamp(turn*0.35,-0.035,0.035));}
     this.camera.aspect =
@@ -777,7 +762,7 @@ export class WyvernView {
     this.environment.placeSky(this.camera.getWorldPosition(new T.Vector3()));
     this.lastDrawn = true;
     const target = this.flightRoot
-      .localToWorld(new T.Vector3(0, 66, 0))
+      .localToWorld(v(titanTargetContact(s).point))
       .project(this.camera);
     this.targetScreen = {
       x: target.x * 0.5 + 0.5,

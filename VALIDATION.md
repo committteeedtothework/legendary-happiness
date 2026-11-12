@@ -976,3 +976,10 @@ Three achievement UI scenarios cover real craft/furnace actions, queued unlock t
 All 246 existing public assets are byte-identical. Terrain generation 16, item/combat definitions, world/physics/inventory/rendering/streaming code and both boss simulations are unchanged apart from the release version and separately instrumented gameplay entrypoints. Source modules separate the goal catalog, state/event tracking, UI and styles. Progress is an additive player field in save format 1.
 
 The Windows runtime and previous HTML launcher are separate downloads. The portable Windows ASAR is extracted and matched to the tested Linux app; the older Windows launcher's actual PE payload and companion extraction match the tested standalone HTML. Native Windows execution, physical controllers and physical iOS remain unverified on this Linux host. The executables are unsigned. Reports, hashes and screenshots are included in the verification archive.
+
+2.19.0 adds focused achievement-envelope/chime cleanup, body-target stability,
+manual release, camera boom clearance, floor-safe boulder ejection, curled-body
+platform sweeps, physical handling parity and moving-frame orientation tests.
+Browser coverage includes real inventory transfers with the free controller
+cursor, device glyph handoff, themed achievement menus and paused notifications.
+Release verification and screenshots accompany the dedicated 2.19.0 downloads.

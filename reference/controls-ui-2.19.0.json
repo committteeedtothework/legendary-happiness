@@ -1,0 +1,11 @@
+{
+  "version": "2.19.0",
+  "references": [
+    {"url":"https://minecraft.wiki/w/Advancement","access":"Retrieved successfully during implementation","use":"Inset category tabs, stone background, item frames, completed gold accents and persistent per-world progress. Original CSS; no Minecraft assets copied."},
+    {"url":"https://www.youtube.com/watch?v=M2XRHLJMGVQ","access":"Previously user-supplied encounter reference and screenshots","use":"Arena angular dark panels, cyan outlines, white italic headings and triangular target reticle. An inspired UI, not a verified exact reproduction."}
+  ],
+  "audio":"Original synthesized four-note notification; challenge adds a fifth. Arena notices use the isolated Titan effects bus; Overworld uses the normal audio bus.",
+  "controls":"Left stick free inventory cursor; right stick scroll; confirm pick/place; attack split/place one and drag-paint; inventory quick-transfer; D-pad steps between slots. Focus mode remains configurable.",
+  "targeting":"View-angle and reach weighted acquisition, persistent body region, manual-camera grace, range release and independent swept contact. No actor warp.",
+  "handling":"Giganto's physical movement rates shared with Wyvern. Pursuit boost remains faster to close on the moving boss. No balance or world generation changes."
+}

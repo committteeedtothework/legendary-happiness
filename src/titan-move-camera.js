@@ -1,3 +1,4 @@
+import {titanTargetContact} from "./titan-targeting.js";
 import { sonicLength } from "./titan-metrics.js";
 import { nearestTitanSurface, point } from "./titan-contact.js";
 // A live shoulder shot, never a stored actor position or a movement lock.
@@ -34,7 +35,7 @@ export function titanMoveShot(s) {
   const focus = point(p.x, p.y + sonicLength(s, 1.9), p.z);
   // Keep a little of the target in the shot while Sonic stays the focal subject.
   if (s.lock) {
-    const hit = nearestTitanSurface(s, focus).point;
+    const hit = titanTargetContact(s, focus).point;
     const dx = hit.x - focus.x,
       dy = hit.y - focus.y,
       dz = hit.z - focus.z;
@@ -72,7 +73,7 @@ export function titanMoveShot(s) {
 // Large teleports and stage/retry changes reset history instead of dragging it.
 export function titanCameraTransport(history, s) {
   const previous = history.avatar;
-  const active = s.stage === "combat" && !s.qte && !s.counterScene;
+  const active = ["traversal","combat","victory"].includes(s.stage) && !s.qte && !s.counterScene;
   const key = `${s.stage}:${s.attempt || 0}`;
   history.avatar = { x: s.avatar.x, y: s.avatar.y, z: s.avatar.z };
   const same = history.key === key && history.active && active;

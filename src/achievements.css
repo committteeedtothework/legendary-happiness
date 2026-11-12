@@ -238,3 +238,42 @@
 #app:has(#overlay[data-screen="achievements"]) #toast {
   visibility: hidden;
 }
+
+/* Framed item tiles, stone field and inset tabs echo the advancement screen. */
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld {
+  background: #c6c6c6; border: 4px solid #171717; color:#303030;
+  box-shadow: inset 3px 3px #fff, inset -4px -4px #555, 0 12px 50px #000a;
+}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-heading h2 {color:#303030;text-shadow:none;}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-heading p {color:#444;text-shadow:none;}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-grid {
+  background-color:#292929; background-image:linear-gradient(90deg,#ffffff05 1px,transparent 1px),linear-gradient(#0003 1px,transparent 1px);
+  background-size:32px 32px; border:3px solid #373737; box-shadow:inset 2px 2px 8px #0008; padding:18px;
+}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-card {
+  border-color:#121212;background:#353535;box-shadow:inset 2px 2px #666,inset -2px -2px #171717;
+}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-card.unlocked {background:#514323;box-shadow:inset 2px 2px #b8944c,inset -2px -2px #332b19;}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-card > img {padding:6px;box-sizing:content-box;background:#202020;border:3px solid #808080;box-shadow:inset 2px 2px #111;}
+#app #ui #overlay[data-screen="achievements"] .achievement-overworld .achievement-card.unlocked > img {border-color:#d2a84f;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena {
+  font-family:Arial,Helvetica,sans-serif;background:linear-gradient(120deg,#071527f5,#10273df2);border:1px solid #56d9ff80;
+  box-shadow:0 0 35px #008cff22; color:#eafcff;clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px);
+}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena h2 {font-family:inherit;font-style:italic;letter-spacing:3px;text-transform:uppercase;text-shadow:none;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena button {font-family:inherit;background:#18334c;border:1px solid #52859c;text-shadow:none;box-shadow:none;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena button[aria-pressed="true"] {background:#076b94;color:white;border-color:#71e5ff;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena .achievement-card {border:1px solid #517b9255;border-left:3px solid #3c687d;background:#102338;box-shadow:none;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena .achievement-card.unlocked {border-left-color:#6beaff;background:linear-gradient(110deg,#0f4561,#11263a);}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena .achievement-card.unlocked small {color:#80eaff;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena .achievement-progress progress {accent-color:#5ee1ff;}
+#achievement-toast {transform:translateY(var(--notice-offset,18px));will-change:opacity,transform;}
+#achievement-toast[data-theme="arena"] {font-family:Arial,Helvetica,sans-serif;border:1px solid #64deff;background:linear-gradient(115deg,#063653f5,#0b152bed);box-shadow:0 0 22px #0789c43b;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);padding:16px 24px;}
+#achievement-toast[data-theme="arena"] span {color:#76e6ff;text-transform:uppercase;letter-spacing:1.5px;}
+#achievement-toast[data-theme="arena"] strong {font-style:italic;font-size:17px;}
+@media(prefers-reduced-motion:reduce){#achievement-toast{transform:none;}}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena h2 {color:#f0fcff;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena button {color:#e9faff;}
+#app #ui #overlay[data-screen="achievements"] .achievement-arena :is(h3,p,small,input,span) {font-family:Arial,Helvetica,sans-serif;}
+#achievement-toast[data-theme="arena"] {top:132px;right:24px;}
+@media(max-width:600px){#achievement-toast[data-theme="arena"]{right:12px;top:120px;width:min(310px,calc(100vw - 24px));box-sizing:border-box;}}

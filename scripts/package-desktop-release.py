@@ -12,7 +12,7 @@ copy=out/exe.name
 if copy.exists():copy.unlink()
 try:os.link(exe,copy)
 except OSError:shutil.copyfile(exe,copy)
-docs=['ACHIEVEMENTS.md','README.md','desktop/README.md','DESKTOP-STREAMING.md','BUILDING.md','VALIDATION.md','THIRD_PARTY.md','TITAN-ASSETS.md','LICENSE']
+docs=['CONTROLS-UI-POLISH.md','CONTROLLERS.md','ACHIEVEMENTS.md','README.md','desktop/README.md','DESKTOP-STREAMING.md','BUILDING.md','VALIDATION.md','THIRD_PARTY.md','TITAN-ASSETS.md','LICENSE']
 html=out/f'DCSMCRAFT-Browser-{v}.zip'
 with zipfile.ZipFile(html,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
  z.write(root/'dist/DCSMCRAFT-Standalone.html','DCSMCRAFT-Browser/DCSMCRAFT.html')

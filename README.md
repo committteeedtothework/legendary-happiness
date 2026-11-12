@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.19.0
+
+Achievements now have Minecraft-inspired Overworld menus, Sonic-inspired arena panels, fading unlock notices and an original sound cue. Both Titans gain steadier movement-following cameras, stable body-part lock-on and curled-form collision fixes. Wyvern shares Giganto's Sonic handling. Controller inventories have an adjustable free crosshair with real stack transfers and device-specific button badges. See [CONTROLS-UI-POLISH.md](CONTROLS-UI-POLISH.md) and [CONTROLLERS.md](CONTROLLERS.md).
+
+Windows downloads: **DCSMCRAFT-2.19.0-Portable.exe** includes the runtime; **DCSMCRAFT-Windows-HTML-2.19.0.zip** uses installed Edge or Chrome. Singleplayer works offline. Existing assets, worlds and achievement progress remain compatible. Export/import world backups when switching between the separate DesktopApp and DesktopProfile save locations.
+
+## Previous release — 2.18.0
+
 # DCSMCRAFT 2.18.0
 
 **64 achievements** cover Survival, Equipment, Adventure, Ocean, DCSMCRAFT's custom items and both Titans. Open **Pause → Achievements** to browse goals, search, filter unlocked/locked goals and check progress. Unlocks save per player/world and survive respawn, backups, co-op resume and arena return. Existing carried equipment and proven Titan victories are recognized in older saves. See [ACHIEVEMENTS.md](ACHIEVEMENTS.md) for every goal, reference sources and compatibility details.

@@ -1,3 +1,4 @@
+import {decorateControllerGlyphs} from "./controller-glyphs.js";
 import {
   PAD_BUTTONS,
   padGlyph,
@@ -382,6 +383,7 @@ export class InputPrompts {
         }
       }
     }
+    for(const root of roots)decorateControllerGlyphs(root,g.controller?.family||"generic",inputDevice(g)==="controller");
     this.observer.takeRecords();
   }
 }

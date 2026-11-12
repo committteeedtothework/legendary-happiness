@@ -25,12 +25,11 @@ export function wyvernScenerySafe(x,z,radius=70) {
 }
 export function clearWyvernTerrainCamera(s,camera,focus) {
   const q={...camera};
-  // Lift the complete boom, including its interpolated path, above the same
-  // terrain function used to build both LOD meshes.
-  for(let i=1;i<=24;i++) {
-    const u=i/24,p={x:focus.x+(q.x-focus.x)*u,y:focus.y+(q.y-focus.y)*u,z:focus.z+(q.z-focus.z)*u};
-    const floor=wyvernFloor(s,p)+1.3;
-    if(p.y<floor)q.y+=(floor-p.y)/u;
+  let safe={...focus,y:Math.max(focus.y,wyvernFloor(s,focus)+1.3)};
+  for(let i=1;i<=64;i++){
+    const u=i/64,p={x:focus.x+(q.x-focus.x)*u,y:focus.y+(q.y-focus.y)*u,z:focus.z+(q.z-focus.z)*u};
+    if(p.y<wyvernFloor(s,p)+1.3)return safe;
+    safe=p;
   }
   if (!s.emerald) {
     let safe={...focus};
@@ -53,6 +52,7 @@ export function advectWyvernAvatar(p,oldFrame,newFrame) {
  const q=wyvernLocalPoint(newFrame,world),turn=oldFrame.yaw-newFrame.yaw;
  const vx=p.vx*Math.cos(turn)+p.vz*Math.sin(turn),vz=p.vz*Math.cos(turn)-p.vx*Math.sin(turn);
  Object.assign(p,q,{vx,vz});
+ for(const key of ["yaw","facingYaw","lastLookYaw"])if(Number.isFinite(p[key]))p[key]+=turn;
 }
 
 let obstacleCache;

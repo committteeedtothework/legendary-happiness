@@ -6,7 +6,7 @@ function cancel(q){q.dash=[];q.roll=q.slide=q.dodge=0;q.stomp=q.drop=q.dropKey=f
 export function sonicTraversalInput(s,action,targets=[],emit=()=>{}){
  if(s.stage!=='traversal'||s.emerald||s.climb?.attached)return false;
  const p=s.avatar,q=state(s),say=(name,duration)=>{s.action=name;s.actionTime=duration;q.actionDuration=duration;};
- if(action==='jump')return sonicJump(s,s.titan==='wyvern'?15:24);
+ if(action==='jump')return sonicJump(s);
  if(action==='target'){s.lock=!s.lock;return true;}
  if(action==='dodge'&&q.dodge<=0){
   cancel(q);q.dodge=0.22;const side=Math.sign(p.moveX)||1;q.dodgeX=Math.cos(p.yaw)*side;q.dodgeZ=-Math.sin(p.yaw)*side;

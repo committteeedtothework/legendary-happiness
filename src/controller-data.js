@@ -8,6 +8,8 @@ export const CONTROLLER_PRESETS = Object.freeze([
 ]);
 export const PAD_DEFAULTS = Object.freeze({
   enabled: true,
+  inventoryCursor: true,
+  cursorSpeed: 1,
   preset: "auto",
   deadzone: 0.18,
   lookSensitivity: 2.6,
@@ -55,6 +57,8 @@ export function controllerConfig(raw = {}) {
     Number.isFinite(raw[k]) ? clamp(raw[k], a, b) : PAD_DEFAULTS[k];
   return {
     enabled: raw.enabled !== false,
+    inventoryCursor: raw.inventoryCursor !== false,
+    cursorSpeed: n("cursorSpeed",0.25,2),
     preset: CONTROLLER_PRESETS.some(([k]) => k === raw.preset)
       ? raw.preset
       : "auto",

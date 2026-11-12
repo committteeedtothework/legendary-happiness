@@ -1,3 +1,4 @@
+import {titanTargetContact} from "./titan-targeting.js";
 import { TITAN_COMBO } from "./titan-combo.js";
 import { arenaPadGlyph, padGlyph } from "./controller-data.js";
 import { TITAN_ACTIONS } from "./titan-combat.js";
@@ -79,12 +80,12 @@ export function updateTitanHudExtras(hud, s, view, controller) {
   q("#titan-stat-power").textContent = Math.round(
     s.config.damage.basic * (s.phantom > 0 ? 1.2 : 1),
   );
-  const contact = nearestTitanSurface(s, { ...s.avatar, y: s.avatar.y + 1.8 });
+  const contact = titanTargetContact(s);
   q("#titan-target-state").textContent =
     s.strike?.homing ? (s.titan==='wyvern'?"HOMING ATTACK":"") : s.stage === "combat" && !s.lock ? "TAB · Lock on" : "";
   q("#titan-target-state").setAttribute(
     "aria-label",
-    s.lock ? "Target locked" : "Free camera",
+    s.lock ? `Target locked: ${contact.id}` : "Free camera",
   );
   q("#titan-target-state").classList.toggle("in-range", contact.distance < 7);
   const hit = s.hitFeedback?.until > s.time ? s.hitFeedback : null;

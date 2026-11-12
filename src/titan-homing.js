@@ -1,10 +1,11 @@
+import {titanTargetContact} from "./titan-targeting.js";
 import {nearestTitanSurface,regionContact,titanBodyRegions} from './titan-contact.js';
 import {sonicContact,sonicLength} from './titan-metrics.js';
 // A target acquisition, curled approach and contact recovery, never a position warp.
 export const TITAN_HOMING=Object.freeze({range:70,parryRange:1400,windup:0.15,parryWindup:0.22,minFlight:0.16,recovery:0.22,blocked:0.22});
 export function homingTarget(s,id){
  const p=sonicContact(s),r=id&&titanBodyRegions(s).find(r=>r.id===id);
- return r?regionContact(r,p):nearestTitanSurface(s,p);
+ return r?regionContact(r,p):titanTargetContact(s,p);
 }
 export function makeTitanHoming(s,parry=false){
  const target=homingTarget(s),range=parry?TITAN_HOMING.parryRange:TITAN_HOMING.range;

@@ -189,7 +189,8 @@ test("existing simulation, progression, arrows, animation, art and supplied asse
   for (const [name, h] of Object.entries(before)) {
     if (
       [
-        // 2.18.0 adds achievement observers and preserves the player ledger.
+        // 2.19.0 adds an original achievement cue; 2.18.0 adds ledger observers.
+        "src/audio.js",
         "src/equipment.js",
         "src/simulation.js",
         "src/ecology.js",

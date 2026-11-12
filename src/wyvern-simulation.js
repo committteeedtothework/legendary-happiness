@@ -1,9 +1,11 @@
+import {titanTargetContact,toggleTitanTarget,tickTitanTarget} from "./titan-targeting.js";
+import {sonicCollider} from "./sonic-collider.js";
 import {steerTitanHoming} from './titan-homing.js';
 import {resolveWyvernPlatforms} from "./wyvern-platforms.js";
 import {ribbonSurface} from "./wyvern-ribbon.js";
 import {sonicTraversalInput,applySonicTraversal,restoreSonicTraversal,startSonicTraversalDash} from "./sonic-traversal.js";
 import {sweepTitanMotion} from "./titan-collision.js";
-import { sonicJump, tickSonicMovement, clearSuperCooldowns, restoreSonicMovement } from "./sonic-movement.js";
+import { sonicHandling, sonicJump, tickSonicMovement, clearSuperCooldowns, restoreSonicMovement } from "./sonic-movement.js";
 import { wyvernFloor, WYVERN_LIMITS, advectWyvernAvatar, wyvernWorldPoint, wyvernLocalPoint, constrainWyvernScenery } from "./wyvern-world.js";
 import { tickTitanCombo, breakTitanCombo, restoreTitanCombo } from "./titan-combo.js";
 import {
@@ -243,7 +245,7 @@ export function wyvernInput(s, action, held = false) {
     const w = s.wyvern,
       p = s.avatar;
     if(w.section==='runway'&&action==='jump'){
-      if(!sonicJump(s,15))return false;w.air=1.25;emit(s,'jump');return true;
+      if(!sonicJump(s))return false;w.air=1.25;emit(s,'jump');return true;
     }
     if(w.section==='runway'&&action==='homing'){
       const gate=WYVERN_GAPS.findIndex(t=>Math.abs(t-w.rail)<21);
@@ -270,12 +272,12 @@ export function wyvernInput(s, action, held = false) {
       return true;
     }
     if (action === "jump") {
-      if (!sonicJump(s,15)) return false;
+      if (!sonicJump(s)) return false;
       emit(s, "jump");
       return true;
     }
     if (action === "target") {
-      s.lock = !s.lock;
+      toggleTitanTarget(s);
       return true;
     }
     if(sonicTraversalInput(s,action,[...WYVERN_APPROACH,...WYVERN_TOWER.filter((_,i)=>i%4===0)],(type,data)=>emit(s,type,data)))return true;
@@ -322,14 +324,14 @@ function traversal(s, input, dt) {
     if(assist){dx=target.x-p.x;dz=target.z-p.z;const d=Math.hypot(dx,dz)||1;dx/=d;dz/=d;
       p.facingYaw=Math.atan2(dx,dz);const angle=Math.atan2(-dx,-dz);p.yaw+=Math.atan2(Math.sin(angle-p.yaw),Math.cos(angle-p.yaw))*(1-Math.exp(-dt*5));p.lastLookYaw=p.yaw;
     }
-    const n=Math.max(1,Math.hypot(dx,dz)),speed=(input.boost?58:34)*(w.slow>0?0.45:1),a=1-Math.exp(-dt*12);
+    const n=Math.max(1,Math.hypot(dx,dz)),speed=(input.boost?sonicHandling(s).boost:sonicHandling(s).run)*(w.slow>0?0.45:1),a=1-Math.exp(-dt*12);
     p.vx+=(dx/n*speed-p.vx)*a;p.vz+=(dz/n*speed-p.vz)*a;
     const gravity=applySonicTraversal(s,input,dt,(type,data)=>emit(s,type,data));
-    p.vy-=38*dt*gravity;p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;
+    p.vy-=sonicHandling(s).gravity*dt*gravity;p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;
     w.air=Math.max(0,w.air-dt);w.railSpeed=Math.hypot(p.vx,p.vz);s.boosting=!!input.boost&&w.railSpeed>1;
     const surface=ribbonSurface(p,w.rail),inGap=surface&&WYVERN_GAPS.some(t=>surface.t>=t&&surface.t<t+15);
     if(surface){w.lane=clamp((p.x-surface.x)*Math.cos(p.yaw)-(p.z-surface.z)*Math.sin(p.yaw),-9,9)/6;if(surface.distance<24&&Math.abs(p.y-surface.y)<30)w.rail=surface.t;}
-    const support=resolveWyvernPlatforms(p,from);
+    const support=resolveWyvernPlatforms(p,from,sonicCollider(s));
     if(support?.kind==='road'){w.rail=support.t;w.air=0;}
     else if(support){w.section='tower';w.air=0;}
     for (const h of WYVERN_HAZARDS)
@@ -357,7 +359,7 @@ function traversal(s, input, dt) {
     p.x=clamp(p.x+(r*Math.cos(p.yaw)-f*Math.sin(p.yaw))*dt*9,-10,10);
     p.z=clamp(p.z+(-r*Math.sin(p.yaw)-f*Math.cos(p.yaw))*dt*9,-4*WYVERN_SCALE,10*WYVERN_SCALE);
     const floor=66+WYVERN_REST_LIFT+7*WYVERN_SCALE;
-    const gravity=applySonicTraversal(s,input,dt,(type,data)=>emit(s,type,data));p.vy-=38*dt*gravity;p.y+=p.vy*dt;
+    const gravity=applySonicTraversal(s,input,dt,(type,data)=>emit(s,type,data));p.vy-=sonicHandling(s).gravity*dt*gravity;p.y+=p.vy*dt;
     p.onGround=p.y<=floor&&p.vy<=0;if(p.onGround){p.y=floor;p.vy=0;}
     if (Math.hypot(p.x, p.z) < 3.5) {
       s.emerald = true;
@@ -372,17 +374,17 @@ function traversal(s, input, dt) {
   const f = input.moveY ?? +!!input.forward - +!!input.back,
     r = input.moveX ?? +!!input.right - +!!input.left,
     n = Math.max(1, Math.hypot(f, r)),
-    speed = input.boost ? 24 : 13,
+    speed = input.boost ? sonicHandling(s).boost : sonicHandling(s).run,
     dx = (r * Math.cos(p.yaw) - f * Math.sin(p.yaw)) / n,
     dz = (-r * Math.sin(p.yaw) - f * Math.cos(p.yaw)) / n,
-    a = 1 - Math.exp(-dt * 12);
+    a = 1 - Math.exp(-dt * (p.onGround?18:12));
   s.boosting = !!input.boost && Math.hypot(f, r) > 0.1;
   p.vx += (dx * speed - p.vx) * a;
   p.vz += (dz * speed - p.vz) * a;
   const gravity=applySonicTraversal(s,input,dt,(type,data)=>emit(s,type,data));
   p.x += p.vx * dt;
   p.z += p.vz * dt;
-  p.vy -= 38 * dt*gravity;
+  p.vy -= sonicHandling(s).gravity * dt*gravity;
   p.y += p.vy * dt;
   const radial = Math.hypot(p.x - TOWER.x, p.z - TOWER.z);
   const coreRadius=36-10*clamp(p.y/TOWER.height,0,1)+0.7;
@@ -391,7 +393,7 @@ function traversal(s, input, dt) {
     p.x=TOWER.x+(radial>0.001?(p.x-TOWER.x)/radial:1)*coreRadius;
     p.z = TOWER.z + ((p.z - TOWER.z) / Math.max(0.001, radial)) * coreRadius;
   }
-  const support=resolveWyvernPlatforms(p,from);
+  const support=resolveWyvernPlatforms(p,from,sonicCollider(s));
   if(support?.kind==='road'){w.section='runway';w.rail=support.t;}
   for (let i = 0; i < WYVERN_TOWER.length; i += 8)
     if (distance(p, WYVERN_TOWER[i]) < 3) {
@@ -589,8 +591,8 @@ function fly(s, input, dt) {
       Math.hypot(rawForward, r, u) < 0.1,
     f = catching ? 0.8 : rawForward,
     n = Math.max(1, Math.hypot(f, r, u)),
-    speed = input.boost ? 175 : 62,
-    a = 1 - Math.exp(-dt * 15);
+    speed = input.boost && !w.open && w.mode === "missiles" ? 175 : input.boost ? sonicHandling(s).flightBoost : sonicHandling(s).flight,
+    a = 1 - Math.exp(-dt * sonicHandling(s).flightAcceleration);
   if (catching) {
     const aim = Math.atan2(p.x, p.z),
       delta = Math.atan2(Math.sin(aim - p.yaw), Math.cos(aim - p.yaw));
@@ -608,7 +610,7 @@ function fly(s, input, dt) {
   }
   p.vx+=(desired.x-p.vx)*a;p.vy+=(desired.y-p.vy)*a;p.vz+=(desired.z-p.vz)*a;
   if (s.dodge > 0) p.vx += (r >= 0 ? 1 : -1) * 55 * dt;
-  approachTitanMelee(s, nearestTitanSurface(s, { ...p, y: p.y + 1.8 }), dt);
+  approachTitanMelee(s, titanTargetContact(s, { ...p, y: p.y + 1.8 }), dt);
   steerTitanHoming(s,dt,emit);
   if (s.strike?.rushPath) {
     const v = titanRushVelocity(
@@ -702,6 +704,7 @@ export function stepWyvern(s, input = {}, dt = 1 / 60) {
   const aerialScene=["wyvern-counter","wyvern-slam","wyvern-hold","wyvern-launch","wyvern-mouth","wyvern-missile","wyvern-barrage","wyvern-dive","wyvern-volley","finale","phase"].includes(s.stage);
   if(!["victory","defeat"].includes(s.stage))s.wyvern.cinemaLift=(s.wyvern.cinemaLift || 0)+((aerialScene?420:0)-(s.wyvern.cinemaLift || 0))*(1-Math.exp(-dt*3));
   clearSuperCooldowns(s);
+  tickTitanTarget(s,dt);
   tickSonicMovement(s,input,dt);
   s.time += dt;
   s.wyvern.musicTime = (s.wyvern.musicTime || 0) + realDt;

@@ -118,3 +118,12 @@ The source record in `reference/achievements-2.18.0.json` includes fetched-page 
 ## Implementation and validation
 
 `src/achievement-data.js` defines the 64 stable goals; `src/achievements.js` owns normalization, event matching, polling and Titan adaptation; `src/achievement-ui.js` and `src/achievements.css` render the screen and queued notifications. Existing actions call the tracker only after successful commits. Arena restoration and respawn preserve the current ledger, while co-op uses each authoritative peer's player data. `tests/achievements.test.js`, `tests/browser/achievements.spec.js` and the packaged desktop test exercise these paths. See VALIDATION.md and the verification archive for results and platform limits.
+
+Version 2.19.0 presentation: the Overworld uses an inset stone menu, framed item
+icons and gold completion accents inspired by Minecraft's advancement screen.
+Arena achievements use angular blue/cyan panels and white headings. Searches,
+category/status filters, progress, touch scrolling and all existing ledger IDs
+are retained. Notifications fade in for 0.24 seconds, hold for 3.2 seconds and
+fade out for 0.56 seconds. Pausing or a cinematic suspends the notification clock.
+An original four-note chime plays once on reveal (five notes for challenges).
+Arena notifications route through the Titan effects/master volume buses.

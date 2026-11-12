@@ -1,3 +1,9 @@
+# Controls and achievement presentation — 2.19.0
+
+The build commands below remain valid. This release adds `npx playwright test --config playwright.controls-ui.config.js` for notification, theme and free controller-cursor transactions. Run `npm test`, `npm run test:desktop:web` and `npm run test:desktop` for physics/targeting, encounter/regression and packaged-runtime coverage. The package script includes separate Windows runtime and HTML launcher downloads, browser/source ZIPs and checksums. See CONTROLS-UI-POLISH.md for scope and limitations.
+
+## Previous release — 2.18.0
+
 # Achievement update — 2.18.0
 
 Use Node 24.22.1 / npm 11.9.0. npm ci, npm run build:standalone, npm run build:desktop (bundled Electron runtime), npm run build:desktop:legacy (previous browser-based launcher). Then python scripts/package-desktop-release.py --output OUTPUT_DIR produces separate runtime EXE, Windows HTML ZIP, Browser ZIP and Source ZIP, with payload checks and SHA-256 checksums.

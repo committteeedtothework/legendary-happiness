@@ -1,5 +1,9 @@
+export function sonicHandling(s) {
+ const k=s.titan==='wyvern'?2.8:1;
+ return {run:13*k,boost:30*k,flight:17*k,flightBoost:36*k,jump:24*k,gravity:26*k,shortJump:8*k,groundAcceleration:18,airAcceleration:12,flightAcceleration:7};
+}
 // Arena-only jump state shared by both Titans; no sandbox movement is changed.
-export function sonicJump(s,speed=24) {
+export function sonicJump(s,speed=sonicHandling(s).jump) {
  const p=s.avatar;
  if(s.stage!=='traversal'||s.climb?.attached||s.wyvern?.section==='boarding')return false;
  if((s.jumpAge??99)<0.055)return false;
@@ -17,15 +21,15 @@ export function tickSonicMovement(s,input,dt) {
  const turn=Math.atan2(Math.sin(look-old),Math.cos(look-old));
  const x=input.moveX ?? +!!input.right-+!!input.left,z=input.moveY ?? +!!input.forward-+!!input.back;
  if(Math.hypot(x,z)>0.0001)p.facingYaw=Math.atan2(x*Math.cos(look)-z*Math.sin(look),-x*Math.sin(look)-z*Math.cos(look));
- else p.facingYaw=(Number.isFinite(p.facingYaw)?p.facingYaw:look+Math.PI)+turn;
+ else if(!Number.isFinite(p.facingYaw))p.facingYaw=look+Math.PI;
  p.lastLookYaw=look;p.moveX=x;p.moveY=z;
  if(s.wyvern)s.wyvern.wallJump=Math.max(0,(s.wyvern.wallJump||0)-dt);
  s.jumpAge=Math.min(99,(s.jumpAge??99)+dt);s.landingAge=Math.min(1,(s.landingAge??1)+dt);
  if(p.onGround){s.coyote=0.1;s.airJumps=0;if(s.wasAirborne)s.landingAge=0;}
  else s.coyote=Math.max(0,(s.coyote||0)-dt);
  const held=!!input.up;
- if(held&&!s.jumpHeld)sonicJump(s,s.titan==='wyvern'?15:24);
- if(!held&&s.jumpHeld&&s.stage==='traversal'&&p.vy>8)p.vy=8;
+ if(held&&!s.jumpHeld)sonicJump(s);
+ if(!held&&s.jumpHeld&&s.stage==='traversal'&&p.vy>sonicHandling(s).shortJump)p.vy=sonicHandling(s).shortJump;
  s.jumpHeld=held;s.wasAirborne=!p.onGround;
 }
 export const superMoveReady=s=>s.stage==='combat'&&s.emerald===true;
