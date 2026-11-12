@@ -47,3 +47,8 @@ Do not resume the Unity port. Preserve generation, gameplay/combat rules, origin
 assets and save compatibility. The new desktop profile is separate from the old
 browser profile; transfer worlds through the existing backup import/export UI.
 Keep the default branch and hosted mobile build unchanged unless instructed.
+
+The 2.18.0 request authorizes a game-wide achievement system, Minecraft web
+reference research, custom-item/Stand/Titan goals, UI, persistence, verification
+and separate runtime/browser-based Windows downloads. Preserve existing game
+rules, art, assets, saves, main branch and hosted mobile version.

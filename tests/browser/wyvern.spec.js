@@ -458,6 +458,8 @@ test("Wyvern portal, physical tower/runway, saved fight, every phase and return 
   expect(returned.ledger).toEqual(["prior-giganto-win"]);
   expect(returned.portal.id).toBe("giganto:retained");
   expect(returned.wyvern.ledger).toHaveLength(1);
+  expect(await page.evaluate(()=>!!dcsmcraft.player.achievements?.unlocked.wyvern_victory)).toBe(true);
+  expect(await page.evaluate(()=>!!dcsmcraft.player.achievements?.unlocked.titan_portal)).toBe(true);
   expect(returned.wyvern.portal).toBeNull();
   expect(returned.wyvern.cooldownUntil).toBeGreaterThan(0);
   await page.evaluate(async (id) => {

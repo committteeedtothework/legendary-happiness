@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { emittedLight, dirtyLightRegion } from "./block-light.js";
 import { useEditionWeapon } from "./edition-combat.js";
 import { B, BLOCKS, ITEMS, makeStack, MIN_Y, MAX_Y } from "./data.js";
@@ -6,6 +7,7 @@ import { overlapsPanel, placeDoor } from "./doors.js";
 import { playerHeight, playerEye } from "./player-body.js";
 const keyOf = (t) => `${t.x},${t.y},${t.z}`;
 function feedback(g, kind = "use", sound = "place") {
+  if (kind === "place") recordAchievement(g,"place");
   g.renderer?.action(kind);
   g.audio?.tone(sound);
   g.ui?.updateHotbar();

@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { B, BLOCKS, SEA, makeStack } from "./data.js";
 import { Inventory } from "./inventory.js";
 import { hash } from "./random.js";
@@ -184,6 +185,7 @@ export function extractRelic(game, target, now = performance.now()) {
   game.world.set(x, y + 1, z, B.air);
   game.world.relicClaimed = true;
   game.inventory.slots = working.slots;
+  recordAchievement(game,"claim",{item:"devin_sword"});
   resetExtraction(game);
   game.audio?.devinClaim?.();
   game.renderer?.action("use");

@@ -1,3 +1,4 @@
+import { recordTitanAchievement } from "./achievements.js";
 import { freshTitanRecord, safeTitanSite } from "./giganto.js";
 import { titanConfig } from "./giganto-simulation.js";
 import { WyvernAudio } from "./wyvern-audio.js";
@@ -368,6 +369,7 @@ export class WyvernIntegration {
         e.accumulator -= 1 / 60;
       }
       for (const event of events) {
+        recordTitanAchievement(g,s,event);
         e.view.event(event, s);
         e.audio.event(event);
         if (["stage", "checkpoint", "emerald", "qte-win"].includes(event.type))

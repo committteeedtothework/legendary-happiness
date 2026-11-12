@@ -1,3 +1,6 @@
+import "./achievements.css";
+import { AchievementView } from "./achievement-ui.js";
+import { achievementState, recordAchievement, pollAchievements, restoreTitanAchievements } from "./achievements.js";
 import "./java-menus.css";
 import { ControllerInput } from "./controller.js";
 import { controllerConfig } from "./controller-data.js";
@@ -233,6 +236,7 @@ class Game {
     this.touch = typeof __DCSMCRAFT_MOBILE__ !== "undefined" && __DCSMCRAFT_MOBILE__
       ? new PocketTouchInput(this) : new TouchInput(this);
     this.prompts = new InputPrompts(this);
+    this.achievementView = new AchievementView(this);
     installMobileApp(this);
     this.ui.title();
     if (new URLSearchParams(location.hash.slice(1)).has("join"))
@@ -614,6 +618,7 @@ class Game {
       this.renderer.loadAround(this.player.x, this.player.z, 2, 9);
       this.active = true;
       this.giganto.load(data.giganto);
+      restoreTitanAchievements(this,data.giganto);
       this.lastAutoSave = this.elapsed;
       if (this.player.health <= 0) {
         this.running = false;
@@ -820,6 +825,7 @@ class Game {
     this.mouseDown = false;
     this.mining = 0;
     this.resetControls();
+    if (type === "personal") recordAchievement(this,"inventory-open");
     this.ui.openInventory(type, container, target);
     document.exitPointerLock?.();
   }
@@ -931,8 +937,10 @@ class Game {
         break;
       }
     const standData = this.player.standData,
+      achievements = achievementState(this.player),
       aquaticId = this.player.aquaticId;
     this.player = createPlayer(clear ? point : this.world.findSpawn(), {
+      achievements,
       aquaticId,
     });
     if (standData) {
@@ -1355,6 +1363,7 @@ class Game {
         this.spawn = { x: p.x, y: p.y, z: p.z };
         this.time = Math.ceil(this.time / 24000) * 24000 + 1000;
         setWeather(this.world, "clear").override = null;
+        recordAchievement(this,"sleep");
         this.ui.toast("Spawn point set. A new day begins.");
         this.ui.announce("A NEW DAY", this.settings.cycleText.dayStart);
         this.audio.tone("dawn");
@@ -1422,6 +1431,7 @@ class Game {
       this.world.get(t.x, t.y + 1, t.z) === B.air
     ) {
       this.world.set(t.x, t.y + 1, t.z, B.crop);
+      recordAchievement(this,"plant");
       this.world.cropTicks[coordKey(t.x, t.y + 1, t.z)] = { age: 0 };
       if (this.mode !== "creative") this.inventory.consume();
       this.renderer.action("place");
@@ -1451,6 +1461,7 @@ class Game {
         ])
       ) {
         if (this.mode !== "creative") this.inventory.consume();
+        recordAchievement(this,"place");
         this.renderer.action("place");
         playWorldSound(this, "place", { x, y, z }, "planks");
         this.ui.updateHotbar();
@@ -1485,6 +1496,7 @@ class Game {
     }
     if (item.block === B.torch && t.normal.y === -1) return;
     if (this.world.set(x, y, z, item.block)) {
+      recordAchievement(this,"place");
       if (this.mode !== "creative") this.inventory.consume();
       this.renderer.action("place");
       playWorldSound(this, "place", { x, y, z }, BLOCKS[item.block].key);
@@ -1529,6 +1541,8 @@ class Game {
       this.fps = this.fps
         ? this.fps * 0.94 + (1 / realFrameSeconds) * 0.06
         : 1 / realFrameSeconds;
+    pollAchievements(this, dt);
+    this.achievementView.frame(dt);
     this.controller?.frame(dt);
     this.touch?.frame(dt);
     if (this.active && this.giganto?.active) {

@@ -1,3 +1,11 @@
+# Achievement update — 2.18.0
+
+Use Node 24.22.1 / npm 11.9.0. npm ci, npm run build:standalone, npm run build:desktop (bundled Electron runtime), npm run build:desktop:legacy (previous browser-based launcher). Then python scripts/package-desktop-release.py --output OUTPUT_DIR produces separate runtime EXE, Windows HTML ZIP, Browser ZIP and Source ZIP, with payload checks and SHA-256 checksums.
+
+npm test runs the unit suite. npm run test:desktop:web runs the existing progression/Titan browser regressions; npx playwright test --config playwright.achievements.config.js runs achievement UI/persistence/mobile/controller checks. npm run test:desktop tests the packaged app in an isolated profile. On Linux, use the matching Electron runtime and software WebGL; this does not establish native Windows/controller/GPU results. Main and the existing hosted mobile branch are not changed.
+
+## Previous build notes — 2.17.0
+
 # Offline desktop build — 2.17.0
 
 Use Node 24.22.1 / npm 11.9.0. Run `npm ci`, `npm run build:standalone`, then `npm run build:desktop`. The new desktop output is `dist/desktop-app/DCSMCRAFT-2.17.0-Portable.exe`, with the complete runtime and local game assets bundled. Source and runtime details are in desktop/README.md and DESKTOP-STREAMING.md. The legacy browser-launcher command is explicitly named `build:desktop:legacy` and is not shipped as the desktop update.
@@ -48,7 +56,7 @@ still needs a separately configured relay. Smoke tests serve the exact packaged
 HTML over loopback because managed browser policies can block `file://` itself.
 
 Optional Windows packaging: after the standalone build, set `DCSMCRAFT_ZIG` to
-the compiler described in `desktop/TOOLCHAIN.json`, then run `npm run build:desktop`.
+the compiler described in `desktop/TOOLCHAIN.json`, then run `npm run build:desktop:legacy`.
 It cross-compiles the existing Windows launcher and verifies its embedded HTML
 using a Linux extraction companion. This does not verify native Windows launch.
 Full release ZIP packaging uses `python3 scripts/package-release.py --output artifacts`.

@@ -1,1 +1,9 @@
-{"name":"dcsmcraft","productName":"DCSMCRAFT","version":"2.17.0","main":"main.cjs","private":true,"description":"DCSMCRAFT offline desktop game","author":"DCSMCRAFT"}
+{
+  "name": "dcsmcraft",
+  "productName": "DCSMCRAFT",
+  "version": "2.18.0",
+  "main": "main.cjs",
+  "private": true,
+  "description": "DCSMCRAFT offline desktop game",
+  "author": "DCSMCRAFT"
+}

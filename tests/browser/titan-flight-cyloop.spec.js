@@ -627,6 +627,8 @@ test("the native encounter completes both rebalanced phases, defeat, retry and t
   expect(result.portal).toBe(true);
   expect(result.bodyVisible).toBe(false);
   expect(result.originalUnchanged).toBe(true);
+  expect(await page.evaluate(()=>!!dcsmcraft.player.achievements?.unlocked.giganto_victory)).toBe(true);
+  expect(await page.evaluate(()=>!!dcsmcraft.player.achievements?.unlocked.titan_portal)).toBe(true);
   await page.screenshot({ path: out + "/victory.png" });
   expect(ev.errors).toEqual([]);
   expect(ev.external).toEqual([]);

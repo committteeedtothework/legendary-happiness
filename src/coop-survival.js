@@ -1,3 +1,4 @@
+import { achievementState, recordAchievement, scanAchievements } from "./achievements.js";
 import { playerEye } from "./player-body.js";
 import { menuStillValid } from "./world-interactions.js";
 import { B, BLOCKS, ITEMS, RECIPES, makeStack } from "./data.js";
@@ -157,6 +158,7 @@ export function peerContext(session, peer) {
     save: () => g.save(),
     closeCraft: () => closePeerCraft(ctx),
     openInventory: (type, container = null, target = null) => {
+      if (type === "personal") recordAchievement(ctx,"inventory-open");
       peer.menu = { type, container, target };
       peer.openMenu = true;
     },
@@ -266,6 +268,11 @@ export function tickPeer(session, peer) {
         d.count = peer.inventory.add(d);
     }
   g.drops = g.drops.filter((d) => d.count > 0);
+  if (g.tickCount % 10 === 0) {
+    scanAchievements(ctx);
+    if ((g.dimension || "overworld") === "overworld")
+      recordAchievement(ctx,"biome",{key:g.world.terrain(p.x,p.z).biome});
+  }
   if (peer.menu?.target) {
     const t = peer.menu.target;
     if (!menuStillValid(g, peer.menu, p)) {
@@ -287,8 +294,10 @@ export function respawnPeer(session, peer) {
       break;
     }
   const standData = peer.player.standData,
+    achievements = achievementState(peer.player),
     aquaticId = peer.player.aquaticId;
   peer.player = createPlayer(clear ? point : g.world.findSpawn(), {
+    achievements,
     aquaticId,
   });
   if (standData) {

@@ -510,6 +510,7 @@ export class ControllerInput {
     const scroll = Math.abs(r.look.y) > 0.15 ? r.look.y : 0;
     if (scroll) {
       const panel =
+        root.querySelector(".achievement-grid") ||
         root.querySelector(
           ".creative-catalog,[data-titan-panel]:not([hidden]),.dialog",
         ) || root;

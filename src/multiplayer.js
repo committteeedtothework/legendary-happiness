@@ -1,3 +1,4 @@
+import { syncAchievements } from "./achievements.js";
 import { restoreEmbeddedArrows } from "./embedded-arrows.js";
 import { PROTOCOL } from "../server/protocol.mjs";
 import { releaseEditionWeapon } from "./edition-combat.js";
@@ -712,6 +713,7 @@ export class Multiplayer {
   applyPrivate(s) {
     const g = this.game;
     if (!s?.player) return;
+    syncAchievements(g,s.player.achievements);
     g.player.standData = s.player.standData || null;
     if (s.standAnnouncement) {
       g.ui.announce(s.standAnnouncement.title, s.standAnnouncement.text);
@@ -1074,6 +1076,7 @@ export class Multiplayer {
       ]),
     );
     g.player = createPlayer(data.player);
+    syncAchievements(g,data.player?.achievements,true);
     if (g.mode === "survival") Object.assign(g.player, data.player);
     else g.player.standData = data.player.standData || null;
     g.player.flying = g.mode === "creative";

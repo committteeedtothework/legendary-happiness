@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.18.0
+
+**64 achievements** cover Survival, Equipment, Adventure, Ocean, DCSMCRAFT's custom items and both Titans. Open **Pause → Achievements** to browse goals, search, filter unlocked/locked goals and check progress. Unlocks save per player/world and survive respawn, backups, co-op resume and arena return. Existing carried equipment and proven Titan victories are recognized in older saves. See [ACHIEVEMENTS.md](ACHIEVEMENTS.md) for every goal, reference sources and compatibility details.
+
+Choose a Windows edition: **DCSMCRAFT-2.18.0-Portable.exe** includes its own Electron runtime; **DCSMCRAFT-Windows-HTML-2.18.0.zip** is the previous browser-based Windows launcher and requires installed Edge or Chrome. Both include the same updated game. The standalone Browser ZIP is also available. The runtime app uses DesktopApp saves; the older launcher retains DesktopProfile. Export/import a world backup when switching profiles. Singleplayer works offline.
+
+## Previous release — 2.17.0
+
 # DCSMCRAFT 2.17.0
 
 The Windows edition is now a self-contained portable Electron app. Download and run `DCSMCRAFT-2.17.0-Portable.exe`; no Edge, Chrome, Node, Unity or separate HTML file is required. Singleplayer and all bundled models/music work offline. Multiplayer still needs a network connection and relay.

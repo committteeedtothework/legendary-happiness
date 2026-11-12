@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { playWorldSound } from "./spatial-audio.js";
 import { nearbyVillages } from "./villages.js";
 import { B, BLOCKS, ITEMS, MOB_INFO, makeStack } from "./data.js";
@@ -300,6 +301,7 @@ export function claimPistols(g, t) {
     return true;
   }
   s.phase = "claimed";
+  recordAchievement(g,"claim",{item:"matthew_dual_pistols"});
   g.ui?.updateHotbar?.();
   g.ui?.toast?.(
     "Matthew's Dual Wielded Pistols · hold left click to fire · right-click Dash · R Air Trick",

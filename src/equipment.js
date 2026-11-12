@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { ITEMS } from "./data.js";
 export const enchantLevel = (stack, id) =>
   Math.max(0, Math.min(5, Math.floor(stack?.enchantments?.[id] || 0)));
@@ -250,6 +251,7 @@ export function enchantItem(game, index, id) {
     game.player.xp -= cost.xp;
   }
   stack.enchantments = { ...stack.enchantments, [id]: level };
+  recordAchievement(game,"enchant");
   game.audio?.tone("enchant");
   game.ui?.updateHotbar();
   return { ok: true, message: `${e.name} ${level} applied.` };

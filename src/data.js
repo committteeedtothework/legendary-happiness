@@ -8,7 +8,7 @@ import {
   appendAquaticItems,
   appendAquaticMobs,
 } from "./aquatic-data.js";
-export const VERSION = "2.17.0";
+export const VERSION = "2.18.0";
 export const GENERATION_VERSION = 16;
 export const REFERENCE =
   "Java Edition 26.3 (content); custom survival mechanics";

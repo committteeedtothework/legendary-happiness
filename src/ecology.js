@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { playWorldSound } from "./spatial-audio.js";
 import { awardXP } from "./equipment.js";
 import { collides } from "./physics.js";
@@ -247,6 +248,7 @@ export function tradeWithVillager(game, e, index) {
     return { ok: false, message: "Make room in your inventory first." };
   game.inventory.slots = working.slots;
   e.tradeUses[index]++;
+  recordAchievement(game,"trade");
   e.gesture = 0.65;
   awardXP(game, 2);
   game.audio?.tone("trade");

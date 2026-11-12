@@ -275,6 +275,17 @@ test("armor stats, recipes, motion and unrelated gameplay retain their prior inv
   for (const [file, h] of Object.entries(b)) {
     if (
       [
+        // 2.18.0 adds achievement observers and preserves the player ledger.
+        "src/equipment.js",
+        "src/simulation.js",
+        "src/ecology.js",
+        "src/coop-survival.js",
+        "src/aquatic.js",
+        "src/realms.js",
+        "src/relic.js",
+        "src/invasion.js",
+        "src/devils-palm.js",
+        "src/rift-trial.js",
         "src/main.js",
         "src/physics.js",
         "src/multiplayer.js",

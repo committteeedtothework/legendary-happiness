@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import {
   B,
   BLOCKS,
@@ -46,6 +47,7 @@ export function aquaticState(w) {
   return (w.aquatic ||= { growth: {}, projectiles: [], achievements: {} });
 }
 export function awardAquatic(g, id, text) {
+  recordAchievement(g,"aquatic",{key:id});
   const a = aquaticState(g.world).achievements;
   if (a[id]) return;
   a[id] = g.tickCount || 1;

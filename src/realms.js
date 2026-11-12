@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { restoreEmbeddedArrows } from "./embedded-arrows.js";
 import { upgradeNightEnemies } from "./hostile-combat.js";
 import { restoreWeather } from "./weather.js";
@@ -84,6 +85,7 @@ export function travel(game, source) {
   game.portalLinks = game.portalLinks || {};
   let dest = game.portalLinks[key]?.frame;
   selectRealm(game, to);
+  recordAchievement(game,"dimension",{key:to});
   if (!dest || !validFrame(game.world, dest)) {
     let x = Math.floor(source.x * (to === "cinderwild" ? 1 / 8 : 8)),
       z = Math.floor(source.z * (to === "cinderwild" ? 1 / 8 : 8));

@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { playWorldSound } from "./spatial-audio.js";
 import { weatherColumnLoaded } from "./weather-spatial.js";
 import { tickLivestock, livestockMotion } from "./livestock.js";
@@ -899,6 +900,7 @@ export function damageEntity(
   playWorldSound(game, "hit", e);
   game.audio?.voice?.(game, e, e.hp <= 0 ? "death" : "hurt");
   if (e.hp <= 0) {
+    if (reward && HOSTILE_TYPES.has(e.type)) recordAchievement(game,"hostile-kill",{key:e.type});
     const lootBonus =
       reward && kind === "melee" && looting > 0
         ? Math.floor(Math.random() * (Math.min(3, Math.max(0, looting)) + 1))
@@ -1051,6 +1053,7 @@ export function devinPulse(game) {
     damageEntity(game, e, 8, { knockback: 2 });
     hits++;
   }
+  recordAchievement(game,"pulse",{value:hits});
   game.renderer?.pulseEffect?.(p);
   game.renderer?.action("use");
   playWorldSound(game, "pulse", game.player);

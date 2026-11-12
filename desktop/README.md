@@ -1,3 +1,14 @@
+# Windows editions — 2.18.0
+
+- **Bundled runtime:** run DCSMCRAFT-2.18.0-Portable.exe. Electron/Chromium and the game are included; no separate installed browser is needed.
+- **Windows HTML launcher:** extract DCSMCRAFT-Windows-HTML-2.18.0.zip and run DCSMCRAFT.exe. This uses installed Microsoft Edge or Google Chrome, with the original DesktopProfile save location.
+
+Both editions include the same 64-achievement update and 2.17 terrain streaming fixes. Open Pause → Achievements. Existing artwork, audio, game rules and world generation are preserved. The runtime's DesktopApp profile is separate; export/import a world backup when changing editions. Both Windows executables are unsigned. Packaged game tests run in Chromium and matching Linux Electron; native Windows execution is unverified on this build host.
+
+Build with Node 24.22.1 / npm 11.9.0: npm ci, npm run build:standalone, npm run build:desktop, npm run build:desktop:legacy. Package with python scripts/package-desktop-release.py --output OUTPUT_DIR. See ACHIEVEMENTS.md for goals and references.
+
+## Previous release — 2.17.0
+
 # DCSMCRAFT 2.17.0 — offline Windows app
 
 Download and run **DCSMCRAFT-2.17.0-Portable.exe** on Windows 10/11 x64. Keep the downloaded EXE anywhere writable. It unpacks its bundled runtime internally and opens DCSMCRAFT; no browser, Node, Unity, local server or separate HTML file is needed. No installer, account or internet connection is required for singleplayer. Public multiplayer still requires an online relay.

@@ -1,3 +1,4 @@
+import { recordTitanAchievement, preserveAchievements } from "./achievements.js";
 import {
   WyvernIntegration,
   restoreWyvernRecord,
@@ -573,7 +574,7 @@ export class GigantoEncounter {
         this.audio = new WyvernAudio(this.game);
       }
       this.audio.frame(s, false);
-      this.game.player = cloneState(s.original.player);
+      this.game.player = preserveAchievements(this.game.player, cloneState(s.original.player));
       this.game.inventory = new Inventory(s.original.inventory);
       this.view =
         s.titan === "wyvern"
@@ -611,6 +612,7 @@ export class GigantoEncounter {
     if (code === "Escape") {
       this.controls.clear();
       if (g.ui.screen === "play") g.pause();
+      else if (g.ui.screen === "achievements") g.ui.back();
       else if (g.ui.screen === "titan-menu") this.button("back");
       else if (s.stage !== "defeat") g.resume();
       return;
@@ -841,6 +843,8 @@ export class GigantoEncounter {
       this.audio.frame(r.session, false);
       document.querySelector("#app").classList.add("titan-active");
       await g.save();
+      // Initial intro is committed here, before the simulation emits transitions.
+      recordTitanAchievement(g, r.session, { type: "stage", stage: "intro" });
       this.accumulator = 0;
       this.lastSave = 0;
       return true;
@@ -942,6 +946,7 @@ export class GigantoEncounter {
       this.audio.syncBoost(s,true);
       // Deliver once after catch-up, against the same pose the next frame draws.
       for (const e of ageTitanEvents(s, events)) {
+        recordTitanAchievement(g,s,e);
         this.view.event(e, s);
         this.audio.event(e);
         if (titanCheckpointEvent(e)) this.checkpointSave = true;
@@ -1255,7 +1260,7 @@ export class GigantoEncounter {
         cameraMode: g.cameraMode,
       };
       try {
-        g.player = cloneState(s.original.player);
+        g.player = preserveAchievements(g.player, cloneState(s.original.player));
         g.inventory = new Inventory(s.original.inventory);
         g.cameraMode = s.original.cameraMode || 0;
         g.mouseDown = g.rightMouseDown = false;

@@ -1,3 +1,4 @@
+import { preserveAchievements } from "./achievements.js";
 // Persistent, single-player incursion trial. The arena is an edited area of the
 // real Cinderworld; its entities, supplies and progress use normal realm saves.
 import { B, BLOCKS, makeStack } from "./data.js";
@@ -181,7 +182,7 @@ export function respawnInTrial(g) {
   const t = activeTrial(g);
   if (!t || g.dimension !== "cinderwild") return false;
   const standData = g.player.standData;
-  g.player = createPlayer(checkpoint(t));
+  g.player = preserveAchievements(g.player,createPlayer(checkpoint(t)));
   if (standData) {
     g.player.standData = standData;
     standData.summoned = false;

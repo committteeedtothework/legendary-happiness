@@ -1,3 +1,4 @@
+import { recordAchievement } from "./achievements.js";
 import { B, SEA } from "./data.js";
 import { hash, hashSeed } from "./random.js";
 import { relicSite } from "./relic.js";
@@ -252,6 +253,7 @@ export function resolvePalmTrial(g, site) {
             ];
     delete s.forceStand;
     s.id = chosen;
+    recordAchievement(g,"stand-awaken");
     s.summoned = true;
     s.energy = 100;
     s.cooldowns = {};

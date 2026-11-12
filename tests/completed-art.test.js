@@ -189,6 +189,17 @@ test("existing simulation, progression, arrows, animation, art and supplied asse
   for (const [name, h] of Object.entries(before)) {
     if (
       [
+        // 2.18.0 adds achievement observers and preserves the player ledger.
+        "src/equipment.js",
+        "src/simulation.js",
+        "src/ecology.js",
+        "src/coop-survival.js",
+        "src/aquatic.js",
+        "src/realms.js",
+        "src/relic.js",
+        "src/invasion.js",
+        "src/devils-palm.js",
+        "src/rift-trial.js",
         "src/textures.js",
         "src/renderer.js",
         "src/graphics.js",

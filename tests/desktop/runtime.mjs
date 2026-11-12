@@ -57,6 +57,7 @@ async function launch() {
 }
 let { app, page } = await launch();
 let saved;
+let achievementMenu;
 try {
   if ((await page.locator("[data-action=quit-desktop]").count()) !== 1)
     throw Error("Desktop quit control missing");
@@ -78,6 +79,10 @@ try {
   await page.locator("[name=difficulty]").selectOption("peaceful");
   await page.locator("[data-action=start-world]").click();
   await page.waitForFunction(() => dcsmcraft.running, null, { timeout: 60000 });
+  await page.evaluate(()=>{dcsmcraft.pause();dcsmcraft.ui.achievements();});
+  achievementMenu=await page.evaluate(()=>({cards:document.querySelectorAll(".achievement-card").length,version:dcsmcraft.player.achievements.version}));
+  if(achievementMenu.cards!==64 || achievementMenu.version!==1)throw Error("Achievement menu missing from native package");
+  await page.screenshot({path:out+"/desktop-achievements.png"});
   await page.evaluate(() => {
     const g = dcsmcraft;
     g.pause();
@@ -177,6 +182,7 @@ try {
     ],
     saved,
   );
+  if (await page.evaluate(()=>dcsmcraft.player.achievements?.version)!==1)throw Error("Achievement ledger lost on desktop restart");
   if (restored.join(",") !== "3,3,4") throw Error("Persistent seam edits lost");
   await page.screenshot({ path: out + "/desktop-reloaded.png" });
   const exportPath = join(cache, "world-backup.json");
@@ -205,6 +211,7 @@ try {
   const backup = JSON.parse(readFileSync(exportPath, "utf8"));
   if (backup.format !== 1 || backup.edits[`${saved.x},182,${saved.z}`] !== 4)
     throw Error("Export lost current edits");
+  if(backup.player.achievements?.version!==1)throw Error("Export lost achievement ledger");
   const originalCount = await page.evaluate(
     async () => (await dcsmcraft.store.list()).length,
   );
@@ -222,10 +229,12 @@ try {
     return {
       id: copy.id,
       seed: data.seed,
+      achievementVersion: data.player.achievements?.version,
       edit: data.edits[`${original.x},182,${original.z}`],
     };
   }, saved);
   if (
+    imported.achievementVersion !== 1 ||
     imported.edit !== 4 ||
     imported.id === saved.id ||
     imported.seed !== "Wildflower"
@@ -291,6 +300,7 @@ try {
       };
     });
     if (rig.skins < 1) throw Error("Native Titan did not load rigged models");
+    if (!await page.evaluate(()=>dcsmcraft.player.achievements?.unlocked.titan_portal))throw Error("Actual portal entry did not award Titan Signals");
     titans.push(rig);
     await page.screenshot({ path: out + "/desktop-" + titan + ".png" });
     if (!(await page.evaluate(() => dcsmcraft.giganto.exit())))
@@ -307,6 +317,7 @@ try {
         nativeWindowsExecutionTested: process.platform === "win32",
         httpNetworkBlocked: true,
         native,
+        achievementMenu,
         titans,
         saved,
         restored,

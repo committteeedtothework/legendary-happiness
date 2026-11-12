@@ -1,3 +1,4 @@
+import { recordAchievement, scanAchievements } from "./achievements.js";
 import { menuLogo } from "./menu-logo.js";
 import {
   recipeBookIcon,
@@ -146,6 +147,7 @@ export class UI {
       }
       if (action === "features") this.features();
       if (action === "settings") this.settings();
+      if (action === "achievements") this.achievements();
       if (action === "titan-menu") this.game.giganto.menu();
       if (action === "weather") this.weather();
       if (action === "jukebox") this.game.jukebox.open();
@@ -811,7 +813,7 @@ export class UI {
     this.game.running = false;
     this.setScreen(
       "pause",
-      `<div class="pause-shade"></div><main class="dialog compact pause-dialog"><h2>Game Menu</h2>${message ? `<p>${esc(message)}</p>` : ""}<button class="primary wide" data-action="resume">Back to Game</button><div class="pause-actions"><button class="secondary" data-action="guide">Controls</button><button class="secondary" data-action="journal">Relic Journal</button><button class="secondary" data-action="settings">Options...</button><button class="secondary" data-action="multiplayer">${this.game.multiplayer?.connected ? "Players" : "Multiplayer"}</button><button class="secondary" data-action="world-chat">Chat</button><button class="secondary" data-action="world-tools">World...</button></div><button class="secondary wide" data-action="quit">${this.game.multiplayer?.isGuest ? "Leave Server" : "Save and Quit to Title"}</button></main>`,
+      `<div class="pause-shade"></div><main class="dialog compact pause-dialog"><h2>Game Menu</h2>${message ? `<p>${esc(message)}</p>` : ""}<button class="primary wide" data-action="resume">Back to Game</button><div class="pause-actions"><button class="secondary" data-action="achievements">Achievements</button><button class="secondary" data-action="guide">Controls</button><button class="secondary" data-action="journal">Relic Journal</button><button class="secondary" data-action="settings">Options...</button><button class="secondary" data-action="multiplayer">${this.game.multiplayer?.connected ? "Players" : "Multiplayer"}</button><button class="secondary" data-action="world-chat">Chat</button><button class="secondary" data-action="world-tools">World...</button></div><button class="secondary wide" data-action="quit">${this.game.multiplayer?.isGuest ? "Leave Server" : "Save and Quit to Title"}</button></main>`,
     );
   }
   worldTools() {
@@ -1326,6 +1328,12 @@ export class UI {
             : ref === "craft"
               ? inv.craft
               : this.container.slots;
+    const smelt = ref === "container" && this.invType === "furnace" && index === 2
+      ? { item: array[index]?.id, before: array[index]?.count || 0 } : null;
+    const recordSmelt = () => {
+      const count = smelt ? smelt.before - (array[index]?.count || 0) : 0;
+      if (count > 0) recordAchievement(g,"smelt-take",{item:smelt.item,count});
+    };
     if (
       ref === "armor" &&
       inv.cursor &&
@@ -1362,6 +1370,7 @@ export class UI {
         array[index] = null;
         awardXP(g, Math.floor(this.container.xp || 0));
         this.container.xp = 0;
+        recordSmelt();
       }
       this.refreshInventory();
       return;
@@ -1425,6 +1434,8 @@ export class UI {
         this.container.xp = 0;
       }
     }
+    recordSmelt();
+    scanAchievements(g);
     g.audio.tone("ui");
     this.refreshInventory();
   }
@@ -1464,8 +1475,14 @@ export class UI {
           break;
         }
         inv.cursor = null;
+        recordAchievement(this.game,"craft",{item:r.result,count:r.count});
       }
-    } else inv.craftOne(this.craftSize, this.invType);
+    } else {
+      const r=inv.recipe(this.craftSize,this.invType);
+      if (inv.craftOne(this.craftSize, this.invType))
+        recordAchievement(this.game,"craft",{item:r.result,count:r.count});
+    }
+    scanAchievements(this.game);
     this.game.audio.tone("craft");
     this.refreshInventory();
   }

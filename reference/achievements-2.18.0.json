@@ -1,0 +1,53 @@
+{
+  "sources": [
+    {
+      "url": "https://minecraft.wiki/w/Achievement",
+      "topic": "Bedrock achievements, names and conditions",
+      "sha256": "b07cfdce75dcc30fd06d6124d6be231ea3ed7cce1443216bcec8b313ddfee692"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Advancement",
+      "topic": "Java advancement names and conditions",
+      "sha256": "e7be670e3c33ea42b5914fac23c611d3002440b29c2136f0290fe510e479606e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/misode/mcmeta/assets/assets/minecraft/lang/en_us.json",
+      "topic": "Community mirror of current vanilla language resources; name cross-check",
+      "sha256": "083dd672d3bba7045d727c42491fefd6d973606879609e86ae33bb1255009236"
+    }
+  ],
+  "searchQuery": "Minecraft achievements Getting Wood Time to Mine Acquire Hardware",
+  "searchURL": "https://www.google.com/search?q=Minecraft+achievements+Getting+Wood+Time+to+Mine+Acquire+Hardware",
+  "referenceNamesFound": [
+    "Taking Inventory",
+    "Getting Wood",
+    "Benchmaking",
+    "Time to Mine!",
+    "Getting an Upgrade",
+    "Hot Topic",
+    "Acquire Hardware",
+    "Time to Strike!",
+    "Time to Farm!",
+    "Bake Bread",
+    "Cow Tipper",
+    "DIAMONDS!",
+    "Ice Bucket Challenge",
+    "MOAR Tools",
+    "A Seedy Place",
+    "Isn't It Iron Pick",
+    "Suit Up",
+    "Cover Me with Diamonds",
+    "Enchanter",
+    "Cover Me in Debris",
+    "Serious Dedication",
+    "Monster Hunter",
+    "Sweet Dreams",
+    "What a Deal!",
+    "Fishy Business",
+    "Tactical Fishing",
+    "Moskstraumen",
+    "Do a Barrel Roll!",
+    "Super Sonic"
+  ],
+  "limitations": "A selection adapted to implemented DCSMCRAFT mechanics. Not a complete official Minecraft list, platform achievement integration or exact reproduction. No Ender Dragon/Wither achievements without those fights. Current wiki requirements vary by edition/version."
+}
