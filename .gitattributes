@@ -1,0 +1,1 @@
+DCSMCRAFT-2.18.0-Portable.exe filter=lfs diff=lfs merge=lfs -text
