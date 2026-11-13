@@ -1,3 +1,4 @@
+import {tickEndWorld,tickEnderman,endEntityDamage,endEntityLoot} from "./end-runtime.js";
 import { recordAchievement } from "./achievements.js";
 import { playWorldSound } from "./spatial-audio.js";
 import { weatherColumnLoaded } from "./weather-spatial.js";
@@ -137,6 +138,7 @@ export function dropItem(game, stack, x, y, z, delay = 10) {
   });
 }
 export function spawnSurfaceHostiles(game, night = true) {
+  if(game.dimension==="end")return;
   const p = game.player,
     cinder = game.dimension === "cinderwild";
   const cap = cinder ? cinderThreatCap(game.difficulty) : 14;
@@ -240,6 +242,7 @@ export function spawnSurfaceHostiles(game, night = true) {
   }
 }
 export function tickSurvival(game) {
+  if(tickEndWorld(game,{createEntity,dropItem,damageEntity})){game.tickCount++;return;}
   if (tickRiftTrial(game, createEntity)) {
     game.tickCount++;
     return;
@@ -439,6 +442,8 @@ export function tickSurvival(game) {
     e.vy ??= 0;
     e.hurt ??= 0;
     e.attack ??= 0;
+    if(["dragoon","end_crystal"].includes(e.type))continue;
+    if(e.type==="enderman"){tickEnderman(game,e,{damageEntity});continue;}
     if (e.type === "boat" || (e.type === "skeleton_horse" && e.rider)) continue;
     if (tickAquaticEntity(game, e, { createEntity, dropItem, damageEntity }))
       continue;
@@ -769,6 +774,7 @@ export function tickSurvival(game) {
   for (const e of game.entities)
     if (e.hp <= 0) {
       aquaticDrops(game, e, dropItem);
+    endEntityLoot(game,e,dropItem);
       recordGuardianDeath(game.world, e);
       recordTitanDeath(game, e);
     }
@@ -854,6 +860,9 @@ export function damageEntity(
   } = {},
 ) {
   if (e.hp <= 0 || e.type === "watcher") return 0;
+  const endHandled=endEntityDamage(game,e,damage,{critical:crit,knockback,source,reward,kind,looting},{damageEntity,dropItem});
+  if(endHandled!==null)return endHandled;
+  if(e.type==="dragoon")knockback=0;
   if (e.type === "boat") {
     e.hp -= damage;
     if (e.hp <= 0)
@@ -906,6 +915,7 @@ export function damageEntity(
         ? Math.floor(Math.random() * (Math.min(3, Math.max(0, looting)) + 1))
         : 0;
     aquaticDrops(game, e, dropItem);
+    endEntityLoot(game,e,dropItem);
     recordGuardianDeath(game.world, e);
     recordInvaderDeath(game.world, e);
     if (recordTitanDeath(game, e))

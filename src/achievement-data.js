@@ -8,6 +8,7 @@ export const ACHIEVEMENT_CATEGORIES = [
   ["ocean", "Ocean"],
   ["custom", "DCSMCRAFT"],
   ["titans", "Titans"],
+  ["end", "The End"],
 ];
 const rows = [];
 const add = (category, id, title, description, icon, rules, options = {}) =>
@@ -527,5 +528,12 @@ titan(
   action("titan-victory", { keys: ["giganto", "wyvern"], unique: "key" }),
   { target: 2, challenge: true },
 );
+add("end","eye_spy","Eye Spy","Follow an Eye of Ender toward a stronghold.","eye_of_ender",[action("end-event",{keys:["eye"]})]);
+add("end","the_end","The End?","Enter The End through an activated portal.","end_stone",[action("dimension",{keys:["end"]})]);
+add("end","free_the_end","Free the End","Defeat DRAGOON.","dragoon_trophy",[action("end-event",{keys:["victory"]})],{challenge:true});
+add("end","pearl_throw","Special Delivery","Throw an Ender Pearl.","ender_pearl",[action("end-event",{keys:["pearl"]})]);
+add("end","crystal_clear","Crystal Clear","Destroy all ten healing crystals.","end_crystal",[action("end-crystal",{unique:"key"})],{target:10});
+add("end","outer_end","Remote Getaway","Reach the outer islands through an End Gateway.","chorus_fruit",[action("end-event",{keys:["outer"]})]);
+add("end","dragon_egg","The Next Generation","Collect the DRAGOON Egg.","dragon_egg",[own("dragon_egg")]);
 export const ACHIEVEMENTS = Object.freeze(rows.map((x) => Object.freeze(x)));
 export const ACHIEVEMENT_BY_ID = new Map(ACHIEVEMENTS.map((x) => [x.id, x]));

@@ -37,6 +37,7 @@ export class AmbientDSP {
       "rumble",
       "leaves",
       "fire",
+      "lava",
       "rain",
       "hail",
       "cave",
@@ -117,6 +118,7 @@ export class AmbientDSP {
               creak * 0.025) +
           this.levels.leaves * (noise - this.water[c]) * 0.07 * this.gust +
           this.levels.fire * (this.low[c] * 0.6 + crack) +
+          (this.levels.lava||0)*(this.deep[c]*2+this.low[c]*.16+Math.sin(this.frame/this.rate*7+this.low[c]*10)*.018) +
           this.levels.rain * (noise * 0.1 + this.water[c] * 0.2) +
           this.levels.hail *
             (Math.abs(noise) > 0.987 ? noise * 0.55 : this.water[c] * 0.04);
@@ -150,6 +152,7 @@ export class Soundscape {
         "rumble",
         "leaves",
         "fire",
+      "lava",
         "rain",
         "cave",
         "eerie",

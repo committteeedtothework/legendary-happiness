@@ -1,3 +1,17 @@
+# The End update — 2.20.0
+
+978 unit tests passed with no failures or skips. Coverage includes the previous content definitions and saved ID order, terrain generation, frame activation, Eye/Pearl physics, safe teleport clearance, dragon crystal healing, perching, death and repeat rewards, Enderman provocation, gateway travel and its step-off latch, malformed metadata, brewing effects, shader paths, opaque lava and irregular pressure-ray explosions.
+
+Two End browser checks passed: actual crafting UI, thrown Eye, a generated stronghold and twelve-frame portal, DRAGOON/crystals, a saved-world reload, real sword contact against the perched head, staged victory, egg/fountain and return to the Overworld; plus fluid/fire rendering and a phone-width journal. The full flight-to-victory sequence is exercised through staged checkpoints, not an uninterrupted manual battle. These runs reported no JavaScript or shader errors.
+
+Eight existing browser regressions passed: crafting, mining/smelting/building, night/death/respawn, save/reload, native worker streaming and edited seams, Giganto phases/retry/finisher, Wyvern traversal/phases/save/return and curled jumping/post-parry homing. Previous assets retain their hashes and old block/item/recipe/combat definitions are compared against 2.19.0; only lava opacity changes among existing blocks.
+
+The packaged Electron 45.3.0 Linux app passed offline creation/travel/streaming, save-on-close, relaunch, backup export/import, both Titan entries and Quit. It displayed all 71 achievements and the new End journal. Its game ASAR matches the Windows portable payload byte-for-byte. The Windows PE runtime matches its official archive checksum. The separate legacy Windows launcher's extracted HTML matches the standalone build.
+
+Windows executables are cross-built and payload-verified; native Windows execution, physical controllers, physical iOS/Safari and hardware-GPU performance are unverified. Browser/native checks use software WebGL and are functional tests, not frame-rate benchmarks. END.md records original-asset adaptations, multiplayer restrictions and content not included. Release verification contains logs, reports, screenshots, changed files and payload checks. Public downloads are checked in full against their SHA-256 values before delivery.
+
+---
+
 # Wyvern recording update · 2.11.1
 
 The recording was analyzed with the installed analyze-youtube skill using Gemini native video input and a separate verification question. Direct playback was blocked by the environment proxy. WYVERN-VIDEO.md and reference/wyvern-video-2.11.1.json distinguish agreed observations, disputed counts, authored timing and missing official animation/music. No 1:1 fidelity or independent frame verification is claimed.

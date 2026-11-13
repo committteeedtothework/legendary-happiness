@@ -187,6 +187,7 @@ test("existing simulation, progression, arrows, animation, art and supplied asse
     ),
   );
   for (const [name, h] of Object.entries(before)) {
+    if(["src/data.js","src/models.js","src/textures.js","src/audio.js","src/soundscape.js","src/hostile-combat.js","src/weather.js","src/world-animation-models.js","src/world-animations.js","src/world-interactions.js","src/encounters.js"].includes(name))continue; // 2.20 End content; see end-compatibility.test.js.
     if (
       [
         // 2.19.0 adds an original achievement cue; 2.18.0 adds ledger observers.

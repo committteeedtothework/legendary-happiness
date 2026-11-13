@@ -1,3 +1,7 @@
+import {dragoonHead} from "./end-hitboxes.js";
+import {useEndItem} from "./end-runtime.js";
+import {EndJournal} from "./end-ui.js";
+import "./end.css";
 import "./achievements.css";
 import { AchievementView } from "./achievement-ui.js";
 import { achievementState, recordAchievement, pollAchievements, restoreTitanAchievements } from "./achievements.js";
@@ -237,6 +241,7 @@ class Game {
       ? new PocketTouchInput(this) : new TouchInput(this);
     this.prompts = new InputPrompts(this);
     this.achievementView = new AchievementView(this);
+    this.endJournal = new EndJournal(this);
     installMobileApp(this);
     this.ui.title();
     if (new URLSearchParams(location.hash.slice(1)).has("join"))
@@ -602,6 +607,7 @@ class Game {
       this.world.tick = data.worldTick || 0;
       this.world.restoreDynamics(data.blockTimers);
       this.world.portals = data.portals || {};
+      this.world.endgame = data.endgame;
       this.time = data.time;
       this.tickCount = data.tickCount || 0;
       this.spawn = data.spawn || this.world.findSpawn();
@@ -646,6 +652,7 @@ class Game {
       ),
       portalLinks: this.portalLinks,
       portals: this.world.portals,
+      endgame: this.world.endgame,
       palm: this.world.palm,
       protectedAreas: this.world.protectedAreas || [],
       rules: this.rules,
@@ -990,6 +997,10 @@ class Game {
     const ray = new THREE.Ray(origin, direction);
     for (const e of this.entities) {
       if (e.hp <= 0) continue;
+      if(e.type==='dragoon'){
+        const h=dragoonHead(e),box=new THREE.Box3(new THREE.Vector3(h.x-1.6,h.y-1,h.z-1.6),new THREE.Vector3(h.x+1.6,h.y+1,h.z+1.6)),hit=ray.intersectBox(box,new THREE.Vector3());
+        if(hit){const dist=hit.distanceTo(origin);if(dist<distance&&(!this.target||this.target.distance>dist)){nearest=e;distance=dist;}}
+      }
       const half =
           ((e.type === "boat" ? 1.3 : MOB_INFO[e.type]?.width || 0.7) *
             farmScale(e)) /
@@ -1286,6 +1297,7 @@ class Game {
     }
     if (this.elapsed - this.lastPlace < 0.2) return;
     this.lastPlace = this.elapsed;
+    if(useEndItem(this))return;
     const t = this.target,
       held = this.inventory.held,
       item = ITEMS[held?.id],
@@ -1342,7 +1354,7 @@ class Game {
       if (t.id === B.bed) {
         if (this.dimension !== "overworld") {
           this.ui.toast(
-            "The Cinderwild never sleeps. Return to the Overworld to rest.",
+            "Return to the Overworld to sleep.",
           );
           return;
         }
@@ -1543,6 +1555,7 @@ class Game {
         : 1 / realFrameSeconds;
     pollAchievements(this, dt);
     this.achievementView.frame(dt);
+    this.endJournal.frame();
     this.controller?.frame(dt);
     this.touch?.frame(dt);
     if (this.active && this.giganto?.active) {

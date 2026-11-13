@@ -273,6 +273,7 @@ test("armor stats, recipes, motion and unrelated gameplay retain their prior inv
     ),
   );
   for (const [file, h] of Object.entries(b)) {
+    if(["src/data.js","src/models.js","src/textures.js","src/audio.js","src/soundscape.js","src/hostile-combat.js","src/weather.js"].includes(file))continue; // 2.20 End content; see end-compatibility.test.js.
     if (
       [
         // 2.18.0 adds achievement observers and preserves the player ledger.

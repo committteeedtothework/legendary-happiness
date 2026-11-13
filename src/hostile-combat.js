@@ -1,3 +1,4 @@
+import {explosionCells} from "./explosion-spread.js";
 import { embedArrow, tickEmbeddedArrows } from "./embedded-arrows.js";
 import { playWorldSound } from "./spatial-audio.js";
 import { blockShieldProjectile } from "./edition-combat.js";
@@ -249,41 +250,14 @@ export function creeperExplosion(game, e, damageEntity, dropItem) {
         0.8,
       );
   }
-  // Container inventories and indestructible/temple blocks are protected.
-  for (let dz = -3; dz <= 3; dz++)
-    for (let dy = -2; dy <= 2; dy++)
-      for (let dx = -3; dx <= 3; dx++) {
-        if (dx * dx + dy * dy + dz * dz > 7) continue;
-        const x = Math.floor(e.x) + dx,
-          y = Math.floor(e.y) + dy,
-          z = Math.floor(e.z) + dz,
-          id = game.world.get(x, y, z),
-          b = BLOCKS[id];
-        if (id === B.tnt) {
-          primeTnt(
-            game.world,
-            x,
-            y,
-            z,
-            10 + Math.floor(hash(x, y, z, game.tickCount) * 20),
-          );
-          continue;
-        }
-        if (
-          !b?.solid ||
-          b.hardness > 3 ||
-          b.relic ||
-          b.door ||
-          game.world.containers?.[`${x},${y},${z}`] ||
-          ["chest", "furnace", "bed", "runestone", "glow_crystal"].includes(
-            b.key,
-          )
-        )
-          continue;
-        game.world.set(x, y, z, B.air);
-        if (ITEMS[b.drop] && hash(x, y, z, game.tickCount) > 0.7)
-          dropItem(game, makeStack(b.drop), x + 0.5, y + 0.3, z + 0.5, 20);
-      }
+  // Seeded pressure rays produce uneven craters, stop at resistant cover and
+  // never generate chunks or erase inventories/indestructible blocks.
+  for(const {x,y,z,id} of explosionCells(game.world,e,4,game.tickCount)){
+    const b=BLOCKS[id];
+    if(id===B.tnt){primeTnt(game.world,x,y,z,10+Math.floor(hash(x,y,z,game.tickCount)*20));continue;}
+    game.world.set(x,y,z,B.air);
+    if(ITEMS[b.drop]&&hash(x,y,z,game.tickCount)>.7)dropItem(game,makeStack(b.drop),x+.5,y+.3,z+.5,20);
+  }
   e.hp = 0;
   game.renderer?.explosionEffect?.(e);
   playWorldSound(game, "explosion", e);

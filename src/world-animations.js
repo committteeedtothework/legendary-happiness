@@ -131,6 +131,10 @@ export class WorldAnimations {
         u.leaf.rotation.z = animated
           ? (0.5 + 0.5 * Math.sin(time * 1.8)) * Math.PI * u.openness
           : 0;
+      } else if(u.kind==='brewing_stand'){
+        const brewing=!!(record?.progress>0);u.bubbles.visible=brewing&&game.settings.particles!=="minimal";
+        u.liquids.forEach((m,i)=>{m.visible=!!record?.slots?.[i];m.material.color.set(record?.slots?.[i]?.id==='turtle_master_potion'?'#727f48':record?.slots?.[i]?.id==='awkward_potion'?'#6a579e':'#4b9bce');});
+        if(animated)u.bubbles.children.forEach((b,i)=>{const phase=(time*.6+i/6)%1;b.position.set(.5+Math.sin(time*2+i)*.1,.5+phase*.55,.5+Math.cos(time*2+i)*.1);b.scale.setScalar(.6+phase*.6);});
       } else if (u.kind === "jukebox") {
         u.disc.visible = !!(game.multiplayer?.isGuest
           ? shared?.disc

@@ -1,3 +1,4 @@
+import {endTerrain,generateEnd,generateStronghold} from "./end-terrain.js";
 import {
   emittedLight,
   dirtyLightRegion,
@@ -63,7 +64,7 @@ export class World {
     this.meshRevision = 0;
     this.dimension = dimension;
     this.seedInt = hashSeed(
-      dimension === "overworld" ? seed : `${seed}:cinderwild`,
+      dimension === "overworld" ? seed : `${seed}:${dimension}`,
     );
     this.weather = createWeather(this.seedInt);
     this.skyCache = new Map();
@@ -106,6 +107,7 @@ export class World {
     return nearbyVillages(this, x, z, radius);
   }
   baseTerrain(x, z) {
+    if(this.dimension==="end")return endTerrain(this,x,z);
     if (this.dimension === "cinderwild" && this.generationVersion >= 7)
       return cinderTerrain(this, x, z);
     if (this.dimension === "cinderwild")
@@ -150,6 +152,7 @@ export class World {
       chunk = { cx, cz, data, maxY: SEA + 1, key };
     this.chunks.set(key, chunk);
     this.meshRevision++;
+    if(this.dimension==="end")return generateEnd(this,chunk);
     if (this.dimension === "cinderwild") {
       const result = this.generateCinder(chunk);
       registerAquatic(this, chunk);
@@ -491,6 +494,7 @@ export class World {
     generatePalm(this, chunk, put);
     generateOcean(this, chunk, put);
     generateEdition(this, chunk, put);
+    generateStronghold(this,chunk,put);
     for (const [x, y, z, id] of this.editChunks.get(key) || [])
       put(x - cx * 16, y, z - cz * 16, id);
     this.dirty.add(key);
@@ -552,7 +556,7 @@ export class World {
     x = Math.floor(x);
     y = Math.floor(y);
     z = Math.floor(z);
-    if (y < MIN_Y) return B.bedrock;
+    if (y < MIN_Y) return this.dimension==="end"?B.air:B.bedrock;
     if (y > MAX_Y) return B.air;
     const cx = Math.floor(x / 16),
       cz = Math.floor(z / 16);

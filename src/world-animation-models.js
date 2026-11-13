@@ -125,6 +125,10 @@ export function createWorldAnimation(t, atlas) {
     root.userData.book = book;
     root.userData.pages = pages;
     root.userData.leaf = leaf;
+  } else if(kind==='brewing_stand'){
+    const bubbles=new THREE.Group();root.add(bubbles);const bubbleMaterial=new THREE.MeshBasicMaterial({color:'#ddb7fa',transparent:true,opacity:.7,depthWrite:false});
+    for(let i=0;i<6;i++){const bubble=new THREE.Mesh(new THREE.SphereGeometry(.018,6,4),bubbleMaterial);bubbles.add(bubble);}root.userData.bubbles=bubbles;
+    root.userData.liquids=[];for(let i=0;i<3;i++)root.userData.liquids.push(box(root,[.075,.1,.1],[.27+i*.26,.19,.325],solid('#4b9bce')));
   } else if (kind === "jukebox") {
     const disc = new THREE.Group();
     disc.position.set(0.5, 1.025, 0.5);

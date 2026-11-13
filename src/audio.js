@@ -1,3 +1,4 @@
+import {surfaceSoundLevels} from "./surface-sound.js";
 import {playAchievementCue} from "./achievement-feedback.js";
 import {
   positionMix,
@@ -489,6 +490,7 @@ export class AudioEngine {
           Math.max(0, 1 - Math.hypot(p.x - x, p.y - y, p.z - z) / 9),
         );
       }
+    const surfaceAudio=surfaceSoundLevels(game.world,p);fire=Math.max(fire,surfaceAudio.fire);water=Math.max(water,surfaceAudio.water);
     const wooded = [
         "woodland",
         "birch_woodland",
@@ -546,7 +548,8 @@ export class AudioEngine {
             }[caveRegionAt(game.world, p)] || 72
           : 0,
         rumble: v * (funnel * 0.65 + (cinder ? 0.45 : cave ? 0.13 : 0)),
-        fire: v * (cinder ? 0.15 : fire * 0.25),
+        fire: v * fire * 0.3,
+        lava: v * surfaceAudio.lava * 0.35,
         rain: v * weather.rain * hush * 0.75,
         hail: v * (weather.hail || 0) * hush * 0.5,
         insectBase: t.biome === "marsh" ? 650 : 3500,

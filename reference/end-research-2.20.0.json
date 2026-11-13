@@ -1,0 +1,46 @@
+{
+  "accessed": "2026-11-13",
+  "sources": [
+    {
+      "url": "https://minecraft.wiki/w/The_End",
+      "title": "The End \u2013 Minecraft Wiki",
+      "cachedSHA256": "c87aabed4700b5114770c2ae60926d6444ac1c07ffa6d30593ef11a8ed0449f8"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Stronghold",
+      "title": "Stronghold \u2013 Minecraft Wiki",
+      "cachedSHA256": "6b8a03c69cb09bdd48111f70a69f48ba94ed46b81e4abac8db472c04e6870ac0"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Eye_of_Ender",
+      "title": "Eye of Ender \u2013 Minecraft Wiki",
+      "cachedSHA256": "32b63600f76e3415e6d5bd72cf5fdf4c6197422a1d301aec8e3e0d082c029ba7"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Ender_Pearl",
+      "title": "Ender Pearl \u2013 Minecraft Wiki",
+      "cachedSHA256": "18753f07ffc3652a06cfca664139fa506325312d8f6a3421ce828a036450e151"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Enderman",
+      "title": "Enderman \u2013 Minecraft Wiki",
+      "cachedSHA256": "ba515571b2f27c1fb073bec6c3325df97c25835e7d47c99bf4d413039e6dd617"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Ender_Dragon",
+      "title": "Ender Dragon \u2013 Minecraft Wiki",
+      "cachedSHA256": "8711f376366b6c4e00ae3675eb9590e644a72deba9425a80c49a54ff9d1523b9"
+    },
+    {
+      "url": "https://minecraft.wiki/w/End_crystal",
+      "title": "End Crystal \u2013 Minecraft Wiki",
+      "cachedSHA256": "465a768f2c82692cb765cf7401b5e07ec42a65c067698b298ada9259cde3039a"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Explosion",
+      "title": "Explosion \u2013 Minecraft Wiki",
+      "cachedSHA256": "2f27c753ba5c6c024a4a6487d4500781896da80d27bcbf372640b12c782ff480"
+    }
+  ],
+  "adaptationNotes": "END.md records compact strongholds, existing combat, custom crystal recipe and omitted End-city content."
+}

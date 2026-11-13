@@ -1,3 +1,4 @@
+import {appendEndBlocks,appendEndItems,appendEndMobs} from "./end-data.js";
 import {
   appendEditionBlocks,
   appendEditionItems,
@@ -8,7 +9,7 @@ import {
   appendAquaticItems,
   appendAquaticMobs,
 } from "./aquatic-data.js";
-export const VERSION = "2.19.0";
+export const VERSION = "2.20.0";
 export const GENERATION_VERSION = 16;
 export const REFERENCE =
   "Java Edition 26.3 (content); custom survival mechanics";
@@ -454,6 +455,8 @@ for (let layers = 1; layers <= 8; layers++)
   });
 appendAquaticBlocks(BLOCKS);
 appendEditionBlocks(BLOCKS);
+appendEndBlocks(BLOCKS);
+for(const b of BLOCKS)if(b.fluid?.type==="lava")b.transparent=false;
 export const ATLAS_COLS = 32,
   ATLAS_ROWS = 128;
 export const B = Object.fromEntries(BLOCKS.map((b, i) => [b.key, i]));
@@ -1261,3 +1264,9 @@ Object.assign(
     note: "Overworld Foundations I: milk adult cows; drinking clears status effects and returns the bucket. Consumption timing is simplified.",
   },
 );
+
+appendEndItems({ITEMS,CREATIVE_ITEMS,shapeless,shaped});
+appendEndMobs(MOB_INFO,HOSTILE_TYPES);
+
+SPAWN_EGG_TYPES.push("enderman");
+ITEMS.enderman_spawn_egg.creativeOnly=true;

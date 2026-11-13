@@ -84,6 +84,7 @@ export function worldInteractionSnapshot(game) {
 export const worldVisualKind = (id) =>
   id === B.chest
     ? "chest"
+    : id === B.brewing_stand ? "brewing_stand"
     : id === B.furnace
       ? "furnace"
       : id === B.enchanting_table

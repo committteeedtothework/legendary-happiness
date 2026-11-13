@@ -1,3 +1,4 @@
+import {END_PILLARS} from "./end-terrain.js";
 import { palmColumn, nearbyPalmSites } from "./palm-terrain.js";
 import { CINDER_BIOMES, nearbyCinderSites } from "./cinderworld.js";
 import { relicSite } from "./relic.js";
@@ -36,7 +37,7 @@ export function meshHorizon(
     return t;
   };
   function face(id, f, x, y, z, w, h, d, tint = [1, 1, 1]) {
-    const out = groups[id === B.water || id === B.lava ? 1 : 0],
+    const out = groups[id === B.water ? 1 : 0],
       start = out.p.length / 3,
       tile = id * 3 + f.t,
       uv = [
@@ -49,7 +50,7 @@ export function meshHorizon(
       const v = f.v[i];
       out.p.push(x + v[0] * w, y + v[1] * h, z + v[2] * d);
       out.n.push(...f.n);
-      if (texturePack === "supplied" || BLOCKS[id]?.edition)
+      if (texturePack === "supplied" || (BLOCKS[id]?.edition||BLOCKS[id]?.endContent))
         out.uv.push(...blockArtUV(id, FACES.indexOf(f), ...uv[i], texturePack));
       else
         out.uv.push(
@@ -85,7 +86,7 @@ export function meshHorizon(
       const t = sample(x, z),
         h = t.h,
         id =
-          world.dimension === "cinderwild"
+          world.dimension === "end" ? B.end_stone : world.dimension === "cinderwild"
             ? B[CINDER_BIOMES[t.biome]?.surface || "cinderstone"]
             : world.generationVersion >= 4
               ? surfaceBlock(t, h, world.seedInt)
@@ -94,6 +95,7 @@ export function meshHorizon(
                 : t.biome === "alpine"
                   ? B.snow
                   : B.grass;
+      if(t.void)continue;
       const tint =
         biomeColors && id === B.grass
           ? BIOMES[t.biome]?.tint || [1, 1, 1]
@@ -110,11 +112,11 @@ export function meshHorizon(
         // A fine neighbor may be much lower than this sampled height. Keep a
         // solid skirt on chunk grid lines; ownership clipping removes its hidden
         // half, without opening a vertical crack at LOD boundaries.
-        const low = edge % 16 === 0 ? Math.min(neighbor, MIN_Y) : neighbor;
+        const low = world.dimension==="end" ? Math.max(18,Math.min(neighbor,h-22)) : edge % 16 === 0 ? Math.min(neighbor, MIN_Y) : neighbor;
         if (low < h) face(id, f, x, low + 1, z, step, h - low, step);
       }
       const level = world.dimension === "cinderwild" ? 68 : SEA;
-      if (h < level && !t.palm)
+      if (world.dimension!=="end" && h < level && !t.palm)
         face(
           world.dimension === "cinderwild" ? B.lava : B.water,
           FACES[2],
@@ -257,6 +259,10 @@ export function meshHorizon(
       ) || [])
         if (id && BLOCKS[id]?.solid && y >= world.terrain(x, z).h)
           box(x, y, z, 1, 1, 1, id);
+  if(world.dimension==='end')for(const p of END_PILLARS){
+    box(p.x-p.r,50,p.z-p.r,p.r*2+1,p.top-49,p.r*2+1,B.obsidian);
+    box(p.x,p.top+1,p.z,1,1,1,B.bedrock);
+  }
   return groups.map((g) =>
     g.p.length
       ? {

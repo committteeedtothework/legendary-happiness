@@ -23,6 +23,7 @@ export function exportRealm(state) {
     crops: w.cropTicks,
     aquatic: w.aquatic,
     portals: w.portals,
+    endgame: w.endgame,
     worldTick: w.tick,
     blockTimers: w.blockTimers,
     entities: state.entities,
@@ -52,6 +53,7 @@ export function restoreRealm(seed, dimension, data = {}) {
     achievements: {},
   };
   world.portals = data.portals || {};
+  world.endgame = data.endgame;
   world.tick = data.worldTick || 0;
   world.restoreDynamics(data.blockTimers);
   return {

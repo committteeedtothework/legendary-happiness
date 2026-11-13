@@ -1,3 +1,6 @@
+import {injectSurfaceAnimation} from "./surface-animation.js";
+import {animateEndModel} from "./end-models.js";
+import {EndVisuals} from "./end-visuals.js";
 import {
   geometryFromData,
   queueTerrainResult,
@@ -115,6 +118,7 @@ export class Renderer {
     this.atlas = makeAtlas(settings.texturePack);
     this.worldAnimations = new WorldAnimations(this.scene, this.atlas);
     this.aquaticVisuals = new AquaticVisuals(this.scene);
+    this.endVisuals = new EndVisuals(this.scene);
     this.appliedPack = settings.texturePack;
     this.material = new THREE.MeshLambertMaterial({
       map: this.atlas.texture,
@@ -145,7 +149,7 @@ export class Renderer {
     this.horizonWaterMaterial = this.waterMaterial.clone();
     for (const material of [this.horizonMaterial, this.horizonWaterMaterial])
       material.onBeforeCompile = (shader) =>
-        injectTerrainCoverage(shader, this, true);
+        {injectTerrainCoverage(shader, this, true);injectSurfaceAnimation(shader,this.fluidTime,this.fluidFancy);}
     this.fluidTime = { value: 0 };
     this.fluidFancy = { value: 1 };
     this.material.onBeforeCompile = (shader) => {
@@ -162,27 +166,11 @@ export class Renderer {
         if(tile>=${B.primed_tnt * 3}.0 && tile<${(B.primed_tnt + 1) * 3}.0 && sin(dcsmTime*20.0)>.2) diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0),.75);
         #endif`,
         );
+      injectSurfaceAnimation(shader,this.fluidTime,this.fluidFancy);
     };
     this.waterMaterial.onBeforeCompile = (shader) => {
-      injectBlockLight(shader);
-      injectTerrainCoverage(shader, this, false);
-      shader.uniforms.dcsmTime = this.fluidTime;
-      shader.uniforms.dcsmFancy = this.fluidFancy;
-      shader.fragmentShader =
-        "uniform float dcsmTime;uniform float dcsmFancy;\n" +
-        shader.fragmentShader.replace(
-          "#include <map_fragment>",
-          `#include <map_fragment>
-      #ifdef USE_MAP
-      float dcsmTile=floor(vMapUv.x*${COLS}.0)+(${ROWS - 1}.0-floor(vMapUv.y*${ROWS}.0))*${COLS}.0;
-      if(dcsmTile>=${B.kelp * 3}.0) diffuseColor.a=min(1.0,diffuseColor.a/0.72);
-      if(dcsmFancy>0.5){
-        if(dcsmTile>=15.0&&dcsmTile<18.0)diffuseColor.rgb*=0.94+0.06*sin(dcsmTime*1.8+vMapUv.x*760.0+vMapUv.y*340.0);
-        if(dcsmTile>=84.0&&dcsmTile<87.0)diffuseColor.rgb*=1.1+0.24*sin(dcsmTime*2.0+vMapUv.x*500.0-vMapUv.y*400.0);
-        if(dcsmTile>=93.0&&dcsmTile<96.0)diffuseColor.rgb*=1.05+0.1*sin(dcsmTime+vMapUv.x*300.0+vMapUv.y*600.0);
-      }
-      #endif`,
-        );
+      injectBlockLight(shader);injectTerrainCoverage(shader,this,false);
+      injectSurfaceAnimation(shader,this.fluidTime,this.fluidFancy);
     };
     this.hemi = new THREE.HemisphereLight("#d8e7dc", "#8f9270", 2);
     this.scene.add(this.hemi);
@@ -846,7 +834,7 @@ export class Renderer {
     const living = new Set();
     for (const e of entities) {
       living.add(e.id);
-      const range = Math.min(
+      const range = ["dragoon","end_crystal"].includes(e.type)?240:Math.min(
         192,
         (this.settings.renderDistance * 16 + 12) *
           (this.settings.entityDistance ?? 1),
@@ -1136,6 +1124,7 @@ export class Renderer {
           : 0;
       });
       animateInfernalModel(m, e, time, dt, animateCreature, attack);
+      animateEndModel(m,e,time,dt,animateCreature);
       const hurt =
         e.hurt > 0 ||
         (e.burningTicks > 0 && Math.floor(time * 5) % 2 === 0) ||
@@ -1351,14 +1340,16 @@ export class Renderer {
     if (this.settings.particles !== "minimal") this.arcane?.burst(e, 24);
   }
   explosionEffect(e) {
-    this.guardianWave(e, 3);
-    this.breakParticles(
-      Math.floor(e.x),
-      Math.floor(e.y),
-      Math.floor(e.z),
-      B.dirt,
-    );
+    if(this.effects.length>180)return;
+    const crystal=e.type==='end_crystal'||e.type==='dragoon',count=particleCount(this.settings,crystal?18:24);
+    for(let i=0;i<Math.max(4,count);i++){
+      const a=Math.random()*Math.PI*2,r=.3+Math.random()*1.4,smoke=i%3===0;
+      const material=new THREE.MeshBasicMaterial({color:smoke?(crystal?'#76547f':'#69635d'):crystal?'#efc0f3':i%2?'#ffc17b':'#e0d1b1',transparent:true,opacity:.8,depthWrite:false});
+      const mesh=new THREE.Mesh(new THREE.IcosahedronGeometry(smoke?.35:.07,0),material);mesh.position.set(e.x+Math.sin(a)*r,e.y+.4+Math.random(),e.z+Math.cos(a)*r);this.scene.add(mesh);
+      this.effects.push({m:mesh,v:new THREE.Vector3(Math.sin(a)*(smoke?1.2:5+Math.random()*3),smoke?.5+Math.random():2+Math.random()*5,Math.cos(a)*(smoke?1.2:5+Math.random()*3)),life:smoke?1.2:.5+Math.random()*.4,pulse:smoke,grow:smoke?.8:undefined,duration:smoke?1.2:.6});
+    }
   }
+
   breakParticles(x, y, z, id) {
     const color = BLOCKS[id].color;
     for (let i = 0; i < particleCount(this.settings, 7); i++) {
@@ -1413,6 +1404,7 @@ export class Renderer {
     // Recoil ages in both F5 views, rather than flashing again on return.
     this.worldAnimations.update(game, frameDt, elapsed);
     this.aquaticVisuals.update(game, elapsed);
+    this.endVisuals.update(game,elapsed);
     this.pistolKick = Math.max(
       0,
       (this.pistolKick || 0) - (animating ? frameDt : 0),
@@ -1449,9 +1441,8 @@ export class Renderer {
       elapsed,
       this.settings.particles !== "minimal",
     );
-    this.fluidTime.value = elapsed;
+    if(animating)this.fluidTime.value += frameDt;
     this.fluidFancy.value =
-      this.settings.fancyGraphics !== false &&
       this.settings.animatedTextures !== false
         ? 1
         : 0;
@@ -1469,7 +1460,7 @@ export class Renderer {
       light,
     );
     sky.lerp(new THREE.Color("#dc9679"), lighting.warmth * 0.6);
-    const cinder = this.world?.dimension === "cinderwild";
+    const cinder = this.world?.dimension === "cinderwild", end = this.world?.dimension === "end";
     if (cinder) {
       const biome = this.world.terrain(player.x, player.z).biome;
       sky.set(
@@ -1494,8 +1485,8 @@ export class Renderer {
         this.sun.color.lerp(new THREE.Color("#ffb276"), lighting.warmth * 0.65);
     }
     this.sunOrb.visible = this.moonOrb.visible =
-      !cinder && this.settings.sunMoon !== false;
-    this.clouds.visible = !cinder && this.settings.clouds !== false;
+      !cinder && !end && this.settings.sunMoon !== false;
+    this.clouds.visible = !cinder && !end && this.settings.clouds !== false;
     if (!cinder) {
       sky.lerp(new THREE.Color("#687888"), this.weatherDark * 0.68);
       this.sun.intensity *= 1 - this.weatherDark * 0.7;
@@ -1529,13 +1520,14 @@ export class Renderer {
       );
     }
     this.standVisuals?.atmosphere(sky, player, elapsed);
+    if(end){sky.set('#17101f');this.hemi.intensity=.88;this.hemi.color.set('#b5a5d2');this.hemi.groundColor.set('#51425e');this.sun.intensity=.6;this.sun.color.set('#dbccf1');}
     this.scene.background.copy(sky);
     this.fog.color.copy(sky);
     this.scene.fog =
       this.settings.fog !== false || underwater ? this.fog : null;
     this.starField.visible =
       this.settings.stars !== false && this.caveShade < 0.6;
-    this.starField.material.opacity = cinder ? 0 : lighting.stars * 0.8;
+    this.starField.material.opacity = cinder ? 0 : end ? .65 : lighting.stars * 0.8;
     const distance = this.settings.renderDistance * 16;
     this.fog.near = underwater ? 2 : distance * (0.83 - this.weatherDark * 0.3);
     this.fog.far = underwater
@@ -1543,6 +1535,7 @@ export class Renderer {
         ? 48
         : 24
       : distance * (1.12 - this.weatherDark * 0.3);
+    if(end){this.fog.near=85;this.fog.far=Math.max(192,distance*1.5);}
     if (this.standVisuals?.trialFade > 0.01 && !underwater) {
       this.scene.fog = this.fog;
       this.fog.near = Math.min(this.fog.near, 7);
@@ -1915,7 +1908,7 @@ export class Renderer {
       }
       if (e.pulse) {
         e.m.scale.addScalar(dt * (e.grow || 13 / 0.6));
-        e.m.material.opacity = Math.max(0, e.life / 0.6) * 0.8;
+        e.m.material.opacity = Math.min(.8,Math.max(0, e.life / (e.duration || .6)) * 0.8);
       } else e.v.y -= 9 * dt;
       e.m.position.addScaledVector(e.v, dt);
       return true;

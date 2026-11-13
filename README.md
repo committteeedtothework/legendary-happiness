@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.20.0
+
+The End adds Endermen, Ender Pearls, craftable Eyes of Ender, seeded strongholds, DRAGOON, healing crystals, outer islands and a return gateway. Water, opaque lava, fire and portals animate; brewing stands show active bubbles. Explosions follow irregular pressure rays. The pause menu includes an End journal and seven new achievements. See [END.md](END.md) for controls, recipes, references and limitations.
+
+Windows downloads: **DCSMCRAFT-2.20.0-Portable.exe** includes its runtime; **DCSMCRAFT-Windows-HTML-2.20.0.zip** is the separate previous browser-based Windows edition. Both run singleplayer offline. Existing assets, saved IDs, item stats and Titan fights are retained. Export/import backups when switching desktop profiles.
+
+## Previous release — 2.19.0
+
 # DCSMCRAFT 2.19.0
 
 Achievements now have Minecraft-inspired Overworld menus, Sonic-inspired arena panels, fading unlock notices and an original sound cue. Both Titans gain steadier movement-following cameras, stable body-part lock-on and curled-form collision fixes. Wyvern shares Giganto's Sonic handling. Controller inventories have an adjustable free crosshair with real stack transfers and device-specific button badges. See [CONTROLS-UI-POLISH.md](CONTROLS-UI-POLISH.md) and [CONTROLLERS.md](CONTROLLERS.md).

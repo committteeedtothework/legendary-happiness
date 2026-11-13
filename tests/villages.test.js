@@ -181,7 +181,7 @@ test("meshing hides enclosed faces, supports ambient occlusion, and uses smaller
   assert.ok(world.revisions.get(chunkKey(1, 1)) > 0);
 });
 test("all new wildlife have distinct body sizes and original PCM impact samples are varied and bounded", () => {
-  assert.equal(Object.keys(MOB_INFO).length, 39);
+  assert.equal(Object.keys(MOB_INFO).length, 42);
   assert.ok(MOB_INFO.chicken.height < MOB_INFO.cow.height);
   const context = {
     sampleRate: 22050,

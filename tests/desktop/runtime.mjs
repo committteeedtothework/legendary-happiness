@@ -81,8 +81,11 @@ try {
   await page.waitForFunction(() => dcsmcraft.running, null, { timeout: 60000 });
   await page.evaluate(()=>{dcsmcraft.pause();dcsmcraft.ui.achievements();});
   achievementMenu=await page.evaluate(()=>({cards:document.querySelectorAll(".achievement-card").length,version:dcsmcraft.player.achievements.version}));
-  if(achievementMenu.cards!==64 || achievementMenu.version!==1)throw Error("Achievement menu missing from native package");
+  if(achievementMenu.cards!==71 || achievementMenu.version!==1)throw Error("Achievement menu missing from native package");
   await page.screenshot({path:out+"/desktop-achievements.png"});
+  await page.evaluate(()=>dcsmcraft.endJournal.open());
+  if(!await page.locator(".end-journal").isVisible())throw Error("End journal missing from offline runtime");
+  await page.screenshot({path:out+"/desktop-end-journal.png"});
   await page.evaluate(() => {
     const g = dcsmcraft;
     g.pause();

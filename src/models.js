@@ -1,3 +1,4 @@
+import {buildEndModel} from "./end-models.js";
 import { buildAquaticModel } from "./aquatic-models.js";
 import { buildColdWildlife } from "./cold-wildlife-models.js";
 import { buildWatcherModel } from "./watcher-model.js";
@@ -132,6 +133,7 @@ export function createMobModel(entity) {
   g.userData.legs = [];
   g.userData.wings = [];
   if (
+    buildEndModel(entity, { g, head, box, limb, material }) ||
     buildAquaticModel(entity, { g, head, box, limb, material }) ||
     buildColdWildlife(entity, { g, head, box, limb, material }) ||
     buildFlierModel(entity, { g, head, box, material }) ||

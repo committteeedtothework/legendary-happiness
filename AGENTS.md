@@ -58,3 +58,8 @@ collision, Super Sonic targeting and Wyvern/shared Sonic handling fixes, and
 inventory controller cursor plus device-specific glyphs. Preserve assets,
 achievement ledgers, saves, main and hosted mobile. Separate Windows editions
 remain authorized for publishing on dedicated source/download branches.
+
+The 2.20.0 request explicitly authorizes The End, Endermen, Ender Pearls/Eyes,
+strongholds, the DRAGOON encounter and progression; animated fluid/fire, opaque
+lava, irregular explosions, QoL and menu polish. Preserve existing assets,
+block IDs, worlds/saves, Titan fights, main and hosted mobile.

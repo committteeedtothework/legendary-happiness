@@ -26,7 +26,7 @@ test("achievements unlock through real craft and furnace transactions, save/relo
  await expect(page.locator('#achievement-toast strong')).toHaveText('Taking Inventory');
  await page.screenshot({path:out+'/achievement-unlock.png'});
  await page.evaluate(()=>dcsmcraft.pause());await page.waitForFunction(()=>!document.pointerLockElement);
- await page.locator('[data-action=achievements]').click();await expect(page.locator('.achievement-card')).toHaveCount(64);
+ await page.locator('[data-action=achievements]').click();await expect(page.locator('.achievement-card')).toHaveCount(71);
  await expect(page.locator('[data-achievement=benchmaking]')).toHaveClass(/unlocked/);await page.screenshot({path:out+'/achievements-desktop.png'});
  await page.locator('#achievement-search').fill('pistols');await expect(page.locator('.achievement-card')).toHaveCount(2);
  await page.locator('#achievement-search').fill('');await page.locator('[data-ach-filter=unlocked]').click();await expect(page.locator('.achievement-card.locked')).toHaveCount(0);

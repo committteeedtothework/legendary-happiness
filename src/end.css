@@ -1,0 +1,106 @@
+#world-boss-hud {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  width: min(560px, 65vw);
+  text-align: center;
+  pointer-events: none;
+  color: white;
+  text-shadow: 2px 2px #000;
+  z-index: 30;
+  font-family: inherit;
+}
+#world-boss-hud[hidden] {
+  display: none;
+}
+#world-boss-hud h2 {
+  font-size: 18px;
+  letter-spacing: 3px;
+  margin: 0 0 7px;
+}
+#world-boss-hud p {
+  font-size: 11px;
+  margin: 6px 0;
+}
+.end-boss-track {
+  height: 12px;
+  background: #1e1028;
+  border: 2px solid #0b0611;
+  box-shadow: inset 0 1px #777;
+}
+.end-boss-track i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(#dc8ce8, #9139b1);
+  transition: width 0.12s linear;
+  box-shadow:
+    inset 0 2px #f2c7ff,
+    inset 0 -2px #642f82;
+}
+#app #ui #overlay .end-journal {
+  width: min(820px, 94vw);
+  max-height: 90dvh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+#app #ui #overlay .end-journal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+#app #ui #overlay .end-journal header h2 {
+  margin: 0;
+}
+#app #ui #overlay .end-journal section {
+  margin-top: 18px;
+  padding: 14px;
+  background: #0000000d;
+  border: 2px solid #777;
+  box-shadow: inset 1px 1px #fff8;
+}
+#app #ui #overlay .end-journal p {
+  line-height: 1.8;
+  font-size: 13px;
+}
+#app #ui #overlay .dialog :is(button, input, select, summary):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+#app
+  #ui
+  #overlay
+  :is(.trade-dialog, .relic-journal, .enchant-dialog, .end-journal) {
+  scrollbar-width: thin;
+  scrollbar-color: #777 #272727;
+  overscroll-behavior: contain;
+}
+#tooltip {
+  max-width: min(420px, calc(100vw - 24px));
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  #world-boss-hud {
+    top: 10px;
+    width: 62vw;
+  }
+  #world-boss-hud h2 {
+    font-size: 14px;
+  }
+  #app #ui #overlay .end-journal {
+    padding: 14px;
+  }
+  #app #ui #overlay .end-journal section {
+    padding: 10px;
+  }
+  #app #ui #overlay .end-journal p {
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .end-boss-track i {
+    transition: none;
+  }
+}

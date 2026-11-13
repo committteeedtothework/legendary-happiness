@@ -1,3 +1,4 @@
+import {paintEndAtlas,paintEndItem} from "./end-art.js";
 import { paintCompletedBlocks } from "./completed-block-art.js";
 import { paintCompletedItem } from "./completed-item-art.js";
 import { paintRefinedItem, visualInventoryItem } from "./refined-item-art.js";
@@ -74,6 +75,7 @@ export function makeAtlas(pack = "renewed") {
   paintAquaticAtlas(canvas);
   paintEditionAtlas(canvas);
   paintCompletedBlocks(canvas, pack);
+  paintEndAtlas(canvas);
   atlasCanvas = canvas;
   activePack = pack;
   icons.clear();
@@ -134,6 +136,7 @@ export function iconURL(id) {
     // Weapon visuals/icons stay original and consistent across all packs.
   } else if (supplied) {
     c.drawImage(supplied, 0, 0, 32, 32);
+  } else if(paintEndItem(c,id)){
   } else if (activePack !== "classic" && paintCompletedItem(c, id)) {
   } else if (paintRefinedItem(c, id)) {
   } else if (paintInventoryArt(c, id, item)) {

@@ -81,7 +81,7 @@ export function setWeather(world, kind) {
 }
 export function tickWeather(game) {
   const world = game.world;
-  if (world.dimension === "cinderwild") return;
+  if (world.dimension === "cinderwild" || world.dimension === "end") return;
   const w = (world.weather ||= createWeather(world.seedInt));
   const climate = biomeWeatherProfile(
     world.terrain(game.player.x, game.player.z).biome,

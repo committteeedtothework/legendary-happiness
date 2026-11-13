@@ -256,6 +256,7 @@ test("combat stats and unrelated simulation retain their prior source outside ar
     ),
   );
   for (const [file, h] of Object.entries(hashes)) {
+    if(["src/data.js","src/models.js","src/textures.js","src/audio.js","src/soundscape.js","src/hostile-combat.js","src/weather.js"].includes(file))continue; // 2.20 End content; see end-compatibility.test.js.
     if (["src/main.js", "src/multiplayer.js", "src/physics.js", "src/coop-survival.js", "src/equipment.js", "src/simulation.js", "src/ecology.js", "src/aquatic.js", "src/realms.js", "src/relic.js", "src/invasion.js", "src/devils-palm.js", "src/rift-trial.js"].includes(file)) continue; // 2.7.18 adds saved/relayed embedded arrows and silent swings.
     let b = readFileSync(new URL("../" + file, import.meta.url));
     b = beforePlayerCopy(file, b);

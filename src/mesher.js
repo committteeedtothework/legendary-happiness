@@ -106,7 +106,7 @@ export function meshChunk(
   const blockLight = buildBlockLight(world, c);
   const get = (x, y, z) =>
     y < MIN_Y
-      ? B.bedrock
+      ? world.dimension==="end"?B.air:B.bedrock
       : y > MAX_Y
         ? B.air
         : x >= 0 && x < 16 && z >= 0 && z < 16
@@ -168,7 +168,7 @@ export function meshChunk(
         blockLight(c.cx * 16 + x + f.n[0], y + f.n[1], c.cz * 16 + z + f.n[2]),
       );
       out.light.push(Math.pow(level / 15, 2) * 1.5);
-      if (id === B.torch || texturePack === "supplied" || BLOCKS[id]?.edition)
+      if (id === B.torch || texturePack === "supplied" || (BLOCKS[id]?.edition||BLOCKS[id]?.endContent))
         out.uv.push(
           ...blockArtUV(
             fluid(id) && !BLOCKS[id]?.aquaticWater ? B[fluid(id).type] : id,
@@ -266,7 +266,7 @@ export function meshChunk(
         const b = BLOCKS[id],
           out =
             groups[
-              fluid(id) ||
+              (fluid(id)?.type === "water") ||
               [B.glass, B.ice, B.portal].includes(id) ||
               (b.edition && /glass/.test(b.key))
                 ? 1
@@ -438,7 +438,7 @@ export function meshChunk(
               continue;
           } else if (
             id !== B.torch &&
-            (adjacent === id || (!ab.transparent && adjacent !== B.chest))
+            (adjacent === id || (!ab.transparent && ab.solid && adjacent !== B.chest))
           )
             continue;
           const portalZ =

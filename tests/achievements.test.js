@@ -11,9 +11,9 @@ import { peerContext, peerSave, respawnPeer } from "../src/coop-survival.js";
 import { tradeWithVillager } from "../src/ecology.js";
 const fixture = (mode="survival") => ({active:true,mode,player:createPlayer({x:0,y:200,z:0}),inventory:new Inventory(),multiplayer:{isGuest:false},audio:{tone(){}},ui:{unlocks:[],achievementUnlocked(e){this.unlocks.push(e.id);},updateHotbar(){}}});
 const unlocked=(g,id)=>!!achievementState(g.player).unlocked[id];
-test("all 64 achievements have real icons, valid item requirements, unique IDs and reachable event routes",()=>{
- assert.equal(ACHIEVEMENTS.length,64);assert.equal(ACHIEVEMENT_BY_ID.size,64);
- const events=new Set(["inventory","inventory-open","craft","smelt-take","plant","place","enchant","hostile-kill","sleep","trade","biome","dimension","aquatic","claim","pulse","stand-awaken","stand-level","titan-stage","titan-emerald","titan-transform","titan-parry","titan-perfect","titan-hit","titan-ring","titan-victory"]);
+test("all 71 achievements have real icons, valid item requirements, unique IDs and reachable event routes",()=>{
+ assert.equal(ACHIEVEMENTS.length,71);assert.equal(ACHIEVEMENT_BY_ID.size,71);
+ const events=new Set(["inventory","inventory-open","craft","smelt-take","plant","place","enchant","hostile-kill","sleep","trade","biome","dimension","aquatic","claim","pulse","stand-awaken","stand-level","titan-stage","titan-emerald","titan-transform","titan-parry","titan-perfect","titan-hit","titan-ring","titan-victory","end-event","end-crystal"]);
  for(const e of ACHIEVEMENTS){assert(ITEMS[e.icon],e.id);assert(ACHIEVEMENT_CATEGORIES.some(([id])=>id===e.category));assert(e.description&&e.target>0);for(const r of e.rules){assert(events.has(r.event),r.event);for(const id of r.items||[])assert(ITEMS[id],id);}}
 });
 test("legacy saves start empty, safe owned goals backfill, event history is never invented",()=>{

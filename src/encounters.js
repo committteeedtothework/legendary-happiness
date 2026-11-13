@@ -78,7 +78,7 @@ export function populateEncounters(game, createEntity) {
         record.created.push(i);
       }
     }
-  } else {
+  } else if (w.dimension === "cinderwild") {
     for (const s of nearbyCinderSites(w, p.x, p.z, 72)) {
       if (w.generationVersion >= 11) {
         populateInfernalEncounter(game, s, createEntity, collides, MOB_INFO);
