@@ -1,3 +1,9 @@
+# DCSMCRAFT 2.21.1 — Windows fullscreen fix
+
+The bundled Windows app uses native window fullscreen, so Escape/pause, inventory, options and return to title preserve fullscreen. F11, Alt+Enter and Video Settings toggle it explicitly. Close the previous app before launching **DCSMCRAFT-2.21.1-Portable.exe**. Existing saves and game content are unchanged. Browser and legacy HTML editions retain their browser fullscreen behaviour.
+
+## Previous release — 2.21.0
+
 # DCSMCRAFT 2.21.0
 
 End Cities, Shulkers and Elytra join the End. DRAGOON gains smoother steering and swoops. Villages expand with profession workshops and new trades. Offhand actions, full-stack drag-out dropping, backpack sorting, shared-model icons, texture refinement and a quieter HUD are included. See [END-CITIES.md](END-CITIES.md) for controls, references and practical differences.

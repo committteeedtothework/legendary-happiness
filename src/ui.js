@@ -226,7 +226,8 @@ export class UI {
         this.videoSettings();
       }
       if (action === "fullscreen") {
-        const op = document.fullscreenElement
+        const nativeToggle=globalThis.dcsmcraftDesktop?.toggleFullscreen;
+        const op = nativeToggle ? nativeToggle() : document.fullscreenElement
           ? document.exitFullscreen()
           : document.documentElement.requestFullscreen?.();
         op?.catch(() =>

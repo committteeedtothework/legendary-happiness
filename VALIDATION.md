@@ -1,3 +1,13 @@
+# Desktop fullscreen hotfix — 2.21.1
+
+Nine desktop policy/fullscreen checks passed. They cover native fullscreen routing, explicit shortcut toggles, ignored key repeats, Escape/menu keys leaving fullscreen unchanged, main-frame-only IPC, handler cleanup, save-on-close, protocol permissions and unchanged game/asset hashes. UI browser fallback and the version-only data change are checked against 2.21.0.
+
+The final packaged Electron app was tested on Linux with an Xorg dummy display and Xfwm window manager. Real Electron native keyboard input verifies F11 and Alt+Enter. The native window's fullscreen flag stays true through Escape/pause, options, inventory, world entry and Save and Quit to Title. The settings toggle exits/enters fullscreen. Menus also preserve a deliberately windowed state. The DOM fullscreen API is never invoked in the desktop path; there were no page errors. Screenshots and the step-by-step report are included in verification.
+
+Playwright's CDP keyboard injection bypasses Electron's before-input-event hook, so shortcut checks use webContents.sendInputEvent. Ozone headless cannot verify native fullscreen; an active window manager is required by the regression script. Native Windows execution remains unverified on this Linux build host. Windows and Linux game ASARs and the official Windows runtime checksum are verified before publishing, along with ZIP integrity and complete public download hashes. The original DesktopApp profile, world rules, saves, supplied assets, main branch and hosted mobile build are preserved.
+
+---
+
 # End Cities and world polish — 2.21.0
 
 The full 989-test unit suite passed. After final offhand serialization, levitation and End Rod refinements, all 62 affected checks passed again, including new rod-palette/light and city-guard unloading checks. The previous block/item/recipe definitions, supplied assets, Titan rules/choreography, storage and weapon palettes retain their compatibility checks. No claim of finding every possible bug is made.

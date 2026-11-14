@@ -96,6 +96,7 @@ for (const n of [
   "preload.cjs",
   "policy.cjs",
   "lifecycle.cjs",
+  "fullscreen.cjs",
   "package.json",
 ])
   await copyFile("desktop/electron/" + n, join(appDir, n));

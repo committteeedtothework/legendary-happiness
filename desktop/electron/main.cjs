@@ -9,6 +9,7 @@ const {
   ipcMain,
 } = require("electron");
 const path = require("node:path");
+const { installFullscreen } = require("./fullscreen.cjs");
 const { saveBeforeClose } = require("./lifecycle.cjs");
 const { pathToFileURL } = require("node:url");
 const {
@@ -110,6 +111,7 @@ else
           backgroundThrottling: true,
         },
       });
+      installFullscreen(window,ipcMain);
       ipcMain.on("dcsmcraft:quit", (event) => {
         if (
           event.sender === window.webContents &&

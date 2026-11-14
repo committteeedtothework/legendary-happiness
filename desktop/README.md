@@ -1,3 +1,7 @@
+## Fullscreen — 2.21.1
+
+Use **F11**, **Alt+Enter** or **Video Settings → Toggle Fullscreen**. The bundled app uses native window fullscreen and preserves the chosen mode through pause, inventory, settings and return to title. Browser/legacy HTML editions retain browser fullscreen rules. Close the old app before running an updated EXE; the DesktopApp save profile is unchanged.
+
 # Windows editions — 2.19.0
 
 Run **DCSMCRAFT-2.19.0-Portable.exe** for the bundled runtime, or extract **DCSMCRAFT-Windows-HTML-2.19.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Both include the achievement UI, Titan camera/collision/targeting and controller inventory update. Existing saves and original assets are preserved. See CONTROLS-UI-POLISH.md and CONTROLLERS.md for details. Windows files are unsigned; native Windows launch is unverified on the Linux build host.
