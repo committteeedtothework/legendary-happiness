@@ -1,0 +1,9 @@
+{
+  "version": "2.21.0",
+  "standaloneHTML_SHA256": "3b4aadba19a2e4bf050ffd1db38abba63cfac4ef84c631be8a4f68254faaf52e",
+  "windowsEXE_SHA256": "6cf913f752c3331b3170706a6c3149a13b55065f7fc0f7a7ee81b6c8d81e2642",
+  "windowsPEEmbeddedPayloadMatches": true,
+  "windowsPEPayloadOffset": 163408,
+  "zipVerified": true,
+  "nativeWindowsExecutionTested": false
+}
