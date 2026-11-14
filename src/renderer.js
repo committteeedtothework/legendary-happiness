@@ -1,3 +1,5 @@
+import {configureWeaponDisplay} from "./weapon-poses.js";
+import {ModelIcons} from "./item-model-icons.js";
 import {injectSurfaceAnimation} from "./surface-animation.js";
 import {animateEndModel} from "./end-models.js";
 import {EndVisuals} from "./end-visuals.js";
@@ -367,6 +369,7 @@ export class Renderer {
     );
     this.slash.position.set(-0.1, 0.12, -0.17);
     this.handGroup.add(this.slash);
+    this.modelIcons=new ModelIcons(this.atlas);
     this.heldMesh = null;
     this.heldId = null;
     this.mobMeshes = new Map();
@@ -407,6 +410,7 @@ export class Renderer {
       this.appliedPack = this.settings.texturePack;
       this.appliedMip = undefined;
       this.heldSignature = undefined;
+      this.offhandId=undefined;
       this.playerSignature = undefined;
       for (const m of this.dropMeshes.values()) this.disposeObject(m);
       this.dropMeshes.clear();
@@ -432,6 +436,7 @@ export class Renderer {
           this.horizonWaterMaterial.needsUpdate = true;
         this.material.needsUpdate = this.waterMaterial.needsUpdate = true;
         this.heldSignature = undefined;
+      this.offhandId=undefined;
         this.playerSignature = undefined;
         for (const m of this.dropMeshes.values()) this.disposeObject(m);
         this.dropMeshes.clear();
@@ -615,6 +620,21 @@ export class Renderer {
   installMesh(cx, cz, geometries, surfaceOnly = false, entry = {}) {
     return installTerrainMesh(this, cx, cz, geometries, surfaceOnly, entry);
   }
+  setThirdOffhand(stack){
+    const model=this.playerModel;if(!model||model.userData.heldId==="matthew_dual_pistols")return;
+    const u=model.userData,id=stack?.id;
+    if(u.offhandId!==id){
+      if(u.offhandItem){u.offhandItem.removeFromParent();this.disposeObject(u.offhandItem,false);}
+      u.offhandId=id;u.offhandItem=id?createHeldModel(id,this.atlas):null;
+      if(u.offhandItem){u.leftGrip.position.copy(u.grip.position);u.leftGrip.rotation.copy(u.grip.rotation);u.forearms[0].add(u.leftGrip);u.leftGrip.add(u.offhandItem);u.offhandItem.scale.setScalar(1.1);configureWeaponDisplay(u.offhandItem,id,"third");}
+    }
+  }
+  setOffhand(stack){
+    const id=stack?.id;if(id===this.offhandId)return;this.offhandId=id;
+    if(this.offhandMesh){this.offhandMesh.removeFromParent();this.disposeObject(this.offhandMesh,false);}
+    this.offhandMesh=id?createHeldModel(id,this.atlas):null;
+    if(this.offhandMesh){this.leftHandRig.grip.add(this.offhandMesh);fitHandGrip(this.leftHandRig,id,this.offhandMesh);}
+  }
   setHeld(id, stack) {
     const signature = JSON.stringify([
       id,
@@ -664,7 +684,7 @@ export class Renderer {
   setArmor(equipment = []) {
     const item = ITEMS[equipment[1]?.id];
     const appearance = armAppearanceFor(this.settings.skin);
-    const armorId = item?.armorSlot === 1 ? equipment[1].id : null;
+    const armorId = item?.armorSlot === 1&&equipment[1].id!=="elytra" ? equipment[1].id : null;
     applyHandAppearance(this.handRig, appearance, armorId);
     applyHandAppearance(this.leftHandRig, appearance, armorId);
     this.playerEquipment = equipment;
@@ -1554,7 +1574,7 @@ export class Renderer {
     if (this.settings.fancyGraphics !== false) {
       this.lastLights = Math.floor(elapsed * 2);
       const carried =
-        (this.settings.localLightCount ?? 4) > 0 ? itemLight(this.heldId) : 0;
+        (this.settings.localLightCount ?? 4) > 0 ? Math.max(itemLight(this.heldId),itemLight(game?.inventory.offhand?.[0]?.id)) : 0;
       const near = carried
         ? [{ x: player.x - 0.5, y: player.y + 0.15, z: player.z - 0.5 }]
         : [];
@@ -1711,6 +1731,8 @@ export class Renderer {
             held: game?.inventory.held,
           },
         );
+        this.setThirdOffhand(game?.inventory.offhand?.[0]);
+        if(player.shieldRaised&&player.shieldHand==="off"&&this.playerModel.userData.offhandItem)this.playerModel.userData.arms[0].rotation.x=-.85;
         if (player.riptide?.ticks > 0)
           this.playerModel.rotation.z =
             ((20 - player.riptide.ticks) / 20) * Math.PI * 6;
@@ -1757,6 +1779,8 @@ export class Renderer {
       this.standVisuals?.trialFade || 0,
       animating,
     );
+    this.modelIcons.setAtlas(this.atlas);
+    this.modelIcons.pump();
     this.gl.info.reset();
     this.gl.autoClear = true;
     this.gl.render(this.scene, this.camera);
@@ -1837,7 +1861,8 @@ export class Renderer {
         const swim = this.animator.swim || 0,
           phase = this.animator.swimPhase || 0;
         this.leftPistol.visible = false;
-        this.leftHandRig.root.visible = !this.heldId && swim > 0.02;
+        this.leftHandRig.root.visible = !!this.offhandMesh||(!this.heldId && swim > 0.02);
+        this.leftHandRig.armVisuals.visible=!this.offhandMesh;
         this.leftHandRig.root.position.set(
           -0.37 - Math.sin(phase) * swim * 0.045,
           HAND_REST_Y - 0.07 + Math.cos(phase * 2) * swim * 0.026,
@@ -1851,6 +1876,17 @@ export class Renderer {
       }
       if (itemOnly && customItemMotion(this.heldId))
         this.handGroup.rotation.z += heldRestRoll(this.heldId);
+      this.setOffhand(game?.inventory.offhand?.[0]);
+      if(this.offhandMesh&&!pistols){
+        const raised=player.shieldRaised&&player.shieldHand==="off";
+        this.leftHandRig.root.position.set(-.37,HAND_REST_Y-.15+(raised?.12:0),-.72+(raised?.05:0));
+        this.leftHandRig.root.rotation.set(raised?-.15:0,raised?.45:.1,raised?-.2:-.12);
+        const remaining=Math.max(0,(player.offhandSwingUntil||0)-elapsed),swing=remaining?Math.sin((1-remaining/.22)*Math.PI):0;
+        this.leftHandRig.root.rotation.x-=swing*.75;this.leftHandRig.root.position.z-=swing*.12;
+        if(this.offhandId==="shield"){this.offhandMesh.rotation.y=Math.PI;this.offhandMesh.position.set(0,-.02,-.12);this.leftHandRig.root.rotation.y=raised?.05:.25;}
+        else if(ITEMS[this.offhandId]?.tool)this.leftHandRig.root.rotation.y=-Math.PI/4;
+        animateEditionWeapon(this.offhandMesh,player,elapsed,game?.inventory.offhand?.[0]);
+      }
       animateEditionWeapon(
         this.heldMesh,
         player,

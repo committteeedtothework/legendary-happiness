@@ -1,3 +1,4 @@
+import {raisedShield} from "./offhand.js";
 import { ITEMS, makeStack } from "./data.js";
 import { playerEye } from "./player-body.js";
 import { wear } from "./equipment.js";
@@ -8,6 +9,7 @@ export function useEditionWeapon(g) {
   if (!["bow", "crossbow", "shield"].includes(id)) return false;
   if (id === "shield") {
     p.shieldRaised = true;
+    p.shieldHand=g.usingOffhand?"off":"main";
     g.renderer?.action("use");
     return true;
   }
@@ -19,7 +21,7 @@ export function useEditionWeapon(g) {
   }
   if (
     g.mode !== "creative" &&
-    !g.inventory.slots.some((s) => s?.id === "arrow")
+    !g.inventory.slots.some((s) => s?.id === "arrow")&&g.inventory.offhand?.[0]?.id!=="arrow"
   ) {
     g.ui?.toast?.("You need arrows.");
     return true;
@@ -58,6 +60,7 @@ export function releaseEditionWeapon(g) {
 }
 function consumeArrow(g) {
   if (g.mode === "creative") return true;
+  if(g.inventory.offhand?.[0]?.id==="arrow"){if(--g.inventory.offhand[0].count===0)g.inventory.offhand[0]=null;return true;}
   const slot = g.inventory.slots.findIndex((s) => s?.id === "arrow");
   return slot >= 0 && g.inventory.consume(slot);
 }
@@ -94,7 +97,8 @@ export function blockShieldProjectile(g, target, q) {
       (peer) => peer.player === target,
     ),
     inv = peer?.inventory || g.inventory;
-  if (!target.shieldRaised || inv.held?.id !== "shield") return false;
+  const shield=raisedShield(inv,target);
+  if(!shield)return false;
   const dx = q.x - target.x,
     dz = q.z - target.z,
     d = Math.hypot(dx, dz);
@@ -102,9 +106,9 @@ export function blockShieldProjectile(g, target, q) {
     return false;
   if (
     g.mode !== "creative" &&
-    wear(inv.held, Math.max(1, Math.floor(q.damage) + 1))
+    wear(shield, Math.max(1, Math.floor(q.damage) + 1))
   )
-    inv.slots[inv.selected] = null;
+    if(target.shieldHand==="off")inv.offhand[0]=null;else inv.slots[inv.selected] = null;
   g.audio?.tone("guardian-impact");
   return true;
 }

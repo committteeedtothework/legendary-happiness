@@ -1,3 +1,4 @@
+import {expandVillagePlan} from "./village-expansion.js";
 import {
   regionalVillage,
   styleForBiome,
@@ -85,6 +86,7 @@ export function villageAt(world, rx, rz) {
       break;
     }
   }
+  result=expandVillagePlan(world,result);
   world.villagePlans.set(key, result);
   return result;
 }
@@ -104,8 +106,8 @@ export function nearbyVillages(world, x, z, radius = 64) {
       const v = villageAt(world, rx, rz);
       if (
         v &&
-        Math.abs(x - v.x) < radius + 30 &&
-        Math.abs(z - v.z) < radius + 30
+        Math.abs(x - v.x) < radius + 70 &&
+        Math.abs(z - v.z) < radius + 70
       )
         villages.push(v);
     }
@@ -116,7 +118,7 @@ export function villageTerrain(world, x, z, base) {
     world,
     x,
     z,
-    world.generationVersion >= 5 ? 50 : 36,
+    world.generationVersion >=16?74:world.generationVersion >= 5 ? 50 : 36,
   )) {
     const d = Math.max(Math.abs(x - v.x), Math.abs(z - v.z));
     const radius = v.radius || 28;
@@ -134,7 +136,7 @@ export function generateVillages(world, chunk, put) {
     world,
     chunk.cx * 16 + 8,
     chunk.cz * 16 + 8,
-    world.generationVersion >= 5 ? 58 : 42,
+    world.generationVersion >=16?82:world.generationVersion >= 5 ? 58 : 42,
   )) {
     if (v.style) {
       regionalVillage(world, chunk, put, v);

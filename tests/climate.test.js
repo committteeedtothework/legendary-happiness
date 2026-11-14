@@ -226,7 +226,7 @@ test("all eight regional villages have real floors, linked doors, beds, roofs, l
       time: 6000,
     };
     populateVillages(g, createEntity);
-    assert.equal(g.entities.filter((e) => e.type === "villager").length, 8);
+    assert.equal(g.entities.filter((e) => e.type === "villager").length, v.houses.length);
     assert.ok(
       g.entities
         .filter((e) => e.type === "villager")

@@ -306,6 +306,8 @@ export function createRelay({
               "attack",
               "pulse",
               "release-use",
+              "swap-hands",
+              "offhand-use",
               "seeker",
               "pistol",
               "inventory",

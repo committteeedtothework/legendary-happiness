@@ -214,14 +214,18 @@ export class Inventory {
     return new Inventory(this.export()).autofill(recipe, size) === null;
   }
   export() {
+    let slots=this.slots,offhand=this.offhand;
+    if(Number.isInteger(this.offhandContextIndex)){
+      const index=this.offhandContextIndex;slots=this.slots.slice();slots[index]=this.offhand[0];offhand=[this.slots[index]];
+    }
     return {
-      slots: this.slots,
+      slots,
       craft: this.craft,
       cursor: this.cursor,
       selected: this.selected,
       stationRecipe: this.stationRecipe,
       equipment: this.equipment,
-      offhand: this.offhand,
+      offhand,
     };
   }
 }

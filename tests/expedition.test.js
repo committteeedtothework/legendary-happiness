@@ -132,8 +132,8 @@ test("dirt recipes consume actual materials, equipment wears quickly and cannot 
 test("new villages double their houses, preserve old layouts and save one defender without resurrection", () => {
   const g = arena(),
     v = villageAt(g.world, 0, 0);
-  assert.equal(v.houses.length, 8);
-  assert.equal(v.radius, 42);
+  assert.equal(v.houses.length, 16);
+  assert.equal(v.radius, 66);
   assert.equal(
     villageAt(new World("Wildflower", {}, "overworld", 4), 0, 0).houses.length,
     4,
@@ -221,7 +221,8 @@ test("skin palettes are original distinct costumes and unknown saved IDs recover
     assert.match(decodeURIComponent(skinPreview(id)), /<svg/);
 });
 test("guard spawn reserves its full body space and retries obstructed legacy settlements without duplicating residents", () => {
-  const g = arena(),
+  const g = arena();g.world=new World("Wildflower",{},"overworld",5);
+  const
     v = villageAt(g.world, 0, 0);
   Object.assign(g.player, { x: v.x, y: v.y + 1, z: v.z + 8 });
   g.world.settlements[v.id] = { inhabited: true };

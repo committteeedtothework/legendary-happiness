@@ -14,7 +14,7 @@ import { doorAt, setDoorOpen } from "./doors.js";
 import { hash } from "./random.js";
 import { Inventory } from "./inventory.js";
 export function populateVillages(game, createEntity) {
-  if (game.dimension === "cinderwild" || !game.world.nearbyVillages) return;
+  if (game.dimension !== "overworld" || !game.world.nearbyVillages) return;
   for (const v of game.world.nearbyVillages(game.player.x, game.player.z, 72)) {
     game.world.settlements ||= {};
     const record = game.world.settlements[v.id];
@@ -49,15 +49,19 @@ export function populateVillages(game, createEntity) {
       }
       if (record && newGuard) record.guardCreated = true;
     }
-    if (record) {
+    if (record && (!v.expansion||record.expansion===v.expansion)) {
       if (newGuard) game.entities.push(newGuard);
       continue;
     }
     game.world.settlements[v.id] = {
+      ...(record||{}),
+      expansion:v.expansion||0,
       inhabited: true,
       guardCreated: !!newGuard,
     };
     v.houses.forEach((home, i) => {
+      if(record&&i<8)return;
+      if(game.entities.some(e=>e.id===`${v.id}:resident:${i}`))return;
       const e = createEntity(
         game,
         "villager",

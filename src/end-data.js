@@ -49,6 +49,7 @@ export function appendEndBlocks(blocks) {
       { drop: "chorus_flower" },
     ],
     ["dragon_egg", "DRAGOON Egg", "#23172d", 3, { tool: "pickaxe", tier: 1 }],
+    ["end_rod","End Rod","#f4eedb",0,{bounds:[.40625,0,.40625,.59375,1,.59375],light:14,edition:true}],
   ])
     (blocks.push({
       key,
@@ -68,6 +69,15 @@ export function appendEndBlocks(blocks) {
 }
 export function appendEndItems({ ITEMS, CREATIVE_ITEMS, shapeless, shaped }) {
   Object.assign(ITEMS, {
+    elytra: {
+      name: "Elytra",
+      color: "#a499b7",
+      stack: 1,
+      armorSlot: 1,
+      armor: 0,
+      durability: 432,
+    },
+    shulker_shell: { name: "Shulker Shell", color: "#a77dab", stack: 64 },
     ender_pearl: {
       key: "ender_pearl",
       name: "Ender Pearl",
@@ -118,6 +128,8 @@ export function appendEndItems({ ITEMS, CREATIVE_ITEMS, shapeless, shaped }) {
     "end_crystal",
     "dragoon_trophy",
     "enderman_spawn_egg",
+    "elytra",
+    "shulker_shell",
   ])
     if (!CREATIVE_ITEMS.includes(k)) CREATIVE_ITEMS.push(k);
   shapeless("eye_of_ender", "eye_of_ender", 1, ["ender_pearl", "blaze_powder"]);
@@ -133,6 +145,14 @@ export function appendEndItems({ ITEMS, CREATIVE_ITEMS, shapeless, shaped }) {
 }
 export function appendEndMobs(info, hostiles) {
   Object.assign(info, {
+    shulker: {
+      name: "Shulker",
+      height: 1,
+      width: 1,
+      health: 30,
+      speed: 0,
+      hostile: true,
+    },
     enderman: {
       name: "Enderman",
       height: 2.9,
@@ -161,6 +181,7 @@ export function appendEndMobs(info, hostiles) {
       voice: "emberling",
     },
   });
+  hostiles.add("shulker");
   hostiles.add("enderman");
   hostiles.add("dragoon");
 }

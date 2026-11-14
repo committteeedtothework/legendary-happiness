@@ -63,3 +63,5 @@ The 2.20.0 request explicitly authorizes The End, Endermen, Ender Pearls/Eyes,
 strongholds, the DRAGOON encounter and progression; animated fluid/fire, opaque
 lava, irregular explosions, QoL and menu polish. Preserve existing assets,
 block IDs, worlds/saves, Titan fights, main and hosted mobile.
+
+The 2.21.0 request authorizes End Cities, smoother DRAGOON flight and swoops, Enderman anatomy, expanded biome villages/professions, offhand actions, responsive rapid combat, inventory drag-out dropping, icon/model consistency, texture fixes, HUD cleanup and related performance/QoL work. Preserve supplied assets, saves, Titan rules, main and hosted mobile.

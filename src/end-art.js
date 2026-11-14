@@ -14,6 +14,7 @@ export function paintEndAtlas(canvas) {
     B.chorus_plant,
     B.chorus_flower,
     B.dragon_egg,
+    B.end_rod,
   ])
     for (let face = 0; face < 3; face++) {
       const tile = BLOCKS[id].artTile + face,
@@ -58,6 +59,7 @@ export function paintEndAtlas(canvas) {
               x < 2 || x > 13 ? "#c0a2be" : n > 0.5 ? "#76567c" : "#57405f";
           else if (id === B.chorus_flower)
             color = x % 7 === 0 || y % 7 === 0 ? "#93749d" : "#d3b5d6";
+          else if(id===B.end_rod)color=y<2||y>13?"#aaa6b0":"#fff5df";
           else color = n > 0.75 ? "#493452" : "#1e1529";
           c.fillStyle = color;
           c.fillRect(ox + x, oy + y, 1, 1);
@@ -67,6 +69,8 @@ export function paintEndAtlas(canvas) {
 export function paintEndItem(c, id) {
   if (
     ![
+      "elytra",
+      "shulker_shell",
       "ender_pearl",
       "eye_of_ender",
       "chorus_fruit",
@@ -82,6 +86,10 @@ export function paintEndItem(c, id) {
       for (let x = 0; x < 32; x++)
         if ((x - 15.5) ** 2 + (y - 15.5) ** 2 < r * r) c.fillRect(x, y, 1, 1);
   };
+  if(id==="elytra"){
+    for(const sign of[-1,1]){c.fillStyle="#655d7b";c.beginPath();c.moveTo(16,5);c.lineTo(16+sign*12,9);c.lineTo(16+sign*9,28);c.lineTo(16+sign*2,20);c.closePath();c.fill();c.fillStyle="#b3a9c7";c.fillRect(sign<0?7:18,9,5,13);}return true;
+  }
+  if(id==="shulker_shell"){c.fillStyle="#8c5e98";c.fillRect(4,10,24,16);c.fillStyle="#bd91ca";c.fillRect(4,6,24,8);c.fillStyle="#63476d";c.fillRect(6,22,20,4);return true;}
   if (id === "ender_pearl" || id === "eye_of_ender") {
     circle(12, "#102c35");
     circle(10, id === "ender_pearl" ? "#237e7c" : "#a6d273");

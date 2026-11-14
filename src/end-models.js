@@ -7,6 +7,7 @@ export function buildEndModel(entity, { g, head, box, limb, material }) {
   eye.emissiveIntensity = 0.8;
   if (entity.type === "enderman") {
     box(g, 0.43, 1.02, 0.3, 0, 1.66, 0, dark);
+    box(g, 0.24, 0.38, 0.24, 0, 2.35, 0, dark);
     head.position.set(0, 2.58, 0);
     box(head, 0.56, 0.5, 0.51, 0, 0.05, 0, dark);
     for (const x of [-0.15, 0.15]) {
@@ -22,6 +23,21 @@ export function buildEndModel(entity, { g, head, box, limb, material }) {
       limb(0.12, 1.35, 0.13, 0.35, 2.18, 0, dark),
     ];
     g.userData.endKind = "enderman";
+    return true;
+  }
+  if (entity.type === "shulker") {
+    const shell = material("#9566a1"),
+      base = material("#d7d894");
+    box(g, 0.95, 0.45, 0.95, 0, 0.225, 0, shell);
+    const lid = new T.Group();
+    lid.position.y = 0.55;
+    g.add(lid);
+    box(lid, 1, 0.45, 1, 0, 0, 0, shell);
+    box(head, 0.45, 0.36, 0.45, 0, 0.55, 0, base);
+    for (const x of [-0.12, 0.12])
+      box(head, 0.07, 0.07, 0.02, x, 0.59, -0.24, dark);
+    g.userData.endKind = "shulker";
+    g.userData.lid = lid;
     return true;
   }
   if (entity.type === "end_crystal") {
@@ -156,6 +172,12 @@ export function animateEndModel(m, e, time, dt, enabled = true) {
     u.endClock +=
       ((e.age || 0) / 20 - u.endClock) * (1 - Math.exp(-Math.max(0, dt) * 18));
   time = u.endClock;
+  if (u.endKind === "shulker") {
+    u.lid.position.y +=
+      (0.55 + (e.open || 0) * 0.4 - u.lid.position.y) *
+      (1 - Math.exp(-dt * 10));
+    return;
+  }
   if (u.endKind === "crystal") {
     u.cage.rotation.set(time * 0.7, time * 0.6, time * 0.45);
     u.core.rotation.set(time * 0.9, -time * 0.6, time);
@@ -163,6 +185,7 @@ export function animateEndModel(m, e, time, dt, enabled = true) {
     return;
   }
   if (u.endKind === "enderman") {
+    u.head.position.y = 2.58;
     if (e.angry > 0) {
       u.head.position.y = 2.63 + Math.sin(time * 24) * 0.03;
       u.arms?.forEach(
@@ -189,9 +212,10 @@ export function animateEndModel(m, e, time, dt, enabled = true) {
   u.endLegs.forEach(
     (n, i) => (n.rotation.x = perch ? 0 : 0.45 + Math.sin(time * 2 + i) * 0.08),
   );
+  m.rotation.x = e.flightPitch || 0;
   m.rotation.z = e.dying
     ? Math.sin(time * 3) * 0.08
     : e.mode === "charge"
       ? Math.sin(time) * 0.1
-      : Math.sin(time * 0.7) * 0.025;
+      : (e.bank || 0) + Math.sin(time * 0.7) * 0.025;
 }

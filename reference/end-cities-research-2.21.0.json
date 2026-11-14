@@ -1,0 +1,56 @@
+{
+  "accessed": "2026-11-13",
+  "sources": [
+    {
+      "url": "https://minecraft.wiki/w/Attack",
+      "title": "Attack \u2013 Minecraft Wiki",
+      "sha256": "e851c6d1ae7a54ce458add27be942e8490277fb1a502c0507e338e93e6e27d79"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Dual_wield",
+      "title": "Dual wielding \u2013 Minecraft Wiki",
+      "sha256": "0a637555191dbeb9b2b466c1af97a0c6d6a351f826fbd02c88308ad9e7b2587f"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Elytra",
+      "title": "Elytra \u2013 Minecraft Wiki",
+      "sha256": "1cdf1c53e8d0b6b187e15373f2ddcc2826d14a1398f82278ef19d78ef87f33e9"
+    },
+    {
+      "url": "https://minecraft.wiki/w/End_city",
+      "title": "End City \u2013 Minecraft Wiki",
+      "sha256": "adf711f6a7b9ae7f893fc3e1e83a08185d911d24c0f234f5e8dfea738ef4a714"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Inventory",
+      "title": "Inventory \u2013 Minecraft Wiki",
+      "sha256": "82306a0e977cdfe4cfd4feae40dd42870f2a676b6d50a2c5f87ac98185026076"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Levitation",
+      "title": "Levitation \u2013 Minecraft Wiki",
+      "sha256": "7ba7d3a86634075cb483de91ac31eead27611a476ba6df94c21c9bc63e22e893"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Mipmap",
+      "title": "Options \u2013 Minecraft Wiki",
+      "sha256": "d55d39f8bb427aca60d3605b253644a80fda4a3fa2771aa633231ad9a0babf0a"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Shulker",
+      "title": "Shulker \u2013 Minecraft Wiki",
+      "sha256": "3be8669da2f80ce493e1166940c0bf980400289c296cda401ba831c5ec781f58"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Village",
+      "title": "Village \u2013 Minecraft Wiki",
+      "sha256": "acdf2b2b604a989f9a7f8ac42c51febd445c2c8520a69d5828621c970b78d78a"
+    },
+    {
+      "url": "https://minecraft.wiki/w/Villager",
+      "title": "Villager \u2013 Minecraft Wiki",
+      "sha256": "6889bc96ab4917af8c3fdaf068b192ae2f6c4248e6a50cdaebc6b14567a10048"
+    }
+  ],
+  "implementationAndDifferences": "END-CITIES.md"
+}

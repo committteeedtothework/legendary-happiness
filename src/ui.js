@@ -1,3 +1,4 @@
+import {dropCursorStack,collectMatching,sortBackpack} from "./inventory-qol.js";
 import { recordAchievement, scanAchievements } from "./achievements.js";
 import { menuLogo } from "./menu-logo.js";
 import {
@@ -81,7 +82,7 @@ const arrow =
   '<span class="arrow-icon" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M4 14 14 4M4 4h10v10" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>';
 const itemHTML = (s, large = false) =>
   s
-    ? `<img draggable="false" alt="${esc(ITEMS[s.id]?.name || s.id)}" src="${iconURL(s.id)}" class="${s.enchantments || ITEMS[s.id]?.legendary ? "enchanted-item" : ""}"/>${s.count > 1 ? `<b>${s.count}</b>` : ""}${s.durability !== undefined && s.durability < ITEMS[s.id].durability ? `<i class="durability" style="--wear:${(s.durability / ITEMS[s.id].durability) * 100}%"></i>` : ""}`
+    ? `<img draggable="false" data-item-icon="${esc(s.id)}" alt="${esc(ITEMS[s.id]?.name || s.id)}" src="${iconURL(s.id)}" class="${s.enchantments || ITEMS[s.id]?.legendary ? "enchanted-item" : ""}"/>${s.count > 1 ? `<b>${s.count}</b>` : ""}${s.durability !== undefined && s.durability < ITEMS[s.id].durability ? `<i class="durability" style="--wear:${(s.durability / ITEMS[s.id].durability) * 100}%"></i>` : ""}`
     : "";
 export class UI {
   constructor(game) {
@@ -443,9 +444,12 @@ export class UI {
       const option = e.target.closest("[data-action], select");
       if (option && !option.disabled) this.game.audio.menu("hover");
     });
+    this.overlay.addEventListener("click",e=>{if(e.target.closest('[data-action="sort-backpack"]')){if(this.game.multiplayer?.isGuest)this.game.multiplayer.command("inventory",{action:"sort"});else{sortBackpack(this.game.inventory);this.refreshInventory();}}});
     this.overlay.addEventListener("mousedown", (e) => {
       const cell = e.target.closest(".slot[data-ref]");
-      if (!cell || this.screen !== "inventory") return;
+      if(this.screen!=="inventory")return;
+      if(!cell){if(!e.target.closest("main,button,input,select")){e.preventDefault();dropCursorStack(this.game,e.button===2);}return;}
+      this.dragFromSlot=true;
       e.preventDefault();
       this.slotClick(cell, e);
     });
@@ -456,7 +460,7 @@ export class UI {
       }
       const cell = e.target.closest(".slot[data-ref]");
       if (
-        this.dragging &&
+        e.buttons===2 && this.dragging &&
         cell &&
         e.buttons &&
         this.dragVisited?.has(cell.dataset.ref + cell.dataset.index) === false
@@ -465,7 +469,14 @@ export class UI {
         this.slotClick(cell, { button: 2, shiftKey: false, drag: true });
       }
     });
-    addEventListener("mouseup", () => {
+    this.overlay.addEventListener("dblclick",e=>{
+      const cell=e.target.closest('.slot[data-ref]');if(this.screen!=="inventory"||!cell||this.game.multiplayer?.isGuest)return;
+      const inv=this.game.inventory,ref=cell.dataset.ref,array=ref==='inventory'?inv.slots:ref==='craft'?inv.craft:ref==='offhand'?inv.offhand:ref==='armor'?inv.equipment:ref==='container'?this.container?.slots:null;
+      collectMatching(inv,array,Number(cell.dataset.index));this.refreshInventory();
+    });
+    addEventListener("mouseup", (e) => {
+      if(this.screen==="inventory"&&this.dragFromSlot&&!e.target.closest?.("main,button,input,select"))dropCursorStack(this.game,e.button===2);
+      this.dragFromSlot=false;
       this.dragging = false;
       this.dragVisited = null;
     });
@@ -803,7 +814,7 @@ export class UI {
   play() {
     this.lastHUD = null;
     this.setScreen("play", "");
-    this.hud.innerHTML = `<div class="hud-brand">${cube}<span>DCSMCRAFT<small id="hud-biome"></small></span></div><div class="world-clock"><span id="day-icon">☀</span><span id="day-label"></span><span class="clock-rule"></span><small id="mode-label"></small></div><div id="target-label"></div><div id="crosshair"><i></i><i></i></div><div id="attack-cooldown" role="progressbar" aria-label="Attack recovery" aria-valuemin="0" aria-valuemax="100" hidden><i></i></div><div id="mining-bar"><i></i></div><div id="hurt-vignette"></div><div id="water-vignette"></div><div id="fps-counter"></div><div id="hud-debug" hidden></div><div class="hud-bottom"><div id="weapon-moves" aria-label="Weapon moves" hidden></div><div class="selected-name" id="selected-name"></div><div id="survival-bars"><div id="armor-bar"></div><div id="oxygen"></div><div class="vital-row"><div id="hearts"></div><div id="hunger"></div></div><div class="xp-line"><span id="xp-level"></span><i id="xp-fill"></i></div></div><div id="hotbar" class="hotbar"></div><div class="hud-hint"><span><kbd>E</kbd> Inventory</span><span><kbd>ESC</kbd> Pause & controls</span><span id="save-status">${this.game.multiplayer?.isGuest ? "SAVED BY HOST" : this.game.store.temporary ? "SESSION ONLY · EXPORT TO KEEP" : "SAVED LOCALLY"}</span></div></div>`;
+    this.hud.innerHTML = `<div class="hud-brand">${cube}<span>DCSMCRAFT<small id="hud-biome"></small></span></div><div class="world-clock"><span id="day-icon">☀</span><span id="day-label"></span><span class="clock-rule"></span><small id="mode-label"></small></div><div id="target-label"></div><div id="crosshair"><i></i><i></i></div><div id="attack-cooldown" role="progressbar" aria-label="Attack recovery" aria-valuemin="0" aria-valuemax="100" hidden><i></i></div><div id="mining-bar"><i></i></div><div id="hurt-vignette"></div><div id="water-vignette"></div><div id="fps-counter"></div><div id="hud-debug" hidden></div><div class="hud-bottom"><div id="weapon-moves" aria-label="Weapon moves" hidden></div><div class="selected-name" id="selected-name"></div><div id="survival-bars"><div id="armor-bar"></div><div id="oxygen"></div><div class="vital-row"><div id="hearts"></div><div id="hunger"></div></div><div class="xp-line"><span id="xp-level"></span><i id="xp-fill"></i></div></div><div id="hotbar" class="hotbar"></div><div class="hud-hint"><span><kbd>E</kbd> Inventory</span><span><kbd>ESC</kbd> Pause & controls</span><span id="save-status" hidden></span></div></div>`;
     this.updateHotbar();
     this.updateHUD();
     this.refreshSaveStatus();
@@ -1037,13 +1048,13 @@ export class UI {
     const trades = VILLAGER_TRADES[entity.profession] || [];
     this.setScreen(
       "trading",
-      `<main class="dialog compact trade-dialog"><div class="dialog-top"><span class="eyebrow">VILLAGER</span><button class="close" data-action="close-inv" aria-label="Close trading">×</button></div><h2>${esc(entity.profession || "villager")}</h2><p class="muted">Level 1 · Resident<br/>Trades restock after sunrise.</p><div class="trade-list">${trades.map((t, i) => `<button class="secondary trade-row" data-action="trade" data-trade="${i}" ${entity.tradeUses?.[i] >= 12 ? "disabled" : ""}><span>${itemHTML(makeStack(t.input, t.cost))}<small>${esc(ITEMS[t.input].name)} × ${t.cost}</small></span><b>→</b><span>${itemHTML(makeStack(t.output, t.count))}<small>${esc(ITEMS[t.output].name)} × ${t.count}</small></span><em>${Math.max(0, 12 - (entity.tradeUses?.[i] || 0))} left</em></button>`).join("")}</div><p class="fine">Carry payment in your inventory. Each completed trade awards 2 XP. This is a limited trading system; reputation and profession leveling are not implemented.</p><button class="primary wide" data-action="close-inv">Done</button></main>`,
+      `<main class="dialog compact trade-dialog"><div class="dialog-top"><span class="eyebrow">VILLAGER</span><button class="close" data-action="close-inv" aria-label="Close trading">×</button></div><h2>${esc(entity.profession || "villager")}</h2><p class="muted">Trades restock at sunrise.</p><div class="trade-list">${trades.map((t, i) => `<button class="secondary trade-row" data-action="trade" data-trade="${i}" ${entity.tradeUses?.[i] >= 12 ? "disabled" : ""}><span>${itemHTML(makeStack(t.input, t.cost))}<small>${esc(ITEMS[t.input].name)} × ${t.cost}</small></span><b>→</b><span>${itemHTML(makeStack(t.output, t.count))}<small>${esc(ITEMS[t.output].name)} × ${t.count}</small></span><em>${Math.max(0, 12 - (entity.tradeUses?.[i] || 0))} left</em></button>`).join("")}</div><button class="primary wide" data-action="close-inv">Done</button></main>`,
     );
   }
   guide() {
     this.setScreen(
       "guide",
-      `${this.header("guide")}<main class="dialog guide-dialog"><div class="dialog-top"><button class="close" data-action="back" aria-label="Back">×</button></div><h2>Controls</h2><div class="guide-columns"><section><dl class="controls-list"><dt><kbd>W A S D</kbd></dt><dd>Move</dd><dt><kbd>MOUSE</kbd></dt><dd>Look around</dd><dt><kbd>SPACE</kbd></dt><dd>Jump / swim up</dd><dt><kbd>SHIFT</kbd></dt><dd>Hold to crouch / flight down</dd><dt><kbd>W → W</kbd></dt><dd>Double-tap to sprint; keep moving to stay running</dd><dt><kbd>CTRL + W</kbd></dt><dd>Sprint (alternative)</dd><dt><kbd>LEFT CLICK</kbd></dt><dd>Mine / attack</dd><dt><kbd>RIGHT CLICK</kbd></dt><dd>Use / place / eat</dd><dt><kbd>1–9 / SCROLL</kbd></dt><dd>Select hotbar slot</dd><dt><kbd>E</kbd></dt><dd>Open / close inventory</dd><dt><kbd>Q / CTRL+Q</kbd></dt><dd>Drop one / stack</dd><dt><kbd>ESC</kbd></dt><dd>Pause</dd><dt><kbd>J</kbd></dt><dd>Relic Journal</dd><dt><kbd>F3</kbd></dt><dd>Coordinates, compass & sword guidance</dd><dt><kbd>F5</kbd></dt><dd>First person → behind → front</dd></dl><p>Creative: double-tap Space to fly. Inventory: right-click splits stacks; Shift-click transfers. Open the recipe book to fill the crafting grid.</p></section><section><h3>Getting started</h3><ol><li>Mine a tree for logs.</li><li>Craft planks, sticks, and a crafting table.</li><li>Craft a wooden pickaxe. Mine stone to upgrade.</li><li>Smelt raw iron in a furnace with coal or wood.</li><li>Build shelter and place torches before night.</li></ol><h3>Exploration</h3><p>Right-click villagers to trade. J opens the Relic Journal. Build a 4 × 5 obsidian frame with a 2 × 3 opening and light it with flint and steel to enter Cinderworld.</p><h3>Giganto</h3><p>Enter a Titan portal. Gather rings, climb for the final Emerald, and defeat Giganto. Fly through the portal that opens after the battle to return to the Overworld.</p><h3>Stands</h3><p>Enter a Devil’s Palm to begin a trial. H summons your Stand; F and G use its abilities. V opens Stand details.</p><h3>World backups</h3><p>Worlds are stored in this browser. Export a backup before clearing browser data or moving the game.</p></section></div></main>`,
+      `${this.header("guide")}<main class="dialog guide-dialog"><div class="dialog-top"><button class="close" data-action="back" aria-label="Back">×</button></div><h2>Controls</h2><div class="guide-columns"><section><dl class="controls-list"><dt><kbd>W A S D</kbd></dt><dd>Move</dd><dt><kbd>MOUSE</kbd></dt><dd>Look around</dd><dt><kbd>SPACE</kbd></dt><dd>Jump / swim up</dd><dt><kbd>SHIFT</kbd></dt><dd>Hold to crouch / flight down</dd><dt><kbd>W → W</kbd></dt><dd>Double-tap to sprint; keep moving to stay running</dd><dt><kbd>CTRL + W</kbd></dt><dd>Sprint (alternative)</dd><dt><kbd>LEFT CLICK</kbd></dt><dd>Mine / attack</dd><dt><kbd>RIGHT CLICK</kbd></dt><dd>Use / place / eat</dd><dt><kbd>1–9 / SCROLL</kbd></dt><dd>Select hotbar slot</dd><dt><kbd>E</kbd></dt><dd>Open / close inventory</dd><dt><kbd>Q / CTRL+Q</kbd></dt><dd>Drop one / stack</dd><dt><kbd>ESC</kbd></dt><dd>Pause</dd><dt><kbd>J</kbd></dt><dd>Relic Journal</dd><dt><kbd>F3</kbd></dt><dd>Coordinates, compass & sword guidance</dd><dt><kbd>F5</kbd></dt><dd>First person → behind → front</dd></dl><p>Creative: double-tap Space to fly. Inventory: right-click splits stacks; Shift-click transfers. Drag outside to drop a stack. Double-click collects matching items. F swaps hands. Open the recipe book to fill the crafting grid.</p></section><section><h3>Getting started</h3><ol><li>Mine a tree for logs.</li><li>Craft planks, sticks, and a crafting table.</li><li>Craft a wooden pickaxe. Mine stone to upgrade.</li><li>Smelt raw iron in a furnace with coal or wood.</li><li>Build shelter and place torches before night.</li></ol><h3>Exploration</h3><p>Right-click villagers to trade. J opens the Relic Journal. Build a 4 × 5 obsidian frame with a 2 × 3 opening and light it with flint and steel to enter Cinderworld.</p><h3>Giganto</h3><p>Enter a Titan portal. Gather rings, climb for the final Emerald, and defeat Giganto. Fly through the portal that opens after the battle to return to the Overworld.</p><h3>Stands</h3><p>Enter a Devil’s Palm to begin a trial. H summons your Stand; F and G use its abilities. V opens Stand details.</p><h3>World backups</h3><p>Worlds are stored in this browser. Export a backup before clearing browser data or moving the game.</p></section></div></main>`,
     );
   }
   features() {
@@ -1107,7 +1118,7 @@ export class UI {
     const compact = ["personal", "table"].includes(this.invType);
     const bookButton = `<button class="recipe-book-toggle" data-action="toggle-recipes" aria-label="Toggle recipe book" aria-controls="crafting-recipe-book" aria-expanded="${!!this.recipeBookOpen}" data-tooltip="Recipe book">${recipeBookIcon}</button>`;
     if (this.invType === "personal") {
-      top = `<div class="player-inventory-top"><div class="armor-column" aria-label="Armor slots">${this.slots("armor", 4)}</div><div class="inventory-model" aria-label="Your equipped character"></div><div class="offhand-pocket">${this.slots("offhand", 1)}</div><section class="personal-crafting"><h2>Crafting</h2><div class="personal-craft-row"><div class="slot-grid craft-grid" style="--cols:2">${this.slots("craft", 4)}</div><span class="craft-arrow" aria-hidden="true">${craftArrowIcon}</span><button class="slot output-slot" data-action="craft" aria-label="Craft result"></button></div>${bookButton}</section></div>`;
+      top = `<div class="player-inventory-top"><div class="armor-column" aria-label="Armor slots">${this.slots("armor", 4)}</div><div class="inventory-model" aria-label="Your equipped character"></div><div class="offhand-pocket">${this.slots("offhand", 1)}</div><section class="personal-crafting"><h2>Crafting</h2><button class="sort-backpack" data-action="sort-backpack" title="Sort backpack; keep the hotbar">Sort</button><div class="personal-craft-row"><div class="slot-grid craft-grid" style="--cols:2">${this.slots("craft", 4)}</div><span class="craft-arrow" aria-hidden="true">${craftArrowIcon}</span><button class="slot output-slot" data-action="craft" aria-label="Craft result"></button></div>${bookButton}</section></div>`;
     } else if (this.invType === "table") {
       top = `<section class="table-crafting-top"><h2>Crafting</h2><div class="table-craft-row"><div class="slot-grid craft-grid" style="--cols:3">${this.slots("craft", 9)}</div><span class="craft-arrow" aria-hidden="true">${craftArrowIcon}</span><button class="slot output-slot" data-action="craft" aria-label="Craft result"></button></div>${bookButton}</section>`;
     }
@@ -1290,6 +1301,9 @@ export class UI {
       index = Number(cell.dataset.index),
       right = e.button === 2;
     if (e.button !== 0 && !right) return;
+    const pressKey=ref+":"+index,now=performance.now();
+    if(!right&&!e.shiftKey&&!g.multiplayer?.isGuest&&ref!=="creative"&&inv.cursor&&this.lastSlotPress?.key===pressKey&&now-this.lastSlotPress.at<260){collectMatching(inv);this.lastSlotPress=null;this.refreshInventory();return;}
+    this.lastSlotPress={key:pressKey,at:now};
     if (g.multiplayer?.isGuest && g.mode === "survival") {
       this.dragging = !e.drag;
       this.dragVisited = this.dragVisited || new Set([ref + index]);
@@ -1519,7 +1533,7 @@ export class UI {
             ? "Offhand"
             : "";
       if (ref === "offhand" && stack)
-        cell.dataset.tooltip += " · Offhand storage (combat use unavailable)";
+        cell.dataset.tooltip += " · Offhand";
       cell.setAttribute(
         "aria-label",
         stack
@@ -1527,7 +1541,7 @@ export class UI {
           : ref === "armor"
             ? `Empty ${ARMOR_SLOTS[i]} slot`
             : ref === "offhand"
-              ? "Empty offhand storage slot"
+              ? "Empty offhand slot"
               : "Empty slot",
       );
     });
@@ -1583,6 +1597,7 @@ export class UI {
           `<div class="hotbar-slot ${i === inv.selected ? "selected" : ""}"><small>${i + 1}</small>${itemHTML(s)}</div>`,
       )
       .join("");
+    bar.insertAdjacentHTML("beforeend",`<div class="hotbar-offhand" aria-label="Offhand">${itemHTML(inv.offhand?.[0])}</div>`);
     this.hud.querySelector("#selected-name").textContent =
       ITEMS[inv.held?.id]?.name || "";
     this.nameUntil = this.game.elapsed + 2;
@@ -1653,7 +1668,7 @@ export class UI {
     this.hud.querySelector("#xp-fill").style.width =
       `${((p.xp - level * level * 7) / Math.max(7, (level + 1) ** 2 * 7 - level * level * 7)) * 100}%`;
     this.hud.querySelector("#day-label").textContent =
-      g.dimension==="end" ? "THE END" : `DAY ${Math.floor(g.time / 24000) + 1}`;
+      g.dimension==="end" ? "The End" : `Day ${Math.floor(g.time / 24000) + 1}`;
     this.hud.querySelector("#day-icon").textContent =
       g.dimension==="end" ? "◇" : g.time % 24000 > 13000 && g.time % 24000 < 23000 ? "☾" : "☀";
     this.hud.querySelector("#mode-label").textContent = creative
@@ -1824,12 +1839,13 @@ export class UI {
       el.textContent = this.game.multiplayer?.isGuest
         ? "SAVED BY HOST"
         : outcome?.status === "durable"
-          ? "SAVED LOCALLY"
+          ? ""
           : outcome?.status === "session-only"
             ? "SESSION ONLY · EXPORT TO KEEP"
             : outcome?.status === "failed"
               ? "SAVE FAILED · EXPORT TO KEEP"
-              : "NOT SAVED YET";
+              : "";
+      el.hidden=!["session-only","failed"].includes(outcome?.status);
     }
   }
   saved() {

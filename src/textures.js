@@ -1,3 +1,4 @@
+import {refineMaterialFaces} from "./texture-refinement.js";
 import {paintEndAtlas,paintEndItem} from "./end-art.js";
 import { paintCompletedBlocks } from "./completed-block-art.js";
 import { paintCompletedItem } from "./completed-item-art.js";
@@ -76,6 +77,7 @@ export function makeAtlas(pack = "renewed") {
   paintEditionAtlas(canvas);
   paintCompletedBlocks(canvas, pack);
   paintEndAtlas(canvas);
+  refineMaterialFaces(canvas,pack);
   atlasCanvas = canvas;
   activePack = pack;
   icons.clear();
@@ -109,6 +111,8 @@ export function crackTextures() {
     return tex;
   });
 }
+let modelIconSource;
+export function setModelIconSource(source){modelIconSource=source;}
 const icons = new Map();
 const iconCanvases = new Map();
 export function itemIconCanvas(id) {
@@ -116,6 +120,7 @@ export function itemIconCanvas(id) {
   return iconCanvases.get(id);
 }
 export function iconURL(id) {
+  const model=modelIconSource?.(id);if(model)return model;
   if (icons.has(id)) return icons.get(id);
   const item = visualInventoryItem(id);
   if (!item) return "";
@@ -130,7 +135,8 @@ export function iconURL(id) {
     c.fillRect(x, y, w, h);
   };
   const supplied = activePack === "supplied" ? suppliedItemImage(id) : null;
-  if (paintArmorIcon(c, id)) {
+  if ((id==="elytra"||id==="shulker_shell")&&paintEndItem(c,id)){
+  } else if (paintArmorIcon(c, id)) {
     // Equipped surfaces and icons share the same original armor palette.
   } else if (paintWeaponIcon(c, id)) {
     // Weapon visuals/icons stay original and consistent across all packs.

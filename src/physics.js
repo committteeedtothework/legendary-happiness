@@ -190,6 +190,7 @@ export function updatePlayer(game, keys, dt) {
     w = game.world,
     creative = game.mode === "creative";
   if (p.health <= 0) return;
+  if(p.levitationTicks>0)p.levitationTicks=Math.max(0,p.levitationTicks-dt*20);
   if (p.horseId) {
     const moving = updateRidingHorse(game, keys, dt);
     if (p.horseId) return moving;
@@ -300,6 +301,9 @@ export function updatePlayer(game, keys, dt) {
     speed *= 0.5;
     p.runicSlow = Math.max(0, p.runicSlow - dt * 20);
   }
+  p.gliding=!!(!p.flying&&!p.onGround&&!p.inWater&&!p.inLava&&game.inventory?.equipment?.[1]?.id==="elytra"&&(game.inventory.equipment[1].durability??432)>1&&keys.has("Space")&&p.vy<1);
+  if(p.gliding){speed=14+Math.max(0,-Math.sin(p.pitch))*12;p.glideWear=(p.glideWear||0)+dt;if(p.glideWear>=1-1e-8&&!creative){const wings=game.inventory.equipment[1];wings.durability=Math.max(1,(wings.durability??432)-1);p.glideWear-=1;}}
+  if(p.gliding){f=1;s*=.3;}
   const tx = (-Math.sin(p.yaw) * f + Math.cos(p.yaw) * s) * speed,
     tz = (-Math.cos(p.yaw) * f - Math.sin(p.yaw) * s) * speed;
   const accel =
@@ -335,7 +339,9 @@ export function updatePlayer(game, keys, dt) {
       p.exhaustion += p.sprinting ? 0.2 : 0.05;
       game.audio?.tone("step", BLOCKS[w.get(p.x, p.y - 0.1, p.z)]?.key);
     }
-    p.vy = Math.max(-78, p.vy - 32 * dt);
+    if(p.levitationTicks>0){p.vy+=(1.8-p.vy)*(1-Math.exp(-5*dt));p.fallStart=p.y;}
+    else if(p.gliding){p.vy+=(Math.min(-.65,Math.sin(p.pitch)*8-2)-p.vy)*(1-Math.exp(-3*dt));p.fallStart=p.y;}
+    else p.vy = Math.max(-78, p.vy - 32 * dt);
   }
   if (
     (BLOCKS[feet]?.shape === "ladder" || BLOCKS[head]?.shape === "ladder") &&

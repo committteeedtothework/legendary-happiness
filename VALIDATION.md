@@ -1,3 +1,17 @@
+# End Cities and world polish — 2.21.0
+
+The full 989-test unit suite passed. After final offhand serialization, levitation and End Rod refinements, all 62 affected checks passed again, including new rod-palette/light and city-guard unloading checks. The previous block/item/recipe definitions, supplied assets, Titan rules/choreography, storage and weapon palettes retain their compatibility checks. No claim of finding every possible bug is made.
+
+Five End/update browser checks passed: full-stack drag-out dropping and collection, offhand shield/swap, actual held-model icons, phone HUD bounds, End City structures and Shulkers, connected Enderman heads, DRAGOON swoops, village forges/trades, and the original stronghold/portal/dragon/exit route. Relevant UI checks were rerun after final changes. A timing-sensitive villager check now waits for the actual blacksmith instead of assuming a fixed number of wall-clock milliseconds. Screenshots are staged in-game checkpoints.
+
+Eight Overworld/Titan browser regressions passed: crafting, mining/smelting/building, night/death/respawn, atomic save/reload, worker streaming and edited seams, Giganto phases/retry/finisher, Wyvern traversal/phases/save/return and curled jumping/post-parry homing. The last presentation-only refinements do not change these gameplay paths.
+
+The final packaged Electron 45.3.0 Linux app passed offline creation, travel/streaming, save-on-close, relaunch, backup export/import, the End journal, all 71 achievement cards, both Titan entries and Quit, with no page errors or external network requests. Windows and Linux game ASARs match; the portable Windows runtime matches its official archive hash. The legacy launcher's extracted HTML matches the standalone build.
+
+Native Windows execution, physical controllers/iOS and hardware-GPU frame rates remain unverified. Tests use software WebGL. END-CITIES.md records authored-city, Shulker, gliding, trading and offhand differences. Final logs, screenshots, changed files and payload checks ship in the verification archive; public downloads are streamed and SHA-256 checked before delivery.
+
+---
+
 # The End update — 2.20.0
 
 978 unit tests passed with no failures or skips. Coverage includes the previous content definitions and saved ID order, terrain generation, frame activation, Eye/Pearl physics, safe teleport clearance, dragon crystal healing, perching, death and repeat rewards, Enderman provocation, gateway travel and its step-off latch, malformed metadata, brewing effects, shader paths, opaque lava and irregular pressure-ray explosions.

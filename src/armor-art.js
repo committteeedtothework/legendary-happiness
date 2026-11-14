@@ -2,7 +2,7 @@ import { ITEMS } from "./data.js";
 import { faceTexture, pixelShade } from "./pixel-surfaces.js";
 const cache = new Map();
 export const ARMOR_IDS = Object.keys(ITEMS).filter(
-  (id) => ITEMS[id].armorSlot !== undefined,
+  (id) => id!=="elytra"&&ITEMS[id].armorSlot !== undefined,
 );
 export function armorPalette(id) {
   const item = ITEMS[id];

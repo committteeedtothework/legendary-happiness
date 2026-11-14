@@ -1,3 +1,4 @@
+import {useOffhand,swapHands,withOffhand,shieldMelee,shouldUseOffhand} from "./offhand.js";
 import {dragoonHead} from "./end-hitboxes.js";
 import {useEndItem} from "./end-runtime.js";
 import {EndJournal} from "./end-ui.js";
@@ -414,7 +415,7 @@ class Game {
         this.lastSpaceTick = this.tickCount;
       }
       if (e.code === "KeyF") {
-        this.ui.toast("This item cannot be used from the offhand.");
+        swapHands(this);
       }
     };
     addEventListener("keydown", this.handleKeyDown);
@@ -739,6 +740,8 @@ class Game {
     this.mining = 0;
   }
   beginSecondaryInput() {
+    this.player.activeHand="main";
+    if(shouldUseOffhand(this)){useOffhand(this);return;}
     this.rightMouseDown = this.canRepeatPlacement();
     this.use();
   }
@@ -747,7 +750,8 @@ class Game {
     if (this.multiplayer?.isGuest) this.multiplayer.command("release-use");
     else {
       releaseTrident(this);
-      releaseEditionWeapon(this);
+      if(this.player.editionDraw?.hand==="off")withOffhand(this,()=>releaseEditionWeapon(this));
+      else releaseEditionWeapon(this);
     }
   }
   resetControls() {
@@ -874,11 +878,13 @@ class Game {
     this.closeCraft();
     this.resume();
   }
-  damage(amount, cause, force = false) {
+  damage(amount, cause, force = false, source = null) {
     if (this.multiplayer?.isGuest && this.mode === "survival") return;
     const p = this.player;
     if ((this.mode === "creative" && !force) || p.health <= 0 || p.hurt > 0)
       return;
+    amount=shieldMelee(this,amount,cause,source);
+    if(amount<=0)return;
     amount = reduceDamage(this.inventory, amount, cause);
     if (this.player.effects?.resistance && !/void|starvation/.test(cause))
       amount *= 1 - Math.min(0.8, this.player.effects.resistance.level * 0.2);

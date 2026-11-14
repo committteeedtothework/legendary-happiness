@@ -1,3 +1,4 @@
+import {VILLAGER_JOBS} from "./village-jobs.js";
 import {buildEndModel} from "./end-models.js";
 import { buildAquaticModel } from "./aquatic-models.js";
 import { buildColdWildlife } from "./cold-wildlife-models.js";
@@ -21,12 +22,12 @@ function makeMaterial(base, style = "cloth") {
   for (let y = 0; y < 16; y++)
     for (let x = 0; x < 16; x++) {
       if (style === "storybook" && (x % 4 !== 0 || y % 4 !== 0)) continue;
-      const r = hash(x, y, base.length + style.length);
+      const r = hash(x >> 1, y >> 1, base.length + style.length);
       if (style === "cow" && hash(x >> 2, y >> 2, 52) > 0.56)
         c.fillStyle = "#46372b";
       else
         c.fillStyle =
-          r > 0.7 ? "#ffffff18" : r < 0.2 ? "#00000018" : "#00000000";
+          r > 0.7 ? "#ffffff08" : r < 0.2 ? "#00000008" : "#00000000";
       c.fillRect(
         x,
         y,
@@ -224,13 +225,15 @@ export function createMobModel(entity) {
       });
       box(g, 0.55, 0.25, 0.34, 0, 0.65, 0, base);
       const apron = material(
-        entity.profession === "farmer"
+        VILLAGER_JOBS[entity.profession]?.color|| (entity.profession === "farmer"
           ? "#9b7f3a"
           : entity.profession === "mason"
             ? "#a9a5a0"
-            : "#d7d1bc",
+            : "#d7d1bc"),
       );
       box(g, 0.32, 0.5, 0.035, 0, 1, -0.17, apron);
+      if(["blacksmith","armorer","toolsmith"].includes(entity.profession))box(head,.56,.08,.05,0,.3,-.25,material("#30343a"));
+      if(entity.profession==="librarian")for(const x of[-.12,.12])box(head,.19,.1,.035,x,.15,-.25,material("#d4c9a4"));
       if (
         entity.profession === "farmer" &&
         !["snow", "pine", "desert", "badlands"].includes(entity.style)

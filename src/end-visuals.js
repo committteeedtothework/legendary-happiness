@@ -59,7 +59,7 @@ export class EndVisuals {
       s = game?.world?.endgame;
     this.group.visible = !!(active && s);
     if (!this.group.visible) return;
-    const list = (s.orbs || []).slice(0, 32);
+    const list = (s.orbs || []).filter(o=>o&&Number.isFinite(o.x+o.y+o.z)).slice(0, 32);
     this.orbs.count = list.length;
     list.forEach((o, i) => {
       this.dummy.position.set(o.x, o.y, o.z);

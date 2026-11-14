@@ -1,3 +1,4 @@
+import {swapHands} from "./offhand.js";
 import { touchConfig, touchVector, isTouchDevice } from "./touch-data.js";
 import "./touch.css";
 export class TouchInput {
@@ -336,6 +337,7 @@ export class TouchInput {
     );
     const root = g.ui.overlay.querySelector("main");
     const items = [
+      ["Swap hands",()=>swapHands(g)],
       ["Weapon ability", () => g.controller.trigger("KeyR")],
       ["Drop one", () => g.controller.trigger("KeyQ")],
       ["Drop stack", () => g.controller.trigger("KeyQ", { ctrlKey: true })],

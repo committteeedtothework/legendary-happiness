@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.21.0
+
+End Cities, Shulkers and Elytra join the End. DRAGOON gains smoother steering and swoops. Villages expand with profession workshops and new trades. Offhand actions, full-stack drag-out dropping, backpack sorting, shared-model icons, texture refinement and a quieter HUD are included. See [END-CITIES.md](END-CITIES.md) for controls, references and practical differences.
+
+Windows editions: **DCSMCRAFT-2.21.0-Portable.exe** bundles its runtime; **DCSMCRAFT-Windows-HTML-2.21.0.zip** uses installed Edge/Chrome. Both run singleplayer offline. Export/import backups when switching between their separate save profiles. Supplied assets and existing saved identifiers are preserved.
+
+## Previous release — 2.20.0
+
 # DCSMCRAFT 2.20.0
 
 The End adds Endermen, Ender Pearls, craftable Eyes of Ender, seeded strongholds, DRAGOON, healing crystals, outer islands and a return gateway. Water, opaque lava, fire and portals animate; brewing stands show active bubbles. Explosions follow irregular pressure rays. The pause menu includes an End journal and seven new achievements. See [END.md](END.md) for controls, recipes, references and limitations.

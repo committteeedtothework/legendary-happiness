@@ -43,6 +43,7 @@ function hurt(game, target, damage, source, damageEntity, knockback = 0.4) {
           : source.type === "sealed_pistols"
             ? "the sealed pistols"
             : "a runic bolt"),
+      source,
     );
     const d = Math.max(
       0.1,

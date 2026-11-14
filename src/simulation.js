@@ -443,6 +443,7 @@ export function tickSurvival(game) {
     e.hurt ??= 0;
     e.attack ??= 0;
     if(["dragoon","end_crystal"].includes(e.type))continue;
+    if(e.type==="shulker")continue;
     if(e.type==="enderman"){tickEnderman(game,e,{damageEntity});continue;}
     if (e.type === "boat" || (e.type === "skeleton_horse" && e.rider)) continue;
     if (tickAquaticEntity(game, e, { createEntity, dropItem, damageEntity }))
@@ -666,6 +667,7 @@ export function tickSurvival(game) {
               : e.type === "stalker"
                 ? "a dusk stalker"
                 : MOB_INFO[e.type]?.name || "an emberling",
+            e,
           );
           prey.vx += dx * 5;
           prey.vz += dz * 5;
@@ -790,7 +792,7 @@ export function hitEntity(game, e) {
     elapsed = game.elapsed - (game.lastAttack ?? -10),
     strength = Math.min(1, elapsed / cooldown),
     crit = !p.onGround && p.vy < 0 && !p.inWater;
-  const damage = (p.standData?.transformed ? Math.round : Math.floor)(
+  const damage = Math.max(1,(p.standData?.transformed ? Math.round : Math.floor)(
     ((item?.attack || 1) +
       (item?.tool === "mace" && p.vy < 0
         ? Math.min(40, Math.max(0, (p.fallStart || p.y) - p.y) * 3)
@@ -817,7 +819,7 @@ export function hitEntity(game, e) {
       (0.2 + strength * strength * 0.8) *
       (crit ? 1.5 : 1) *
       (p.standData?.transformed ? 1.5 : 1),
-  );
+  ));
   game.lastAttack = game.elapsed;
   p.exhaustion += 0.1;
   const stack = game.inventory.held;

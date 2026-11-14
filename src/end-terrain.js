@@ -1,3 +1,4 @@
+import {generateEndCities} from "./end-cities.js";
 import { B, MIN_Y, MAX_Y, makeStack } from "./data.js";
 import { hash, hashSeed, noise2 } from "./random.js";
 const seedOf = (w) => hashSeed(w.seed);
@@ -161,6 +162,7 @@ export function generateEnd(w, c) {
     put = (x, y, z, id) => {
       if (x >= 0 && x < 16 && z >= 0 && z < 16 && y > MIN_Y && y <= MAX_Y) {
         data[(y - MIN_Y) * 256 + z * 16 + x] = id;
+        if(id===B.end_rod)w.generatedLights.add(`${cx*16+x},${y},${cz*16+z}`);
         c.maxY = Math.max(c.maxY, y);
       }
     };
@@ -206,6 +208,7 @@ export function generateEnd(w, c) {
           for (let y = 61; y <= 64; y++) put(x, y, z, B.bedrock);
       }
     }
+  generateEndCities(w,c,put);
   for (const [x, y, z, id] of w.editChunks.get(key) || [])
     put(x - cx * 16, y, z - cz * 16, id);
   w.dirty.add(key);

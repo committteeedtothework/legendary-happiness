@@ -1,3 +1,4 @@
+import {appendVillageTrades} from "./village-jobs.js";
 import {appendEndBlocks,appendEndItems,appendEndMobs} from "./end-data.js";
 import {
   appendEditionBlocks,
@@ -9,7 +10,7 @@ import {
   appendAquaticItems,
   appendAquaticMobs,
 } from "./aquatic-data.js";
-export const VERSION = "2.20.0";
+export const VERSION = "2.21.0";
 export const GENERATION_VERSION = 16;
 export const REFERENCE =
   "Java Edition 26.3 (content); custom survival mechanics";
@@ -1109,6 +1110,7 @@ export const VILLAGER_TRADES = {
     { input: "emerald", cost: 1, output: "wool", count: 1 },
   ],
 };
+appendVillageTrades(VILLAGER_TRADES);
 export const CYCLE_TEXT = {
   dayEnd: "Sunset.",
   nightStart: "Nightfall.",

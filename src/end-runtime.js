@@ -1,3 +1,5 @@
+import { tickEndCities, shulkerLoot } from "./end-cities.js";
+import { steerDragon, swoopTarget } from "./dragon-flight.js";
 import { B, BLOCKS, MIN_Y, makeStack } from "./data.js";
 import { hash } from "./random.js";
 import {
@@ -96,6 +98,7 @@ export function enterEnd(g) {
   const p = g.player;
   p.endReturn = { x: p.x, y: p.y, z: p.z, yaw: p.yaw, dimension: "overworld" };
   selectRealm(g, "end");
+  endState(g.world);
   for (let x = 94; x <= 98; x++)
     for (let z = -2; z <= 2; z++) {
       g.world.set(x, 50, z, B.obsidian);
@@ -292,10 +295,31 @@ function tickOrbs(g, api, s) {
     if (
       !o ||
       !Number.isFinite(o.x + o.y + o.z) ||
-      !["eye", "pearl", "breath"].includes(o.kind)
+      !["eye", "pearl", "breath", "shulker"].includes(o.kind)
     )
       continue;
     o.age = (o.age || 0) + 1;
+    if (o.kind === "shulker") {
+      const dx = p.x - o.x,
+        dy = p.y + 1 - o.y,
+        dz = p.z - o.z,
+        n = Math.max(0.1, Math.hypot(dx, dy, dz));
+      for (const [k, v] of [
+        ["x", dx],
+        ["y", dy],
+        ["z", dz],
+      ]) {
+        o["v" + k] += ((v / n) * 0.34 - o["v" + k]) * 0.12;
+        o[k] += o["v" + k];
+      }
+      if (n < 1.1) {
+        g.damage?.(4, "a Shulker");
+        p.levitationTicks = 100;
+        continue;
+      }
+      if (o.age < 180 && !w.solid(o.x, o.y, o.z)) keep.push(o);
+      continue;
+    }
     if (o.kind === "eye") {
       if (!o.from || !o.to) continue;
       const u = Math.min(1, o.age / 45),
@@ -463,8 +487,7 @@ function tickDragon(g, e, api, s) {
         y: 88 + Math.sin(a * 1.4) * 10,
         z: Math.sin(a) * 59,
       };
-    for (const k of ["x", "y", "z"]) e[k] += (target[k] - e[k]) * 0.08;
-    e.yaw = Math.atan2(-Math.cos(a), Math.sin(a));
+    steerDragon(e, target, s.phase === 2 ? 1.15 : 0.85);
     if (e.age % (s.phase === 2 ? 36 : 60) === 0) {
       const dx = p.x - e.x,
         dy = p.y + 1 - e.y,
@@ -487,35 +510,39 @@ function tickDragon(g, e, api, s) {
       e.cycles = (e.cycles || 0) + 1;
       if (e.cycles % 2) {
         e.charge = { x: p.x, y: p.y + 2, z: p.z };
-        turn("charge");
+        delete e.swoop;
+        turn(e.cycles % 4 === 1 ? "swoop" : "charge");
       } else turn("approach");
     }
-  } else if (e.mode === "charge") {
-    if (e.modeAge <= 25) {
-      e.y += 0.12;
-    } else {
-      const q = e.charge || p,
-        dx = q.x - e.x,
-        dy = q.y - e.y,
-        dz = q.z - e.z,
-        n = Math.max(1, Math.hypot(dx, dy, dz));
-      e.x += (dx / n) * 1.5;
-      e.y += (dy / n) * 1.5;
-      e.z += (dz / n) * 1.5;
-      e.yaw = Math.atan2(-dx, -dz);
-      if (n < 6 || e.modeAge > 100) turn("orbit");
+  } else if (e.mode === "swoop") {
+    steerDragon(e, swoopTarget(e, p), e.modeAge < 28 ? 0.65 : 1.65);
+    if (e.modeAge === 28) cue(g, "guardian-cast", e);
+    if (e.modeAge > 135) {
+      delete e.swoop;
+      turn("orbit");
     }
+  } else if (e.mode === "charge") {
+    const q = e.charge || p;
+    steerDragon(
+      e,
+      e.modeAge <= 25
+        ? {
+            x: e.x + (e.flightVx || 0) * 12,
+            y: e.y + 5,
+            z: e.z + (e.flightVz || 0) * 12,
+          }
+        : q,
+      e.modeAge <= 25 ? 0.6 : 1.5,
+    );
+    if ((e.modeAge > 35 && distance(e, q) < 7) || e.modeAge > 110)
+      turn("orbit");
   } else if (e.mode === "approach") {
-    e.x += (0 - e.x) * 0.045;
-    e.z += (0 - e.z) * 0.045;
-    e.y += (61.5 - e.y) * 0.045;
-    e.yaw +=
-      Math.atan2(Math.sin(Math.PI - e.yaw), Math.cos(Math.PI - e.yaw)) * 0.05;
-    if (e.modeAge >= 80) turn("perch");
+    steerDragon(e, { x: 0, y: 61.5, z: 0 }, 0.8);
+    if (e.modeAge >= 80 && Math.hypot(e.x, e.z) < 3) turn("perch");
   } else if (e.mode === "perch") {
-    e.x *= 0.8;
-    e.z *= 0.8;
-    e.y += (61.5 - e.y) * 0.2;
+    steerDragon(e, { x: 0, y: 61.5, z: 0 }, 0.22);
+    e.yaw +=
+      Math.atan2(Math.sin(Math.PI - e.yaw), Math.cos(Math.PI - e.yaw)) * 0.025;
     if (e.modeAge === 40) {
       s.clouds.push({
         x: 0,
@@ -584,6 +611,7 @@ export function tickEndWorld(g, api) {
     for (const e of g.entities)
       if (e.type === "end_crystal" && e.hp > 0) e.age = (e.age || 0) + 1;
     seedDragon(g);
+    tickEndCities(g, api);
     for (const e of g.entities)
       if (e.hp > 0 && e.type === "dragoon") tickDragon(g, e, api, s);
     for (const cloud of s.clouds) {
@@ -746,6 +774,8 @@ export function tickEnderman(g, e, api) {
       g.damage?.(
         g.difficulty === "easy" ? 4 : g.difficulty === "hard" ? 10 : 7,
         "an Enderman",
+        false,
+        e,
       );
       e.attack = 1;
     }
@@ -770,6 +800,12 @@ export function tickEnderman(g, e, api) {
 }
 // Null delegates to the standard damage path; a number means fully handled.
 export function endEntityDamage(g, e, damage, options, api) {
+  if (
+    e.type === "shulker" &&
+    !e.open &&
+    ["arrow", "bullet"].includes(options.kind)
+  )
+    return 0;
   if (e.type === "enderman") {
     e.angry = 600;
     if (["arrow", "bullet", "projectile", "trident"].includes(options.kind)) {
@@ -821,6 +857,11 @@ export function endEntityDamage(g, e, damage, options, api) {
   return null;
 }
 export function endEntityLoot(g, e, drop) {
+  shulkerLoot(g, e, drop);
+  if (e.type === "enderman") {
+    if (e.endLooted) return;
+    e.endLooted = true;
+  }
   if (
     e.type === "enderman" &&
     hash(Math.floor(e.x), e.age || 0, Math.floor(e.z), g.world.seedInt) > 0.5

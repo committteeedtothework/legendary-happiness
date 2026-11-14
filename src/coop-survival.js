@@ -1,3 +1,5 @@
+import {shieldMelee} from "./offhand.js";
+import {sortBackpack,dropCursorStack} from "./inventory-qol.js";
 import { achievementState, recordAchievement, scanAchievements } from "./achievements.js";
 import { playerEye } from "./player-body.js";
 import { menuStillValid } from "./world-interactions.js";
@@ -83,7 +85,7 @@ export function closePeerCraft(ctx) {
     ctx.inventory.cursor = null;
   }
 }
-export function damagePeer(session, peer, amount, cause, force = false) {
+export function damagePeer(session, peer, amount, cause, force = false, source = null) {
   const ctx = peer.context,
     p = peer.player;
   if (
@@ -92,6 +94,8 @@ export function damagePeer(session, peer, amount, cause, force = false) {
     p.hurt > 0
   )
     return;
+  amount=shieldMelee(ctx,amount,cause,source);
+  if(amount<=0)return;
   p.health = Math.max(
     0,
     p.health -
@@ -153,8 +157,8 @@ export function peerContext(session, peer) {
         this.latched = false;
       },
     },
-    damage: (amount, cause, force) =>
-      damagePeer(session, peer, amount, cause, force),
+    damage: (amount, cause, force,source) =>
+      damagePeer(session, peer, amount, cause, force,source),
     save: () => g.save(),
     closeCraft: () => closePeerCraft(ctx),
     openInventory: (type, container = null, target = null) => {
@@ -341,6 +345,8 @@ export function inventoryOperation(session, peer, op) {
       ? 3
       : 2,
   });
+  if(op.action==="sort")return sortBackpack(ctx.inventory);
+  if(op.action==="drop-cursor")return dropCursorStack(ctx,!!op.one);
   if (op.action === "slot") {
     const counts = {
       inventory: 36,

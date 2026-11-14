@@ -1,3 +1,4 @@
+import {swapHands} from "./offhand.js";
 import {ControllerCursor} from "./controller-cursor.js";
 import {
   controllerConfig,
@@ -292,7 +293,8 @@ export class ControllerInput {
     if (edge("target")) this.trigger("F5");
     if (edge("up")) this.trigger("KeyR");
     if (edge("down")) this.trigger("KeyQ");
-    if (edge("left")) this.trigger("KeyJ");
+    if(edge("left")&&b.crouch)swapHands(g);
+    else if (edge("left")) this.trigger("KeyJ");
     if (edge("right")) g.chat.open();
     if (edge("mine")) {
       this.primary = g.beginPrimaryInput();

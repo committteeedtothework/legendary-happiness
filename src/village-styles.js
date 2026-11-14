@@ -1,3 +1,4 @@
+import {finishVillageWorkshops,villageWorkstation} from "./village-expansion.js";
 import { B, makeStack } from "./data.js";
 import { doorId } from "./doors.js";
 export const VILLAGE_STYLES = {
@@ -95,7 +96,7 @@ export function styleForBiome(biome) {
 export function regionalVillage(world, chunk, put, v) {
   const p = VILLAGE_STYLES[v.style],
     set = (x, y, z, id) => put(x - chunk.cx * 16, y, z - chunk.cz * 16, id),
-    r = 41;
+    r = (v.radius||42)-1;
   for (
     let z = Math.max(v.z - r, chunk.cz * 16);
     z <= Math.min(v.z + r, chunk.cz * 16 + 15);
@@ -199,7 +200,7 @@ export function regionalVillage(world, chunk, put, v) {
       h.x + 5,
       floor + 1,
       h.z + 1,
-      h.profession === "mason" ? B.furnace : B.crafting_table,
+      v.expansion?villageWorkstation(h.profession):h.profession === "mason" ? B.furnace : B.crafting_table,
     );
     set(h.x + 1, floor + 1, h.z + 5, B.chest);
     set(h.doorX, floor + 3, h.z + 5, B.torch);
@@ -265,4 +266,5 @@ export function regionalVillage(world, chunk, put, v) {
     for (let y = 1; y <= 3; y++) set(v.x + dx, v.y + y, v.z + dz, p.frame);
     set(v.x + dx, v.y + 4, v.z + dz, B.torch);
   }
+  if(v.expansion)finishVillageWorkshops(world,chunk,put,v);
 }

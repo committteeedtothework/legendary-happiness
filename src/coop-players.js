@@ -10,7 +10,7 @@ export function survivalPlayers(game) {
 export function isPlayer(game, target) {
   return target === game.player || !!game.multiplayer?.peerForPlayer?.(target);
 }
-export function damagePlayer(game, target, amount, cause) {
-  if (target === game.player) game.damage(amount, cause);
-  else game.multiplayer?.damagePlayer?.(target, amount, cause);
+export function damagePlayer(game, target, amount, cause, source = null) {
+  if (target === game.player) game.damage(amount, cause,false,source);
+  else game.multiplayer?.damagePlayer?.(target, amount, cause,source);
 }

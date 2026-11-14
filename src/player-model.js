@@ -164,9 +164,10 @@ export function createPlayerModel(skinId, equipment = [], held, atlas) {
     pack.userData.coveredBy = "chest";
     accessories.push(pack);
   }
+  const armorEquipment=equipment.map(s=>s?.id==="elytra"?null:s);
   const armor = equipArmorVisuals(
     { rig, head, body, arms, forearms, legs },
-    equipment,
+    armorEquipment,
     accessories,
   );
   const grip = new THREE.Group();
@@ -194,7 +195,10 @@ export function createPlayerModel(skinId, equipment = [], held, atlas) {
     leftGrip.add(left);
     forearms[0].add(leftGrip);
   }
+  const elytraWings=[];
+  if(equipment[1]?.id==="elytra")for(const sign of[-1,1]){const wing=new THREE.Group();wing.position.set(sign*.08,1.25,.17);wing.rotation.z=sign*.15;box(wing,[.35,.72,.05],[sign*.12,-.28,.02],"#8b7f9c");rig.add(wing);elytraWings.push(wing);}
   root.userData = {
+    elytraWings,
     coat,
     armor,
     accessories,
@@ -226,10 +230,11 @@ export function animatePlayerModel(
   visualAction = null,
   visualContext = {},
 ) {
+  model.userData.elytraWings?.forEach((w,i)=>{w.rotation.z+=((i?1:-1)*(p.gliding?.9:.15)-w.rotation.z)*(1-Math.exp(-dt*10));});
   if (model.userData.heldKind !== "pistols") {
     animateArticulatedPlayer(
       model,
-      p,
+      p.gliding?{...p,swimming:true}:p,
       dt,
       moving,
       action,
@@ -264,6 +269,7 @@ export function animatePlayerModel(
     return;
   }
   const u = model.userData;
+
   u.stride = (u.stride || 0) + (moving ? dt * (p.sprinting ? 14 : 9) : 0);
   const alpha = 1 - Math.exp(-14 * dt),
     gait = moving ? (p.sprinting ? 0.65 : 0.4) : 0;

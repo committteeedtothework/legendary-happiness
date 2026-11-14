@@ -1,3 +1,4 @@
+import {swapHands,useOffhand,withOffhand} from "./offhand.js";
 import { syncAchievements } from "./achievements.js";
 import { restoreEmbeddedArrows } from "./embedded-arrows.js";
 import { PROTOCOL } from "../server/protocol.mjs";
@@ -576,6 +577,8 @@ export class Multiplayer {
           ok = true;
         }
       }
+      if(m.kind==="swap-hands")ok=swapHands(g);
+      if(m.kind==="offhand-use")ok=useOffhand(g);
       if (m.kind === "attack") {
         g.tryAttack();
         ok = true;
@@ -640,8 +643,8 @@ export class Multiplayer {
   peerForPlayer(player) {
     return [...this.peers.values()].find((p) => p.player === player);
   }
-  damagePlayer(player, amount, cause) {
-    this.peerForPlayer(player)?.context.damage(amount, cause);
+  damagePlayer(player, amount, cause, source = null) {
+    this.peerForPlayer(player)?.context.damage(amount, cause,false,source);
   }
   physics(dt) {
     if (this.connected && !this.isGuest)
@@ -958,12 +961,14 @@ export class Multiplayer {
         finish(true);
         return;
       }
+      if(m.kind==="swap-hands"){finish(swapHands(ctx));return;}
+      if(m.kind==="offhand-use"){finish(useOffhand(ctx));return;}
       if (m.kind === "attack") {
         finish(ctx.tryAttack());
         return;
       }
       if (m.kind === "release-use") {
-        finish(releaseTrident(ctx) || releaseEditionWeapon(ctx));
+        finish(releaseTrident(ctx) || (ctx.player.editionDraw?.hand==="off"?withOffhand(ctx,()=>releaseEditionWeapon(ctx)):releaseEditionWeapon(ctx)));
         return;
       }
       if (m.kind === "pistol") {
@@ -993,7 +998,7 @@ export class Multiplayer {
     const now = performance.now();
     if (
       !["inventory", "menu", "close", "respawn"].includes(kind) &&
-      now - (this.lastCommand || 0) < 170
+      now - (this.lastCommand || 0) < (["attack","offhand-use","release-use","swap-hands"].includes(kind)?35:170)
     )
       return false;
     if (!["inventory", "menu", "close", "respawn"].includes(kind))
