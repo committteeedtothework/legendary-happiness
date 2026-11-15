@@ -65,7 +65,6 @@ export function launchSeeker(game) {
   p.devinSeekerTick = game.tickCount + 280;
   game.renderer?.action("use");
   game.audio?.tone("seeker");
-  game.ui?.toast("Devin's Seeker · tracking a hostile");
   return true;
 }
 // Fixed 20 Hz swept collision: steering never teleports a bolt through a wall.

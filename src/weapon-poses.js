@@ -202,26 +202,11 @@ export function poseThirdPersonWeapon(
     pitch = p.pitch || 0,
     drawing =
       p.editionDraw?.id === id || (id === "crossbow" && context.held?.charged);
-  const active =
-    (action > 0 || visualAction) && ["attack", "mine", "place"].includes(kind);
-  const special = ["devin_sword"].includes(id) || ITEMS[id]?.tool === "spear";
   // Retain swimming strokes. On land, Java's straight cuboid arms carry/use
   // the same rigid socket; no compensating wrist rotation or detached elbow.
   if (!p.inWater) {
-    u.forearms.forEach((a) => a.rotation.set(0, 0, 0));
-    if (active && !special) {
-      const t = visualAction
-        ? Math.max(0, Math.min(1, visualAction.age / visualAction.duration))
-        : Math.max(0, Math.min(1, action));
-      const arc = Math.sin(Math.sqrt(t) * Math.PI),
-        yaw = -Math.sin(Math.sqrt(t) * Math.PI * 2) * 0.2;
-      right.rotation.x = visualAction
-        ? 1.2 * arc - Math.sin(t * Math.PI) * (0.7 - pitch) * 0.45
-        : Math.abs(action) * 1.55;
-      right.rotation.y = yaw * 2;
-      right.rotation.z = -Math.sin(t * Math.PI) * 0.4;
-      u.body.rotation.y = yaw;
-    }
+    // The common player pose owns the swing for fists, blocks and weapons.
+    // This layer only owns explicit aiming and held-model display transforms.
     if (drawing && id === "bow") {
       right.rotation.set(Math.PI / 2 + pitch, -0.1, 0);
       left.rotation.set(Math.PI / 2 + pitch, 0.4, 0);

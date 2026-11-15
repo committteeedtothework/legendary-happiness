@@ -906,7 +906,7 @@ export function damageEntity(
       (MOB_INFO[e.type]?.height || 1.95) * farmScale(e),
       (MOB_INFO[e.type]?.width || 0.6) * farmScale(e),
     );
-  game.renderer?.combatImpact?.(e, { critical: crit, killed: e.hp <= 0 });
+  game.renderer?.combatImpact?.(e, { critical: crit, killed: e.hp <= 0, source });
   if (reward) game.hitFeedback = { critical: crit, until: game.elapsed + 0.16 };
   playWorldSound(game, "hit", e);
   game.audio?.voice?.(game, e, e.hp <= 0 ? "death" : "hurt");
@@ -1027,12 +1027,6 @@ export function damageEntity(
         e.y + 0.5,
         e.z,
       );
-    if (reward)
-      game.ui?.toast(
-        HOSTILE_TYPES.has(e.type)
-          ? "Hostile defeated · +5 XP"
-          : "Gather the drops before they disappear",
-      );
   }
   game.ui?.updateHotbar();
   return damage;
@@ -1069,9 +1063,6 @@ export function devinPulse(game) {
   game.renderer?.pulseEffect?.(p);
   game.renderer?.action("use");
   playWorldSound(game, "pulse", game.player);
-  game.ui?.toast(
-    `Devin's Pulse · ${hits} hostile${hits === 1 ? "" : "s"} struck`,
-  );
   game.ui?.updateHUD();
   return true;
 }

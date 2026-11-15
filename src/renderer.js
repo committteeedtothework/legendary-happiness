@@ -1,4 +1,5 @@
 import {configureWeaponDisplay} from "./weapon-poses.js";
+import { addCriticalImpact, updateCriticalParticle } from "./combat-feedback.js";
 import {ModelIcons} from "./item-model-icons.js";
 import {injectSurfaceAnimation} from "./surface-animation.js";
 import {animateEndModel} from "./end-models.js";
@@ -739,13 +740,10 @@ export class Renderer {
   action(kind) {
     if (kind === "fire") {
       this.pistolKick = PISTOL_RECOIL_SECONDS;
-      this.playerSwing = PISTOL_RECOIL_SECONDS;
     }
     this.animator.trigger(kind, ITEMS[this.heldId]?.tool, this.heldId);
-    if (["attack", "use", "place", "eat"].includes(kind))
-      this.playerSwing = 0.32;
   }
-  combatImpact(entity, { critical = false, killed = false } = {}) {
+  combatImpact(entity, { critical = false, killed = false, source } = {}) {
     if (this.heldId === "devin_sword" && this.settings.particles !== "minimal")
       this.arcane?.burst(entity, critical ? 20 : 10);
     const model = this.mobMeshes.get(entity.id);
@@ -753,7 +751,12 @@ export class Renderer {
       model.userData.flinch = 1;
       if (killed) model.userData.death = 0.001;
     }
-    for (let i = 0; i < particleCount(this.settings, critical ? 9 : 4); i++) {
+    if (critical) {
+      addCriticalImpact(this, entity, source);
+      return;
+    }
+    const count = Math.min(particleCount(this.settings, 4), Math.max(0, 180 - this.effects.length));
+    for (let i = 0; i < count; i++) {
       const m = new THREE.Mesh(
         new THREE.BoxGeometry(0.045, 0.045, 0.045),
         new THREE.MeshBasicMaterial({
@@ -1421,6 +1424,15 @@ export class Renderer {
       0.1,
       Math.max(0, this.lastTime ? elapsed - this.lastTime : 0.016),
     );
+    // Advance once, before either view reads the action. Camera changes retain
+    // the same progress instead of rendering third person one frame behind.
+    const handPose = playing ? this.animator.step(animating ? frameDt : 0, player, {
+      moving,
+      mining: mining > 0,
+      tool: ITEMS[this.heldId]?.tool,
+      itemId: this.heldId,
+      bobbing: this.settings.viewBobbing !== false,
+    }) : null;
     // Recoil ages in both F5 views, rather than flashing again on return.
     this.worldAnimations.update(game, frameDt, elapsed);
     this.aquaticVisuals.update(game, elapsed);
@@ -1699,10 +1711,6 @@ export class Renderer {
               m.receiveShadow = true;
             }
           });
-        this.playerSwing = Math.max(
-          0,
-          (this.playerSwing || 0) - (animating ? frameDt : 0),
-        );
         this.playerShadow =
           this.settings.shadows && this.settings.entityShadows;
         animatePlayerModel(
@@ -1712,7 +1720,9 @@ export class Renderer {
           moving,
           mining > 0
             ? 0.5 + 0.5 * Math.sin(elapsed * 13)
-            : Math.sin((this.playerSwing / 0.32) * Math.PI),
+            : this.animator.action
+              ? Math.sin(Math.PI * this.animator.action.age / this.animator.action.duration)
+              : 0,
           this.animator.action?.kind || (mining > 0 ? "mine" : "attack"),
           this.pistolKick,
           this.settings.particles !== "minimal",
@@ -1743,13 +1753,6 @@ export class Renderer {
           );
           this.playerModel.userData.rig.position.y = -0.45;
         }
-        this.animator.step(animating ? frameDt : 0, player, {
-          moving,
-          mining: mining > 0,
-          tool: ITEMS[this.heldId]?.tool,
-          itemId: this.heldId,
-          bobbing: this.settings.viewBobbing !== false,
-        });
       } else if (this.playerModel) this.playerModel.visible = false;
       const fov =
         (player.spyglassUntil > elapsed ? 20 : 0) ||
@@ -1789,13 +1792,7 @@ export class Renderer {
       this.leftHandRig.skin.color.set("#58a2a6");
     }
     if (playing && !cameraMode) {
-      const pose = this.animator.step(animating ? frameDt : 0, player, {
-        moving,
-        mining: mining > 0,
-        tool: ITEMS[this.heldId]?.tool,
-        itemId: this.heldId,
-        bobbing: this.settings.viewBobbing !== false,
-      });
+      const pose = handPose;
       const nearWall =
         this.outline.visible && this.targetDistance < 0.9
           ? (0.9 - this.targetDistance) / 0.9
@@ -1934,7 +1931,7 @@ export class Renderer {
       this.gl.render(this.handScene, this.handCamera);
       this.gl.autoClear = true;
     }
-    const dt = Math.min(0.05, this.lastTime ? elapsed - this.lastTime : 0.016);
+    const dt = animating ? Math.min(0.05, frameDt) : 0;
     this.lastTime = elapsed;
     this.effects = this.effects.filter((e) => {
       e.life -= dt;
@@ -1945,7 +1942,10 @@ export class Renderer {
       if (e.pulse) {
         e.m.scale.addScalar(dt * (e.grow || 13 / 0.6));
         e.m.material.opacity = Math.min(.8,Math.max(0, e.life / (e.duration || .6)) * 0.8);
-      } else e.v.y -= 9 * dt;
+      } else {
+        e.v.y -= 9 * dt;
+        if (e.critical) updateCriticalParticle(e, this.camera, dt);
+      }
       e.m.position.addScaledVector(e.v, dt);
       return true;
     });

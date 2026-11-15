@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.22.0 — gameplay polish
+
+Quieter gameplay notices, species-specific animal sounds, critical-hit stars and synchronized rigid-arm third-person swings. Supplied assets, saves, combat tuning and both Titan encounters are retained. See [GAMEPLAY-POLISH.md](GAMEPLAY-POLISH.md) for scope and references.
+
+Run **DCSMCRAFT-2.22.0-Portable.exe** for the bundled offline runtime. The separate **DCSMCRAFT-Windows-HTML-2.22.0.zip** uses installed Edge/Chrome. Close the previous app first.
+
+## Previous release — 2.21.1
+
 # DCSMCRAFT 2.21.1 — Windows fullscreen fix
 
 The bundled Windows app uses native window fullscreen, so Escape/pause, inventory, options and return to title preserve fullscreen. F11, Alt+Enter and Video Settings toggle it explicitly. Close the previous app before launching **DCSMCRAFT-2.21.1-Portable.exe**. Existing saves and game content are unchanged. Browser and legacy HTML editions retain their browser fullscreen behaviour.

@@ -94,6 +94,23 @@ try {
     g.settings.renderDistance = 8;
     g.renderer.applyGraphics();
   });
+  // Exercise the packaged combat feedback/rig, using an isolated test entity.
+  const combatPolish = await page.evaluate(() => {
+    const g=dcsmcraft,r=g.renderer,p=g.player;
+    g.inventory.slots[0]={id:"iron_sword",count:1};g.inventory.selected=0;
+    const e={id:900001,type:"cow",x:p.x+1.5,y:p.y,z:p.z-2,hp:10,yaw:0,age:0};
+    g.entities=[e];r.setHeld("iron_sword");r.syncEntities([e],[],g.elapsed,0);
+    const particles=g.settings.particles;g.settings.particles="all";
+    r.combatImpact(e,{critical:true,source:p});r.action("attack");g.cameraMode=1;
+    r.lastTime=g.elapsed-1/60;
+    r.draw({game:g,player:p,equipment:g.inventory.equipment,cameraMode:1,playing:true,animating:true,elapsed:g.elapsed});
+    const result={stars:r.effects.filter(e=>e.critical).length,elbows:r.playerModel.userData.forearms.map(a=>a.rotation.x),arm:r.playerModel.userData.arms[1].rotation.x};
+    g.settings.particles=particles;document.querySelector("#cycle-banner").style.visibility="hidden";
+    return result;
+  });
+  if(combatPolish.stars!==16||combatPolish.elbows.some(v=>v!==0)||Math.abs(combatPolish.arm)<.1)throw Error("Packaged critical feedback or player rig failed");
+  await page.screenshot({path:out+"/desktop-critical-and-swing.png"});
+  await page.evaluate(()=>{const g=dcsmcraft,r=g.renderer;g.entities=[];g.cameraMode=0;r.animator.reset();for(const e of r.effects)r.disposeObject(e.m);r.effects=[];r.syncEntities([],[],g.elapsed,0);});
   const start = await page.evaluate(() => ({
     x: dcsmcraft.player.x,
     z: dcsmcraft.player.z,
@@ -305,7 +322,7 @@ try {
     if (rig.skins < 1) throw Error("Native Titan did not load rigged models");
     if (!await page.evaluate(()=>dcsmcraft.player.achievements?.unlocked.titan_portal))throw Error("Actual portal entry did not award Titan Signals");
     titans.push(rig);
-    await page.screenshot({ path: out + "/desktop-" + titan + ".png" });
+    await page.screenshot({ path: out + "/desktop-" + titan + ".png", timeout:90000 });
     if (!(await page.evaluate(() => dcsmcraft.giganto.exit())))
       throw Error("Native arena exit failed");
   }
@@ -321,6 +338,7 @@ try {
         httpNetworkBlocked: true,
         native,
         achievementMenu,
+        combatPolish,
         titans,
         saved,
         restored,

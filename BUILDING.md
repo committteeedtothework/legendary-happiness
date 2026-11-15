@@ -1,3 +1,9 @@
+# Gameplay polish — 2.22.0
+
+Use Node 24.22.1/npm 11.9.0. Run npm test, then npx playwright test --config playwright.gameplay-polish.config.js. Existing desktop regression and packaging commands remain valid. GAMEPLAY-POLISH.md documents changes, references and sound synthesis.
+
+## Previous build notes
+
 # Controls and achievement presentation — 2.19.0
 
 The build commands below remain valid. This release adds `npx playwright test --config playwright.controls-ui.config.js` for notification, theme and free controller-cursor transactions. Run `npm test`, `npm run test:desktop:web` and `npm run test:desktop` for physics/targeting, encounter/regression and packaged-runtime coverage. The package script includes separate Windows runtime and HTML launcher downloads, browser/source ZIPs and checksums. See CONTROLS-UI-POLISH.md for scope and limitations.

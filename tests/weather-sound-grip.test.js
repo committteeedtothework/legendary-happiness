@@ -149,7 +149,11 @@ test("all creature identities and event articulations are distinct, bounded, cli
   const bank = createVoiceBank(c);
   assert.equal(made, 0);
   assert.equal(bank.zombie, bank.zombie);
-  assert.equal(made, 3);
+  assert.equal(made, 0);
+  assert.equal(bank.zombie[0], bank.zombie[0]);
+  assert.equal(made, 1);
+  assert.notEqual(bank.zombie[0], bank.zombie[1]);
+  assert.equal(made, 2);
   assert.notEqual(bank["zombie:hurt"], bank.zombie);
   const fx = createEffectBank(c),
     before = made;

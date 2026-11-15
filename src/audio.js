@@ -15,8 +15,8 @@ import { createPistolBank } from "./pistol-audio.js";
 import { isWater, isLava } from "./block-dynamics.js";
 import { MusicEngine } from "./music.js";
 import { weatherAt } from "./weather.js";
-import { createVoiceBank } from "./voices.js";
-import { B } from "./data.js";
+import { createVoiceBank, VOICE_PROFILES } from "./voices.js";
+import { B, MOB_INFO } from "./data.js";
 import { Soundscape } from "./soundscape.js";
 import { createFoleyBank, surfaceFamily } from "./foley.js";
 // Original procedural Foley: filtered noise, short resonant impacts, and
@@ -393,10 +393,10 @@ export class AudioEngine {
     )
       return;
     return this.withWorldPosition(game, "mob", entity, () =>
-      this.mob(entity.type, 0, kind),
+      this.mob(entity.type, 0, kind, 0, false, entity.baby ? 1.35 : 1),
     );
   }
-  mob(type, distance = 0, kind = "idle", pan = 0, occluded = false) {
+  mob(type, distance = 0, kind = "idle", pan = 0, occluded = false, pitchScale = 1) {
     if (
       !this.context ||
       !this.settings.volume ||
@@ -409,13 +409,17 @@ export class AudioEngine {
         distanceGain(distance, 16) *
         (this.settings.mobVolume ?? 0.75) *
         (kind === "idle" ? 0.35 : 0.5),
-      pitch = 0.97 + Math.random() * 0.06;
+      pitch = (0.97 + Math.random() * 0.06) * pitchScale;
+    // End creatures reuse deliberately assigned voices. Unknown types stay
+    // silent rather than turning into zombies or silently losing an alias.
+    const voice = VOICE_PROFILES[type] ? type : MOB_INFO[type]?.voice;
+    if (!VOICE_PROFILES[voice]) return;
     this.played++;
     const eventKind = ["idle", "hurt", "attack", "death"].includes(kind)
       ? kind
       : "idle";
     this.sample(
-      eventKind === "idle" ? type : `${type}:${eventKind}`,
+      eventKind === "idle" ? voice : `${voice}:${eventKind}`,
       gain * (occluded ? 0.4 : 1),
       pitch,
       0,

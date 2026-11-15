@@ -113,3 +113,7 @@ The user supplied Titan WYVERN and Break Through It All for Wyvern-only playback
 ## Offline desktop runtime (2.17.0)
 
 Electron 45.3.0 is distributed under its MIT license with Chromium and other components under their respective licenses. The complete Electron LICENSE and LICENSES.chromium.html are retained in the bundled runtime. electron-builder 26.18.0 creates the NSIS portable wrapper and retains its standard plugins/resources; source development dependencies and exact versions are in package-lock.json. Original game/model/audio/font notices remain in the bundled game/NOTICES.txt and source assets. No new permission to redistribute user-supplied third-party media is granted by packaging.
+
+## Gameplay polish — 2.22.0
+
+Animal vocal models and critical-star geometry are original synthesized/procedural assets. Minecraft Wiki and Animal Diversity Web were consulted for mechanics and species-call descriptions; no media or source code was copied. See GAMEPLAY-POLISH.md for reference links.

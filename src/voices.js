@@ -1,5 +1,6 @@
 // Original vocal synthesis: harmonic/formant bodies, breath, irregular pulse
 // envelopes and pitch motion. No recordings or copied game audio.
+import { animalVoiceSamples } from "./animal-voices.js";
 export const VOICE_PROFILES = {
   cod: [320, 0.2, 1400, 0.7],
   salmon: [280, 0.25, 1200, 0.65],
@@ -43,6 +44,7 @@ export const VOICE_PROFILES = {
   shade: [59, 0.65, 470, 0.4],
   stalker: [90, 0.53, 1300, 0.7],
   emberling: [132, 0.6, 2100, 0.6],
+  shulker: [151, 0.38, 940, 0.18],
 };
 // Species use distinct articulations, not the same oscillator at a new pitch.
 const families = {
@@ -88,8 +90,11 @@ const families = {
   emberling: "ember",
   shade: "groan",
   stalker: "chitter",
+  shulker: "shell",
 };
 export function voiceSamples(type, rate, variant = 0, kind = "idle") {
+  const animal = animalVoiceSamples(type, rate, variant, kind);
+  if (animal) return animal;
   const profile = VOICE_PROFILES[type] || VOICE_PROFILES.zombie;
   const [pitch, base, formant, breath] = profile,
     family = families[type];
@@ -176,7 +181,8 @@ export function voiceSamples(type, rate, variant = 0, kind = "idle") {
       family === "bone" ||
       family === "ratchet" ||
       family === "metal" ||
-      family === "forge"
+      family === "forge" ||
+      family === "shell"
     ) {
       value = 0;
       for (let j = 0; j < 5; j++) {
@@ -186,7 +192,13 @@ export function voiceSamples(type, rate, variant = 0, kind = "idle") {
             (Math.sin(
               2 *
                 Math.PI *
-                (family === "bone" ? 780 : family === "forge" ? 170 : 350) *
+                (family === "bone"
+                  ? 780
+                  : family === "forge"
+                    ? 170
+                    : family === "shell"
+                      ? 510
+                      : 350) *
                 (1 + j * 0.27) *
                 u,
             ) *
@@ -233,12 +245,19 @@ export function createVoiceBank(context) {
       Object.defineProperty(bank, key, {
         enumerable: true,
         get() {
-          const buffers = Array.from({ length: 3 }, (_, v) => {
-            const samples = voiceSamples(type, rate, v, kind),
-              buffer = context.createBuffer(1, samples.length, rate);
-            buffer.copyToChannel(samples, 0);
-            return buffer;
-          });
+          const buffers = new Array(3);
+          for (let v = 0; v < buffers.length; v++)
+            Object.defineProperty(buffers, v, {
+              configurable: true,
+              enumerable: true,
+              get() {
+                const samples = voiceSamples(type, rate, v, kind),
+                  buffer = context.createBuffer(1, samples.length, rate);
+                buffer.copyToChannel(samples, 0);
+                Object.defineProperty(buffers, v, { value: buffer });
+                return buffer;
+              },
+            });
           Object.defineProperty(bank, key, {
             value: buffers,
             enumerable: true,

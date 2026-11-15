@@ -1,4 +1,5 @@
 import { weaponActionPose } from "./weapon-motion.js";
+import { customItemMotion } from "./java-item-motion.js";
 const mix = (a, b, t) => a + (b - a) * t;
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 // A visual rig only: the authoritative upright player collision body is unchanged.
@@ -44,7 +45,7 @@ export function animateArticulatedPlayer(
     leg.rotation.z = sign * (s * 0.055 + u.crouch * 0.035);
   });
   let weapon = null;
-  if (visualAction)
+  if (visualAction && customItemMotion(u.heldId, u.heldKind))
     weapon = weaponActionPose(
       visualAction.kind,
       visualAction.age / visualAction.duration,
@@ -62,11 +63,12 @@ export function animateArticulatedPlayer(
     let rx = walk + (i === 1 && u.heldKind !== "item" ? 0.12 : 0),
       ry = 0,
       rz = side * (0.035 + breathing);
-    let bend = i === 1 && u.heldKind !== "item" ? 0.18 : 0;
+    // Cuboid limbs remain rigid on land. Only swimming needs an elbow joint;
+    // bending every carried-item arm folds its sleeve into the upper arm.
+    let bend = 0;
     if (!p.onGround && !p.flying && !swimming) {
       rx += clamp(-(p.vy || 0) * 0.018, -0.13, 0.15);
       rz += side * 0.12;
-      bend += 0.12;
     }
     if (s > 0.001) {
       const stroke = swimPhase + (i ? 0 : Math.PI),
@@ -86,12 +88,18 @@ export function animateArticulatedPlayer(
         rx = 0.18 - weapon.rx * 1.4 + Math.abs(weapon.z) * 2.5;
         ry = weapon.ry * 0.8;
         rz = -weapon.rz * 0.65;
-        bend = 0.2 + Math.abs(weapon.rx) * 0.4;
+      } else if (visualAction && !use) {
+        const progress = clamp(visualAction.age / visualAction.duration, 0, 1);
+        const arc = Math.sin(Math.sqrt(progress) * Math.PI);
+        rx =
+          1.2 * arc -
+          Math.sin(progress * Math.PI) * (0.7 - (p.pitch || 0)) * 0.45;
+        ry = -Math.sin(Math.sqrt(progress) * Math.PI * 2) * 0.4;
+        rz = -Math.sin(progress * Math.PI) * 0.4;
       } else {
         rx = action * (use ? 1.9 : 1.55);
         ry = -action * (use ? 0.05 : 0.32);
         rz = action * (use ? -0.18 : 0.25);
-        bend = 0.15 + action * 0.45;
       }
     }
     arm.rotation.set(rx, ry, rz);
@@ -109,17 +117,15 @@ export function animateArticulatedPlayer(
     s * Math.sin(swimPhase * 2) * 0.018;
   u.rig.position.z = -0.8 * Math.sin(lean);
   u.rig.rotation.z = Math.sin(phase) * u.gait * 0.025;
-  u.body.rotation.y = weapon
-    ? weapon.ry * 0.16
-    : Math.sin(phase) * u.gait * 0.025;
-  u.body.rotation.z = weapon ? -weapon.rz * 0.05 : 0;
+  // Attack rotation belongs to the shoulder, not a separately twisting torso.
+  u.body.rotation.set(0, 0, 0);
   u.head.rotation.x = clamp((p.pitch || 0) - lean * 0.55, -1.1, 1.1);
   const wrist =
     u.heldKind === "block" ? -0.1 : u.heldKind === "spear" ? -1.0 : -0.62;
   u.grip.rotation.x =
     wrist -
-    u.arms[1].rotation.x * 0.48 +
-    (u.forearms?.[1]?.rotation.x || 0) * -0.35;
+    s * u.arms[1].rotation.x * 0.48 +
+    s * (u.forearms?.[1]?.rotation.x || 0) * -0.35;
   u.grip.rotation.z = weapon ? weapon.rz * 0.16 : 0;
   u.coat?.forEach((tail, i) => {
     const target =

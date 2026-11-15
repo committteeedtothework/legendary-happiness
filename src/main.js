@@ -280,11 +280,6 @@ class Game {
       if (e.code === "F5" && this.active && this.ui.screen === "play") {
         e.preventDefault();
         this.cameraMode = (this.cameraMode + 1) % 3;
-        this.ui.toast(
-          ["First person", "Third person · behind", "Third person · front"][
-            this.cameraMode
-          ],
-        );
         return;
       }
       if (e.code === "F3") {
@@ -552,12 +547,11 @@ class Game {
     this.ui.play();
     this.resume();
     this.ui.announce("DAY 1", this.settings.cycleText.dayStart);
-    this.ui.toast(
-      this.store.temporary
-        ? "Browser storage is blocked. This world is session-only; export it from Saved Worlds before closing."
-        : "Hold left-click on a tree to gather wood.",
-      this.store.temporary ? 10000 : 6500,
-    );
+    if (this.store.temporary)
+      this.ui.toast(
+        "Browser storage is blocked. Export a backup before closing.",
+        10000,
+      );
   }
   async loadWorld(id) {
     this.multiplayer?.disconnect();
@@ -770,7 +764,6 @@ class Game {
     this.lockRequested = false;
     this.audio.music?.silence();
     this.renderer.animator.reset();
-    this.renderer.playerSwing = 0;
   }
   resume() {
     if (this.multiplayer?.isGuest && !this.multiplayer.connected) {
@@ -964,7 +957,6 @@ class Game {
     }
     this.resume();
     this.save().catch((e) => this.ui.toast("Save failed: " + e.message));
-    this.ui.toast("Respawned. Dropped items remain for five minutes.");
   }
   travelDimension(portal) {
     if (activeTrial(this)) {
@@ -1382,7 +1374,7 @@ class Game {
         this.time = Math.ceil(this.time / 24000) * 24000 + 1000;
         setWeather(this.world, "clear").override = null;
         recordAchievement(this,"sleep");
-        this.ui.toast("Spawn point set. A new day begins.");
+        this.ui.toast("Spawn point set.");
         this.ui.announce("A NEW DAY", this.settings.cycleText.dayStart);
         this.audio.tone("dawn");
         return;

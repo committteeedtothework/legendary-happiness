@@ -1,3 +1,17 @@
+# Gameplay polish — 2.22.0
+
+The final Node suite passes **1,006 tests**, with no failures or skipped tests. Coverage includes save durability, generation/lighting/chunk streaming, inventory/combat, both Titan simulations, model stability, weapon grips, water/swimming/Elytra and controller behavior. Nine focused polish tests verify species/event/variant PCM, lazy voice caching, baby pitch and End aliases, straight land arms with attached grips, matching action poses at 30/60/144 FPS, actual critical damage, immune/dead target suppression, visible-body particle placement and preserved asset/stat/save/Titan hashes.
+
+The focused Chromium run passes both browser tests. It checks quiet F5 changes, one shared action step per rendered view, current-frame shoulder angles at all three frame rates, pause freezing, real Web Audio playback/ended-node cleanup/mute, 64-block pickup and silent kill/drop notices. The final critical-particle placement was rechecked in Chromium and captured in an in-game screenshot. Effects retain depth testing; stars emerge outside elongated/rotated visible bodies rather than hiding inside their collision radius. Geometry is shared, effects are capped at 180 and particle settings remain active.
+
+The Windows portable contains the same game ASAR as the Linux Electron runtime. Its extracted runtime executable matches the pinned official Windows runtime SHA-256. The legacy Windows PE contains the standalone HTML byte-for-byte. Native fullscreen/menu behavior is covered by policy tests and an Electron/Xorg/Xfwm run using native keyboard events. Browser fullscreen remains separate.
+
+See the verification download for packaged-app reports, screenshots, original animal-call preview/index, source changes, payload checks and public download hashes. The separate Windows editions retain their existing save profiles; backup export/import remains the way to move worlds between them. Main and the hosted mobile version are unchanged.
+
+Limits: Windows execution, real controllers, hardware-GPU performance and listening on the user's speakers are not verified on this Linux host. Animal sounds are original synthesized effects, not recordings or a claim of exact Minecraft audio fidelity. The test host uses software WebGL, so its render timings do not predict Windows GPU performance. A screenshot timeout under concurrent software-rendering tests was addressed in the harness by allowing 90 seconds for Titan captures and rerunning the native flow without concurrent GPU tests; no arena quality setting or gameplay timing was changed.
+
+## Previous validation — 2.21.1
+
 # Desktop fullscreen hotfix — 2.21.1
 
 Nine desktop policy/fullscreen checks passed. They cover native fullscreen routing, explicit shortcut toggles, ignored key repeats, Escape/menu keys leaving fullscreen unchanged, main-frame-only IPC, handler cleanup, save-on-close, protocol permissions and unchanged game/asset hashes. UI browser fallback and the version-only data change are checked against 2.21.0.

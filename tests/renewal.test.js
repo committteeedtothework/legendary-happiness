@@ -194,5 +194,5 @@ test("rich creature voices are finite, bounded, unique and variant-dependent wit
     assert.notDeepEqual(data, variant);
     signatures.add(data.slice(50, 100).join(","));
   }
-  assert.equal(signatures.size, 42);
+  assert.equal(signatures.size, Object.keys(VOICE_PROFILES).length);
 });

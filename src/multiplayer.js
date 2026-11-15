@@ -790,7 +790,6 @@ export class Multiplayer {
       g.ui.death();
     } else if (wasDead && g.player.health > 0) {
       g.resume();
-      g.ui.toast("Respawned. Your dropped items remain in the world.");
     } else if (s.openMenu && s.menu) {
       g.running = false;
       g.resetControls();

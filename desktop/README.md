@@ -1,3 +1,9 @@
+# Windows editions — 2.22.0
+
+Run **DCSMCRAFT-2.22.0-Portable.exe**, or extract **DCSMCRAFT-Windows-HTML-2.22.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Close the old app before starting the update. Existing save locations and native fullscreen behavior are preserved. See GAMEPLAY-POLISH.md for this update.
+
+## Previous notes
+
 ## Fullscreen — 2.21.1
 
 Use **F11**, **Alt+Enter** or **Video Settings → Toggle Fullscreen**. The bundled app uses native window fullscreen and preserves the chosen mode through pause, inventory, settings and return to title. Browser/legacy HTML editions retain browser fullscreen rules. Close the old app before running an updated EXE; the DesktopApp save profile is unchanged.
