@@ -55,6 +55,7 @@ export function projectileOwner(game, id) {
 export function pvpActors(game, attacker = game.player) {
   const root = multiplayerGame(game);
   if (
+    root.mode === "creative" ||
     !ruleEnabled(root, "pvp") ||
     !root.multiplayer?.connected ||
     !attacker ||

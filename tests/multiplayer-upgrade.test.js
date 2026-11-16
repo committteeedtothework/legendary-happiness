@@ -98,6 +98,7 @@ test("PvP is opt-in for legacy worlds, capped, reciprocal and never targets away
   assert.equal(pvpActors(g).length, 0);
   delete peer.player.standData;
   g.mode = "creative";
+  assert.deepEqual(pvpActors(g),[]);
   assert.equal(damagePvP(g, target, 100), 0);
 });
 test("custom PvP range caps, death attribution, drops, keepInventory and away saves are authoritative", () => {
