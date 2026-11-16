@@ -13,7 +13,11 @@ import {
   stepTitan,
   titanInput,
 } from "../src/giganto-simulation.js";
-import { wyvernSession, stepWyvern } from "../src/wyvern-simulation.js";
+import {
+  wyvernSession,
+  stepWyvern,
+  wyvernInput,
+} from "../src/wyvern-simulation.js";
 import { lockTitanCinematics } from "../src/titan-finale.js";
 import { createWatchRouter } from "../server/watch.mjs";
 import { routeArena } from "../server/arena.mjs";
@@ -98,7 +102,7 @@ test("PvP is opt-in for legacy worlds, capped, reciprocal and never targets away
   assert.equal(pvpActors(g).length, 0);
   delete peer.player.standData;
   g.mode = "creative";
-  assert.deepEqual(pvpActors(g),[]);
+  assert.deepEqual(pvpActors(g), []);
   assert.equal(damagePvP(g, target, 100), 0);
 });
 test("custom PvP range caps, death attribution, drops, keepInventory and away saves are authoritative", () => {
@@ -191,7 +195,7 @@ test("watch routing requires host approval and active membership; frames and sig
 test("arena input replay is deterministic for both Titans; invalid tokens, oversized input and forged victory cannot grant loot", () => {
   for (const [kind, make, step] of [
     ["giganto", titanSession, stepTitan],
-    ["wyvern", wyvernSession, stepWyvern],
+    ["wyvern", wyvernSession, stepWyvern, wyvernInput],
   ]) {
     const { game: g, peer, session: m } = fixture();
     g.player.onGround = true;
@@ -334,5 +338,65 @@ test("guest targeting excludes its replicated body and still targets other playe
   assert.deepEqual(
     pvpActors(game).map((a) => a.pvpId),
     ["other"],
+  );
+});
+
+test("Titan replay keeps mouse, touch and controller look and action headings authoritative for both fights", () => {
+  for (const [kind, make, step, action] of [
+    ["giganto", titanSession, stepTitan, titanInput],
+    ["wyvern", wyvernSession, stepWyvern, wyvernInput],
+  ]) {
+    const { game: g, peer, session: m } = fixture();
+    g.giganto = {
+      export: () => ({
+        portal: { id: "look", cell: "x", x: 2, y: 200, z: 4 },
+        config: { enabled: true, cooldown: 60 },
+        cooldownUntil: 0,
+        ledger: [],
+        used: [],
+        wyvern: {
+          portal: { id: "wlook", cell: "w", x: 2, y: 200, z: 4 },
+          config: { enabled: true, cooldown: 60 },
+          cooldownUntil: 0,
+          ledger: [],
+          used: [],
+        },
+      }),
+    };
+    const grant = m.arena.hostBegin(peer, kind);
+    peer.arena.session.stage = "traversal";
+    const local = structuredClone(peer.arena.session);
+    const pre = { yaw: 1.1, pitch: 0.3, lock: false },
+      post = { yaw: 1.35, pitch: 0.4, lock: false };
+    Object.assign(local.avatar, { yaw: pre.yaw, pitch: pre.pitch });
+    local.lock = pre.lock;
+    local.events = [];
+    action(local, "jump");
+    Object.assign(local.avatar, { yaw: post.yaw, pitch: post.pitch });
+    local.lock = post.lock;
+    const input = arenaFrame({
+      forward: true,
+      view: post,
+      actions: [{ key: "jump", view: pre }],
+    });
+    step(local, input, 1 / 60);
+    assert.equal(
+      m.arena.hostFrames(peer, { token: grant.token, seq: 1, frames: [input] }),
+      true,
+    );
+    assert.deepEqual(peer.arena.session, local);
+  }
+  assert.throws(
+    () => arenaFrame({ view: { yaw: Infinity, pitch: 0 } }),
+    /look/,
+  );
+  assert.throws(
+    () =>
+      arenaFrame({ actions: [{ key: "jump", view: { yaw: 0, pitch: 99 } }] }),
+    /look/,
+  );
+  assert.equal(
+    arenaFrame({ view: { yaw: 1, pitch: 0.2, x: 999, hp: 999 } }).view.x,
+    undefined,
   );
 });

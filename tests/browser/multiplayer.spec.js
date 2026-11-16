@@ -138,7 +138,7 @@ test("real relay and three independent players share invitations, block edits, d
       dcsmcraft.inventory.selected = 0;
       dcsmcraft.player.pitch = -0.85;
     });
-    await guest.waitForFunction(() => dcsmcraft.target?.y === 199);
+    await guest.waitForFunction(()=>{const g=dcsmcraft,t=g.target,f=g.world.raycast({x:g.player.x,y:g.player.y+1.62,z:g.player.z},g.direction(),5);return t?.y===199&&f&&['x','y','z'].every(k=>t[k]===f[k])&&Math.abs(t.distance-f.distance)<.001;});
     const target = await guest.evaluate(() => ({ ...dcsmcraft.target }));
     await guest.locator("#game-canvas").click({ button: "right", force: true });
     const placed = {
@@ -340,7 +340,7 @@ test("real relay and three independent players share invitations, block edits, d
       "black",
     ]);
     await guest.keyboard.press("KeyR");
-    await expect(guest.locator("#toast")).toContainText("host-only");
+    await expect(guest.locator("#toast")).toContainText("Seeker recharges");
     await guest.keyboard.press("Tab");
     await expect(guest.locator("#session-players")).toContainText("Friend Two");
     await guest.locator("#chat-message").fill("<hello> from a real client");

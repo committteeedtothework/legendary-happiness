@@ -1,6 +1,6 @@
 # Multiplayer — 2.23.0
 
-The final Node suite passes **1,018 tests**, with no failures or skipped tests. All three new multiplayer browser tests pass, using a real relay and independent browser profiles. The packaged Linux Electron app passes offline creation, chunk travel, save-on-close/relaunch, backup export/import, both Titan portal model loads/returns and Quit. Windows EXE/ASAR payloads and the separate HTML launcher are checked byte-for-byte.
+The final Node suite passes **1,019 tests**, with no failures or skipped tests. All three new multiplayer browser tests pass, using a real relay and independent browser profiles. The packaged Linux Electron app passes offline creation, chunk travel, save-on-close/relaunch, backup export/import, both Titan portal model loads/returns and Quit. Windows EXE/ASAR payloads and the separate HTML launcher are checked byte-for-byte.
 
 Release evidence is packaged in the verification ZIP. Focused tests cover world rules/cheats, atomic commands, PvP caps and eligibility, custom weapon provenance, private chat/watch routing, input-only Titan replay, forged victory rejection, once-only rewards, save recovery and shared-realm isolation. Real browser sessions exercise the relay and actual rendered encounters. The full existing Node suite is also run.
 

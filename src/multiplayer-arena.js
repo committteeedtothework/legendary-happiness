@@ -18,6 +18,30 @@ const fields = [
   "hit",
   "cyloop",
 ];
+function viewInput(raw) {
+  if (raw === undefined) return undefined;
+  if (
+    !raw ||
+    !Number.isFinite(raw.yaw) ||
+    Math.abs(raw.yaw) > 1e6 ||
+    !Number.isFinite(raw.pitch) ||
+    Math.abs(raw.pitch) > 1.55
+  )
+    throw Error("Invalid arena look.");
+  return { yaw: raw.yaw, pitch: raw.pitch, lock: raw.lock === true };
+}
+function applyView(session, view) {
+  if (view) {
+    session.avatar.yaw = view.yaw;
+    session.avatar.pitch = view.pitch;
+    session.lock = view.lock;
+  }
+}
+function sessionView(s) {
+  return s
+    ? { yaw: s.avatar.yaw, pitch: s.avatar.pitch, lock: s.lock }
+    : undefined;
+}
 export function arenaFrame(raw) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw))
     throw Error("Invalid arena input.");
@@ -33,12 +57,17 @@ export function arenaFrame(raw) {
   if (
     !Array.isArray(actions) ||
     actions.length > 6 ||
-    actions.some((a) => typeof a !== "string" || !/^[-a-z]{1,24}$/.test(a))
+    actions.some(
+      (a) => !/^[-a-z]{1,24}$/.test(typeof a === "string" ? a : a?.key || ""),
+    )
   )
     throw Error("Invalid arena action.");
   return {
     ...input,
-    actions,
+    actions: actions.map((a) =>
+      typeof a === "string" ? a : { key: a.key, view: viewInput(a.view) },
+    ),
+    view: viewInput(raw.view),
     cinematicTime: Number.isFinite(raw.cinematicTime)
       ? Math.max(0, Math.min(120, raw.cinematicTime))
       : undefined,
@@ -182,7 +211,11 @@ export class MultiplayerArena {
       action = a.titan === "wyvern" ? wyvernInput : titanInput;
     for (const f of frames) {
       a.session.events = [];
-      for (const key of f.actions) action(a.session, key);
+      for (const entry of f.actions) {
+        if (typeof entry === "object") applyView(a.session, entry.view);
+        action(a.session, typeof entry === "string" ? entry : entry.key);
+      }
+      applyView(a.session, f.view);
       for (const event of a.session.events || [])
         recordTitanAchievement(peer.context, a.session, event);
       if (
@@ -335,13 +368,15 @@ export class MultiplayerArena {
     return data;
   }
   action(key) {
-    if (this.token && this.m.isGuest) this.actions.push(key);
+    if (this.token && this.m.isGuest && this.actions.length < 64)
+      this.actions.push({ key, view: sessionView(this.g.giganto?.session) });
   }
   step(s, input, dt, kind) {
     if (this.token && this.m.isGuest) {
       this.frames.push(
         arenaFrame({
           ...input,
+          view: sessionView(s),
           actions: this.actions.splice(0, 6),
           cinematicTime: ["phase", "finale"].includes(s.stage)
             ? s.stageTime

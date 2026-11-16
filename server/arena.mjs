@@ -2,7 +2,7 @@ export function routeArena(room, ws, m, send) {
   const host = ws === room.host;
   if (["arena-request", "arena-input"].includes(m.type)) {
     if (host) throw Error("Arena actions are guest requests.");
-    if (JSON.stringify(m).length > 8192)
+    if (JSON.stringify(m).length > 16384)
       throw Error("Arena input is too large.");
     if (
       m.type === "arena-input" &&
