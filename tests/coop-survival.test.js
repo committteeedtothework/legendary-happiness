@@ -78,6 +78,7 @@ function fixture() {
   session.sent = [];
   session.addPeer({ id: "guest", name: "Friend One" });
   const peer = session.peers.get("guest");
+  peer.awaitingRealm=false;
   Object.assign(peer.player, {
     x: 2.5,
     y: 200,

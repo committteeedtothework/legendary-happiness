@@ -1,6 +1,7 @@
 // 2.23.0 explicitly authorizes multiplayer, command, rules and encounter-isolation hooks.
 // Other files are still checked by their original guards and the new release baseline.
 export const multiplayerAuthorized = new Set([
+ "server/Dockerfile","server/compose.yaml","render.yaml","scripts/build-standalone.mjs","scripts/build-local-game.mjs",
   "src/aquatic.js",
   "src/end-runtime.js",
   "src/wyvern-integration.js",

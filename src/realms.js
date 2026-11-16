@@ -63,6 +63,11 @@ export function restoreRealm(seed, dimension, data = {}) {
   };
 }
 export function selectRealm(game, dimension) {
+  if(game.multiplayer?.peer){
+    const m=game.multiplayer,manager=m.sharedRealm;
+    if(manager?.travelling!==m.peer)throw Error("Use an active portal to travel.");
+    manager.switchPeer(m.peer,dimension);return;
+  }
   if(game.multiplayer?.connected&&game.multiplayer.game!==game)throw Error("Only the host can start a realm expedition.");
   const shared=game.multiplayer?.game===game?game.multiplayer.sharedRealm:null;
   shared?.before(dimension);

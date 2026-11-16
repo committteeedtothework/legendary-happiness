@@ -1,3 +1,11 @@
+# Windows editions — 2.24.0
+
+Run **DCSMCRAFT-2.24.0-Portable.exe**, or extract **DCSMCRAFT-Windows-HTML-2.24.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Close the old app before starting the update. Saves, native fullscreen and supplied assets are preserved. See FRIENDS-REALMS.md for independent guest dimensions, usernames, friends and invitations.
+
+Internet Friends requires a persistent operator-hosted HTTPS account/relay service; no live public endpoint is bundled. Configure its address in Friends once, or use an operator-configured build. Players then invite/join without starting Cloudflare. Singleplayer remains offline. Matching clients/server use protocol 6.
+
+## Previous notes
+
 # Windows editions — 2.23.0
 
 Run **DCSMCRAFT-2.23.0-Portable.exe**, or extract **DCSMCRAFT-Windows-HTML-2.23.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Close the old app before starting the update. Existing save locations and native fullscreen behavior are preserved. See MULTIPLAYER-UPGRADE.md for this update. Multiplayer requires the updated protocol 5 relay; singleplayer remains offline.

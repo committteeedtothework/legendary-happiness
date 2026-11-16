@@ -1,3 +1,6 @@
+import {survivalPlayers,damagePlayer} from './coop-players.js';
+import {playerActors} from './pvp.js';
+const endTarget=(g,source)=>survivalPlayers(g).sort((a,b)=>Math.hypot(a.x-source.x,a.y-source.y,a.z-source.z)-Math.hypot(b.x-source.x,b.y-source.y,b.z-source.z))[0]||g.player;
 import {ruleEnabled} from "./world-rules.js";
 import { tickEndCities, shulkerLoot } from "./end-cities.js";
 import { steerDragon, swoopTarget } from "./dragon-flight.js";
@@ -88,11 +91,11 @@ function placePlayer(g, q) {
     onGround: false,
     flying: false,
   });
+  if(g.multiplayer?.peer)g.multiplayer.peer.teleport=true;
   g.renderer?.loadAround?.(q.x, q.z, 2, 5);
 }
 export function enterEnd(g) {
-  if (g.multiplayer?.isGuest || (g.multiplayer?.connected && g.multiplayer.game!==g)) {
-    g.ui?.toast?.("The host travels first. Use Watch to follow their view.");
+  if (g.multiplayer?.isGuest || (g.multiplayer?.connected && g.multiplayer.game!==g&&!g.multiplayer.peer)) {
     return false;
   }
   if (g.dimension !== "overworld") return false;
@@ -114,10 +117,10 @@ export function enterEnd(g) {
   return true;
 }
 export function leaveEnd(g) {
-  if(g.multiplayer?.isGuest||(g.multiplayer?.connected&&g.multiplayer.game!==g)){g.ui?.toast?.("The host travels first. Use Watch to follow their view.");return false;}
+  if(g.multiplayer?.isGuest||(g.multiplayer?.connected&&g.multiplayer.game!==g&&!g.multiplayer.peer))return false;
   if (g.dimension !== "end" || !endState(g.world).defeated) return false;
   const back = g.spawn || g.player.endReturn;
-  selectRealm(g, "overworld");
+  selectRealm(g, g.spawnDimension||'overworld');
   const x = back.x,
     z = back.z,
     y = back.y;
@@ -284,6 +287,7 @@ export function useEndItem(g) {
   }
   consume(g);
   p.enderCooldown = g.tickCount + (kind === "pearl" ? 20 : 8);
+  p.aquaticId||=crypto.randomUUID();orb.owner=p.aquaticId;
   s.orbs.push(orb);
   g.renderer?.action?.("use");
   cue(g, "throw", p);
@@ -302,6 +306,7 @@ function tickOrbs(g, api, s) {
       continue;
     o.age = (o.age || 0) + 1;
     if (o.kind === "shulker") {
+      const p=endTarget(g,o);
       const dx = p.x - o.x,
         dy = p.y + 1 - o.y,
         dz = p.z - o.z,
@@ -315,7 +320,7 @@ function tickOrbs(g, api, s) {
         o[k] += o["v" + k];
       }
       if (n < 1.1) {
-        g.damage?.(4, "a Shulker");
+        damagePlayer(g,p,4,'a Shulker');
         p.levitationTicks = 100;
         continue;
       }
@@ -356,12 +361,9 @@ function tickOrbs(g, api, s) {
           const q =
             safeEndTeleport(w, hit.x, hit.y, hit.z) ||
             safeEndTeleport(w, o.x - o.vx, o.y - o.vy, o.z - o.vz);
-          if (q) {
-            particles(g, p);
-            placePlayer(g, q);
-            g.damage?.(5, "an ender pearl");
-            particles(g, q);
-          }
+          const actor=o.owner?playerActors(g).find(a=>a.player.aquaticId===o.owner):null;
+          const owner=actor?.context||(!g.multiplayer?.connected||!o.owner?g:null);
+          if(q&&owner&&owner.player.health>0){particles(g,owner.player);placePlayer(owner,q);if(actor?.id&&owner.multiplayer?.peer)owner.multiplayer.peer.teleport=true;owner.damage?.(5,'an ender pearl');particles(g,q);}
         } else
           s.clouds.push({ x: o.x, y: o.y + 0.3, z: o.z, age: 0, radius: 4 });
         continue;
@@ -447,13 +449,23 @@ function completeDragon(g, e, api) {
   g.world.set(75, 65, 0, B.end_gateway);
   g.world.set(75, 64, 0, B.bedrock);
   api.dropItem(g, makeStack("dragoon_trophy"), 0, 66, 0, 20);
-  g.player.xp += s.kills === 1 ? 12000 : 500;
-  recordAchievement(g, "end-event", { key: "victory" });
-  g.ui?.announce?.("DRAGOON DEFEATED", "");
+  const reward=s.kills===1?12000:500;
+  if(g.multiplayer?.connected&&!g.multiplayer.isGuest){
+    const winners=playerActors(g).filter(a=>a.player.health>0&&!a.player.multiplayerAway);
+    for(const [i,a] of winners.entries()){
+      a.player.xp=(a.player.xp||0)+Math.floor(reward/winners.length)+(i<reward%winners.length?1:0);
+      recordAchievement(a.context,"end-event",{key:"victory"});
+      a.context.ui?.announce?.("DRAGOON DEFEATED","");
+    }
+  }else{
+    g.player.xp += reward;
+    recordAchievement(g,"end-event",{key:"victory"});
+    g.ui?.announce?.("DRAGOON DEFEATED","");
+  }
   g.save?.()?.catch?.(() => {});
 }
 function tickDragon(g, e, api, s) {
-  const p = g.player;
+  const p = endTarget(g,e);
   e.age = (e.age || 0) + 1;
   e.modeAge = (e.modeAge || 0) + 1;
   e.hurt = Math.max(0, (e.hurt || 0) - 0.05);
@@ -563,17 +575,16 @@ function tickDragon(g, e, api, s) {
     distance({ x: e.x, y: e.y + 2, z: e.z }, p) < 9 &&
     e.age % 20 === 0
   ) {
-    g.damage?.(g.difficulty === "hard" ? 12 : 8, "DRAGOON");
+    damagePlayer(g,p,g.difficulty==='hard'?12:8,'DRAGOON',e);
     const d = Math.max(1, Math.hypot(p.x - e.x, p.z - e.z));
     p.vx += ((p.x - e.x) / d) * 12;
     p.vz += ((p.z - e.z) / d) * 12;
     p.vy = Math.max(p.vy, 7);
   }
 }
-export function tickEndWorld(g, api) {
-  const s = endState(g.world),
-    p = g.player;
-  tickOrbs(g, api, s);
+export function tickEndTravel(g){
+ if(g.isBackgroundWorld&&!g.multiplayer?.peer)return false;
+ const s=endState(g.world),p=g.player;
   g.endTravelCooldown = Math.max(0, (g.endTravelCooldown || 0) - 1);
   const contact = g.world.get(p.x, p.y + 0.1, p.z);
   if (contact !== B.end_gateway) g.endGatewayLatched = false;
@@ -607,6 +618,13 @@ export function tickEndWorld(g, api) {
       g.endTravelCooldown = 60;
     }
   }
+ return false;
+}
+export function tickEndWorld(g, api) {
+  const s = endState(g.world),
+    p = g.player;
+  tickOrbs(g, api, s);
+  if(tickEndTravel(g))return true;
   if (g.dimension === "end") {
     g.world.weather.kind = "clear";
     g.world.weather.intensity = 0;
@@ -618,13 +636,13 @@ export function tickEndWorld(g, api) {
       if (e.hp > 0 && e.type === "dragoon") tickDragon(g, e, api, s);
     for (const cloud of s.clouds) {
       cloud.age++;
-      if (
+      for(const p of survivalPlayers(g))if (
         g.mode !== "creative" &&
         cloud.age % 10 === 0 &&
         Math.hypot(p.x - cloud.x, p.z - cloud.z) < cloud.radius &&
         Math.abs(p.y - cloud.y) < 3
       )
-        g.damage?.(3, "dragon breath");
+        damagePlayer(g,p,3,'dragon breath',cloud);
     }
     s.clouds = s.clouds.filter((c) => c.age < 180);
     if (s.defeated && g.tickCount % 20 === 0) {
@@ -721,7 +739,7 @@ export function tickEnderman(g, e, api) {
   e.age = (e.age || 0) + 1;
   e.hurt = Math.max(0, (e.hurt || 0) - 0.05);
   e.attack = Math.max(0, (e.attack || 0) - 0.05);
-  const p = g.player,
+  const p = endTarget(g,e),
     w = g.world,
     dx = p.x - e.x,
     dz = p.z - e.z,
@@ -774,12 +792,7 @@ export function tickEnderman(g, e, api) {
     );
     if (d > 15 && e.age % 35 === 0) teleportEnderman(g, e);
     if (d < 2.4 && Math.abs(p.y - e.y) < 2 && !e.attack) {
-      g.damage?.(
-        g.difficulty === "easy" ? 4 : g.difficulty === "hard" ? 10 : 7,
-        "an Enderman",
-        false,
-        e,
-      );
+      damagePlayer(g,p,g.difficulty==='easy'?4:g.difficulty==='hard'?10:7,'an Enderman',e);
       e.attack = 1;
     }
   } else {
@@ -850,11 +863,7 @@ export function endEntityDamage(g, e, damage, options, api) {
           other.type === "dragoon" ? 10 : Math.max(1, 12 - distance(other, e)),
           { source: e, kind: "explosion", reward: false, knockback: 0 },
         );
-    if (g.mode !== "creative" && distance(g.player, e) < 8)
-      g.damage?.(
-        Math.ceil((1 - distance(g.player, e) / 8) * 14),
-        "an end crystal",
-      );
+    for(const p of survivalPlayers(g))if(distance(p,e)<8)damagePlayer(g,p,Math.ceil((1-distance(p,e)/8)*14),'an end crystal',e);
     return 1;
   }
   return null;

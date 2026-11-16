@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 const target = resolve(process.argv[2] || "dist/DCSMCRAFT-Standalone.html");
 const bundle = await build({
   entryPoints: ["src/main.js"],
-  define: { __DCSMCRAFT_DEV__: "false" },
+  define: { __DCSMCRAFT_DEV__: "false", __DCSMCRAFT_SOCIAL_URL__:JSON.stringify(process.env.DCSMCRAFT_SOCIAL_URL||'') },
   bundle: true,
   format: "iife",
   minify: true,

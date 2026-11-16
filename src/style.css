@@ -5104,3 +5104,5 @@ input[type="range"]::-moz-range-thumb {
 .spectator-connecting{position:relative;background:#0009;padding:12px;pointer-events:none;}
 
 #world-rules-form .world-rule {display:flex;align-items:center;gap:12px;padding:9px 0;} #world-rules-form input{width:20px;height:20px;accent-color:#68ad50;}
+
+.friends-dialog{max-width:760px;max-height:88vh;overflow-y:auto}.friends-dialog form{display:flex;gap:10px;align-items:end;margin:14px 0}.friends-dialog label{flex:1}.friend-row{display:flex;gap:8px;align-items:center;padding:10px 0;border-bottom:2px solid #555}.friend-row>span{flex:1;min-width:100px}.friend-row small{display:block;color:#c7c7c7;font-size:12px}.friend-row button{font-size:12px;padding:8px}.friends-error{color:#ffb2a0}.friends-status{color:#cee6b2}.account-restore{display:block;margin:16px 0}@media(max-width:600px){.friend-row{flex-wrap:wrap}.friend-row>span{flex-basis:100%}.friends-dialog form{flex-wrap:wrap}}

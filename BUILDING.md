@@ -1,3 +1,13 @@
+# Friends and dimensions — 2.24.0
+
+Use Node 24.22.1/npm 11.9.0. Run `npm ci`, `npm test`, and `npx playwright test --config playwright.social.config.js --workers=1`. `npm run friends` starts the persistent account/friends/game relay; `npm run multiplayer` retains the classic relay. All clients and relay must use protocol 6.
+
+Build with `npm run build:standalone`, `npm run build:desktop`, and `npm run build:desktop:legacy`. Set `DCSMCRAFT_SOCIAL_URL=https://your-service.example` during standalone/desktop builds to configure Friends by default. A game served directly by `npm run friends` discovers the same-origin service from `/health`. The in-game Connection Settings also accepts an operator's service address. See FRIENDS-REALMS.md for TLS, persistence, Docker/Caddy and Render deployment.
+
+`python3 scripts/package-desktop-release.py --output DIR` packages the separate Windows editions, browser/source ZIPs and verification hashes. Do not distribute `data/`, account backups, TLS keys or local profiles.
+
+## Previous build notes
+
 # Multiplayer — 2.23.0
 
 Use Node 24.22.1/npm 11.9.0. Run `npm ci`, `npm test`, then `npx playwright test --config playwright.multiplayer-update.config.js --workers=1`. The browser tests start a real relay and verify PvP, watching, media negotiation/fallback, guest Titan entry/exit and realm isolation. `npm run multiplayer` starts the relay for players (protocol 5). See MULTIPLAYER-UPGRADE.md.

@@ -130,7 +130,7 @@ export function damagePeer(session, peer, amount, cause, force = false, source =
   }
 }
 export function peerContext(session, peer) {
-  const g = session.simulationGame || session.game,
+  const g = session.gameFor?.(peer) || session.simulationGame || session.game,
     ctx = Object.create(g);
   Object.assign(ctx, {
     player: peer.player,
@@ -139,14 +139,16 @@ export function peerContext(session, peer) {
       peer.teleport = true;
     },
     multiplayer: Object.assign(Object.create(session), {
+      peer,
       occupants: () => [...(g.player.multiplayerAway?[]:[g.player]), ...session.occupants(g.dimension)],
     }),
     inventory: peer.inventory,
     spawn: peer.spawn,
+    spawnDimension:peer.spawnDimension||'overworld',
     audio: { tone() {}, voice() {}, standSound() {} },
     renderer: {
       action:(kind)=>recordPeerAction(session,peer,kind),
-      animator: { reset() {} },
+      animator: { reset() {} },setWorld(){},loadAround(){},
       breakParticles: (...a) => g.renderer.breakParticles(...a),
       pulseEffect: (p) => g.renderer.pulseEffect(p),
       arcane: g.renderer.arcane,
@@ -176,9 +178,7 @@ export function peerContext(session, peer) {
     },
     openTrade: (entity) => {peer.menu={type:'trading',trader:entity.id};peer.openMenu=true;},
     openEnchanting: () => {peer.menu={type:'enchanting',target:ctx.target};peer.openMenu=true;},
-    travelDimension: () => {
-      peer.feedback = "The host starts realm expeditions. Use Watch to follow.";
-    },
+    travelDimension: (portal) => session.sharedRealm.travelPeer(peer,portal),
   });
   Object.defineProperty(ctx,'running',{configurable:true,get:()=>!peer.menu&&!peer.player.multiplayerAway,set(){}});
   ctx.ui = {
@@ -189,6 +189,7 @@ export function peerContext(session, peer) {
     toast: (message) => {
       peer.feedback = String(message);
     },
+    play(){},
     updateHotbar() {},
     updateHUD() {},
     refreshInventory() {},
@@ -210,7 +211,7 @@ export function peerTarget(game, peer, reach = 4.5) {
   );
 }
 export function stepPeer(session, peer, dt) {
-  const g = session.simulationGame || session.game,
+  const g = session.gameFor?.(peer) || session.simulationGame || session.game,
     ctx = peer.context,
     p = peer.player;
   if (g.mode === "creative" || peer.player.multiplayerAway) return;
@@ -258,10 +259,12 @@ export function stepPeer(session, peer, dt) {
   }
 }
 export function tickPeer(session, peer) {
-  const g = session.simulationGame || session.game,
-    ctx = peer.context,
-    p = peer.player;
-  if (g.mode === "creative" || peer.player.multiplayerAway) return;
+  let g = session.gameFor?.(peer) || session.simulationGame || session.game;
+  const ctx=peer.context,p=peer.player;
+  if(peer.player.multiplayerAway)return;
+  session.sharedRealm?.tickPeerTravel(peer);
+  g=session.gameFor?.(peer)||g;
+  if(g.mode==='creative')return;
   tickPlayerSurvival(ctx);
   tickWeatherDamage(ctx);
   if (p.health > 0)
@@ -290,7 +293,9 @@ export function tickPeer(session, peer) {
 }
 export function respawnPeer(session, peer) {
   if (peer.player.health > 0) return false;
-  const g = session.simulationGame || session.game,
+  const destination=peer.spawnDimension||'overworld',changed=peer.dimension&&peer.dimension!==destination;
+  if(changed)session.sharedRealm?.switchPeer(peer,destination);
+  const g = session.gameFor?.(peer) || session.simulationGame || session.game,
     point = { ...peer.spawn };
   let clear = false;
   for (let y = point.y; y < point.y + 32; y++)
@@ -319,10 +324,11 @@ export function respawnPeer(session, peer) {
   peer.mine = false;
   peer.teleport = true;
   peer.lastDeath = null;
+  if(changed)session.sendWelcome?.(peer);
   return true;
 }
 export function inventoryOperation(session, peer, op) {
-  const g = session.simulationGame || session.game,
+  const g = session.gameFor?.(peer) || session.simulationGame || session.game,
     ctx = peer.context,
     ui = ctx.ui,
     menu = peer.menu;
@@ -400,7 +406,10 @@ export function inventoryOperation(session, peer, op) {
 export function peerSave(peer) {
   return cloneState({
     name: peer.name,
-    dimension:peer.context.dimension,
+    dimension:peer.dimension||peer.context.dimension,
+    accountId:peer.accountId,
+    portalCooldown:peer.context.portalCooldown,
+    spawnDimension:peer.spawnDimension||'overworld',
     player: {...peer.player,multiplayerAway:undefined},
     titanRecords:peer.titanRecords||{},
     inventory: peer.inventory.export(),

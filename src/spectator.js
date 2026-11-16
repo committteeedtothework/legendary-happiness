@@ -48,8 +48,8 @@ export class SpectatorSession {
     const m = this.m,
       g = this.g;
     if (m.isGuest) return;
-    const actor = playerActors(m.simulationGame).find((p) => p.id === viewer),
-      subject = playerActors(m.simulationGame).find((p) => p.id === target);
+    const actor = playerActors(m.game,{all:true}).find((p) => p.id === viewer),
+      subject = playerActors(m.game,{all:true}).find((p) => p.id === target);
     const deny = (text) =>
       m.send({ type: "watch-denied", to: viewer, message: text });
     if (!actor) return;

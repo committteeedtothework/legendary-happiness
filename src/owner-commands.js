@@ -74,7 +74,7 @@ export function extraOwnerCommand(g, cmd, args, api) {
       throw Error("Use /gamemode survival|creative.");
     if (
       g.giganto?.active ||
-      g.multiplayer?.sharedRealm?.base ||
+      
       [...(g.multiplayer?.peers?.values() || [])].some((p) => p.arena)
     )
       throw Error("Return from the encounter first.");
@@ -100,6 +100,7 @@ export function extraOwnerCommand(g, cmd, args, api) {
       for (const t of targets) {
         if (t.peer) {
           t.peer.spawn = { ...q };
+          t.peer.spawnDimension=g.dimension;t.peer.context.spawnDimension=g.dimension;
           t.peer.context.spawn = t.peer.spawn;
         } else g.spawn = { ...q };
       }

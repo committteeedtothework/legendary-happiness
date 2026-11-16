@@ -5,6 +5,9 @@ services:
       dockerfile: server/Dockerfile
     environment:
       PUBLIC_URL: https://${DCSMCRAFT_DOMAIN:?Set DCSMCRAFT_DOMAIN to your public DNS name}
+      SOCIAL_DB: /data/friends.sqlite
+    volumes:
+      - friends-data:/data
     expose:
       - "8787"
     restart: unless-stopped
@@ -23,5 +26,6 @@ services:
       - relay
     restart: unless-stopped
 volumes:
+  friends-data:
   caddy-data:
   caddy-config:

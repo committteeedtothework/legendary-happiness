@@ -14,35 +14,13 @@ export const PVP_TUNING = Object.freeze({
     seeker: 48,
   },
 });
-export const multiplayerGame = (g) => {
-  const m = g.multiplayer,
-    shared = m?.simulationGame;
-  return shared && shared.dimension === g.dimension ? shared : m?.game || g;
-};
-export function playerActors(game) {
-  const root = multiplayerGame(game),
-    m = root.multiplayer;
-  if (
-    !m?.connected ||
-    (m.sharedRealm?.base && root.dimension !== m.sharedRealm.base.dimension)
-  )
-    return [];
-  if (m.isGuest)
-    return (m.remotePoses || []).map((p) => ({
-      id: p.id,
-      name: p.name,
-      player: p,
-    }));
-  return [
-    {
-      id: m.id || "host",
-      name: m.players?.find((p) => p.id === m.id)?.name || "Host",
-      player: root.player,
-      context: root,
-      inventory: root.inventory,
-    },
-    ...[...m.peers.values()].map((p) => ({ ...p, context: p.context })),
-  ];
+export const multiplayerGame = g=>g.multiplayer?.sharedRealm?.contextFor(g.dimension)||g.multiplayer?.game||g;
+export function playerActors(game,{all=false}={}){
+ const root=multiplayerGame(game),m=root.multiplayer,owner=m?.game||root;
+ if(!m?.connected)return[];
+ if(m.isGuest)return(m.remotePoses||[]).filter(p=>all||!p.dimension||p.dimension===game.dimension).map(p=>({id:p.id,name:p.name,player:p,dimension:p.dimension}));
+ const list=[{id:m.id||'host',name:m.players?.find(p=>p.id===m.id)?.name||'Host',player:owner.player,context:owner,dimension:owner.dimension,inventory:owner.inventory},...[...m.peers.values()].map(p=>({...p,dimension:p.dimension||p.context.dimension}))];
+ return all?list:list.filter(p=>p.dimension===game.dimension);
 }
 export function projectileOwner(game, id) {
   return playerActors(game).find(
@@ -173,6 +151,7 @@ export function damagePvP(
     y: to.player.y,
     z: to.player.z,
     critical: !!critical,
+    dimension:game.dimension,
   };
   m.combatSequence = event.id;
   m.combatEvent?.(event);

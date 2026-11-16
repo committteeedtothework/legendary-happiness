@@ -1,3 +1,13 @@
+# DCSMCRAFT 2.24.0 — friends and dimensions
+
+Guests can enter Cinderwild and The End independently while the host and other players remain in their own dimensions. Usernames, friend requests, presence, private invitations and account backups are available through the Friends menu. See [FRIENDS-REALMS.md](FRIENDS-REALMS.md) for setup and tested limits.
+
+Windows editions: **DCSMCRAFT-2.24.0-Portable.exe** includes its runtime; **DCSMCRAFT-Windows-HTML-2.24.0.zip** uses installed Edge/Chrome. Singleplayer remains offline. Existing assets and world saves are preserved. Multiplayer needs matching protocol 6 clients and server.
+
+Internet friends require one deployed persistent HTTPS service. No public service address is bundled in this release; configure an operator-hosted service once. Players then invite from Friends without starting Cloudflare or forwarding ports.
+
+## Previous release — 2.23.0
+
 # DCSMCRAFT 2.23.0 — multiplayer
 
 PvP, live encounter spectating, guest Titan portals, expanded custom-item actions, private messages, world rules and creator commands. See [MULTIPLAYER-UPGRADE.md](MULTIPLAYER-UPGRADE.md) for controls, relay setup, Minecraft references and limits.
@@ -900,4 +910,3 @@ The next stages are described in [FEATURES.md](FEATURES.md). None of those missi
 Arena chase and counter changes for this release: [TITAN-COUNTER.md](TITAN-COUNTER.md).
 
 Current arena traversal and canyon changes: [TITAN-FREEDOM.md](TITAN-FREEDOM.md).
-

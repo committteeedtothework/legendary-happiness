@@ -1,3 +1,4 @@
+import {sendRealmFrames} from "./multiplayer-realms-network.js";
 import {cleanRemoteAction,sampleAction,recordPeerAction} from "./multiplayer-animation.js";
 import {SharedRealm} from "./multiplayer-world.js";
 import {enchantItem} from "./equipment.js";
@@ -141,6 +142,7 @@ export function cleanPose(p) {
   )
     return null;
   return {
+    dimension:["overworld","cinderwild","end"].includes(p.dimension)?p.dimension:"overworld",
     visualAction:cleanRemoteAction(p.visualAction),
     health:Math.max(0,Math.min(20,Number(p.health) || 0)),
     multiplayerAway:!!p.multiplayerAway,
@@ -167,6 +169,7 @@ export function cleanPose(p) {
 function poseFor(game) {
   return {
     ...game.player,
+    dimension:game.dimension,
     visualAction:sampleAction(game),
     skin: game.settings.skin,
     held: game.inventory.held?.id,
@@ -189,7 +192,7 @@ export class Multiplayer {
     this.savedPlayers = {};
     this.pending = new Map();
   }
-  async connect({ server, name, invite }) {
+  async connect({ server, name, invite, hubToken, friendsOnly=false }) {
     if (this.game.giganto?.active)
       throw new Error(
         "Return from the singleplayer Titan encounter before opening co-op.",
@@ -239,6 +242,8 @@ export class Multiplayer {
         this.send({
           type: invite ? "join" : "create",
           protocol: PROTOCOL,
+          hubToken,
+          friendsOnly,
           resume: this.isGuest ? this.readResume() : undefined,
           name: (name || "Player").slice(0, 20),
           room: parsed.room,
@@ -312,6 +317,7 @@ export class Multiplayer {
               this.game.ui.updateSession();
           }
           if (m.type === "pose" && !this.isGuest) this.receivePose(m);
+          if(m.type==='realm-ready'&&!this.isGuest){const peer=this.peers.get(m.id);if(peer&&m.epoch===peer.realmEpoch)peer.awaitingRealm=false;}
           if (m.type === "input" && !this.isGuest) this.receiveInput(m);
           if (m.type === "private-state" && this.isGuest)
             this.applyPrivate(m.state);
@@ -394,13 +400,17 @@ export class Multiplayer {
     this.socket.send(JSON.stringify(data));
     return true;
   }
-  addPeer({ id, name, resume }) {
-    const g = this.simulationGame,
+  addPeer({ id, name, resume, accountId }) {
+    let g = this.game;
+    const
       survival = g.mode === "survival";
+    const accountRecord=accountId&&Object.entries(this.savedPlayers).find(([,v])=>v.accountId===accountId);
+    if(accountRecord)resume=accountRecord[0];
     const known =
       typeof resume === "string" &&
       /^[a-f0-9]{48}$/.test(resume) &&
       this.savedPlayers[resume];
+    if (known?.accountId && known.accountId!==accountId){this.send({type:'kick',id});return;}
     if (known && [...this.peers.values()].some((p) => p.resume === resume)) {
       this.send({ type: "kick", id });
       return;
@@ -409,11 +419,13 @@ export class Multiplayer {
       this.send({ type: "kick", id });
       return;
     }
-    const saved = known || {},compatible=(saved.dimension||'overworld')===(g.dimension||'overworld'),
+    const saved=known||{},dimension=['overworld','cinderwild','end'].includes(saved.dimension)?saved.dimension:'overworld';
+    g=this.sharedRealm.contextFor(dimension);
+    const compatible=(saved.dimension||'overworld')===dimension,
       start=g.dimension==='overworld'?g.spawn:{x:g.player.x,y:g.player.y,z:g.player.z},
-      player = survival ? createPlayer(compatible&&saved.player?saved.player:start) : createPlayer(g.player);
+      player = createPlayer(compatible&&saved.player?saved.player:survival?start:g.player);
     // createPlayer initializes health: explicitly restore saved survival state.
-    if (survival && saved.player){Object.assign(player, saved.player);if(!compatible)Object.assign(player,start,{vx:0,vy:0,vz:0,fallStart:start.y});}
+    if (saved.player){Object.assign(player, saved.player);if(!compatible)Object.assign(player,start,{vx:0,vy:0,vz:0,fallStart:start.y});}
     if (!survival && saved.player?.standData)
       player.standData = saved.player.standData;
     delete player.multiplayerAway;
@@ -421,6 +433,8 @@ export class Multiplayer {
     const peer = {
       id,
       name,
+      dimension,
+      accountId,
       player,
       skin: "explorer",
       inventory: new Inventory(saved.inventory),
@@ -433,6 +447,7 @@ export class Multiplayer {
       keys: new Set(),
       mine: false,
       menu: null,
+      spawnDimension:saved.spawnDimension||'overworld',
       lastDeath: saved.lastDeath,
       titanRecords:saved.titanRecords||{},
     };
@@ -452,12 +467,14 @@ export class Multiplayer {
         }
       }
     peer.context = peerContext(this, peer);
+    peer.context.portalCooldown=saved.portalCooldown||0;
     this.peers.set(id, peer);
     this.sendWelcome(peer);
     g.chat?.announce(`${name} joined the world.`);
   }
   sendWelcome(peer) {
-    const world = this.sharedRealm.snapshot();
+    const world = this.sharedRealm.snapshot(peer.dimension||peer.context?.dimension);
+    peer.realmEpoch=(peer.realmEpoch||0)+1;peer.awaitingRealm=true;world.realmEpoch=peer.realmEpoch;
     world.giganto=this.arena.publicRecords();
     world.titanRecords=peer.titanRecords||{};
     delete world.coopPlayers;
@@ -468,11 +485,11 @@ export class Multiplayer {
     world.lastDeath = peer.lastDeath;
     this.send({ type: "welcome", to: peer.id, world });
   }
-  receivePose({ id, pose }) {
+  receivePose({ id, pose,realmEpoch }) {
     if (this.game.mode === "survival") return;
     const peer = this.peers.get(id),
       p = cleanPose(pose);
-    if (!peer || !p || peer.player.multiplayerAway) return;
+    if (!peer || !p || peer.player.multiplayerAway || peer.awaitingRealm || realmEpoch!==undefined&&realmEpoch!==peer.realmEpoch) return;
     const now = performance.now(),
       dt = Math.min(2, (now - peer.lastPose) / 1000);
     if (
@@ -494,6 +511,7 @@ export class Multiplayer {
     }
     if (now - (peer.lastStandTeleport || -1000) < 500)
       for (const key of ["x", "y", "z"]) p[key] = peer.player[key];
+    delete p.dimension;
     delete p.health;delete p.multiplayerAway;
     delete p.visualAction;
     delete p.stand; // Creative clients cannot assign ownership or transformations.
@@ -505,11 +523,12 @@ export class Multiplayer {
   }
   execute(m) {
     const busy=this.peers.get(m.id);
+    if(busy?.awaitingRealm || m.realmEpoch!==undefined&&m.realmEpoch!==busy?.realmEpoch){if(Number.isSafeInteger(m.seq))this.send({type:'ack',to:m.id,seq:m.seq,ok:false});return;}
     if(busy?.player.multiplayerAway){if(Number.isSafeInteger(m.seq)&&m.seq>busy.lastSeq){busy.lastSeq=m.seq;this.send({type:'ack',to:m.id,seq:m.seq,ok:false});}return;}
     if (m.kind === "stand") return this.executeStand(m);
     if (this.game.mode === "survival" || ["inventory","menu","close","trade","enchant","use","style"].includes(m.kind)) return this.executeSurvival(m);
     const peer = this.peers.get(m.id),
-      g = this.simulationGame;
+      g = this.gameFor(peer);
     if (!peer || !Number.isSafeInteger(m.seq) || m.seq <= peer.lastSeq) return;
     peer.lastSeq = m.seq;
     const reject = (message) =>
@@ -673,7 +692,7 @@ export class Multiplayer {
     this.peerForPlayer(player)?.context.damage(amount, cause,false,source);
   }
   combatEvent(e){
-    if(this.sharedRealm.base)return;
+    if(e?.dimension && e.dimension!==this.game.dimension)return;
     if(!e||!Number.isSafeInteger(e.id)||e.id<=(this.lastCombatEvent||0)||![e.x,e.y,e.z].every(Number.isFinite))return;
     this.lastCombatEvent=e.id;const g=this.game;
     if(e.attacker===this.id)g.hitFeedback={critical:!!e.critical,until:g.elapsed+.2};
@@ -683,25 +702,28 @@ export class Multiplayer {
   broadcastMode(){
     for(const peer of this.peers.values()){peer.keys=new Set();peer.mine=false;this.sendWelcome(peer);}
   }
-  get simulationGame(){return this.sharedRealm?.base || this.game;}
+  get simulationGame(){return this.game;}
+  gameFor(peer){return this.sharedRealm?.gameFor(peer)||this.game;}
   arenaBackground(dt){
     if(!this.connected||this.isGuest)return;
     this.backgroundAccumulator=(this.backgroundAccumulator||0)+dt;
-    while(this.backgroundAccumulator>=1/60){this.backgroundAccumulator-=1/60;this.physics(1/60);this.backgroundTick=(this.backgroundTick||0)+1;if(this.backgroundTick%3===0){this.sharedRealm.anchor();tickSurvival(this.simulationGame);tickPalm(this.simulationGame,damageEntity);this.tickSurvival();}}
+    while(this.backgroundAccumulator>=1/60){this.backgroundAccumulator-=1/60;this.physics(1/60);this.backgroundTick=(this.backgroundTick||0)+1;if(this.backgroundTick%3===0){tickSurvival(this.game);tickPalm(this.game,damageEntity);this.tickSurvival();}}
   }
   physics(dt) {
     if (this.connected && !this.isGuest)
       for (const peer of this.peers.values()) stepPeer(this, peer, dt);
   }
   tickSurvival() {
-    if (this.connected && !this.isGuest)
+    if (this.connected && !this.isGuest){
+      this.sharedRealm.tickBackground();
       for (const peer of this.peers.values()) tickPeer(this, peer);
+    }
   }
   receiveInput({ id, input }) {
     if (this.game.mode !== "survival") return;
     const peer = this.peers.get(id),
       clean = cleanInput(input);
-    if (!peer || !clean) return;
+    if (!peer || !clean || peer.awaitingRealm || input.realmEpoch!==undefined&&input.realmEpoch!==peer.realmEpoch) return;
     if(peer.player.multiplayerAway){peer.keys=new Set();peer.mine=false;peer.lastPose=performance.now();return;}
     peer.keys = new Set(clean.keys);
     peer.mine = clean.mine;
@@ -720,6 +742,7 @@ export class Multiplayer {
     this.send({
       type: "input",
       input: {
+        realmEpoch:this.realmEpoch,
         yaw: g.player.yaw,
         pitch: g.player.pitch,
         keys: g.running ? [...(g.inputKeys?.() || g.keys)] : [],
@@ -735,6 +758,7 @@ export class Multiplayer {
       type: "private-state",
       to: peer.id,
       state: {
+        realmEpoch:peer.realmEpoch,
         standAnnouncement: peer.standAnnouncement,
         player: peer.player,
         inventory: peer.inventory.export(),
@@ -746,7 +770,7 @@ export class Multiplayer {
               type: peer.menu.type,
               container: peer.menu.container,
               target: peer.menu.target,
-              trader:peer.menu.trader?this.simulationGame.entities.find(e=>e.id===peer.menu.trader):null,
+              trader:peer.menu.trader?this.gameFor(peer).entities.find(e=>e.id===peer.menu.trader):null,
             }
           : null,
         openMenu: !!peer.openMenu,
@@ -760,7 +784,7 @@ export class Multiplayer {
   }
   applyPrivate(s) {
     const g = this.game;
-    if (!s?.player) return;
+    if (!s?.player || s.realmEpoch!==undefined&&s.realmEpoch!==this.realmEpoch) return;
     if(g.giganto?.active){this.arena.lastPrivate=s;return;}
     if(s.titanRecords)this.arena.records=s.titanRecords;
     syncAchievements(g,s.player.achievements);
@@ -782,6 +806,7 @@ export class Multiplayer {
       "burning",
       "hurt",
       "runicSlow",
+      "levitationTicks","enderCooldown",
       "matthewShotTick",
       "matthewHand",
       "devinReadyTick",
@@ -888,7 +913,7 @@ export class Multiplayer {
   }
   executeSurvival(m) {
     const peer = this.peers.get(m.id),
-      g = this.simulationGame;
+      g = this.gameFor(peer);
     if (!peer || !Number.isSafeInteger(m.seq) || m.seq <= peer.lastSeq) return;
     peer.lastSeq = m.seq;
     peer.feedback = "";
@@ -1057,11 +1082,12 @@ export class Multiplayer {
     if (!["inventory", "menu", "close", "respawn"].includes(kind))
       this.lastCommand = now;
     if (this.game.mode === "survival") this.sendInput();
-    else this.send({ type: "pose", pose: cleanPose(poseFor(this.game)) });
+    else this.send({ type: "pose",realmEpoch:this.realmEpoch, pose: cleanPose(poseFor(this.game)) });
     const seq = ++this.sequence;
     this.pending.set(seq, now);
     this.send({
       type: "command",
+      realmEpoch:this.realmEpoch,
       seq,
       kind,
       held: this.game.inventory.held?.id,
@@ -1177,7 +1203,8 @@ export class Multiplayer {
     g.drops = data.drops || [];
     g.portalCharge = 0;
     g.portalCooldown = 100;
-    g.cameraMode = 0;
+    if(!this.sessionReady)g.cameraMode = 0;
+    this.clearModels();this.realmEpoch=data.realmEpoch;
     g.active = true;
     this.arena.records=data.titanRecords||{};
     g.giganto?.load(data.giganto);
@@ -1185,10 +1212,11 @@ export class Multiplayer {
     g.renderer.loadAround(g.player.x, g.player.z, 2, 9);
     g.ui.play();
     g.resume();
+    this.send({type:'realm-ready',epoch:this.realmEpoch});
 
   }
   applyState(s) {
-    if (!s || s.dimension !== this.game.dimension) return;
+    if (!s || s.dimension !== this.game.dimension || s.realmEpoch!==undefined&&s.realmEpoch!==this.realmEpoch) return;
     const g = this.game;
     for (const [key, id] of s.edits || []) {
       const xyz = key.split(",").map(Number);
@@ -1249,8 +1277,7 @@ export class Multiplayer {
     if (!this.connected || !this.sessionReady) return;
     this.sharedRealm.sync();
     if(!this.isGuest&&this.game.rules?.allowSpectating===false)for(const viewer of this.watch.requests.keys())this.watch.approve(viewer,null);
-    if(this.sharedRealm.base&&!this.game.giganto?.active)this.arenaBackground(dt);
-    const g = this.simulationGame;
+    const g = this.game;
     if (this.game.ui.screen === "multiplayer" && now >= (this.nextSessionUI || 0)) {
       this.nextSessionUI = now + 1000;
       g.ui.updateSession();
@@ -1263,7 +1290,7 @@ export class Multiplayer {
       if (now >= (this.nextPose || 0)) {
         this.nextPose = now + (g.mode === "survival" ? 50 : 100);
         if (g.mode === "survival") this.sendInput();
-        else this.send({ type: "pose", pose: cleanPose(poseFor(g)) });
+        else this.send({ type: "pose",realmEpoch:this.realmEpoch, pose: cleanPose(poseFor(g)) });
       }
       for (const [seq, at] of this.pending)
         if (now - at > 10000) {
@@ -1273,98 +1300,15 @@ export class Multiplayer {
       if (g.settings.particles !== "minimal")
         for (const q of g.sharedSeekers || [])
           g.renderer.arcane?.emit(q.x, q.y, q.z, 0, 0, 0, 0.25);
-    } else {
-      if (now >= (this.nextPrivate || 0)) {
-        this.nextPrivate = now + 100;
-        for (const peer of this.peers.values()) this.sendPrivate(peer);
-      }
-      if (this.sharedWorld !== g.world) {
-        this.sharedWorld = g.world;
-        this.lastEdits = new Map(g.world.edits);
-        for (const peer of this.peers.values()) {
-          Object.assign(peer.player, createPlayer(g.player), {
-            flying: g.mode === "creative",
-          });
-          peer.context.player = peer.player;
-          this.sendWelcome(peer);
-        }
-      }
-      if (now >= (this.nextState || 0)) {
-        this.nextState = now + 250;
-        const edits = [];
-        for (const [key, id] of g.world.edits)
-          if (this.lastEdits.get(key) !== id) {
-            edits.push([key, id]);
-            this.lastEdits.set(key, id);
-          }
-        const palmChanged =
-          this.lastPalmWorld !== g.world ||
-          this.lastPalmRevision !== (g.world.palm?.revision || 0);
-        this.lastPalmWorld = g.world;
-        this.lastPalmRevision = g.world.palm?.revision || 0;
-        this.send({
-          type: "state",
-          state: {
-            dimension: g.dimension,
-            difficulty: g.difficulty,
-            titans:this.arena.publicRecords(),
-            edits,
-            time: g.time,
-            tickCount: g.tickCount,
-            worldTick: g.world.tick,
-            blockTimers: g.world.blockTimers,
-            aquatic: g.world.aquatic,
-            palm: palmChanged ? g.world.palm || null : undefined,
-            protectedAreas: g.world.protectedAreas || [],
-            endgame:g.world.endgame,
-            rules: g.rules,
-            standProjectiles: g.standProjectiles || [],
-            weather: g.world.weather,
-            relicClaimed: g.world.relicClaimed,
-            blockVisuals: worldInteractionSnapshot(g),
-            entities: g.entities,
-            drops: g.drops,
-            hostileProjectiles: g.hostileProjectiles || [],
-            embeddedArrows: g.world.embeddedArrows || [],
-            settlements: g.world.settlements,
-            pistolTraces: g.pistolTraces || [],
-            seekers: (g.seekers || []).map((q) => ({ x: q.x, y: q.y, z: q.z })),
-          },
-        });
-      }
-      if (now >= (this.nextPoses || 0)) {
-        this.nextPoses = now + 100;
-        const players = [
-          {
-            id: this.id,
-            name: this.players.find((p) => p.id === this.id)?.name || "Host",
-            ...cleanPose(poseFor(g)),
-          },
-          ...Array.from(this.peers.values(), (peer) => ({
-            id: peer.id,
-            name: peer.name,
-            ...cleanPose({
-              ...peer.player,
-              visualAction:peer.visualAction?{...peer.visualAction,age:Math.max(0,g.elapsed-peer.visualAction.started)}:null,
-              skin: peer.skin,
-              held: peer.held,
-              equipment: peer.equipment,
-            }),
-          })),
-        ];
-        this.send({ type: "poses", players });
-        this.remotePoses = players;
-      }
-    }
+    } else sendRealmFrames(this,now,{cleanPose,poseFor});
     this.sharedRealm.sync();
     this.renderPlayers(dt);
   }
   renderPlayers(dt) {
-    if(this.sharedRealm.base){for(const e of this.models.values())e.model.visible=false;return;}
     const g = this.game,
       seen = new Set();
     for (const p of this.remotePoses || []) {
-      if (p.id === this.id) continue;
+      if (p.id === this.id || p.dimension&&p.dimension!==g.dimension) continue;
       const clean = cleanPose(p);
       if (!clean) continue;
       seen.add(p.id);

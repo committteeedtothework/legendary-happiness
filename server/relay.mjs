@@ -1,8 +1,9 @@
+import {createReadStream} from "node:fs";
 import {routeArena} from "./arena.mjs";
 import {createWatchRouter} from "./watch.mjs";
 import { createServer } from "node:http";
 import { createServer as createSecureServer } from "node:https";
-import { readFile } from "node:fs/promises";
+import { readFile,stat } from "node:fs/promises";
 import { randomBytes, timingSafeEqual } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
@@ -48,6 +49,7 @@ export function createRelay({
   maxConnections = 64,
   publicURL = "",
   tls,
+  social=null,
 } = {}) {
   publicURL = normalizePublicURL(publicURL);
   if (tls && (!tls.cert || !tls.key))
@@ -56,7 +58,7 @@ export function createRelay({
   const handler = async (req, res) => {
     if (req.url === "/health") {
       res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ ok: true, protocol: PROTOCOL }));
+      res.end(JSON.stringify({ ok: true, protocol: PROTOCOL, ...(social?{social:true}:{}) }));
       return;
     }
     if (req.url?.split("?")[0] !== "/") {
@@ -65,14 +67,9 @@ export function createRelay({
       return;
     }
     try {
-      const html = await readFile(htmlPath);
-      res.writeHead(200, {
-        "Content-Type": "text/html; charset=utf-8",
-        "X-Content-Type-Options": "nosniff",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Cache-Control": "no-store",
-      });
-      res.end(html);
+      const info=await stat(htmlPath);if(!info.isFile())throw Error('Game build missing.');
+      res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Length':info.size,'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','Cache-Control':'no-store'});
+      const stream=createReadStream(htmlPath);stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);
     } catch {
       res.writeHead(503, { "Content-Type": "text/plain" });
       res.end("Build the game first: npm run build:standalone");
@@ -85,6 +82,7 @@ export function createRelay({
     perMessageDeflate: false,
   });
   http.on("upgrade", (req, socket, head) => {
+    if(req.url==='/social'&&social){social.upgrade(req,socket,head);return;}
     if (req.url !== "/relay" || wss.clients.size >= maxConnections) {
       socket.destroy();
       return;
@@ -107,6 +105,7 @@ export function createRelay({
       id: ws.id,
       name: ws.name,
       host: ws === room.host,
+      accountId:ws.account?.id,
     }));
   function broadcast(room, data) {
     for (const ws of [room.host, ...room.guests.values()]) send(ws, data);
@@ -116,6 +115,7 @@ export function createRelay({
     room?.watch?.leave(ws.id);
     ws.room = null;
     if (!room) return;
+    if(room.host===ws)social?.unbindRoom(room);
     if (room.host === ws) {
       rooms.delete(room.id);
       for (const guest of room.guests.values()) {
@@ -129,6 +129,7 @@ export function createRelay({
       }
     } else {
       room.guests.delete(ws.id);
+      social?.publish();
       send(room.host, { type: "peer-left", id: ws.id });
       broadcast(room, { type: "roster", players: roster(room) });
     }
@@ -171,16 +172,19 @@ export function createRelay({
         if (!ws.room) {
           if (m.protocol !== PROTOCOL)
             throw Error("Game versions do not match");
-          ws.name = text(m.name, 20) || "Player";
+          if(m.hubToken){ws.account=social?.identity(m.hubToken);if(!ws.account)throw Error('Sign in to Friends again.');}
+          ws.name = ws.account?.username||text(m.name,20)||'Player';
           if (m.type === "create") {
             const room = {
               id: token(6),
               key: token(24),
               host: ws,
               guests: new Map(),
+              friendsOnly:!!m.friendsOnly&&!!ws.account,
             };
             rooms.set(room.id, room);
             ws.room = room;
+            social?.bindRoom(room);
             send(ws, {
               type: "created",
               room: room.id,
@@ -191,7 +195,8 @@ export function createRelay({
             });
           } else if (m.type === "join") {
             const room = rooms.get(m.room);
-            if (!room || !sameKey(m.key, room.key))
+            const ticket=room&&ws.account&&social?.joinTicket(m.key,ws.account.id,room.id);
+            if (!room || (room.friendsOnly?!ticket:!ticket&&!sameKey(m.key,room.key)))
               throw Error("Invitation is invalid or the host is offline");
             if (room.guests.size >= MAX_PLAYERS - 1)
               throw Error("This world is full (8 players)");
@@ -207,10 +212,12 @@ export function createRelay({
               type: "peer-join",
               id: ws.id,
               name: ws.name,
+              accountId:ws.account?.id,
               resume: typeof m.resume === "string" ? m.resume.slice(0, 64) : "",
             });
             broadcast(room, { type: "roster", players: roster(room) });
           } else throw Error("Create or join a room first");
+          social?.publish();
           clearTimeout(deadline);
           return;
         }
@@ -219,6 +226,7 @@ export function createRelay({
         room.watch ||= createWatchRouter(room,send);
         if(room.watch.route(ws,m))return;
         if(routeArena(room,ws,m,send))return;
+        if(m.type==='realm-ready'){if(host)throw Error('Guest acknowledgement required.');send(room.host,{type:'realm-ready',id:ws.id,epoch:m.epoch});return;}
         if(m.type==='private-chat'||m.type==='emote'){
           if(Date.now()-(ws.chatAt||0)<500)return;ws.chatAt=Date.now();
           const message=text(m.message,160);if(!message)return;
@@ -271,7 +279,7 @@ export function createRelay({
             send(room.guests.get(m.to), { type: "welcome", world: m.world });
           else if (m.type === "state") {
             for (const guest of room.guests.values())
-              send(guest, { type: "state", state: m.state });
+              if(!m.to||m.to===guest.id)send(guest, { type: "state", state: m.state });
           } else if (m.type === "poses") {
             for (const guest of room.guests.values())
               send(guest, { type: "poses", players: m.players });
@@ -308,7 +316,7 @@ export function createRelay({
             JSON.stringify(m.pose).length > 2048
           )
             throw Error("Invalid pose");
-          send(room.host, { type: "pose", id: ws.id, pose: m.pose });
+          send(room.host, { type: "pose", id: ws.id,realmEpoch:m.realmEpoch, pose: m.pose });
         } else if (m.type === "command") {
           if (
             !Number.isSafeInteger(m.seq) ||
@@ -340,6 +348,7 @@ export function createRelay({
             throw Error("Invalid command");
           send(room.host, {
             type: "command",
+            realmEpoch:m.realmEpoch,
             id: ws.id,
             seq: m.seq,
             kind: m.kind,
@@ -393,6 +402,7 @@ export function createRelay({
       clearInterval(heartbeat);
       for (const ws of wss.clients) ws.terminate();
       await new Promise((resolve) => wss.close(resolve));
+      await social?.close();
       if (http.listening) await new Promise((resolve) => http.close(resolve));
     },
   };

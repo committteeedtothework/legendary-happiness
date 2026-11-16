@@ -1,3 +1,17 @@
+# Friends and dimensions — 2.24.0
+
+All **1,030 Node tests passed**. Additional final focused networking tests verify realm-epoch forwarding and signed invitations after the last server edits. Coverage includes independent Cinder/End portals, owner isolation, separate world mutations and PvP, per-dimension packet routing, stale input/action rejection, death/respawn, account-bound reconnect positions/inventories and DRAGOON rewards restricted to players actually present in The End.
+
+The real two-browser test passed account creation, mutual friend requests, authenticated private invitations and joining, End entry/exit with retained items while the owner stayed in the Overworld, Cinder travel, account backup/restore into a fresh browser profile, and reconnection to the saved Cinder position/inventory. Neither browser reported a page error. The packaged Electron Friends test also passed sign-in from the secure dcsmcraft://game origin, persisted CryptoKeys and automatic sign-in after an app restart in an isolated profile. SQLite restart persistence, canonical usernames, proof validation, wrong-key/cross-service rejection, friend blocking and recipient-bound single-use admission have real WebSocket tests.
+
+Every supplied source asset, generation, save storage, physics, visible character models and pure Titan simulations/rigs are hash-checked against the preceding release. No gameplay stat or asset was changed. The Node suite includes existing combat, Titan, save, controller, rendering and torch regressions. The packaged matching Linux Electron runtime passed offline creation, travel, chunk seams, save-on-close, relaunch, backup export/import and both Titan portals. The Windows portable contains the identical game ASAR and its runtime executable matches the pinned official Windows runtime hash; the legacy launcher embeds the standalone HTML byte-for-byte. Source/browser/client builds and payload reports accompany the download artifacts.
+
+No public Friends backend has been deployed: an operator-owned HTTPS host and persistent disk are still required. The local backend/browser tests demonstrate the implementation, not Internet-scale capacity, native Windows execution or mobile background reconnection. Windows executables remain unsigned. Desktop matching-payload/offline test results are included in the verification download; hardware controller/GPU behaviour and native Windows networking remain unverified on this Linux host. Main and the hosted mobile branch remain unchanged.
+
+FRIENDS-REALMS.md describes the exact feature flow, one-time deployment, account-key backup/recovery and limitations. Research and machine-readable test reports accompany the verification download.
+
+## Previous validation
+
 # Multiplayer — 2.23.0
 
 The final Node suite passes **1,019 tests**, with no failures or skipped tests. All three new multiplayer browser tests pass, using a real relay and independent browser profiles. The packaged Linux Electron app passes offline creation, chunk travel, save-on-close/relaunch, backup export/import, both Titan portal model loads/returns and Quit. Windows EXE/ASAR payloads and the separate HTML launcher are checked byte-for-byte.

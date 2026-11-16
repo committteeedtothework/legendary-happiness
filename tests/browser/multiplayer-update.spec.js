@@ -233,7 +233,7 @@ test("owner realm travel preserves guests; media tracks, fallback and spectator 
     );
     const dims = await host.page.evaluate(() => ({
       host: dcsmcraft.dimension,
-      shared: dcsmcraft.multiplayer.simulationGame.dimension,
+      shared: dcsmcraft.multiplayer.sharedRealm.contextFor("overworld").dimension,
       peer: [...dcsmcraft.multiplayer.peers.values()][0].context.dimension,
     }));
     expect(dims).toEqual({

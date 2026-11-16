@@ -130,6 +130,7 @@ export const WYVERN_SCORE=${JSON.stringify({ url: await asset("public/audio/wyve
     write: false,
     target: ["safari16.4", "chrome110"],
     define: {
+      __DCSMCRAFT_SOCIAL_URL__:JSON.stringify(process.env.DCSMCRAFT_SOCIAL_URL||''),
       __DCSMCRAFT_DEV__: "false",
       __DCSMCRAFT_MOBILE__: String(mobile),
     },

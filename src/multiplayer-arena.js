@@ -118,7 +118,7 @@ export class MultiplayerArena {
     this.ready(peer.player);
     if (
       !["giganto", "wyvern"].includes(titan) ||
-      this.m.simulationGame.dimension !== "overworld"
+      this.m.gameFor(peer).dimension !== "overworld"
     )
       throw Error("Portal unavailable.");
     const exported = this.publicRecords(),
@@ -159,7 +159,7 @@ export class MultiplayerArena {
     session.original = {
       player: clone(peer.player),
       inventory: peer.inventory.export(),
-      dimension: this.m.simulationGame.dimension,
+      dimension: this.m.gameFor(peer).dimension,
       cameraMode: 0,
     };
     const token = crypto.randomUUID();
@@ -245,7 +245,7 @@ export class MultiplayerArena {
       ]) {
         const left = peer.inventory.add(makeStack(id, count));
         if (left)
-          this.m.simulationGame.drops.push({
+          this.m.gameFor(peer).drops.push({
             uid: `titan:${peer.id}:${s.id}:${id}`,
             id,
             count: left,

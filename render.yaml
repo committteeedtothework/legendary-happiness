@@ -1,13 +1,20 @@
-# Optional Render Blueprint. Deployment needs the owner's Render account.
+# The operator deploys this once; players use the in-game Friends menu.
 services:
   - type: web
-    name: dcsmcraft-relay
+    name: dcsmcraft-friends
     runtime: docker
+    plan: starter
     dockerfilePath: ./server/Dockerfile
     dockerContext: .
     healthCheckPath: /health
+    disk:
+      name: friends-data
+      mountPath: /data
+      sizeGB: 1
     envVars:
       - key: HOST
         value: 0.0.0.0
+      - key: SOCIAL_DB
+        value: /data/friends.sqlite
       - key: PUBLIC_URL
         sync: false

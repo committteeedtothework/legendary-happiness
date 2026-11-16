@@ -324,7 +324,7 @@ test("existing assets, save code, generation, collision, item/creature stats and
   const data = readFileSync(
     new URL("../src/data.js", import.meta.url),
     "utf8",
-  ).replace('VERSION = "2.23.0"', 'VERSION = "2.21.1"');
+  ).replace(/VERSION = "[^"]+"/, 'VERSION = "2.21.1"');
   assert.equal(
     createHash("sha256").update(data).digest("hex"),
     "43650126164eed61be67105b8d6b49484b996737e1b4ae794d55cf04ee2c9b18",

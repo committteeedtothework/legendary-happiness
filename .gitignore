@@ -31,3 +31,9 @@ src/wyvern-model-data.js
 
 # Rebuilt from supplied Wyvern MP3s.
 src/wyvern-music-data.js
+
+# Persistent account/friends service data is never distributed.
+data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

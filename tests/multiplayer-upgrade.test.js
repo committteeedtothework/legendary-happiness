@@ -282,7 +282,7 @@ test("owner realm expeditions keep guests and saves in the shared realm and rest
   g.seekers = [];
   g.pistolTraces = [];
   selectRealm(g, "cinderwild");
-  assert.equal(m.simulationGame.world, world);
+  assert.equal(m.sharedRealm.contextFor("overworld").world, world);
   assert.equal(peer.context.dimension, "overworld");
   assert.equal(peer.context.world, world);
   assert.deepEqual(
@@ -290,12 +290,12 @@ test("owner realm expeditions keep guests and saves in the shared realm and rest
     position,
   );
   assert.equal(pvpActors(g).length, 0);
-  m.simulationGame.world.set(3, 203, 3, B.gold_block);
-  m.simulationGame.tickCount += 200;
+  m.sharedRealm.contextFor("overworld").world.set(3,203,3,B.gold_block);
+  g.tickCount += 200;
   m.sharedRealm.sync();
   assert.equal(g.realms.overworld.world.get(3, 203, 3), B.gold_block);
-  assert.throws(() => selectRealm(peer.context, "end"), /host/);
-  const tick = m.simulationGame.tickCount;
+  assert.throws(() => selectRealm(peer.context, "end"), /portal/);
+  const tick = g.tickCount;
   selectRealm(g, "overworld");
   assert.equal(g.world, world);
   assert.equal(m.sharedRealm.base, null);

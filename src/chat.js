@@ -1,3 +1,4 @@
+import {selectRealm} from "./realms.js";
 import {cheatsEnabled} from "./world-rules.js";
 import {extraOwnerCommand,EXTRA_COMMAND_HELP} from "./owner-commands.js";
 import { palmDev, ensurePalm } from "./devils-palm.js";
@@ -40,7 +41,7 @@ export function findParticipant(g, name = "@s") {
     );
   return found[0];
 }
-function teleport(g, target, point) {
+function teleport(g, target, point, dimension=target.peer?.dimension||g.dimension) {
   if (
     ![point.x, point.y, point.z].every(Number.isFinite) ||
     Math.abs(point.x) > 100000 ||
@@ -49,8 +50,11 @@ function teleport(g, target, point) {
     point.y > MAX_Y + 64
   )
     throw Error("Coordinates are outside the supported world.");
-  if (collides(g.world, { ...target.player, ...point }, 1.8, 0.6))
+  const world=g.multiplayer?.connected?g.multiplayer.sharedRealm.contextFor(dimension).world:g.world;
+  if (collides(world, { ...target.player, ...point }, 1.8, 0.6))
     throw Error("Destination is inside a solid block.");
+  const changed=dimension!==(target.peer?.dimension||g.dimension);
+  if(changed){if(target.peer)g.multiplayer.sharedRealm.switchPeer(target.peer,dimension);else selectRealm(g,dimension);}
   Object.assign(target.player, {
     x: point.x,
     y: point.y,
@@ -63,7 +67,8 @@ function teleport(g, target, point) {
   if (target.peer) {
     target.peer.teleport = true;
     target.peer.keys = new Set();
-  }
+    if(changed)g.multiplayer.sendWelcome(target.peer);
+  }else if(changed)g.renderer.loadAround(point.x,point.z,2,5);
 }
 export async function runOwnerCommand(g, line) {
   if (!g.active) throw Error("Open a world first.");
@@ -71,7 +76,6 @@ export async function runOwnerCommand(g, line) {
     throw Error("Only the person hosting this world can use commands.");
   const [raw, ...args] = tokenizeCommand(line),
     cmd = raw?.toLowerCase();
-  if(g.multiplayer?.sharedRealm?.base&&!['/help','/list','/seed','/save','/give','/clear','/enchant','/effect','/kick','/say','/heal'].includes(cmd))throw Error('Return to the shared realm first.');
   if(!["/help","/list","/seed","/save","/kick"].includes(cmd)&&!cheatsEnabled(g))throw Error("Cheats are disabled for this world.");
   const extra=extraOwnerCommand(g,cmd,args,{participants,findParticipant});
   if(extra!==null)return extra;
@@ -148,7 +152,7 @@ export async function runOwnerCommand(g, line) {
     const target = findParticipant(g, args[0]);
     if (args.length === 2) {
       const destination = findParticipant(g, args[1]);
-      teleport(g, target, destination.player);
+      teleport(g, target, destination.player,destination.peer?.dimension||g.dimension);
     } else if (args.length === 4)
       teleport(g, target, {
         x: Number(args[1]),
@@ -162,7 +166,7 @@ export async function runOwnerCommand(g, line) {
   if (cmd === "/spawn") {
     if (args.length > 1) throw Error("Use /spawn [player].");
     const target = findParticipant(g, args[0]);
-    teleport(g, target, target.spawn);
+    teleport(g, target, target.spawn,target.peer?.spawnDimension||g.spawnDimension||'overworld');
     return `Returned ${target.name} to spawn.`;
   }
   if (cmd === "/heal") {

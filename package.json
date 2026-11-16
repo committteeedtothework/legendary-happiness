@@ -1,6 +1,6 @@
 {
   "name": "dcsmcraft",
-  "version": "2.23.0",
+  "version": "2.24.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -30,7 +30,8 @@
     "prebuild:mobile": "node scripts/embed-wyvern-music.mjs && node scripts/embed-wyvern-model.mjs && node scripts/embed-titan-boost.mjs && node scripts/embed-titan-prelude.mjs && node scripts/embed-giganto-score.mjs && node scripts/embed-titan-models.mjs && node scripts/embed-overworld-music.mjs && node scripts/build-worker.mjs",
     "build:desktop:legacy": "node scripts/build-desktop.mjs",
     "test:desktop": "node tests/desktop/runtime.mjs",
-    "test:desktop:web": "playwright test --config playwright.desktop.config.js"
+    "test:desktop:web": "playwright test --config playwright.desktop.config.js",
+    "friends": "node server/friends.mjs"
   },
   "dependencies": {
     "three": "0.180.0",

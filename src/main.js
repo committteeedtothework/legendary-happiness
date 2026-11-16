@@ -1,3 +1,4 @@
+import {FriendsClient} from "./friends-client.js";
 import {combatTargets} from "./pvp.js";
 import {normalizeWorldRules,ruleEnabled} from "./world-rules.js";
 import {useOffhand,swapHands,withOffhand,shieldMelee,shouldUseOffhand} from "./offhand.js";
@@ -236,6 +237,7 @@ class Game {
     this.ui = new UI(this);
     this.store.onStatus = () => this.ui.refreshSaveStatus();
     this.multiplayer = new Multiplayer(this);
+    this.friends = new FriendsClient(this);
     this.jukebox = new Jukebox(this);
     this.chat = new ChatSystem(this);
     this.giganto = new GigantoEncounter(this);
@@ -973,7 +975,7 @@ class Game {
     }
     if (this.multiplayer?.isGuest) {
       this.portalCharge=0;this.portalCooldown=100;
-      this.ui.toast('The host travels first. Use Watch to follow their view.');return;
+      return;
     }
 
     travel(this, portal);
@@ -1579,13 +1581,13 @@ class Game {
         );
         if (!this.multiplayer?.isGuest || this.mode === "creative")
           updateTrickster(this, 1 / 60);
-        if(!this.multiplayer?.sharedRealm.base)this.multiplayer?.physics(1 / 60);
+        this.multiplayer?.physics(1 / 60);
         this.accumulator -= 1 / 60;
         this.subtick = (this.subtick || 0) + 1;
         if (this.subtick % 3 === 0 && !this.multiplayer?.isGuest) {
           tickSurvival(this);
           tickPalm(this, damageEntity);
-          if(!this.multiplayer?.sharedRealm.base)this.multiplayer?.tickSurvival();
+          this.multiplayer?.tickSurvival();
         }
       }
       this.target = this.world.raycast(
