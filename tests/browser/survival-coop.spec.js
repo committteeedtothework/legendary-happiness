@@ -12,30 +12,33 @@ async function prep(browser) {
   const context = await browser.newContext(),
     page = await context.newPage(),
     errors = [];
-  page.setDefaultTimeout(20000);
+  page.setDefaultTimeout(45000);
   page.on("pageerror", (e) => errors.push(e.message));
   await page.addInitScript(() =>
     localStorage.setItem(
       "dcsmcraft-settings",
       JSON.stringify({
         renderDistance: 2,
-        graphics: 1,
+        frameLimit:15,
+        graphics: 0,
+        shadows:false,entityShadows:false,clouds:false,particles:"minimal",
         ambientSounds: false,
         musicEnabled: false,
         volume: 0,
       }),
     ),
   );
-  await page.goto(origin);
+  await page.goto(origin,{waitUntil:"domcontentloaded",timeout:120000});
   await page.waitForFunction(() => window.dcsmcraft?.initialized);
   return { context, page, errors };
 }
 async function hostWorld(page) {
   await page.locator("[data-action=create]").click();
+  await page.getByLabel("Allow Cheats",{exact:true}).check();
   await page.locator("[name=seed]").fill("Survival with friends");
   await page.locator("[name=difficulty]").selectOption("peaceful");
   await page.locator("[data-action=start-world]").click();
-  await page.waitForFunction(() => dcsmcraft.active);
+  await page.waitForFunction(() => dcsmcraft.active&&dcsmcraft.ui.screen==="play");
   await page.evaluate((B) => {
     const g = dcsmcraft;
     g.pause();
@@ -225,6 +228,7 @@ test("Survival players chat, mine, craft, place, use shared workstations, die, r
     );
     await host.evaluate((B) => {
       const g = dcsmcraft;
+      for(let z=5;z<=6;z++)g.world.set(8,200,z,B.air);
       g.world.set(8, 200, 4, B.chest);
       g.world.containers["8,200,4"] = {
         type: "chest",
@@ -354,7 +358,7 @@ test("Survival players chat, mine, craft, place, use shared workstations, die, r
     await host.evaluate(() => dcsmcraft.quit());
     await host.waitForFunction(() => !dcsmcraft.active);
     await host.evaluate(async (id) => dcsmcraft.loadWorld(id), id);
-    await host.waitForFunction(() => dcsmcraft.active);
+    await host.waitForFunction(() => dcsmcraft.active&&dcsmcraft.ui.screen==="play");
     await host.evaluate(() => dcsmcraft.pause());
     await host.locator("[data-action=multiplayer]").click();
     await host.locator("#multiplayer-name").fill("Owner");

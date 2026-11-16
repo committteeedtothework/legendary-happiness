@@ -574,8 +574,7 @@ test("saved fire age resumes and exposed rain extinguishes a persistent supporte
 
 test("co-op guest applies flowing-state IDs and TNT timers without keeping an independent simulation queue", () => {
   const g = game(),
-    session = Object.create(Multiplayer.prototype);
-  session.game = g;
+    session = new Multiplayer(g);
   const timers = { "1,200,0": { kind: "tnt", ticks: 49 } };
   session.applyState({
     dimension: "overworld",

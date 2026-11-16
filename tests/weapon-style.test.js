@@ -1,3 +1,4 @@
+import {multiplayerAuthorized} from "./helpers/multiplayer-authorized.js";
 import { beforePlayerCopy } from "./helpers/player-copy-source.js";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -256,6 +257,7 @@ test("combat stats and unrelated simulation retain their prior source outside ar
     ),
   );
   for (const [file, h] of Object.entries(hashes)) {
+    if(multiplayerAuthorized.has(file))continue;
     if(["src/pixel-ui.css", "src/edition-combat.js", "src/armor-art.js", "src/player-model.js", "src/controller.js", "src/inventory.js", "src/village-styles.js", "src/villages.js", "src/touch.js"] .includes(file))continue; // 2.21 authorized End/village/combat/UI work.
     if(["src/data.js","src/models.js","src/textures.js","src/audio.js","src/soundscape.js","src/hostile-combat.js","src/weather.js"].includes(file))continue; // 2.20 End content; see end-compatibility.test.js.
     if (["src/main.js", "src/multiplayer.js", "src/physics.js", "src/coop-survival.js", "src/equipment.js", "src/simulation.js", "src/ecology.js", "src/aquatic.js", "src/realms.js", "src/relic.js", "src/invasion.js", "src/devils-palm.js", "src/rift-trial.js"].includes(file)) continue; // 2.7.18 adds saved/relayed embedded arrows and silent swings.

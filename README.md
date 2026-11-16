@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.23.0 — multiplayer
+
+PvP, live encounter spectating, guest Titan portals, expanded custom-item actions, private messages, world rules and creator commands. See [MULTIPLAYER-UPGRADE.md](MULTIPLAYER-UPGRADE.md) for controls, relay setup, Minecraft references and limits.
+
+Run **DCSMCRAFT-2.23.0-Portable.exe** for the bundled offline runtime. The separate **DCSMCRAFT-Windows-HTML-2.23.0.zip** uses installed Edge/Chrome. Close the previous app first. Existing saves and supplied assets are preserved; multiplayer requires a protocol 5 relay and matching game versions.
+
+## Previous release — 2.22.0
+
 # DCSMCRAFT 2.22.0 — gameplay polish
 
 Quieter gameplay notices, species-specific animal sounds, critical-hit stars and synchronized rigid-arm third-person swings. Supplied assets, saves, combat tuning and both Titan encounters are retained. See [GAMEPLAY-POLISH.md](GAMEPLAY-POLISH.md) for scope and references.

@@ -122,13 +122,14 @@ export function buildTrialArena(world, t) {
   };
 }
 export function beginTitanTrial(g, createEntity) {
+  if(g.isBackgroundWorld||(g.multiplayer?.connected&&g.multiplayer.game&&g.multiplayer.game!==g))return false;
   const s = incursionAcrossRealms(g);
   if (
     !s ||
     s.trial ||
     g.dimension !== "overworld" ||
     g.mode !== "survival" ||
-    g.multiplayer?.connected ||
+    (g.multiplayer?.isGuest||(g.multiplayer?.connected&&!g.multiplayer.sharedRealm)) ||
     g.player.health <= 0
   )
     return false;
@@ -298,6 +299,7 @@ export function useTrialExit(g, target) {
   return true;
 }
 export function tickRiftTrial(g, createEntity) {
+  if(g.isBackgroundWorld||(g.multiplayer?.connected&&g.multiplayer.game&&g.multiplayer.game!==g))return false;
   if (g.multiplayer?.isGuest) return false;
   const s = incursionAcrossRealms(g),
     p = g.player,
@@ -355,7 +357,7 @@ export function tickRiftTrial(g, createEntity) {
     g.mode !== "survival" ||
     g.difficulty === "peaceful" ||
     p.health <= 0 ||
-    g.multiplayer?.connected
+    (g.multiplayer?.isGuest||(g.multiplayer?.connected&&!g.multiplayer.sharedRealm))
   ) {
     delete s.grab;
     delete p.riftGrip;

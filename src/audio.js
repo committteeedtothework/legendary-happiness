@@ -83,13 +83,14 @@ export class AudioEngine {
     return playAchievementCue(this.context, this.master, {...options, volume: options.volume ?? this.settings.menuVolume ?? 1});
   }
   updateVolume() {
-    if (this.master && this.appliedMasterVolume !== this.settings.volume) {
+    const volume=this.watchMuted?0:this.settings.volume;
+    if (this.master && this.appliedMasterVolume !== volume) {
       this.master.gain.setTargetAtTime(
-        this.settings.volume,
+        volume,
         this.context.currentTime,
         0.025,
       );
-      this.appliedMasterVolume = this.settings.volume;
+      this.appliedMasterVolume = volume;
     }
     this.menuAudio?.updateVolume();
   }

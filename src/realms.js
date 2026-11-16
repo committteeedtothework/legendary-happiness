@@ -63,6 +63,9 @@ export function restoreRealm(seed, dimension, data = {}) {
   };
 }
 export function selectRealm(game, dimension) {
+  if(game.multiplayer?.connected&&game.multiplayer.game!==game)throw Error("Only the host can start a realm expedition.");
+  const shared=game.multiplayer?.game===game?game.multiplayer.sharedRealm:null;
+  shared?.before(dimension);
   game.standProjectiles = [];
   game.sharedStandProjectiles = [];
   game.seekers = [];
@@ -79,6 +82,7 @@ export function selectRealm(game, dimension) {
   game.entities = state.entities;
   game.drops = state.drops;
   game.renderer.setWorld(game.world);
+  shared?.after();
 }
 export function travel(game, source) {
   const from = game.dimension || "overworld",

@@ -1,3 +1,4 @@
+import {combatTargets,offensiveTarget,projectileOwner} from "./pvp.js";
 import { HOSTILE_TYPES, MOB_INFO } from "./data.js";
 
 const center = (e) => ({
@@ -22,8 +23,8 @@ function visible(world, from, to) {
 function acquire(game, from, range) {
   let best,
     distance = range;
-  for (const e of game.entities) {
-    if (e.hp <= 0 || !HOSTILE_TYPES.has(e.type)) continue;
+  for (const e of combatTargets(game)) {
+    if (e.hp <= 0 || !offensiveTarget(e,HOSTILE_TYPES)) continue;
     const c = center(e),
       d = Math.hypot(c.x - from.x, c.y - from.y, c.z - from.z);
     if (d < distance && visible(game.world, from, c)) {
@@ -59,6 +60,8 @@ export function launchSeeker(game) {
     vx: (c.x - origin.x) / d,
     vy: (c.y - origin.y) / d,
     vz: (c.z - origin.z) / d,
+    owner: game.standIdentity || game.player.aquaticId || "host",
+    caster: game.multiplayer?.peerForPlayer?.(game.player)?.id || game.multiplayer?.id,
     target: target.id,
     life: 80,
   });
@@ -70,12 +73,14 @@ export function launchSeeker(game) {
 // Fixed 20 Hz swept collision: steering never teleports a bolt through a wall.
 export function tickSeekers(game, damage) {
   game.seekers = (game.seekers || []).filter((q) => {
+    const actor=projectileOwner(game,q.caster),caster=actor?.context || game;
+    const targets=combatTargets(caster);
     if (--q.life <= 0) return false;
-    let target = game.entities.find(
-      (e) => e.id === q.target && e.hp > 0 && HOSTILE_TYPES.has(e.type),
+    let target = targets.find(
+      (e) => e.id === q.target && e.hp > 0 && offensiveTarget(e,HOSTILE_TYPES),
     );
     if (!target) {
-      target = acquire(game, q, 12);
+      target = acquire(caster, q, 12);
       if (target) q.target = target.id;
     }
     if (target) {
@@ -96,8 +101,8 @@ export function tickSeekers(game, damage) {
       wall = game.world.raycast(q, { x: q.vx, y: q.vy, z: q.vz }, step, true);
     let hit,
       nearest = wall ? wall.distance : step + 0.001;
-    for (const e of game.entities) {
-      if (e.hp <= 0 || !HOSTILE_TYPES.has(e.type)) continue;
+    for (const e of targets) {
+      if (e.hp <= 0 || !offensiveTarget(e,HOSTILE_TYPES)) continue;
       const c = center(e),
         along = Math.max(
           0,
@@ -123,7 +128,7 @@ export function tickSeekers(game, damage) {
     q.y += q.vy * Math.min(step, nearest);
     q.z += q.vz * Math.min(step, nearest);
     if (hit || wall) {
-      if (hit) damage(game, hit, 12, { knockback: 2.5 });
+      if (hit) damage(caster, hit, 12, { knockback: 2.5,kind:"seeker" });
       game.renderer?.arcane?.burst({ x: q.x, y: q.y - 1, z: q.z }, 24);
       return false;
     }

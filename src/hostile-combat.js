@@ -1,3 +1,4 @@
+import {combatTargets,projectileOwner} from "./pvp.js";
 import {explosionCells} from "./explosion-spread.js";
 import { embedArrow, tickEmbeddedArrows } from "./embedded-arrows.js";
 import { playWorldSound } from "./spatial-audio.js";
@@ -122,7 +123,8 @@ export function tickHostileProjectiles(game, damageEntity) {
     );
     let victim = null,
       closest = wall ? wall.distance / length : 1.01;
-    const targets = game.entities.filter(
+    const owner=q.playerArrow?projectileOwner(game,q.owner):null;
+    const targets = (owner ? combatTargets(owner.context) : game.entities).filter(
       (e) =>
         e.hp > 0 &&
         e.id !== q.source &&
@@ -169,6 +171,7 @@ export function tickHostileProjectiles(game, damageEntity) {
         );
         damageEntity(peer?.context || game, victim, q.damage, {
           kind: "arrow",
+          source:q,
           reward: true,
           knockback: 0.3,
         });

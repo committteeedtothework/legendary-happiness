@@ -519,6 +519,7 @@ test("host pistol commands enforce per-peer tick cooldowns and restore host stat
     ],
   ]);
   session.send = (m) => acks.push(m);
+  session.peers.get("guest").inventory.slots[0]=makeStack(MATTHEW);
   session.execute({ id: "guest", seq: 1, kind: "pistol", held: MATTHEW });
   assert.equal(enemy.hp, 15);
   assert.equal(g.player, hostPlayer);

@@ -160,7 +160,7 @@ export class WyvernIntegration {
       e.pending ||
       !g.active ||
       g.dimension !== "overworld" ||
-      g.multiplayer?.connected ||
+      g.multiplayer?.isGuest ||
       r.portal ||
       !r.config.enabled ||
       g.tickCount < r.cooldownUntil
@@ -319,7 +319,7 @@ export class WyvernIntegration {
       g = e.game,
       s = e.session;
     if (!s) return;
-    g.elapsed -= dt;
+    if(!g.multiplayer?.connected)g.elapsed -= dt;
     g.audio.music?.silence();
     e.prompt.hidden = true;
     e.hud.hidden = g.ui.screen !== "play";
@@ -343,7 +343,7 @@ export class WyvernIntegration {
             ...(g.touch?.active ? g.touch.keys : []),
           ]),
           move = touchMovement(g);
-        stepWyvern(
+        (g.multiplayer?.connected ? (session,input,dt)=>g.multiplayer.arena.step(session,input,dt,'wyvern') : stepWyvern)(
           s,
           {
             ...(move

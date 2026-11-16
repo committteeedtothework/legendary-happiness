@@ -189,7 +189,7 @@ export function updatePlayer(game, keys, dt) {
   const p = game.player,
     w = game.world,
     creative = game.mode === "creative";
-  if (p.health <= 0) return;
+  if (p.health <= 0 || p.multiplayerAway) return;
   if(p.levitationTicks>0)p.levitationTicks=Math.max(0,p.levitationTicks-dt*20);
   if (p.horseId) {
     const moving = updateRidingHorse(game, keys, dt);

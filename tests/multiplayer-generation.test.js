@@ -20,8 +20,7 @@ function fixture() {
       this.resumed = true;
     },
   };
-  const session = Object.create(Multiplayer.prototype);
-  session.game = game;
+  const session = new Multiplayer(game);
   session.sessionReady = false;
   return { game, session };
 }

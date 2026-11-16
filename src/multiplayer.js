@@ -1,3 +1,13 @@
+import {cleanRemoteAction,sampleAction,recordPeerAction} from "./multiplayer-animation.js";
+import {SharedRealm} from "./multiplayer-world.js";
+import {enchantItem} from "./equipment.js";
+import {tradeWithVillager} from "./ecology.js";
+import {tricksterMove} from "./matthew.js";
+import {MultiplayerArena} from "./multiplayer-arena.js";
+import {tickSurvival} from "./simulation.js";
+import {tickPalm} from "./devils-palm.js";
+import {SpectatorSession} from "./spectator.js";
+import {normalizeWorldRules} from "./world-rules.js";
 import {swapHands,useOffhand,withOffhand} from "./offhand.js";
 import { syncAchievements } from "./achievements.js";
 import { restoreEmbeddedArrows } from "./embedded-arrows.js";
@@ -131,6 +141,9 @@ export function cleanPose(p) {
   )
     return null;
   return {
+    visualAction:cleanRemoteAction(p.visualAction),
+    health:Math.max(0,Math.min(20,Number(p.health) || 0)),
+    multiplayerAway:!!p.multiplayerAway,
     x: p.x,
     y: p.y,
     z: p.z,
@@ -154,6 +167,7 @@ export function cleanPose(p) {
 function poseFor(game) {
   return {
     ...game.player,
+    visualAction:sampleAction(game),
     skin: game.settings.skin,
     held: game.inventory.held?.id,
     equipment: game.inventory.equipment.map((s) => s?.id),
@@ -169,6 +183,9 @@ export class Multiplayer {
     this.models = new Map();
     this.chat = [];
     this.sequence = 0;
+    this.sharedRealm=new SharedRealm(this);
+    this.arena=new MultiplayerArena(this);
+    this.watch=new SpectatorSession(this);
     this.savedPlayers = {};
     this.pending = new Map();
   }
@@ -184,14 +201,6 @@ export class Multiplayer {
     if (this.socket) this.disconnect();
     if (!invite && !this.game.active)
       throw Error("Open a Survival or Creative world before hosting.");
-    if (
-      !invite &&
-      this.game.mode === "survival" &&
-      this.game.dimension !== "overworld"
-    )
-      throw Error(
-        "Survival sharing currently starts in the Overworld. Close co-op before dimension travel.",
-      );
     const parsed = invite
       ? readInvitation(invite)
       : { server: relayURL(server).href };
@@ -203,6 +212,7 @@ export class Multiplayer {
     this.sessionReady = false;
     this.lastEdits = new Map();
     this.sharedWorld = null;
+    this.lastCombatEvent=0;
     let ws;
     try {
       ws = new WebSocket(this.server);
@@ -274,6 +284,9 @@ export class Multiplayer {
               "Public relay address updated. Copy a fresh invitation.",
             );
           }
+          if(m.type.startsWith('arena-')){this.arena.receive(m);return;}
+          if(m.type.startsWith('watch-')){this.watch.receive(m).catch(()=>this.game.ui.toast('Spectator connection ended.'));return;}
+          if(m.type==='watchers'){this.watch.receive(m).catch(()=>{});return;}
           if (m.type === "welcome") {
             this.adopt(m.world);
             this.sessionReady = true;
@@ -285,6 +298,7 @@ export class Multiplayer {
           }
           if (m.type === "peer-join" && !this.isGuest) this.addPeer(m);
           if (m.type === "peer-left") {
+            this.watch.remove(m.id);
             const leaving = this.peers.get(m.id);
             if (leaving?.player.standData?.trial?.phase === "trial")
               leaving.player.standData.trial = null;
@@ -316,6 +330,7 @@ export class Multiplayer {
               if (Number.isSafeInteger(m.cooldowns?.[key]))
                 this.game.player[key] = m.cooldowns[key];
           }
+          if(m.type==="combat-event")this.combatEvent(m.event);
           if (m.type === "pong") this.ping = Math.max(0, Date.now() - m.at);
           if (m.type === "chat") {
             this.chat.push({ name: m.name, message: m.message });
@@ -346,6 +361,9 @@ export class Multiplayer {
         if (this.socket !== ws) return;
         if (!this.isGuest)
           for (const id of this.peers.keys()) this.stashPeer(id);
+        this.sharedRealm.clear();
+        this.arena.disconnected();
+        this.watch.clear();
         this.peers.clear();
         this.connected = false;
         this.sessionReady = false;
@@ -377,7 +395,7 @@ export class Multiplayer {
     return true;
   }
   addPeer({ id, name, resume }) {
-    const g = this.game,
+    const g = this.simulationGame,
       survival = g.mode === "survival";
     const known =
       typeof resume === "string" &&
@@ -391,22 +409,22 @@ export class Multiplayer {
       this.send({ type: "kick", id });
       return;
     }
-    const saved = known || {},
-      player = survival
-        ? createPlayer(saved.player || g.spawn)
-        : createPlayer(g.player);
+    const saved = known || {},compatible=(saved.dimension||'overworld')===(g.dimension||'overworld'),
+      start=g.dimension==='overworld'?g.spawn:{x:g.player.x,y:g.player.y,z:g.player.z},
+      player = survival ? createPlayer(compatible&&saved.player?saved.player:start) : createPlayer(g.player);
     // createPlayer initializes health: explicitly restore saved survival state.
-    if (survival && saved.player) Object.assign(player, saved.player);
+    if (survival && saved.player){Object.assign(player, saved.player);if(!compatible)Object.assign(player,start,{vx:0,vy:0,vz:0,fallStart:start.y});}
     if (!survival && saved.player?.standData)
       player.standData = saved.player.standData;
+    delete player.multiplayerAway;
     player.flying = !survival;
     const peer = {
       id,
       name,
       player,
       skin: "explorer",
-      inventory: new Inventory(survival ? saved.inventory : undefined),
-      spawn: saved.spawn || { ...g.spawn },
+      inventory: new Inventory(saved.inventory),
+      spawn: (compatible&&saved.spawn) || { ...start },
       resume: known ? resume : resumeToken(),
       lastPose: performance.now(),
       lastSeq: -1,
@@ -416,7 +434,9 @@ export class Multiplayer {
       mine: false,
       menu: null,
       lastDeath: saved.lastDeath,
+      titanRecords:saved.titanRecords||{},
     };
+    if(!known&&!survival)for(const [i,id]of ['grass','stone','log','planks','glass','torch','crafting_table','oak_door','devin_sword'].entries())peer.inventory.slots[i]=makeStack(id,ITEMS[id].stack);
     if (!known)
       for (const [dx, dz] of [
         [2, 0],
@@ -437,7 +457,9 @@ export class Multiplayer {
     g.chat?.announce(`${name} joined the world.`);
   }
   sendWelcome(peer) {
-    const world = this.game.snapshot();
+    const world = this.sharedRealm.snapshot();
+    world.giganto=this.arena.publicRecords();
+    world.titanRecords=peer.titanRecords||{};
     delete world.coopPlayers;
     world.player = { ...peer.player };
     world.inventory = peer.inventory.export();
@@ -450,7 +472,7 @@ export class Multiplayer {
     if (this.game.mode === "survival") return;
     const peer = this.peers.get(id),
       p = cleanPose(pose);
-    if (!peer || !p) return;
+    if (!peer || !p || peer.player.multiplayerAway) return;
     const now = performance.now(),
       dt = Math.min(2, (now - peer.lastPose) / 1000);
     if (
@@ -472,6 +494,8 @@ export class Multiplayer {
     }
     if (now - (peer.lastStandTeleport || -1000) < 500)
       for (const key of ["x", "y", "z"]) p[key] = peer.player[key];
+    delete p.health;delete p.multiplayerAway;
+    delete p.visualAction;
     delete p.stand; // Creative clients cannot assign ownership or transformations.
     Object.assign(peer.player, p);
     peer.skin = p.skin;
@@ -480,10 +504,12 @@ export class Multiplayer {
     peer.lastPose = now;
   }
   execute(m) {
+    const busy=this.peers.get(m.id);
+    if(busy?.player.multiplayerAway){if(Number.isSafeInteger(m.seq)&&m.seq>busy.lastSeq){busy.lastSeq=m.seq;this.send({type:'ack',to:m.id,seq:m.seq,ok:false});}return;}
     if (m.kind === "stand") return this.executeStand(m);
-    if (this.game.mode === "survival") return this.executeSurvival(m);
+    if (this.game.mode === "survival" || ["inventory","menu","close","trade","enchant","use","style"].includes(m.kind)) return this.executeSurvival(m);
     const peer = this.peers.get(m.id),
-      g = this.game;
+      g = this.simulationGame;
     if (!peer || !Number.isSafeInteger(m.seq) || m.seq <= peer.lastSeq) return;
     peer.lastSeq = m.seq;
     const reject = (message) =>
@@ -521,8 +547,8 @@ export class Multiplayer {
       "audio",
     ])
       previous[key] = g[key];
-    peer.inventory.slots[0] = held ? makeStack(held, ITEMS[held].stack) : null;
-    peer.inventory.selected = 0;
+    if(Number.isInteger(m.selected)&&m.selected>=0&&m.selected<9)peer.inventory.selected=m.selected;
+    if((peer.inventory.held?.id||null)!==held)return reject('Wait for the inventory to update.');
     let feedback = "";
     const quietUI = {
       toast: (message) => {
@@ -541,7 +567,7 @@ export class Multiplayer {
       g.lastAttack = peer.lastAttack;
       g.ui = quietUI;
       g.renderer = {
-        action() {},
+        action:(kind)=>recordPeerAction(this,peer,kind),
         breakParticles: (...a) => previous.renderer.breakParticles(...a),
         pulseEffect: (p) => previous.renderer.pulseEffect(p),
         arcane: previous.renderer.arcane,
@@ -646,6 +672,23 @@ export class Multiplayer {
   damagePlayer(player, amount, cause, source = null) {
     this.peerForPlayer(player)?.context.damage(amount, cause,false,source);
   }
+  combatEvent(e){
+    if(this.sharedRealm.base)return;
+    if(!e||!Number.isSafeInteger(e.id)||e.id<=(this.lastCombatEvent||0)||![e.x,e.y,e.z].every(Number.isFinite))return;
+    this.lastCombatEvent=e.id;const g=this.game;
+    if(e.attacker===this.id)g.hitFeedback={critical:!!e.critical,until:g.elapsed+.2};
+    g.renderer?.combatImpact?.({id:'player:'+e.target,type:'player',x:e.x,y:e.y,z:e.z},{critical:!!e.critical,source:g.player});
+    if(e.target!==this.id)g.audio?.world?.(g,'hit',e);
+  }
+  broadcastMode(){
+    for(const peer of this.peers.values()){peer.keys=new Set();peer.mine=false;this.sendWelcome(peer);}
+  }
+  get simulationGame(){return this.sharedRealm?.base || this.game;}
+  arenaBackground(dt){
+    if(!this.connected||this.isGuest)return;
+    this.backgroundAccumulator=(this.backgroundAccumulator||0)+dt;
+    while(this.backgroundAccumulator>=1/60){this.backgroundAccumulator-=1/60;this.physics(1/60);this.backgroundTick=(this.backgroundTick||0)+1;if(this.backgroundTick%3===0){this.sharedRealm.anchor();tickSurvival(this.simulationGame);tickPalm(this.simulationGame,damageEntity);this.tickSurvival();}}
+  }
   physics(dt) {
     if (this.connected && !this.isGuest)
       for (const peer of this.peers.values()) stepPeer(this, peer, dt);
@@ -659,6 +702,7 @@ export class Multiplayer {
     const peer = this.peers.get(id),
       clean = cleanInput(input);
     if (!peer || !clean) return;
+    if(peer.player.multiplayerAway){peer.keys=new Set();peer.mine=false;peer.lastPose=performance.now();return;}
     peer.keys = new Set(clean.keys);
     peer.mine = clean.mine;
     peer.lastPose = performance.now();
@@ -702,6 +746,7 @@ export class Multiplayer {
               type: peer.menu.type,
               container: peer.menu.container,
               target: peer.menu.target,
+              trader:peer.menu.trader?this.simulationGame.entities.find(e=>e.id===peer.menu.trader):null,
             }
           : null,
         openMenu: !!peer.openMenu,
@@ -716,17 +761,13 @@ export class Multiplayer {
   applyPrivate(s) {
     const g = this.game;
     if (!s?.player) return;
+    if(g.giganto?.active){this.arena.lastPrivate=s;return;}
+    if(s.titanRecords)this.arena.records=s.titanRecords;
     syncAchievements(g,s.player.achievements);
     g.player.standData = s.player.standData || null;
     if (s.standAnnouncement) {
       g.ui.announce(s.standAnnouncement.title, s.standAnnouncement.text);
       g.audio?.standSound?.("presence");
-    }
-    if (g.mode !== "survival") {
-      if (s.teleport)
-        for (const key of ["x", "y", "z", "vx", "vy", "vz", "fallStart"])
-          g.player[key] = s.player[key];
-      return;
     }
     const wasDead = g.player.health <= 0,
       health = g.player.health,
@@ -747,7 +788,9 @@ export class Multiplayer {
       "devinSeekerTick",
     ])
       if (Number.isFinite(s.player[key])) g.player[key] = s.player[key];
-    g.player.flying = false;
+    if(g.mode==="survival")g.player.flying = false;
+    g.player.multiplayerStats=s.player.multiplayerStats||{kills:0,deaths:0};
+    for(const key of ["tricksterRecharges","tricksterAirUsed","tricksterWallUsed"])g.player[key]=s.player[key];
     g.player.boatId = s.player.boatId || null;
     g.player.horseId = s.player.horseId || null;
     g.player.aquaticId = s.player.aquaticId || null;
@@ -765,7 +808,7 @@ export class Multiplayer {
       !["KeyW", "KeyA", "KeyS", "KeyD", "Space"].some((key) =>
         (g.inputKeys?.() || g.keys).has(key),
       );
-    if (s.teleport || distance > 1.25 || (idle && distance > 0.025))
+    if (s.teleport || (g.mode==='survival'&&(distance > 1.25 || (idle && distance > 0.025))))
       for (const key of [
         "x",
         "y",
@@ -794,11 +837,15 @@ export class Multiplayer {
       g.running = false;
       g.resetControls();
       document.exitPointerLock?.();
-      g.ui.openInventory(s.menu.type, s.menu.container, s.menu.target);
-    } else if (s.closeMenu && g.ui.screen === "inventory") {
+      if(s.menu.type==='trading')g.ui.trading(s.menu.trader);
+      else if(s.menu.type==='enchanting')g.ui.enchanting();
+      else g.ui.openInventory(s.menu.type, s.menu.container, s.menu.target);
+    } else if (s.closeMenu && ['inventory','trading','enchanting'].includes(g.ui.screen)) {
       g.ui.toast("That workstation is no longer in reach.");
       g.resume();
     }
+    if(g.ui.screen==='trading'&&s.menu?.trader){const key=JSON.stringify(s.menu.trader.tradeUses);if(key!==this.tradeSignature){this.tradeSignature=key;g.ui.trading(s.menu.trader);}}
+    if(g.ui.screen==='enchanting'){const key=JSON.stringify(s.inventory.slots);if(key!==this.enchantSignature){this.enchantSignature=key;g.ui.enchanting(g.ui.enchantIndex);}}
     if (g.ui.screen === "inventory") {
       if (s.menu?.container) g.ui.container = s.menu.container;
       g.ui.refreshInventory();
@@ -841,7 +888,7 @@ export class Multiplayer {
   }
   executeSurvival(m) {
     const peer = this.peers.get(m.id),
-      g = this.game;
+      g = this.simulationGame;
     if (!peer || !Number.isSafeInteger(m.seq) || m.seq <= peer.lastSeq) return;
     peer.lastSeq = m.seq;
     peer.feedback = "";
@@ -900,6 +947,15 @@ export class Multiplayer {
         finish(inventoryOperation(this, peer, m.payload));
         return;
       }
+      if(m.kind==='trade'){
+        const e=g.entities.find(e=>e.id===peer.menu?.trader);
+        if(peer.menu?.type!=='trading'||!Number.isInteger(m.payload?.index)||!e){finish(false,'Trade unavailable.');return;}
+        const result=tradeWithVillager(ctx,e,m.payload.index);finish(result.ok,result.message);return;
+      }
+      if(m.kind==='enchant'){
+        if(peer.menu?.type!=='enchanting'||!peer.menu.target||g.world.get(peer.menu.target.x,peer.menu.target.y,peer.menu.target.z)!==B.enchanting_table||Math.hypot(peer.player.x-peer.menu.target.x,peer.player.y-peer.menu.target.y,peer.player.z-peer.menu.target.z)>6||!Number.isInteger(m.payload?.index)||m.payload.index<0||m.payload.index>=36){finish(false,'Enchanting table is out of reach.');return;}
+        const result=enchantItem(ctx,m.payload.index,m.payload.enchantment);finish(result.ok,result.message);return;
+      }
       if (g.elapsed - peer.lastAction < 0.16) {
         finish(false);
         return;
@@ -952,14 +1008,12 @@ export class Multiplayer {
             return;
           }
         }
-        if (pistolUsesStyle(ctx)) {
-          finish(false, "Style movement is host-only in the Survival beta.");
-          return;
-        }
-        ctx.use();
+        const before={x:peer.player.x,y:peer.player.y,z:peer.player.z};ctx.use();
+        if(Math.hypot(peer.player.x-before.x,peer.player.y-before.y,peer.player.z-before.z)>.1)peer.teleport=true;
         finish(true);
         return;
       }
+      if(m.kind==='style'){const ok=tricksterMove(ctx,m.payload?.blink===true);if(ok)peer.teleport=true;finish(ok);return;}
       if(m.kind==="swap-hands"){finish(swapHands(ctx));return;}
       if(m.kind==="offhand-use"){finish(useOffhand(ctx));return;}
       if (m.kind === "attack") {
@@ -987,10 +1041,10 @@ export class Multiplayer {
       finish(false, "The action could not be applied.");
     }
   }
-  occupants() {
+  occupants(dimension=this.game.dimension) {
     return this.isGuest
       ? (this.remotePoses || []).filter((p) => p.id !== this.id)
-      : Array.from(this.peers.values(), (p) => p.player);
+      : Array.from(this.peers.values()).filter(p=>(p.context?.dimension||"overworld")===(dimension||"overworld")).map(p=>p.player);
   }
   command(kind, payload = {}) {
     if (!this.connected || !this.sessionReady) return false;
@@ -1036,7 +1090,7 @@ export class Multiplayer {
     if (
       !data ||
       !["creative", "survival"].includes(data.mode) ||
-      !["overworld", "cinderwild"].includes(data.dimension) ||
+      !["overworld", "cinderwild", "end"].includes(data.dimension) ||
       typeof data.seed !== "string" ||
       !Number.isInteger(data.generationVersion) ||
       data.generationVersion < 2 ||
@@ -1059,7 +1113,7 @@ export class Multiplayer {
     );
     g.world.palm = data.palm || null;
     g.world.protectedAreas = data.protectedAreas || [];
-    g.rules = { keepInventory: false, ...data.rules };
+    g.rules = normalizeWorldRules(data.rules);
     g.standProjectiles = [];
     g.world.weather = restoreWeather(data.weather, g.world.seedInt);
     g.world.relicClaimed = !!data.relicClaimed;
@@ -1067,6 +1121,7 @@ export class Multiplayer {
     g.world.containers = data.containers || {};
     g.world.cropTicks = data.crops || {};
     g.world.portals = data.portals || {};
+    g.world.endgame=data.endgame;
     g.spawn = data.playerSpawn || data.spawn;
     g.time = data.time;
     g.tickCount = data.tickCount;
@@ -1101,7 +1156,7 @@ export class Multiplayer {
           break;
         }
       }
-    if (g.mode === "survival") g.inventory = new Inventory(data.inventory);
+    if (g.mode === "survival" || data.inventory) g.inventory = new Inventory(data.inventory);
     else if (!g.inventory || !this.sessionReady) {
       g.inventory = new Inventory();
       [
@@ -1124,16 +1179,13 @@ export class Multiplayer {
     g.portalCooldown = 100;
     g.cameraMode = 0;
     g.active = true;
+    this.arena.records=data.titanRecords||{};
+    g.giganto?.load(data.giganto);
     g.renderer.setWorld(g.world);
     g.renderer.loadAround(g.player.x, g.player.z, 2, 9);
     g.ui.play();
     g.resume();
-    g.ui.toast(
-      g.mode === "survival"
-        ? "Survival co-op beta · the host simulates and saves your inventory. T opens chat."
-        : "Creative co-op · the host saves the world. T opens chat.",
-      7000,
-    );
+
   }
   applyState(s) {
     if (!s || s.dimension !== this.game.dimension) return;
@@ -1150,7 +1202,8 @@ export class Multiplayer {
     g.world.fluidBuckets.forEach((b) => (b.length = 0));
     if (s.palm !== undefined) installPalm(g.world, s.palm);
     g.world.protectedAreas = s.protectedAreas || [];
-    g.rules = s.rules || { keepInventory: false };
+    g.rules = normalizeWorldRules(s.rules);
+    this.arena.sync(s.titans);
     g.sharedStandProjectiles = s.standProjectiles || [];
     g.world.blockTimers = s.blockTimers || {};
     g.world.aquatic = s.aquatic || {
@@ -1164,6 +1217,7 @@ export class Multiplayer {
     g.world.tick = s.worldTick;
     g.world.weather = restoreWeather(s.weather, g.world.seedInt);
     g.world.relicClaimed = !!s.relicClaimed;
+    if(s.endgame)g.world.endgame=s.endgame;
     const oldLaughs = new Map(
       (g.entities || [])
         .filter((e) => e.type === "watcher")
@@ -1193,8 +1247,11 @@ export class Multiplayer {
   }
   frame(now, dt) {
     if (!this.connected || !this.sessionReady) return;
-    const g = this.game;
-    if (g.ui.screen === "multiplayer" && now >= (this.nextSessionUI || 0)) {
+    this.sharedRealm.sync();
+    if(!this.isGuest&&this.game.rules?.allowSpectating===false)for(const viewer of this.watch.requests.keys())this.watch.approve(viewer,null);
+    if(this.sharedRealm.base&&!this.game.giganto?.active)this.arenaBackground(dt);
+    const g = this.simulationGame;
+    if (this.game.ui.screen === "multiplayer" && now >= (this.nextSessionUI || 0)) {
       this.nextSessionUI = now + 1000;
       g.ui.updateSession();
     }
@@ -1250,6 +1307,7 @@ export class Multiplayer {
           state: {
             dimension: g.dimension,
             difficulty: g.difficulty,
+            titans:this.arena.publicRecords(),
             edits,
             time: g.time,
             tickCount: g.tickCount,
@@ -1258,6 +1316,7 @@ export class Multiplayer {
             aquatic: g.world.aquatic,
             palm: palmChanged ? g.world.palm || null : undefined,
             protectedAreas: g.world.protectedAreas || [],
+            endgame:g.world.endgame,
             rules: g.rules,
             standProjectiles: g.standProjectiles || [],
             weather: g.world.weather,
@@ -1286,6 +1345,7 @@ export class Multiplayer {
             name: peer.name,
             ...cleanPose({
               ...peer.player,
+              visualAction:peer.visualAction?{...peer.visualAction,age:Math.max(0,g.elapsed-peer.visualAction.started)}:null,
               skin: peer.skin,
               held: peer.held,
               equipment: peer.equipment,
@@ -1296,9 +1356,11 @@ export class Multiplayer {
         this.remotePoses = players;
       }
     }
+    this.sharedRealm.sync();
     this.renderPlayers(dt);
   }
   renderPlayers(dt) {
+    if(this.sharedRealm.base){for(const e of this.models.values())e.model.visible=false;return;}
     const g = this.game,
       seen = new Set();
     for (const p of this.remotePoses || []) {
@@ -1360,9 +1422,16 @@ export class Multiplayer {
         Math.cos(clean.yaw - m.rotation.y),
       );
       m.rotation.y += da * (1 - Math.exp(-14 * dt));
-      m.visible = true;
+      m.visible = !clean.multiplayerAway;
       if (m.children[0]) m.children[0].visible = !clean.stand?.transformed;
-      animatePlayerModel(m, clean, dt, d > 0.025, 0);
+      if(clean.visualAction){
+        const a=clean.visualAction;
+        if(entry.action?.serial!==a.serial)entry.action={...a};
+        else entry.action.age=Math.max(entry.action.age,a.age);
+      }
+      const a=entry.action;if(a){a.age+=dt;if(a.age>=a.duration)entry.action=null;}
+      const visual=entry.action;
+      animatePlayerModel(m, clean, dt, d > 0.025, visual?Math.sin(Math.PI*visual.age/visual.duration):0,visual?.kind||"attack",visual?.kind==='fire'?Math.max(0,.18-visual.age):0,g.settings.particles!=="minimal",visual,{time:g.elapsed,matthewHand:clean.stand?.hand});
       animateMagic(
         m,
         g.visualTime ?? g.elapsed,
@@ -1382,6 +1451,9 @@ export class Multiplayer {
     this.remotePoses = [];
   }
   disconnect() {
+    this.sharedRealm.clear();
+    this.arena.disconnected();
+    this.watch.clear();
     this.closed = true;
     this.connected = false;
     this.sessionReady = false;

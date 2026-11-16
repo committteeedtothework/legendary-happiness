@@ -1,6 +1,6 @@
-# Windows editions — 2.22.0
+# Windows editions — 2.23.0
 
-Run **DCSMCRAFT-2.22.0-Portable.exe**, or extract **DCSMCRAFT-Windows-HTML-2.22.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Close the old app before starting the update. Existing save locations and native fullscreen behavior are preserved. See GAMEPLAY-POLISH.md for this update.
+Run **DCSMCRAFT-2.23.0-Portable.exe**, or extract **DCSMCRAFT-Windows-HTML-2.23.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Close the old app before starting the update. Existing save locations and native fullscreen behavior are preserved. See MULTIPLAYER-UPGRADE.md for this update. Multiplayer requires the updated protocol 5 relay; singleplayer remains offline.
 
 ## Previous notes
 

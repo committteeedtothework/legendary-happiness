@@ -1,9 +1,12 @@
+import {recordPeerAction} from "./multiplayer-animation.js";
+import {updateTrickster} from "./matthew.js";
+import {ruleEnabled} from "./world-rules.js";
 import {shieldMelee} from "./offhand.js";
 import {sortBackpack,dropCursorStack} from "./inventory-qol.js";
 import { achievementState, recordAchievement, scanAchievements } from "./achievements.js";
 import { playerEye } from "./player-body.js";
 import { menuStillValid } from "./world-interactions.js";
-import { B, BLOCKS, ITEMS, RECIPES, makeStack } from "./data.js";
+import { B, BLOCKS, ITEMS, RECIPES, CREATIVE_ITEMS, makeStack } from "./data.js";
 import { Inventory } from "./inventory.js";
 import { createPlayer, updatePlayer, collides } from "./physics.js";
 import { miningTicks } from "./inventory.js";
@@ -90,10 +93,11 @@ export function damagePeer(session, peer, amount, cause, force = false, source =
     p = peer.player;
   if (
     (session.game.mode === "creative" && !force) ||
-    p.health <= 0 ||
+    p.health <= 0 || p.multiplayerAway ||
     p.hurt > 0
   )
     return;
+  if(cause==="fall"&&!force&&!ruleEnabled(session.game,"fallDamage"))return;
   amount=shieldMelee(ctx,amount,cause,source);
   if(amount<=0)return;
   p.health = Math.max(
@@ -122,11 +126,11 @@ export function damagePeer(session, peer, amount, cause, force = false, source =
     peer.mine = false;
     peer.menu = null;
     peer.lastDeath = { x: p.x, y: p.y, z: p.z, cause };
-    session.game.chat?.announce(`${peer.name} was lost to ${cause}.`);
+    if(ruleEnabled(session.game,"showDeathMessages")&&!source?.pvpAttacker)session.game.chat?.announce(`${peer.name} was lost to ${cause}.`);
   }
 }
 export function peerContext(session, peer) {
-  const g = session.game,
+  const g = session.simulationGame || session.game,
     ctx = Object.create(g);
   Object.assign(ctx, {
     player: peer.player,
@@ -135,13 +139,13 @@ export function peerContext(session, peer) {
       peer.teleport = true;
     },
     multiplayer: Object.assign(Object.create(session), {
-      occupants: () => [g.player, ...session.occupants()],
+      occupants: () => [...(g.player.multiplayerAway?[]:[g.player]), ...session.occupants(g.dimension)],
     }),
     inventory: peer.inventory,
     spawn: peer.spawn,
     audio: { tone() {}, voice() {}, standSound() {} },
     renderer: {
-      action() {},
+      action:(kind)=>recordPeerAction(session,peer,kind),
       animator: { reset() {} },
       breakParticles: (...a) => g.renderer.breakParticles(...a),
       pulseEffect: (p) => g.renderer.pulseEffect(p),
@@ -170,16 +174,13 @@ export function peerContext(session, peer) {
       closePeerCraft(ctx);
       peer.menu = null;
     },
-    openTrade: () => {
-      peer.feedback = "Trading is host-only in this Survival beta.";
-    },
-    openEnchanting: () => {
-      peer.feedback = "Enchanting is host-only in this Survival beta.";
-    },
+    openTrade: (entity) => {peer.menu={type:'trading',trader:entity.id};peer.openMenu=true;},
+    openEnchanting: () => {peer.menu={type:'enchanting',target:ctx.target};peer.openMenu=true;},
     travelDimension: () => {
-      peer.feedback = "Close co-op before dimension travel.";
+      peer.feedback = "The host starts realm expeditions. Use Watch to follow.";
     },
   });
+  Object.defineProperty(ctx,'running',{configurable:true,get:()=>!peer.menu&&!peer.player.multiplayerAway,set(){}});
   ctx.ui = {
     game: ctx,
     announce: (title, text) => {
@@ -209,16 +210,17 @@ export function peerTarget(game, peer, reach = 4.5) {
   );
 }
 export function stepPeer(session, peer, dt) {
-  const g = session.game,
+  const g = session.simulationGame || session.game,
     ctx = peer.context,
     p = peer.player;
-  if (g.mode === "creative") return;
+  if (g.mode === "creative" || peer.player.multiplayerAway) return;
   p.flying = false;
   updatePlayer(
     ctx,
     performance.now() - peer.lastPose < 700 ? peer.keys : new Set(),
     dt,
   );
+  updateTrickster(ctx,dt);
   ctx.target = peerTarget(g, peer);
   const t = ctx.target,
     key = t ? `${t.x},${t.y},${t.z}` : null;
@@ -256,10 +258,10 @@ export function stepPeer(session, peer, dt) {
   }
 }
 export function tickPeer(session, peer) {
-  const g = session.game,
+  const g = session.simulationGame || session.game,
     ctx = peer.context,
     p = peer.player;
-  if (g.mode === "creative") return;
+  if (g.mode === "creative" || peer.player.multiplayerAway) return;
   tickPlayerSurvival(ctx);
   tickWeatherDamage(ctx);
   if (p.health > 0)
@@ -288,7 +290,7 @@ export function tickPeer(session, peer) {
 }
 export function respawnPeer(session, peer) {
   if (peer.player.health > 0) return false;
-  const g = session.game,
+  const g = session.simulationGame || session.game,
     point = { ...peer.spawn };
   let clear = false;
   for (let y = point.y; y < point.y + 32; y++)
@@ -299,11 +301,13 @@ export function respawnPeer(session, peer) {
     }
   const standData = peer.player.standData,
     achievements = achievementState(peer.player),
-    aquaticId = peer.player.aquaticId;
+    aquaticId = peer.player.aquaticId,
+    multiplayerStats=peer.player.multiplayerStats;
   peer.player = createPlayer(clear ? point : g.world.findSpawn(), {
     achievements,
     aquaticId,
   });
+  peer.player.multiplayerStats=multiplayerStats;
   if (standData) {
     peer.player.standData = standData;
     standData.trial = null;
@@ -318,7 +322,7 @@ export function respawnPeer(session, peer) {
   return true;
 }
 export function inventoryOperation(session, peer, op) {
-  const g = session.game,
+  const g = session.simulationGame || session.game,
     ctx = peer.context,
     ui = ctx.ui,
     menu = peer.menu;
@@ -349,6 +353,7 @@ export function inventoryOperation(session, peer, op) {
   if(op.action==="drop-cursor")return dropCursorStack(ctx,!!op.one);
   if (op.action === "slot") {
     const counts = {
+      creative:g.mode==='creative'?CREATIVE_ITEMS.length:0,
       inventory: 36,
       armor: 4,
       offhand: menu.type === "personal" ? 1 : 0,
@@ -395,7 +400,9 @@ export function inventoryOperation(session, peer, op) {
 export function peerSave(peer) {
   return cloneState({
     name: peer.name,
-    player: peer.player,
+    dimension:peer.context.dimension,
+    player: {...peer.player,multiplayerAway:undefined},
+    titanRecords:peer.titanRecords||{},
     inventory: peer.inventory.export(),
     spawn: peer.spawn,
     lastDeath: peer.lastDeath,

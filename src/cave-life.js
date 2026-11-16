@@ -1,3 +1,4 @@
+import {ruleEnabled} from "./world-rules.js";
 import { B, BLOCKS, MOB_INFO } from "./data.js";
 import { hash } from "./random.js";
 import { collides, moveBody } from "./physics.js";
@@ -96,6 +97,7 @@ export function findCaveFloor(w, x, z, nearY, type = "zombie") {
   return null;
 }
 export function spawnCaveHostiles(g, createEntity) {
+  if(!ruleEnabled(g,"doMobSpawning"))return;
   if (
     g.multiplayer?.isGuest ||
     g.mode !== "survival" ||

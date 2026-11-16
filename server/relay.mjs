@@ -1,3 +1,5 @@
+import {routeArena} from "./arena.mjs";
+import {createWatchRouter} from "./watch.mjs";
 import { createServer } from "node:http";
 import { createServer as createSecureServer } from "node:https";
 import { readFile } from "node:fs/promises";
@@ -111,6 +113,7 @@ export function createRelay({
   }
   function leave(ws) {
     const room = ws.room;
+    room?.watch?.leave(ws.id);
     ws.room = null;
     if (!room) return;
     if (room.host === ws) {
@@ -149,12 +152,10 @@ export function createRelay({
           ws.messages = 0;
           ws.bytes = 0;
         }
-        if (
-          ++ws.messages > 80 ||
-          (ws.bytes += raw.length) >
-            (ws.room?.host === ws ? 16 * 1024 * 1024 : 96 * 1024)
-        )
-          throw Error("Message rate exceeded");
+        if(++ws.messages>140)throw Error("Message rate exceeded");
+        const media=raw.length<164000&&raw.toString().includes('"type":"watch-frame"');
+        if(media){if((ws.mediaWindow||0)<Date.now()-1000){ws.mediaWindow=Date.now();ws.mediaBytes=0;}if((ws.mediaBytes=(ws.mediaBytes||0)+raw.length)>900*1024)return;}
+        else if((ws.bytes+=raw.length)>(ws.room?.host===ws?16*1024*1024:96*1024))throw Error("Message rate exceeded");
         const m = JSON.parse(raw.toString());
         if (
           !m ||
@@ -215,6 +216,15 @@ export function createRelay({
         }
         const room = ws.room,
           host = room.host === ws;
+        room.watch ||= createWatchRouter(room,send);
+        if(room.watch.route(ws,m))return;
+        if(routeArena(room,ws,m,send))return;
+        if(m.type==='private-chat'||m.type==='emote'){
+          if(Date.now()-(ws.chatAt||0)<500)return;ws.chatAt=Date.now();
+          const message=text(m.message,160);if(!message)return;
+          if(m.type==='emote')broadcast(room,{type:'chat',name:'*',message:ws.name+' '+message});
+          else{const recipient=m.to===room.host.id?room.host:room.guests.get(m.to);if(!recipient)throw Error('Player unavailable.');const data={type:'chat',name:'Whisper',message:ws.name+' → '+recipient.name+': '+message};send(ws,data);if(recipient!==ws)send(recipient,data);}return;
+        }
         if (m.type === "chat") {
           const message = text(m.message, 160);
           if (message.startsWith("/")) {
@@ -249,6 +259,9 @@ export function createRelay({
             const message = text(m.message, 160);
             if (message)
               broadcast(room, { type: "chat", name: "World", message });
+          } else if(m.type==="combat-event"){
+            const e=m.event;if(!e||!Number.isSafeInteger(e.id)||![e.x,e.y,e.z].every(Number.isFinite))throw Error('Invalid combat event');
+            for(const guest of room.guests.values())send(guest,{type:'combat-event',event:e});
           } else if (m.type === "private-state")
             send(room.guests.get(m.to), {
               type: "private-state",
@@ -315,7 +328,7 @@ export function createRelay({
               "close",
               "drop",
               "respawn",
-              "stand",
+              "stand", "trade", "enchant", "style",
             ].includes(m.kind) ||
             (m.payload != null &&
               (typeof m.payload !== "object" ||

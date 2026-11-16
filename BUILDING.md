@@ -1,3 +1,11 @@
+# Multiplayer — 2.23.0
+
+Use Node 24.22.1/npm 11.9.0. Run `npm ci`, `npm test`, then `npx playwright test --config playwright.multiplayer-update.config.js --workers=1`. The browser tests start a real relay and verify PvP, watching, media negotiation/fallback, guest Titan entry/exit and realm isolation. `npm run multiplayer` starts the relay for players (protocol 5). See MULTIPLAYER-UPGRADE.md.
+
+Build both Windows editions using the existing standalone, Electron and legacy launcher commands below. `python3 scripts/package-desktop-release.py --output <directory>` packages the EXE, separate HTML launcher, browser and source. `npm run test:desktop` launches the packaged runtime and checks offline saves, import/export and both Titan portals.
+
+## Previous build notes — 2.22.0
+
 # Gameplay polish — 2.22.0
 
 Use Node 24.22.1/npm 11.9.0. Run npm test, then npx playwright test --config playwright.gameplay-polish.config.js. Existing desktop regression and packaging commands remain valid. GAMEPLAY-POLISH.md documents changes, references and sound synthesis.

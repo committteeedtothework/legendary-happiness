@@ -1,3 +1,5 @@
+import {combatTargets,offensiveTarget,damagePvP} from "./pvp.js";
+import {ruleEnabled} from "./world-rules.js";
 import {tickEndWorld,tickEnderman,endEntityDamage,endEntityLoot} from "./end-runtime.js";
 import { recordAchievement } from "./achievements.js";
 import { playWorldSound } from "./spatial-audio.js";
@@ -138,6 +140,7 @@ export function dropItem(game, stack, x, y, z, delay = 10) {
   });
 }
 export function spawnSurfaceHostiles(game, night = true) {
+  if(!ruleEnabled(game,"doMobSpawning"))return;
   if(game.dimension==="end")return;
   const p = game.player,
     cinder = game.dimension === "cinderwild";
@@ -248,8 +251,8 @@ export function tickSurvival(game) {
     return;
   }
   const p = game.player;
-  game.time++;
-  if ((game.dimension || "overworld") === "overworld")
+  if(ruleEnabled(game,"doDaylightCycle"))game.time++;
+  if (ruleEnabled(game,"doDaylightCycle") && (game.dimension || "overworld") === "overworld")
     for (const event of CYCLE_EVENTS)
       if (game.time % 24000 === event.tick) {
         game.ui?.announce?.(event.title, game.settings.cycleText?.[event.key]);
@@ -282,7 +285,7 @@ export function tickSurvival(game) {
     dropItem(game, makeStack(d.id), d.x, d.y, d.z);
   tickWeather(game);
   tickBoats(game);
-  spawnFliers(game, createEntity);
+  if(ruleEnabled(game,"doMobSpawning"))spawnFliers(game, createEntity);
   if (game.tickCount % 40 === 0) populateVillages(game, createEntity);
   if (game.tickCount % 40 === 0) populateEncounters(game, createEntity);
   game.tickCount++;
@@ -388,10 +391,10 @@ export function tickSurvival(game) {
     (game.time % 24000 >= 13000 && game.time % 24000 < 23000) ||
     (["thunder", "tornado", "hail"].includes(game.world.weather?.kind) &&
       game.world.weather.intensity > 0.65);
-  spawnSurfaceHostiles(game, night);
-  if (!cinder) spawnOverworldWildlife(game, createEntity);
+  if(ruleEnabled(game,"doMobSpawning"))spawnSurfaceHostiles(game, night);
+  if (!cinder && ruleEnabled(game,"doMobSpawning")) spawnOverworldWildlife(game, createEntity);
   if (
-    cinder &&
+    cinder && ruleEnabled(game,"doMobSpawning") &&
     game.world.generationVersion >= 7 &&
     game.tickCount % 240 === 0 &&
     game.entities.filter(
@@ -432,8 +435,7 @@ export function tickSurvival(game) {
           );
       }
   }
-  spawnCaveHostiles(game, createEntity);
-  spawnWatcher(game, createEntity);
+  if(ruleEnabled(game,"doMobSpawning")){spawnCaveHostiles(game, createEntity);spawnWatcher(game, createEntity);}
   for (const e of game.entities) {
     if (e.hp <= 0) continue;
     e.turn ??= 0;
@@ -861,6 +863,7 @@ export function damageEntity(
     looting = 0,
   } = {},
 ) {
+  if(e.pvpId)return damagePvP(game,e,damage,{kind,knockback,source,critical:crit});
   if (e.hp <= 0 || e.type === "watcher") return 0;
   const endHandled=endEntityDamage(game,e,damage,{critical:crit,knockback,source,reward,kind,looting},{damageEntity,dropItem});
   if(endHandled!==null)return endHandled;
@@ -1043,8 +1046,8 @@ export function devinPulse(game) {
   }
   p.devinReadyTick = (game.tickCount || 0) + 200;
   let hits = 0;
-  for (const e of game.entities) {
-    if (!HOSTILE_TYPES.has(e.type) || e.hp <= 0) continue;
+  for (const e of combatTargets(game)) {
+    if (!offensiveTarget(e,HOSTILE_TYPES) || e.hp <= 0) continue;
     const dx = e.x - p.x,
       dy = e.y + 1 - p.y - 1.3,
       dz = e.z - p.z,
@@ -1056,7 +1059,7 @@ export function devinPulse(game) {
       d,
     );
     if (wall && wall.distance < d - 0.2) continue;
-    damageEntity(game, e, 8, { knockback: 2 });
+    damageEntity(game, e, 8, { knockback: 2,kind:"pulse" });
     hits++;
   }
   recordAchievement(game,"pulse",{value:hits});
@@ -1083,6 +1086,7 @@ export function interactContainer(world, target) {
 
 // Player-only state advances once per world tick for host-authoritative co-op.
 export function tickPlayerSurvival(game) {
+  if(game.player.multiplayerAway)return;
   tickOceanPlayer(game);
   const p = game.player;
   if (game.mode !== "creative" && p.health > 0) {
@@ -1110,7 +1114,7 @@ export function tickPlayerSurvival(game) {
     )
       game.damage(1, "suffocation");
     if (game.tickCount % 80 === 0) {
-      if ((p.food >= 18 || game.difficulty === "peaceful") && p.health < 20) {
+      if (ruleEnabled(game,"naturalRegeneration") && (p.food >= 18 || game.difficulty === "peaceful") && p.health < 20) {
         p.health++;
         p.exhaustion += 6;
       } else if (

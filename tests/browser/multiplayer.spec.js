@@ -9,7 +9,7 @@ test.beforeAll(async () => {
 });
 test.afterAll(async () => relay.close());
 async function prep(page) {
-  page.setDefaultTimeout(15000);
+  page.setDefaultTimeout(45000);
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.addInitScript(() =>
@@ -17,13 +17,15 @@ async function prep(page) {
       "dcsmcraft-settings",
       JSON.stringify({
         renderDistance: 2,
-        graphics: 1,
+        frameLimit:15,
+        graphics: 0,
+        shadows:false,entityShadows:false,clouds:false,particles:"minimal",
         ambientSounds: false,
         musicEnabled: false,
       }),
     ),
   );
-  await page.goto(origin);
+  await page.goto(origin,{waitUntil:"domcontentloaded",timeout:120000});
   await page.waitForFunction(() => window.dcsmcraft?.initialized);
   return errors;
 }
@@ -45,7 +47,7 @@ test("real relay and three independent players share invitations, block edits, d
     await host.locator("[name=seed]").fill("Cooperative Wildflower");
     await host.locator("[name=mode][value=creative]").check();
     await host.locator("[data-action=start-world]").click();
-    await host.waitForFunction(() => dcsmcraft.active);
+    await host.waitForFunction(() => dcsmcraft.active&&dcsmcraft.ui.screen==="play");
     await host.evaluate((B) => {
       const g = dcsmcraft;
       g.pause();
@@ -84,7 +86,7 @@ test("real relay and three independent players share invitations, block edits, d
     await guest.locator("[data-role=guest]").click();
     await guest.waitForFunction(() => dcsmcraft.multiplayer.sessionReady);
     await expect(guest.locator("[data-action=resume]")).toBeVisible();
-    await third.goto(invite);
+    await third.goto(invite,{waitUntil:"domcontentloaded",timeout:120000});
     await third.waitForFunction(() => window.dcsmcraft?.initialized);
     await expect(third.locator("#multiplayer-invite")).toHaveValue(invite);
     await third.locator("#multiplayer-name").fill("Friend Two");
@@ -129,6 +131,8 @@ test("real relay and three independent players share invitations, block edits, d
     await host.waitForFunction(() => dcsmcraft.world.get(8, 200, 5) === 0);
     await third.waitForFunction(() => dcsmcraft.world.get(8, 200, 5) === 0);
     // Both peers target a platform floor; place a shared block using the ordinary right click.
+    // Equip the canonical peer inventory; client poses cannot grant items.
+    await host.evaluate(({id,item,count})=>{const m=dcsmcraft.multiplayer,p=m.peers.get(id);p.inventory.slots[0]={id:item,count};m.sendPrivate(p);},{id:await guest.evaluate(()=>dcsmcraft.multiplayer.id),item:"planks",count:64});
     await guest.evaluate(() => {
       dcsmcraft.inventory.slots[0] = { id: "planks", count: 64 };
       dcsmcraft.inventory.selected = 0;
@@ -219,6 +223,8 @@ test("real relay and three independent players share invitations, block edits, d
         },
       ];
     });
+    // Equip the canonical peer inventory; client poses cannot grant items.
+    await host.evaluate(({id,item,count})=>{const m=dcsmcraft.multiplayer,p=m.peers.get(id);p.inventory.slots[0]={id:item,count};m.sendPrivate(p);},{id:await guest.evaluate(()=>dcsmcraft.multiplayer.id),item:"devin_sword",count:1});
     await guest.evaluate(() => {
       dcsmcraft.inventory.slots[0] = { id: "devin_sword", count: 1 };
       dcsmcraft.player.yaw = 0;
@@ -271,6 +277,8 @@ test("real relay and three independent players share invitations, block edits, d
         },
       ];
     });
+    // Equip the canonical peer inventory; client poses cannot grant items.
+    await host.evaluate(({id,item,count})=>{const m=dcsmcraft.multiplayer,p=m.peers.get(id);p.inventory.slots[0]={id:item,count};m.sendPrivate(p);},{id:await guest.evaluate(()=>dcsmcraft.multiplayer.id),item:"matthew_dual_pistols",count:1});
     await guest.evaluate(() => {
       const g = dcsmcraft;
       g.inventory.slots[0] = { id: "matthew_dual_pistols", count: 1 };

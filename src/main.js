@@ -1,3 +1,5 @@
+import {combatTargets} from "./pvp.js";
+import {normalizeWorldRules,ruleEnabled} from "./world-rules.js";
 import {useOffhand,swapHands,withOffhand,shieldMelee,shouldUseOffhand} from "./offhand.js";
 import {dragoonHead} from "./end-hitboxes.js";
 import {useEndItem} from "./end-runtime.js";
@@ -199,7 +201,7 @@ class Game {
     this.devStands =
       typeof __DCSMCRAFT_DEV__ !== "undefined" && __DCSMCRAFT_DEV__;
     this.standProjectiles = [];
-    this.rules = { keepInventory: false };
+    this.rules = normalizeWorldRules({}, {legacy:false});
     this.store = new SaveStore();
     this.audio = new AudioEngine(this.settings);
     this.renderer = new Renderer(document.querySelector("#app"), this.settings);
@@ -348,10 +350,7 @@ class Game {
       }
       if (e.code === "KeyR") {
         if (holdsPistols(this)) {
-          if (this.multiplayer?.isGuest) {
-            this.ui.toast("Air Trick is host-only in Creative co-op.");
-            return;
-          }
+          if (this.multiplayer?.isGuest) {this.multiplayer.command('style',{blink:true});return;}
           tricksterMove(this, true);
           return;
         }
@@ -491,7 +490,7 @@ class Game {
       if (this.active && !this.giganto?.closing) this.save().catch(() => {});
     });
   }
-  async newWorld({ name, seed, mode, difficulty }) {
+  async newWorld({ name, seed, mode, difficulty, ...options }) {
     this.giganto.clear();
     this.multiplayer?.disconnect();
     if (this.multiplayer) this.multiplayer.isGuest = false;
@@ -507,7 +506,7 @@ class Game {
     this.portalCooldown = 0;
     this.portalCharge = 0;
     this.standProjectiles = [];
-    this.rules = { keepInventory: false };
+    this.rules = normalizeWorldRules(options,{legacy:false,mode});
     this.seekers = [];
     this.pistolTraces = [];
     this.hostileProjectiles = [];
@@ -561,7 +560,7 @@ class Game {
       const { data, recovered } = await this.store.load(id);
       this.giganto.clear();
       this.standProjectiles = [];
-      this.rules = { keepInventory: false, ...data.rules };
+      this.rules = normalizeWorldRules(data.rules);
       this.seekers = [];
       this.pistolTraces = [];
       this.hostileProjectiles = [];
@@ -607,6 +606,7 @@ class Game {
       this.tickCount = data.tickCount || 0;
       this.spawn = data.spawn || this.world.findSpawn();
       this.player = createPlayer(this.spawn, data.player);
+      delete this.player.multiplayerAway;
       delete this.player.fishing;
       this.inventory = new Inventory(data.inventory);
       this.entities = upgradeNightEnemies(data.entities, this.dimension);
@@ -661,7 +661,7 @@ class Game {
       worldTick: this.world.tick,
       blockTimers: this.world.blockTimers,
       spawn: this.spawn,
-      player: this.player,
+      player: {...this.player,multiplayerAway:undefined},
       inventory: this.inventory.export(),
       edits: this.world.exportEdits(),
       generationVersion: this.world.generationVersion,
@@ -823,7 +823,7 @@ class Game {
     this.ui.pause();
   }
   openInventory(type, container = null, target = null) {
-    if (this.multiplayer?.isGuest && this.mode === "survival")
+    if (this.multiplayer?.isGuest)
       this.multiplayer.command("menu", { type });
     this.running = false;
     this.mouseDown = false;
@@ -834,7 +834,7 @@ class Game {
     document.exitPointerLock?.();
   }
   closeCraft() {
-    if (this.multiplayer?.isGuest && this.mode === "survival") {
+    if (this.multiplayer?.isGuest) {
       this.multiplayer.command("close");
       return;
     }
@@ -874,6 +874,8 @@ class Game {
   damage(amount, cause, force = false, source = null) {
     if (this.multiplayer?.isGuest && this.mode === "survival") return;
     const p = this.player;
+    if(p.multiplayerAway)return;
+    if(cause==="fall" && !force && this.rules?.fallDamage===false)return;
     if ((this.mode === "creative" && !force) || p.health <= 0 || p.hurt > 0)
       return;
     amount=shieldMelee(this,amount,cause,source);
@@ -944,11 +946,13 @@ class Game {
       }
     const standData = this.player.standData,
       achievements = achievementState(this.player),
-      aquaticId = this.player.aquaticId;
+      aquaticId = this.player.aquaticId,
+      multiplayerStats=this.player.multiplayerStats;
     this.player = createPlayer(clear ? point : this.world.findSpawn(), {
       achievements,
       aquaticId,
     });
+    this.player.multiplayerStats=multiplayerStats;
     if (standData) {
       this.player.standData = standData;
       standData.trial = null;
@@ -967,11 +971,9 @@ class Game {
       );
       return;
     }
-    if (this.multiplayer?.connected) {
-      this.portalCharge = 0;
-      this.portalCooldown = 100;
-      this.ui.toast("Leave multiplayer to change dimensions.");
-      return;
+    if (this.multiplayer?.isGuest) {
+      this.portalCharge=0;this.portalCooldown=100;
+      this.ui.toast('The host travels first. Use Watch to follow their view.');return;
     }
 
     travel(this, portal);
@@ -993,7 +995,7 @@ class Game {
           ? 4.5
           : ITEMS[this.inventory.held?.id]?.reach || 3;
     const ray = new THREE.Ray(origin, direction);
-    for (const e of this.entities) {
+    for (const e of combatTargets(this)) {
       if (e.hp <= 0) continue;
       if(e.type==='dragoon'){
         const h=dragoonHead(e),box=new THREE.Box3(new THREE.Vector3(h.x-1.6,h.y-1,h.z-1.6),new THREE.Vector3(h.x+1.6,h.y+1,h.z+1.6)),hit=ray.intersectBox(box,new THREE.Vector3());
@@ -1267,16 +1269,12 @@ class Game {
       boatInReach(this)
     ) {
       if (this.multiplayer?.isGuest) {
-        if (this.mode === "survival") this.multiplayer.command("use");
-        else this.ui.toast("Boats are host-controlled in Creative co-op.");
+        this.multiplayer.command("use");
       } else useBoat(this);
       return;
     }
     if (pistolUsesStyle(this)) {
-      if (this.multiplayer?.isGuest && this.mode === "survival") {
-        this.ui.toast("Only the host can use this ability.");
-        return;
-      }
+      if (this.multiplayer?.isGuest) {this.multiplayer.command('style',{blink:false});return;}
       tricksterMove(this);
       return;
     }
@@ -1514,7 +1512,7 @@ class Game {
     }
   }
   autofill(recipe, size) {
-    if (this.multiplayer?.isGuest && this.mode === "survival") {
+    if (this.multiplayer?.isGuest) {
       this.multiplayer.command("inventory", {
         action: "recipe",
         recipe: RECIPES.indexOf(recipe),
@@ -1554,10 +1552,12 @@ class Game {
     pollAchievements(this, dt);
     this.achievementView.frame(dt);
     this.endJournal.frame();
-    this.controller?.frame(dt);
-    this.touch?.frame(dt);
+    if(!this.multiplayer?.watch.target){this.controller?.frame(dt);this.touch?.frame(dt);}
     if (this.active && this.giganto?.active) {
+      this.multiplayer?.frame(now,dt);
+      this.multiplayer?.arenaBackground?.(dt);
       this.giganto.frame(dt);
+      this.multiplayer?.watch.capture(now);
       this.prompts?.frame();
       return;
     }
@@ -1579,13 +1579,13 @@ class Game {
         );
         if (!this.multiplayer?.isGuest || this.mode === "creative")
           updateTrickster(this, 1 / 60);
-        this.multiplayer?.physics(1 / 60);
+        if(!this.multiplayer?.sharedRealm.base)this.multiplayer?.physics(1 / 60);
         this.accumulator -= 1 / 60;
         this.subtick = (this.subtick || 0) + 1;
         if (this.subtick % 3 === 0 && !this.multiplayer?.isGuest) {
           tickSurvival(this);
           tickPalm(this, damageEntity);
-          this.multiplayer?.tickSurvival();
+          if(!this.multiplayer?.sharedRealm.base)this.multiplayer?.tickSurvival();
         }
       }
       this.target = this.world.raycast(
@@ -1695,6 +1695,7 @@ class Game {
       underwater: p.underwater,
       animating: this.running,
     });
+    this.multiplayer?.watch.capture(now);
     this.ui.frame();
     this.jukebox.update();
     this.chat.frame();

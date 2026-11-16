@@ -1,3 +1,4 @@
+import {combatTargets,offensiveTarget,projectileOwner} from "./pvp.js";
 import { STANDS, STAND_ARTIFACTS } from "./stands-data.js";
 import { HOSTILE_TYPES, MOB_INFO } from "./data.js";
 import { collides, moveBody } from "./physics.js";
@@ -153,7 +154,7 @@ function targeted(g, range, filter) {
   const p = g.player,
     a = eye(p),
     d = direction(p);
-  return g.entities
+  return combatTargets(g)
     .filter((e) => e.hp > 0 && filter(e))
     .map((e) => {
       const b = {
@@ -259,10 +260,10 @@ export const STAND_ACTIONS = {
     },
     (g, damage) => {
       let n = 0;
-      for (const e of g.entities)
+      for (const e of combatTargets(g))
         if (
           e.hp > 0 &&
-          HOSTILE_TYPES.has(e.type) &&
+          offensiveTarget(e,HOSTILE_TYPES) &&
           Math.hypot(e.x - g.player.x, e.y - g.player.y, e.z - g.player.z) <
             4 &&
           standVisible(g.world, eye(g.player), { x: e.x, y: e.y + 1, z: e.z })
@@ -294,7 +295,7 @@ export const STAND_ACTIONS = {
         friends[0].health = Math.min(20, friends[0].health + 4);
         return true;
       }
-      const e = targeted(g, 4, (e) => !HOSTILE_TYPES.has(e.type));
+      const e = targeted(g, 4, (e) => !offensiveTarget(e,HOSTILE_TYPES));
       if (!e) return false;
       const max = MOB_INFO[e.type]?.health || 10;
       if (e.hp >= max) return false;
@@ -436,8 +437,9 @@ export function tickStandProjectiles(game, damage) {
       wall = game.world.raycast(a, v, d, true);
     let hit,
       near = wall?.distance ?? d + 0.01;
-    for (const e of game.entities) {
-      if (e.hp <= 0 || !HOSTILE_TYPES.has(e.type)) continue;
+    const caster=projectileOwner(game,q.owner)?.context;
+    for (const e of caster ? combatTargets(caster) : game.entities) {
+      if (e.hp <= 0 || !offensiveTarget(e,HOSTILE_TYPES)) continue;
       const height = MOB_INFO[e.type]?.height || 1.8,
         width = (MOB_INFO[e.type]?.width || 0.6) / 2;
       const contact = rayBounds(

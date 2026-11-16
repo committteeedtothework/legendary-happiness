@@ -1,3 +1,15 @@
+# Multiplayer — 2.23.0
+
+The final Node suite passes **1,018 tests**, with no failures or skipped tests. All three new multiplayer browser tests pass, using a real relay and independent browser profiles. The packaged Linux Electron app passes offline creation, chunk travel, save-on-close/relaunch, backup export/import, both Titan portal model loads/returns and Quit. Windows EXE/ASAR payloads and the separate HTML launcher are checked byte-for-byte.
+
+Release evidence is packaged in the verification ZIP. Focused tests cover world rules/cheats, atomic commands, PvP caps and eligibility, custom weapon provenance, private chat/watch routing, input-only Titan replay, forged victory rejection, once-only rewards, save recovery and shared-realm isolation. Real browser sessions exercise the relay and actual rendered encounters. The full existing Node suite is also run.
+
+Supplied assets, generation, item/NPC stats, save storage and both pure Titan simulations are checked against the 2.22.0 baseline. Changed integration hooks are explicitly scoped in tests/helpers/multiplayer-authorized.js; unchanged files retain their original hash checks.
+
+Both Windows payloads are inspected. The same game ASAR is launched in Linux Electron. Native Windows execution, hardware controllers and Internet WebRTC across different NATs are not verified here. Direct media negotiates video/game audio tracks; relay fallback is video-only. Cloud Chromium supplies no ICE candidates even for a separate loopback probe, so actual direct playback is unverified. Independent guest dimension travel remains unsupported. Main and hosted mobile stay unchanged.
+
+## Previous validation — 2.22.0
+
 # Gameplay polish — 2.22.0
 
 The final Node suite passes **1,006 tests**, with no failures or skipped tests. Coverage includes save durability, generation/lighting/chunk streaming, inventory/combat, both Titan simulations, model stability, weapon grips, water/swimming/Elytra and controller behavior. Nine focused polish tests verify species/event/variant PCM, lazy voice caching, baby pitch and End aliases, straight land arms with attached grips, matching action poses at 30/60/144 FPS, actual critical damage, immune/dead target suppression, visible-body particle placement and preserved asset/stat/save/Titan hashes.

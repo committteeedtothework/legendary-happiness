@@ -1,3 +1,5 @@
+import {cheatsEnabled} from "./world-rules.js";
+import {extraOwnerCommand,EXTRA_COMMAND_HELP} from "./owner-commands.js";
 import { palmDev, ensurePalm } from "./devils-palm.js";
 import { ITEMS, MIN_Y, MAX_Y, makeStack } from "./data.js";
 import { collides } from "./physics.js";
@@ -11,7 +13,7 @@ export function tokenizeCommand(line) {
   const tokens = line.trim().match(/"[^"\r\n]*"|[^\s"]+/g) || [];
   return tokens.map((t) => (t.startsWith('"') ? t.slice(1, -1) : t));
 }
-function participants(g) {
+export function participants(g) {
   const m = g.multiplayer;
   return [
     {
@@ -69,6 +71,10 @@ export async function runOwnerCommand(g, line) {
     throw Error("Only the person hosting this world can use commands.");
   const [raw, ...args] = tokenizeCommand(line),
     cmd = raw?.toLowerCase();
+  if(g.multiplayer?.sharedRealm?.base&&!['/help','/list','/seed','/save','/give','/clear','/enchant','/effect','/kick','/say','/heal'].includes(cmd))throw Error('Return to the shared realm first.');
+  if(!["/help","/list","/seed","/save","/kick"].includes(cmd)&&!cheatsEnabled(g))throw Error("Cheats are disabled for this world.");
+  const extra=extraOwnerCommand(g,cmd,args,{participants,findParticipant});
+  if(extra!==null)return extra;
   if (cmd === "/palmdev") {
     const result = palmDev(g, args);
     await g.save();
@@ -88,7 +94,7 @@ export async function runOwnerCommand(g, line) {
     await g.save();
     return "Protected from Palm generation and Stand travel.";
   }
-  if (cmd === "/help") return COMMAND_HELP;
+  if (cmd === "/help") return COMMAND_HELP+" · "+EXTRA_COMMAND_HELP;
   if (cmd === "/list")
     return participants(g)
       .map((p) => `${p.name} (${p.id})`)
@@ -131,29 +137,12 @@ export async function runOwnerCommand(g, line) {
     return `Difficulty set to ${args[0]}.`;
   }
   if (cmd === "/give") {
-    const [name, id, countText = "1"] = args,
-      count = Number(countText),
-      target = findParticipant(g, name);
-    if (
-      args.length < 2 ||
-      args.length > 3 ||
-      !ITEMS[id] ||
-      !Number.isInteger(count) ||
-      count < 1 ||
-      count > 64
-    )
-      throw Error("Use /give <player|@s> <item_id> [1–64].");
-    if (target.player.health <= 0)
-      throw Error("That player must respawn first.");
-    // Roll back a partial add so a failed command cannot hide or duplicate items.
-    const before = target.inventory.export(),
-      slots = structuredClone(before.slots);
-    if (target.inventory.add(makeStack(id, count))) {
-      target.inventory.slots = slots;
-      throw Error("Not enough inventory space.");
-    }
-    g.ui.updateHotbar();
-    return `Gave ${count} ${ITEMS[id].name} to ${target.name}.`;
+    const [name,id,countText='1']=args,count=Number(countText),targets=name==='@a'?participants(g):[findParticipant(g,name)];
+    if(args.length<2||args.length>3||!ITEMS[id]||!Number.isInteger(count)||count<1||count>64)throw Error('Use /give player|@a|@s item [1–64].');
+    if(targets.some(t=>t.player.health<=0||t.player.multiplayerAway))throw Error('That player must return to the world first.');
+    const backups=targets.map(t=>structuredClone(t.inventory.slots));
+    for(const t of targets)if(t.inventory.add(makeStack(id,count))){targets.forEach((target,i)=>target.inventory.slots=backups[i]);throw Error('Not enough inventory space.');}
+    g.ui.updateHotbar();return `Gave ${count} ${ITEMS[id].name}${targets.length>1?' to '+targets.length+' players':''}.`;
   }
   if (cmd === "/tp") {
     const target = findParticipant(g, args[0]);
@@ -214,7 +203,7 @@ export class ChatSystem {
   receive(name, message) {
     this.lines.push({
       name: String(name).slice(0, 20),
-      message: String(message).slice(0, 1000),
+      message: String(message).slice(0, 4000),
       at: performance.now(),
     });
     this.lines = this.lines.slice(-80);
@@ -232,6 +221,24 @@ export class ChatSystem {
     this.history.push(line);
     this.history = this.history.slice(-40);
     this.historyIndex = this.history.length;
+    if(line.startsWith('/')){
+      let tokens;try{tokens=tokenizeCommand(line);}catch(e){this.receive('Command',e.message);return;}
+      const [command,...args]=tokens,m=this.game.multiplayer;
+      if(['/msg','/tell','/w','/me','/spectate','/list','/help'].includes(command)&&m.connected){
+        if(command==='/help'&&m.isGuest){this.receive('Command','/list · /msg player message · /me action · /spectate player|stop');return;}
+        if(command==='/list'){this.receive('Players',m.players.map(p=>`${p.name} (${p.id})`).join(', '));return;}
+        if(command==='/spectate'){
+          if(args.length===1&&args[0]==='stop'){m.watch.request(null);return;}
+          const player=m.players.find(p=>p.id===args[0]||p.name.toLowerCase()===args[0]?.toLowerCase());
+          if(!player||args.length!==1)this.receive('Command','Use /spectate player|stop.');else m.watch.request(player.id);return;
+        }
+        if(['/msg','/tell','/w'].includes(command)){
+          const player=m.players.find(p=>p.id===args[0]||p.name.toLowerCase()===args[0]?.toLowerCase());
+          if(!player||args.length<2)this.receive('Command','Use /msg player message.');else m.send({type:'private-chat',to:player.id,message:args.slice(1).join(' ')});return;
+        }
+        if(command==='/me'){if(args.length)m.send({type:'emote',message:args.join(' ')});return;}
+      }
+    }
     if (line.startsWith("/")) {
       try {
         this.receive("Command", await runOwnerCommand(this.game, line));

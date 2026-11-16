@@ -1,3 +1,5 @@
+import {openWorldRules} from "./world-rules-ui.js";
+import {WORLD_RULES} from "./world-rules.js";
 import {dropCursorStack,collectMatching,sortBackpack} from "./inventory-qol.js";
 import { recordAchievement, scanAchievements } from "./achievements.js";
 import { menuLogo } from "./menu-logo.js";
@@ -126,6 +128,7 @@ export class UI {
       this.game.audio.menu(menuRoleForAction(action));
       if (action === "multiplayer") this.multiplayerMenu();
       if (action === "world-chat") this.game.chat.open();
+      if(action==='world-rules')openWorldRules(this);
       if (action === "connect-multiplayer") this.connectMultiplayer(button);
       if (action === "test-relay") this.testRelay(button);
       if (action === "copy-invite") this.copyInvite();
@@ -176,6 +179,7 @@ export class UI {
       if (action === "enchant-select")
         this.enchanting(Number(button.dataset.index));
       if (action === "enchant-item") {
+        if(this.game.multiplayer?.isGuest){this.game.multiplayer.command('enchant',{index:this.enchantIndex,enchantment:button.dataset.enchantment});return;}
         const result = enchantItem(
           this.game,
           this.enchantIndex,
@@ -234,7 +238,9 @@ export class UI {
           this.toast("Fullscreen is unavailable in this viewer."),
         );
       }
+      if(action==='watch-player'){this.game.multiplayer.watch.request(button.dataset.id);return;}
       if (action === "trade") {
+        if(this.game.multiplayer?.isGuest){this.game.multiplayer.command('trade',{index:Number(button.dataset.trade)});return;}
         const result = tradeWithVillager(
           this.game,
           this.tradingEntity,
@@ -629,7 +635,7 @@ export class UI {
       players = this.overlay.querySelector("#session-players"),
       log = this.overlay.querySelector("#chat-log");
     if (players)
-      players.innerHTML = `<h3>Players (${m.players.length}/8) · ${m.ping ?? "—"} ms</h3>${m.players.map((p) => `<div class="session-player"><span>${esc(p.name)}${p.host ? " · Host" : ""}</span>${!m.isGuest && !p.host ? `<button class="secondary" data-action="kick-player" data-id="${esc(p.id)}">Remove</button>` : ""}</div>`).join("")}`;
+      players.innerHTML = `<h3>Players (${m.players.length}/8) · ${m.ping ?? "—"} ms</h3>${m.players.map((p) => `<div class="session-player"><span>${esc(p.name)}${p.host ? " · Host" : ""}</span>${p.id!==m.id?`<button class="secondary" data-action="watch-player" data-id="${esc(p.id)}">Watch</button>`:''}${!m.isGuest && !p.host ? `<button class="secondary" data-action="kick-player" data-id="${esc(p.id)}">Remove</button>` : ""}</div>`).join("")}`;
     if (log) {
       log.innerHTML = m.chat
         .map((line) => `<p><b>${esc(line.name)}</b>: ${esc(line.message)}</p>`)
@@ -705,8 +711,11 @@ export class UI {
   create() {
     this.setScreen(
       "create",
-      `${this.header()}<main class="dialog create-dialog"><form id="world-form"><div class="dialog-top"><button type="button" class="close" data-action="title" aria-label="Close">×</button></div><h2>Create New World</h2><label>WORLD NAME<input name="name" maxlength="48" value="New World" required autocomplete="off"/></label><label>WORLD SEED <small>Optional · letters or numbers</small><input name="seed" maxlength="80" placeholder="Random" autocomplete="off"/></label><fieldset><legend>GAME MODE</legend><label class="radio-card"><input type="radio" name="mode" value="survival" checked/><span><b>Survival</b><small>Gather resources and survive.</small></span><span>◈</span></label><label class="radio-card"><input type="radio" name="mode" value="creative"/><span><b>Creative</b><small>Unlimited blocks and flight.</small></span><span>▧</span></label></fieldset><label class="select-label">DIFFICULTY<select name="difficulty"><option value="peaceful">Peaceful</option><option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option></select></label><button class="primary wide" type="button" data-action="start-world">Create New World</button></form></main>`,
+      `${this.header()}<main class="dialog create-dialog"><form id="world-form"><div class="dialog-top"><button type="button" class="close" data-action="title" aria-label="Close">×</button></div><h2>Create New World</h2><label>WORLD NAME<input name="name" maxlength="48" value="New World" required autocomplete="off"/></label><label>WORLD SEED <small>Optional · letters or numbers</small><input name="seed" maxlength="80" placeholder="Random" autocomplete="off"/></label><fieldset><legend>GAME MODE</legend><label class="radio-card"><input type="radio" name="mode" value="survival" checked/><span><b>Survival</b><small>Gather resources and survive.</small></span><span>◈</span></label><label class="radio-card"><input type="radio" name="mode" value="creative"/><span><b>Creative</b><small>Unlimited blocks and flight.</small></span><span>▧</span></label></fieldset><label class="select-label">DIFFICULTY<select name="difficulty"><option value="peaceful">Peaceful</option><option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option></select></label><div class="world-rule-options"><label class="world-rule"><input type="hidden" name="cheats" value="false"><input type="checkbox" name="cheats" value="true"> Allow Cheats</label><details><summary>Game Rules</summary>${Object.entries(WORLD_RULES).map(([key,r])=>`<label class="world-rule"><input type="hidden" name="${key}" value="false"><input type="checkbox" name="${key}" value="true" ${r.initial?"checked":""}> ${r.label}</label>`).join("")}</details></div><button class="primary wide" type="button" data-action="start-world">Create New World</button></form></main>`,
     );
+    const form=this.overlay.querySelector('#world-form'),cheats=form.querySelector('[type=checkbox][name=cheats]');
+    cheats.addEventListener('change',()=>cheats.dataset.explicit='true');
+    form.querySelectorAll('[name=mode]').forEach(input=>input.addEventListener('change',()=>{if(!cheats.dataset.explicit)cheats.checked=form.querySelector('[name=mode]:checked').value==='creative';}));
   }
   async worlds() {
     this.setScreen(
@@ -832,7 +841,7 @@ export class UI {
     const g = this.game;
     this.setScreen(
       "world-tools",
-      `<main class="dialog compact"><h2>World</h2><button data-action="titan-menu">Giganto</button><button data-action="jukebox">Jukebox</button><button data-action="cinder-guide">Cinderworld</button><button data-action="aquatic-guide">Ocean Journal</button>${g.mode === "creative" ? '<button data-action="weather">Weather</button>' : ""}${!g.multiplayer?.isGuest ? '<button data-action="backup-current">Export world backup</button>' : ""}${window.DCSMCRAFT_HTML_SOURCE ? '<button data-action="download-game">Save game HTML</button>' : ""}<button data-action="back">Done</button></main>`,
+      `<main class="dialog compact"><h2>World</h2><button data-action="world-rules">World Options</button><button data-action="titan-menu">Giganto</button><button data-action="jukebox">Jukebox</button><button data-action="cinder-guide">Cinderworld</button><button data-action="aquatic-guide">Ocean Journal</button>${g.mode === "creative" ? '<button data-action="weather">Weather</button>' : ""}${!g.multiplayer?.isGuest ? '<button data-action="backup-current">Export world backup</button>' : ""}${window.DCSMCRAFT_HTML_SOURCE ? '<button data-action="download-game">Save game HTML</button>' : ""}<button data-action="back">Done</button></main>`,
     );
   }
   settingValue(key, value) {
@@ -1305,7 +1314,7 @@ export class UI {
     const pressKey=ref+":"+index,now=performance.now();
     if(!right&&!e.shiftKey&&!g.multiplayer?.isGuest&&ref!=="creative"&&inv.cursor&&this.lastSlotPress?.key===pressKey&&now-this.lastSlotPress.at<260){collectMatching(inv);this.lastSlotPress=null;this.refreshInventory();return;}
     this.lastSlotPress={key:pressKey,at:now};
-    if (g.multiplayer?.isGuest && g.mode === "survival") {
+    if (g.multiplayer?.isGuest) {
       this.dragging = !e.drag;
       this.dragVisited = this.dragVisited || new Set([ref + index]);
       g.multiplayer.command("inventory", {
@@ -1472,7 +1481,7 @@ export class UI {
     if (!s.count) inv.slots[index] = null;
   }
   craft(all = false) {
-    if (this.game.multiplayer?.isGuest && this.game.mode === "survival") {
+    if (this.game.multiplayer?.isGuest) {
       this.game.multiplayer.command("inventory", { action: "craft", all });
       return;
     }

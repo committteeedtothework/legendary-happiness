@@ -410,6 +410,9 @@ export class GigantoEncounter {
       const damage = e.target.dataset.titanDamage;
       const k = damage ? "damage" : e.target.dataset.titanConfig;
       if (!k || (this.active && k === "climbMode")) return;
+      if(game.multiplayer?.isGuest && !['audio','volume','musicVolume','effectsVolume','shadows','shadowQuality','postProcessing','motionBlur','bloom','ambientOcclusion','sceneryDetail','weatherEffects','lighting','groundEffects','liveReflections','speedTrails','graphicsQuality','lightQuality','particles'].includes(k)){
+        game.ui.toast('Only the host can change combat settings.');this.pauseMenu();return;
+      }
       this.record.config = titanConfig({
         ...this.record.config,
         [k]: damage
@@ -590,6 +593,7 @@ export class GigantoEncounter {
       return false;
     lockTitanCinematics(s);
     s.events = [];
+    this.game.multiplayer?.arena.action(action);
     const result =
       s.titan === "wyvern" ? wyvernInput(s, action) : titanInput(s, action);
     for (const e of s.events) {
@@ -655,7 +659,7 @@ export class GigantoEncounter {
       this.pending ||
       !g.active ||
       g.dimension !== "overworld" ||
-      g.multiplayer?.connected ||
+      g.multiplayer?.isGuest ||
       !r.config.enabled ||
       g.tickCount < r.cooldownUntil
     )
@@ -788,10 +792,6 @@ export class GigantoEncounter {
       !g.player.onGround
     )
       return false;
-    if (g.multiplayer?.connected || g.multiplayer?.isGuest) {
-      g.ui.toast("Leave multiplayer to enter.");
-      return false;
-    }
     if (
       !this.nearPortal ||
       !this.validPortal() ||
@@ -814,8 +814,7 @@ export class GigantoEncounter {
         g.player.health <= 0 ||
         !g.player.onGround ||
         !this.nearPortal ||
-        !this.validPortal() ||
-        g.multiplayer?.connected
+        !this.validPortal()
       )
         return false;
       if (g.saving) await g.saving;
@@ -825,14 +824,16 @@ export class GigantoEncounter {
         dimension: g.dimension,
         cameraMode: g.cameraMode,
       };
+      const grant=await g.multiplayer?.arena.begin(this.wyvern.savedGigantoRecord?'wyvern':'giganto');
+      if(grant){r.config=cloneState(grant.record.config);r.portal=cloneState(grant.record.portal);}
       initializeArenaSettings(r.config, g.settings);
       r.session = lockTitanCinematics(
-        (this.wyvern.savedGigantoRecord ? wyvernSession : titanSession)(
+        grant?.session || (this.wyvern.savedGigantoRecord ? wyvernSession : titanSession)(
           { ...r.config, cinematics: true },
           r.portal.id,
         ),
       );
-      r.session.original = original;
+      r.session.original = grant?.session.original || original;
       this.active = true;
       g.resetControls();
       this.silenceWorld();
@@ -850,6 +851,8 @@ export class GigantoEncounter {
       return true;
     } catch (e) {
       this.active = false;
+      try{if(g.multiplayer?.arena.token)await g.multiplayer.arena.finish(false);}catch{}
+      g.multiplayer?.arena.complete();
       this.audio.silence();
       r.session = null;
       this.view?.dispose();
@@ -883,7 +886,7 @@ export class GigantoEncounter {
     if (!s) return;
     if (s.titan === "wyvern") return this.wyvern.frame(dt);
     lockTitanCinematics(s);
-    g.elapsed -= dt;
+    if(!g.multiplayer?.connected)g.elapsed -= dt;
     g.audio.music?.silence();
     this.prompt.hidden = true;
     this.hud.hidden = g.ui.screen !== "play";
@@ -918,7 +921,7 @@ export class GigantoEncounter {
             ...(g.touch?.active ? g.touch.keys : []),
           ]),
           move = touchMovement(g);
-        stepTitan(
+        (g.multiplayer?.connected ? (session,input,dt)=>g.multiplayer.arena.step(session,input,dt,'giganto') : stepTitan)(
           s,
           {
             ...(move
@@ -1209,6 +1212,7 @@ export class GigantoEncounter {
         ? wyvernInput(this.session, "retry")
         : titanInput(this.session, "retry");
       this.controls.clear();
+      g.multiplayer?.arena.action('retry');
       g.resume();
       g.save().catch((e) => g.ui.toast(e.message));
     }
@@ -1252,6 +1256,7 @@ export class GigantoEncounter {
     this.audio.pause(s);
     try {
       if (g.saving) await g.saving;
+      await g.multiplayer?.arena.finish(!!s.won);
       const old = {
         player: g.player,
         inventory: g.inventory,
@@ -1267,7 +1272,7 @@ export class GigantoEncounter {
         delete g.player.editionDraw;
         g.player.shieldRaised = false;
         g.player.vx = g.player.vy = g.player.vz = 0;
-        if (s.won && !r.ledger.includes(s.id)) {
+        if (s.won && !r.ledger.includes(s.id) && !g.multiplayer?.isGuest) {
           r.ledger.push(s.id);
           for (const [id, count] of [
             ["diamond", 6],
@@ -1314,6 +1319,7 @@ export class GigantoEncounter {
       this.portalMesh = null;
       this.audio.silence();
       if (s.titan === "wyvern") this.wyvern.finish();
+      g.multiplayer?.arena.complete();
       document.querySelector("#app").classList.remove("titan-active");
       g.renderer.loadAround(g.player.x, g.player.z, 2, 9);
       g.ui.play();

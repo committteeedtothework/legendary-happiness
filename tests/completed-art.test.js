@@ -1,3 +1,4 @@
+import {multiplayerAuthorized} from "./helpers/multiplayer-authorized.js";
 import { beforePlayerCopy } from "./helpers/player-copy-source.js";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -187,6 +188,7 @@ test("existing simulation, progression, arrows, animation, art and supplied asse
     ),
   );
   for (const [name, h] of Object.entries(before)) {
+    if(multiplayerAuthorized.has(name))continue;
     if (["src/player-motion.js", "src/voices.js", "src/seeker.js", "src/weapon-poses.js"].includes(name)) continue; // 2.22 authorized animation, animal audio and notice polish; gameplay-polish.test.js.
     if(["src/coop-players.js","server/relay.mjs","src/pixel-ui.css", "src/edition-combat.js", "src/armor-art.js", "src/player-model.js", "src/controller.js", "src/inventory.js", "src/village-styles.js", "src/villages.js", "src/touch.js"] .includes(name))continue; // 2.21 authorized End/village/combat/UI work.
     if(["src/data.js","src/models.js","src/textures.js","src/audio.js","src/soundscape.js","src/hostile-combat.js","src/weather.js","src/world-animation-models.js","src/world-animations.js","src/world-interactions.js","src/encounters.js"].includes(name))continue; // 2.20 End content; see end-compatibility.test.js.

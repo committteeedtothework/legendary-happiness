@@ -1,3 +1,4 @@
+import {combatTargets} from "./pvp.js";
 import { B, BLOCKS, MOB_INFO } from "./data.js";
 import { farmScale } from "./livestock-data.js";
 import { collides, moveBody } from "./physics.js";
@@ -68,7 +69,7 @@ export function firePistols(g, damage) {
     wall = g.world.raycast(from, dir, 40, true);
   let distance = wall?.distance ?? 40,
     victim = null;
-  for (const e of g.entities) {
+  for (const e of combatTargets(g)) {
     if (e.hp <= 0) continue;
     const t = rayBody(from, dir, e, distance);
     if (t !== null && t < distance) {
@@ -146,7 +147,7 @@ export function tricksterMove(g, blink = false) {
       wall = w.raycast(from, dir, 18, true);
     let target = null,
       nearest = wall?.distance ?? 18;
-    for (const e of g.entities) {
+    for (const e of combatTargets(g)) {
       if (e.hp <= 0) continue;
       const hit = rayBody(from, dir, e, nearest);
       if (hit !== null && hit < nearest) {

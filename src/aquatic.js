@@ -1,3 +1,4 @@
+import {ruleEnabled} from "./world-rules.js";
 import { recordAchievement } from "./achievements.js";
 import {
   B,
@@ -255,7 +256,7 @@ export function tickAquaticWorld(g, { createEntity, dropItem, damageEntity }) {
     }
   }
   // Population is independent from land wildlife, with a bounded local budget.
-  if (w.dimension !== "overworld" || g.tickCount % 120 !== 0) return;
+  if (!ruleEnabled(g,"doMobSpawning") || w.dimension !== "overworld" || g.tickCount % 120 !== 0) return;
   if (
     w.weather?.kind === "thunder" &&
     g.tickCount % 600 === 0 &&

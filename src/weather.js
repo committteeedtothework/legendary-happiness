@@ -1,3 +1,4 @@
+import {ruleEnabled} from "./world-rules.js";
 import {
   weatherColumnLoaded,
   weatherRoof,
@@ -87,7 +88,7 @@ export function tickWeather(game) {
     world.terrain(game.player.x, game.player.z).biome,
   );
   if (w.override) w.kind = w.override;
-  else if ((w.remaining -= w.kind === "clear" ? climate.rate : 1) <= 0) {
+  else if (ruleEnabled(game,"doWeatherCycle") && (w.remaining -= w.kind === "clear" ? climate.rate : 1) <= 0) {
     w.serial++;
     const r = hash(world.seedInt, w.serial, 819);
     w.kind =

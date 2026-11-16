@@ -69,3 +69,5 @@ The 2.21.0 request authorizes End Cities, smoother DRAGOON flight and swoops, En
 The 2.21.1 request authorizes the bundled Windows app fullscreen/menu fix and its necessary bridge, UI, verification and release updates. Preserve game rules, assets, saves, main and hosted mobile.
 
 The 2.22.0 request authorizes concise gameplay notices, species-specific animal audio, critical-hit feedback, synchronized third-person arm/held-item animation and related bug/performance fixes. Keep game rules, collision, generation, saves, supplied assets, Titan tuning/choreography, main and hosted mobile intact. Publishing separate source/download branches and both Windows editions remains authorized.
+
+The 2.23.0 request explicitly authorizes multiplayer PvP/custom-item parity, live spectating of private encounters, Minecraft-referenced world rules/cheats and creator commands, associated networking/save isolation, tests and releases. Preserve source assets, generation and item/NPC stats, existing PvE/Titan tuning, saves, main and hosted mobile. Separate source/download branch publishing and both Windows editions remain authorized.

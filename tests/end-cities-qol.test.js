@@ -1,3 +1,4 @@
+import {multiplayerAuthorized} from "./helpers/multiplayer-authorized.js";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { World } from "../src/world.js";
@@ -286,7 +287,7 @@ test("the update preserves supplied assets, Titan choreography/rules, storage, l
       new URL("../reference/end-cities-preserved-2.20.0.json", import.meta.url),
     ),
   );
-  for (const [n, h] of Object.entries(old))
+  for (const [n, h] of Object.entries(old).filter(([n])=>!multiplayerAuthorized.has(n)))
     assert.equal(
       createHash("sha256")
         .update(readFileSync(new URL("../" + n, import.meta.url)))

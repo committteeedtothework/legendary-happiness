@@ -1,3 +1,4 @@
+import {ruleEnabled} from "./world-rules.js";
 import { tickEndCities, shulkerLoot } from "./end-cities.js";
 import { steerDragon, swoopTarget } from "./dragon-flight.js";
 import { B, BLOCKS, MIN_Y, makeStack } from "./data.js";
@@ -90,8 +91,8 @@ function placePlayer(g, q) {
   g.renderer?.loadAround?.(q.x, q.z, 2, 5);
 }
 export function enterEnd(g) {
-  if (g.multiplayer?.connected || g.multiplayer?.isGuest) {
-    g.ui?.toast?.("Leave multiplayer to enter The End.");
+  if (g.multiplayer?.isGuest || (g.multiplayer?.connected && g.multiplayer.game!==g)) {
+    g.ui?.toast?.("The host travels first. Use Watch to follow their view.");
     return false;
   }
   if (g.dimension !== "overworld") return false;
@@ -113,6 +114,7 @@ export function enterEnd(g) {
   return true;
 }
 export function leaveEnd(g) {
+  if(g.multiplayer?.isGuest||(g.multiplayer?.connected&&g.multiplayer.game!==g)){g.ui?.toast?.("The host travels first. Use Watch to follow their view.");return false;}
   if (g.dimension !== "end" || !endState(g.world).defeated) return false;
   const back = g.spawn || g.player.endReturn;
   selectRealm(g, "overworld");
@@ -660,6 +662,7 @@ export function tickEndWorld(g, api) {
   return false;
 }
 export function spawnEndermen(g, create) {
+  if(!ruleEnabled(g,"doMobSpawning"))return;
   const end = g.dimension === "end",
     night =
       g.dimension === "overworld" &&

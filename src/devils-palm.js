@@ -28,7 +28,7 @@ export function palmContexts(g) {
   return [
     g,
     ...(g.multiplayer?.connected && !g.multiplayer.isGuest
-      ? [...g.multiplayer.peers.values()].map((p) => p.context)
+      ? [...g.multiplayer.peers.values()].map((p) => p.context).filter(c=>c.dimension===g.dimension)
       : []),
   ];
 }

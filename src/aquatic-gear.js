@@ -1,3 +1,4 @@
+import {combatTargets,projectileOwner} from "./pvp.js";
 import { playWorldSound } from "./spatial-audio.js";
 import { useSkeletonHorse } from "./aquatic-mount.js";
 import {
@@ -357,7 +358,7 @@ export function tickAquaticGear(g) {
     state = aquaticState(w);
   if (p.riptide?.ticks > 0) {
     p.riptide.hitIds ||= [];
-    for (const e of g.entities)
+    for (const e of combatTargets(g))
       if (
         e.hp > 0 &&
         e.type !== "boat" &&
@@ -431,7 +432,7 @@ export function tickAquaticGear(g) {
         );
       let victim = null,
         best = hit ? hit.distance / speed : 1.01;
-      for (const e of g.entities) {
+      for (const e of target ? combatTargets(target.context || g,target.player) : g.entities) {
         if (e.hp <= 0 || e.type === "boat") continue;
         const m = MOB_INFO[e.type];
         for (let i = 0; i <= 10; i++) {
