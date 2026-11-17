@@ -1,0 +1,26 @@
+{
+  "DCSMCRAFT-2.25.0-Portable.exe": {
+    "bytes": 236539538,
+    "sha256": "f65b7c95ab42050080f628805a1ac43c06924caf0dbcd3ff9d2693c2a1a75c88"
+  },
+  "DCSMCRAFT-Browser-2.25.0.zip": {
+    "bytes": 104848701,
+    "sha256": "0de82c1981e9fee5f583f8a1c384557efa1f826be85b429325134d41882f8df5"
+  },
+  "DCSMCRAFT-Windows-HTML-2.25.0.zip": {
+    "bytes": 104915520,
+    "sha256": "35550922b0ca7efe8d6f79ec3217d1a67a6edd26386c1e943cdeb15cc68cca6d"
+  },
+  "DCSMCRAFT-Windows-HTML-2.25.0-verification.json": {
+    "bytes": 355,
+    "sha256": "64dcff7a0709c9e8ed06039817bd4e130147120837c7b3e270bac138f4b7e794"
+  },
+  "dcsmcraft-source-v2.25.0.zip": {
+    "bytes": 105583379,
+    "sha256": "b68516f6045fdbf03722aa2e036f2fe4b4cd6ff579ff2694b0b6afceb3eb23f3"
+  },
+  "DCSMCRAFT-Verification-2.25.0.zip": {
+    "bytes": 3165276,
+    "sha256": "75bb00d2c11ac71e5e3fa11cb917af47369512261b38a55a2ff77d2a0360f541"
+  }
+}
