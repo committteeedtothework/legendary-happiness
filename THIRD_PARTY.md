@@ -1,6 +1,8 @@
-# Lord Verity addition — 2.25.0
+# Lord Verity — 2.25.1
 
-The new skinned GLB is an original reference recreation made for DCSMCRAFT. Horror Skunx/ThatMob, Xratior and CheaterPMCPL are credited for character/costume references in LORD-VERITY.md; no Sketchfab mesh was downloaded or redistributed. Master of Humanity by Horror Skunx is referenced through its visible YouTube embed. No song audio is extracted or bundled. User-imported MP3s remain local to the device. Existing asset notices remain unchanged.
+The skinned GLB is an original reference recreation made for DCSMCRAFT. Horror Skunx/ThatMob, Xratior and CheaterPMCPL are credited for character/costume references in LORD-VERITY.md; no Sketchfab mesh was downloaded or redistributed.
+
+The user explicitly supplied **Lord Verity - Master of Humanity (song).mp3** for playback during this encounter. Its bytes are preserved in public/audio/verity/master-of-humanity.mp3, embedded in standalone builds and included as a hashed offline mobile/desktop asset. Rights remain with Horror Skunx and the respective recording rights holders; this recording is outside the project MIT license. No YouTube audio was extracted. The optional visible YouTube setting remains available; imported MP3s stay local to the device. See public/audio/verity/NOTICE.txt and LORD-VERITY.md for the source/hash and playback behavior.
 
 # Third-party software
 

@@ -32,3 +32,5 @@
   #verity-song{width:200px;height:200px;right:max(8px,env(safe-area-inset-right));bottom:8px}
   #verity-song-controls{right:max(8px,env(safe-area-inset-right));bottom:215px}
 }
+
+.verity-note.current{position:relative;overflow:hidden}.verity-note.current::after{content:"";position:absolute;bottom:0;left:0;height:3px;width:calc(var(--verity-timing,0) * 100%);background:#ffe297}.verity-dancing #verity-touch button.held{background:#8d783b;border-color:#fff5ca}

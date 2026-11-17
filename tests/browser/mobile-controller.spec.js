@@ -586,31 +586,32 @@ test.describe('Lord Verity mobile release',()=>{
  test.use({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1,userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile Safari/604.1'});
  test('Lord Verity mobile offline model, touch dance, rotation, pause and restored movement',async({page,context})=>{
   const ev=await boot(page);await world(page);
-  const saved=await page.evaluate(async()=>{const g=dcsmcraft;g.settings.musicEnabled=false;g.settings.verityMusic='off';g.player.xp=37;await g.save();await g.mobileApp.panel();return g.id;});
+  const saved=await page.evaluate(async()=>{const g=dcsmcraft;g.settings.volume=.2;g.settings.musicVolume=.5;g.settings.musicEnabled=true;g.settings.verityMusic='supplied';g.player.xp=37;await g.save();await g.mobileApp.panel();return g.id;});
   await page.evaluate(async()=>{await navigator.serviceWorker.ready;});await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
   await page.locator('[data-mobile="download"]').tap();await expect(page.locator('#mobile-offline-status')).toHaveText('Offline ready',{timeout:90000});
   await context.setOffline(true);await page.reload();await page.waitForFunction(()=>window.dcsmcraft?.initialized);await page.evaluate(id=>dcsmcraft.loadWorld(id),saved);
   await page.waitForFunction(()=>dcsmcraft.active&&dcsmcraft.running);await page.waitForTimeout(300);
-  const before=await page.evaluate(()=>{const g=dcsmcraft;g.entities=[];g.drops=[];g.rules.doMobSpawning=true;g.cameraMode=0;g.settings.musicEnabled=false;g.settings.verityMusic='off';Object.assign(g.player,{yaw:0,pitch:0,onGround:true,vx:0,vy:0,vz:0});g.world.settlements['lord-verity']={version:1,next:0,visits:0};return {x:g.player.x,y:g.player.y,z:g.player.z,xp:g.player.xp};});
+  const before=await page.evaluate(()=>{const g=dcsmcraft;g.entities=[];g.drops=[];g.rules.doMobSpawning=true;g.cameraMode=0;g.settings.volume=.2;g.settings.musicVolume=.5;g.settings.musicEnabled=true;g.settings.verityMusic='supplied';Object.assign(g.player,{yaw:0,pitch:0,onGround:true,vx:0,vy:0,vz:0});g.world.settlements['lord-verity']={version:1,next:0,visits:0};return {x:g.player.x,y:g.player.y,z:g.player.z,xp:g.player.xp};});
   expect(before.xp).toBe(37);
   await page.waitForFunction(()=>dcsmcraft.player.verityDance?.phase==='dance'&&!!dcsmcraft.renderer.verityVisuals.model);
+  await page.waitForFunction(()=>dcsmcraft.verity.music.buffered&&dcsmcraft.verity.music.media&&!dcsmcraft.verity.music.media.paused);expect(await page.evaluate(()=>dcsmcraft.verity.music.media.offset)).toBe(0);
   await expect(page.locator('#verity-touch')).toBeVisible();await expect(page.locator('#touch-joystick')).toBeHidden();
   expect(await page.locator('.verity-notes').innerText()).not.toMatch(/Space|A \/|D \/|W \/|WASD/);
   const rig=await page.evaluate(()=>{let meshes=0,bones=0;dcsmcraft.renderer.verityVisuals.model.traverse(o=>{if(o.isSkinnedMesh){meshes++;bones=o.skeleton.bones.length;}});return {meshes,bones,clip:dcsmcraft.renderer.verityVisuals.clip};});
   expect(rig.bones).toBe(18);expect(rig.meshes).toBeGreaterThan(3);expect(rig.clip).toBe('VerityDance');
   // Align to an unused left step, then submit it through the real touch button.
-  await page.evaluate(()=>{const g=dcsmcraft,d=g.player.verityDance,r=g.world.settlements['lord-verity'].active;r.age=2.4+4*60/112+.005;d.time=4*60/112+.005;});
-  await page.locator('#verity-touch button[aria-label="left"]').tap();await page.waitForFunction(()=>dcsmcraft.player.verityDance.score>0);
+  await page.evaluate(()=>{const g=dcsmcraft,d=g.player.verityDance,r=g.world.settlements['lord-verity'].active;r.age=2.4+4*60/112-.39;d.time=4*60/112-.39;d.used=[0,1,2,3];d.score=8;});
+  await page.locator('#verity-touch button[aria-label="left"]').tap();await page.waitForFunction(()=>dcsmcraft.player.verityDance.score>8);
   await expect(page.locator('[data-touch="chat"]')).toBeHidden();
   const pauseBox=await page.locator('[data-touch="pause"]').boundingBox(),notesBox=await page.locator('.verity-notes').boundingBox();expect(pauseBox.x).toBeGreaterThan(700);expect(notesBox.y+notesBox.height).toBeLessThan(150);
   await page.screenshot({path:out+'/lord-verity-landscape.png'});
   await page.locator('[data-touch="pause"]').tap();const age=await page.evaluate(()=>dcsmcraft.world.settlements['lord-verity'].active.age);await page.waitForTimeout(300);expect(await page.evaluate(()=>dcsmcraft.world.settlements['lord-verity'].active.age)).toBe(age);
   await page.setViewportSize({width:390,height:844});await page.locator('[data-action="resume"]').tap();await expect(page.locator('#verity-touch')).toBeVisible();
   const boxes=await page.locator('#verity-touch button').evaluateAll(bs=>bs.map(b=>{const r=b.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom};}));for(const r of boxes){expect(r.left).toBeGreaterThanOrEqual(0);expect(r.right).toBeLessThanOrEqual(390);expect(r.top).toBeGreaterThan(0);expect(r.bottom).toBeLessThanOrEqual(844);}
-  await page.screenshot({path:out+'/lord-verity-portrait.png'});await page.waitForFunction(()=>!dcsmcraft.player.verityDance,null,{timeout:30000});
+  await page.screenshot({path:out+'/lord-verity-portrait.png'});await page.evaluate(()=>{dcsmcraft.world.settlements['lord-verity'].active.age=2.4+256*60/112-.1;});await page.waitForFunction(()=>!dcsmcraft.player.verityDance,null,{timeout:30000});
   await expect(page.locator('#verity-touch')).toBeHidden();await expect(page.locator('#touch-joystick')).toBeVisible();
   const after=await page.evaluate(()=>({x:dcsmcraft.player.x,y:dcsmcraft.player.y,z:dcsmcraft.player.z,camera:dcsmcraft.cameraMode,music:dcsmcraft.verity.music.state,render:dcsmcraft.renderer.verityVisuals.root.visible}));expect(after.x).toBe(before.x);expect(after.z).toBe(before.z);expect(after.camera).toBe(0);expect(after.music).toBe('idle');expect(after.render).toBe(false);
   const stick=await page.locator('#touch-joystick').boundingBox();await fingers(page,'touchStart',[[1,stick.x+stick.width/2,stick.y+stick.height/2]]);await fingers(page,'touchMove',[[1,stick.x+stick.width/2,stick.y+5]]);await page.waitForTimeout(400);await fingers(page,'touchEnd',[]);expect(await page.evaluate(()=>dcsmcraft.player.z)).toBeLessThan(before.z-.1);
-  await context.setOffline(false);expect(ev.errors).toEqual([]);expect(ev.requests.some(u=>u.includes('youtube'))).toBe(false);writeFileSync(out+'/lord-verity-mobile.json',JSON.stringify({offline:true,realTouchInput:true,rig,before,after,pauseFrozen:true,portraitButtons:boxes,errors:ev.errors,physicalIOSVerified:false},null,2));
+  await context.setOffline(false);expect(ev.errors).toEqual([]);expect(ev.requests.some(u=>u.includes('youtube'))).toBe(false);writeFileSync(out+'/lord-verity-mobile.json',JSON.stringify({offline:true,suppliedAudioDecoded:true,freshSongOffset:0,earlyTouchBuffered:true,stagedEnding:true,realTouchInput:true,rig,before,after,pauseFrozen:true,portraitButtons:boxes,errors:ev.errors,physicalIOSVerified:false},null,2));
  });
 });

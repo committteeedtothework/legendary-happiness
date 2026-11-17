@@ -5,14 +5,15 @@ import { playerActors } from "./pvp.js";
 export const VERITY = Object.freeze({
   bpm: 112,
   beat: 60 / 112,
-  beats: 32,
+  beats: 256,
   arrival: 2.4,
   departure: 3,
   firstVisit: 1800,
   revisit: 12000,
   radius: 8,
-  perfect: 0.11,
-  good: 0.24,
+  perfect: 0.14,
+  good: 0.31,
+  inputBuffer: 0.14,
   steps: ["left", "right", "kick", "clap", "left", "right", "kick", "clap"],
 });
 export const danceLocked = (p) =>
@@ -111,14 +112,61 @@ export function summonVerity(g) {
 export function clearVerityDance(p) {
   delete p.verityDance;
 }
+export const VERITY_DURATION =
+  VERITY.arrival + VERITY.beat * VERITY.beats + VERITY.departure;
+export const VERITY_KEYS = Object.freeze({
+  KeyA: "left",
+  ArrowLeft: "left",
+  KeyD: "right",
+  ArrowRight: "right",
+  KeyW: "kick",
+  ArrowUp: "kick",
+  KeyS: "clap",
+  ArrowDown: "clap",
+  Space: "clap",
+  KeyF: "clap",
+});
+export function nextVerityBeat(d) {
+  let beat = Math.max(
+    0,
+    Math.ceil(((d?.time || 0) - VERITY.good) / VERITY.beat),
+  );
+  while (beat < VERITY.beats && d?.used?.includes(beat)) beat++;
+  return beat;
+}
+export function verityHitBeat(d, step) {
+  if (!d || d.phase !== "dance" || !VERITY.steps.includes(step)) return -1;
+  const nearest = Math.round(d.time / VERITY.beat);
+  return (
+    [nearest, nearest - 1, nearest + 1].find(
+      (beat) =>
+        beat >= 0 &&
+        beat < VERITY.beats &&
+        !d.used?.includes(beat) &&
+        VERITY.steps[beat % VERITY.steps.length] === step &&
+        Math.abs(d.time - beat * VERITY.beat) <= VERITY.good,
+    ) ?? -1
+  );
+}
+export function verityStickStep(move, previous) {
+  const x = move?.x || 0,
+    y = move?.y || 0,
+    strength = Math.max(Math.abs(x), Math.abs(y));
+  if (strength < (previous ? 0.28 : 0.58)) return null;
+  if (strength < 0.58) return previous;
+  return Math.abs(x) > Math.abs(y)
+    ? x < 0
+      ? "left"
+      : "right"
+    : y < 0
+      ? "kick"
+      : "clap";
+}
 export function scoreVerityStep(g, p, step) {
-  const d = p.verityDance;
-  if (!d || d.phase !== "dance" || !VERITY.steps.includes(step)) return false;
-  const beat = Math.round(d.time / VERITY.beat);
-  if (beat < 0 || beat >= VERITY.beats || d.used?.includes(beat)) return false;
+  const d = p.verityDance,
+    beat = verityHitBeat(d, step);
+  if (beat < 0) return false;
   const error = Math.abs(d.time - beat * VERITY.beat);
-  if (error > VERITY.good || VERITY.steps[beat % VERITY.steps.length] !== step)
-    return false;
   (d.used ||= []).push(beat);
   d.score += error <= VERITY.perfect ? 2 : 1;
   d.feedback = error <= VERITY.perfect ? "PERFECT" : "GOOD";
@@ -257,5 +305,9 @@ export function cleanDanceVisual(d) {
     !Number.isFinite(d.time)
   )
     return null;
-  return { id: d.id, phase: d.phase, time: Math.max(0, Math.min(25, d.time)) };
+  return {
+    id: d.id,
+    phase: d.phase,
+    time: Math.max(0, Math.min(VERITY_DURATION, d.time)),
+  };
 }

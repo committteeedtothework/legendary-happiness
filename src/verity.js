@@ -1,18 +1,16 @@
-import { VERITY, danceLocked, scoreVerityStep } from "./verity-simulation.js";
+import {
+  VERITY,
+  danceLocked,
+  scoreVerityStep,
+  VERITY_KEYS,
+  nextVerityBeat,
+  verityHitBeat,
+  verityStickStep,
+} from "./verity-simulation.js";
 import { VerityMusic } from "./verity-music.js";
 import { buttonName, inputDevice } from "./input-prompts.js";
 import "./verity.css";
 
-const keySteps = {
-  KeyA: "left",
-  ArrowLeft: "left",
-  KeyD: "right",
-  ArrowRight: "right",
-  KeyW: "kick",
-  ArrowUp: "kick",
-  Space: "clap",
-  KeyF: "clap",
-};
 const esc = (s) =>
   String(s ?? "").replace(
     /[&<>"']/g,
@@ -27,8 +25,7 @@ export class VerityEncounter {
     this.hud = document.createElement("section");
     this.hud.id = "verity-hud";
     this.hud.hidden = true;
-    this.hud.innerHTML =
-      '<h2>Lord Verity</h2><div class="verity-phase"></div><div class="verity-notes"></div><div class="verity-feedback" aria-live="polite"></div><progress max="32" value="0" aria-label="Dance progress"></progress><div class="verity-score"></div>';
+    this.hud.innerHTML = `<h2>Lord Verity</h2><div class="verity-phase"></div><div class="verity-notes"></div><div class="verity-feedback" aria-live="polite"></div><progress max="${VERITY.beats}" value="0" aria-label="Dance progress"></progress><div class="verity-score"></div>`;
     this.media = document.createElement("aside");
     this.media.id = "verity-song";
     this.media.hidden = true;
@@ -63,8 +60,13 @@ export class VerityEncounter {
         e.preventDefault();
         e.stopPropagation();
         game.audio.unlock();
+        game.touch?.activate();
+        b.classList.add("held");
+        b.setPointerCapture?.(e.pointerId);
         this.input(step);
       };
+      for (const event of ["pointerup", "pointercancel", "lostpointercapture"])
+        b.addEventListener(event, () => b.classList.remove("held"));
       this.touch.append(b);
     }
     document.querySelector("#app").append(this.touch);
@@ -83,7 +85,7 @@ export class VerityEncounter {
     if (!this.active || !this.g.running) return false;
     if (e.code === "Escape") return false;
     e.preventDefault();
-    if (!e.repeat && keySteps[e.code]) this.input(keySteps[e.code]);
+    if (!e.repeat && VERITY_KEYS[e.code]) this.input(VERITY_KEYS[e.code]);
     return true;
   }
   controller(r, edge) {
@@ -96,13 +98,32 @@ export class VerityEncounter {
       ["left", "left"],
       ["right", "right"],
       ["up", "kick"],
+      ["down", "clap"],
       ["jump", "clap"],
     ])
       if (edge(action)) this.input(step);
+    const stick = verityStickStep(r.move, this.stickStep);
+    if (stick && stick !== this.stickStep) this.input(stick);
+    this.stickStep = stick;
     return true;
   }
   input(step) {
     if (!this.active || !this.g.running) return false;
+    const d = this.g.player.verityDance,
+      beat = nextVerityBeat(d);
+    if (verityHitBeat(d, step) < 0) {
+      const until = beat * VERITY.beat - d.time;
+      if (
+        d.phase === "dance" &&
+        beat < VERITY.beats &&
+        VERITY.steps[beat % VERITY.steps.length] === step &&
+        until > 0 &&
+        until <= VERITY.good + VERITY.inputBuffer
+      )
+        this.pending = { step, beat, id: d.id };
+      return false;
+    }
+    this.pending = null;
     if (this.g.multiplayer?.isGuest)
       return this.g.multiplayer.command("verity", { step });
     const ok = scoreVerityStep(this.g, this.g.player, step);
@@ -115,12 +136,37 @@ export class VerityEncounter {
       d = g.player.verityDance;
     if (active && this.id !== d.id) {
       this.id = d.id;
+      this.pending = null;
+      this.stickStep = null;
       g.resetControls();
-      this.music.begin(d.id);
+      this.music.begin(d.id, {
+        resumeAt:
+          (g.world.settlements?.["lord-verity"]?.active?.age || 0) >
+          VERITY.arrival
+            ? g.world.settlements["lord-verity"].active.age
+            : 0,
+      });
       g.mouseDown = g.rightMouseDown = false;
       g.mining = 0;
       g.audio.music?.silence();
       g.jukebox?.audio?.pause();
+    }
+    if (!g.running || !active) {
+      this.pending = null;
+      this.stickStep = null;
+    }
+    if (this.pending && g.running) {
+      const q = this.pending;
+      if (
+        q.id !== d?.id ||
+        d.phase !== "dance" ||
+        d.time > q.beat * VERITY.beat + VERITY.good
+      )
+        this.pending = null;
+      else if (verityHitBeat(d, q.step) >= 0) {
+        this.pending = null;
+        this.input(q.step);
+      }
     }
     document.querySelector("#app").classList.toggle("verity-dancing", active);
     this.mediaControls.querySelector("button").textContent =
@@ -155,10 +201,16 @@ export class VerityEncounter {
     this.renderDance = { ...d, time: this.visualTime };
     const phase = this.hud.querySelector(".verity-phase");
     phase.textContent =
-      d.phase === "arrival" ? "DANCE" : d.phase === "bow" ? "COMPLETE" : "";
-    const beat = Math.max(
-      0,
-      Math.min(VERITY.beats - 1, Math.round(d.time / VERITY.beat)),
+      d.phase === "arrival" ? "READY" : d.phase === "bow" ? "COMPLETE" : "";
+    const beat = Math.min(VERITY.beats - 1, nextVerityBeat(d));
+    this.hud.style.setProperty(
+      "--verity-timing",
+      String(
+        Math.max(
+          0,
+          1 - Math.abs(beat * VERITY.beat - d.time) / (VERITY.beat * 1.5),
+        ),
+      ),
     );
     const device = inputDevice(g),
       signature = device + (g.controller?.family || "") + ":" + beat;
@@ -170,11 +222,11 @@ export class VerityEncounter {
               left: buttonName(g, "left"),
               right: buttonName(g, "right"),
               kick: buttonName(g, "up"),
-              clap: buttonName(g, "jump"),
+              clap: `${buttonName(g, "down")} / ${buttonName(g, "jump")}`,
             }
           : device === "touch"
             ? { left: "←", right: "→", kick: "↑", clap: "Clap" }
-            : { left: "A / ←", right: "D / →", kick: "W / ↑", clap: "Space" };
+            : { left: "A / ←", right: "D / →", kick: "W / ↑", clap: "S / ↓" };
       this.hud.querySelector(".verity-notes").innerHTML = Array.from(
         { length: 4 },
         (_, i) => {
@@ -196,16 +248,18 @@ export class VerityEncounter {
     document.querySelector("#app").classList.remove("verity-dancing");
     this.music.stop();
     this.id = null;
+    this.pending = null;
+    this.stickStep = null;
     this.hud.hidden = this.touch.hidden = this.mediaControls.hidden = true;
     this.g.renderer.verityVisuals?.clear();
   }
   settings() {
     const g = this.g,
-      m = g.settings.verityMusic || "youtube";
+      m = g.settings.verityMusic || "supplied";
     g.pause();
     g.ui.setScreen(
       "verity-settings",
-      `<main class="dialog compact"><h2>Lord Verity</h2><label>Music<select id="verity-music"><option value="youtube" ${m === "youtube" ? "selected" : ""}>YouTube · Horror Skunx</option><option value="local" ${m === "local" ? "selected" : ""}>Local MP3</option><option value="off" ${m === "off" ? "selected" : ""}>Off</option></select></label><label>Choose MP3<input id="verity-mp3" type="file" accept="audio/mpeg,.mp3"></label><p id="verity-file-status" role="status"></p><p class="fine">YouTube needs an internet connection. Imported music stays on this device.</p><button class="primary wide" data-action="back">Done</button></main>`,
+      `<main class="dialog compact"><h2>Lord Verity</h2><label>Music<select id="verity-music"><option value="supplied" ${m === "supplied" ? "selected" : ""}>Soundtrack</option><option value="youtube" ${m === "youtube" ? "selected" : ""}>YouTube · Horror Skunx</option><option value="local" ${m === "local" ? "selected" : ""}>Local MP3</option><option value="off" ${m === "off" ? "selected" : ""}>Off</option></select></label><label>Choose MP3<input id="verity-mp3" type="file" accept="audio/mpeg,.mp3"></label><p id="verity-file-status" role="status"></p><p class="fine">YouTube needs an internet connection. Imported music stays on this device.</p><button class="primary wide" data-action="back">Done</button></main>`,
     );
     g.ui.overlay.querySelector("#verity-music").onchange = (e) => {
       g.settings.verityMusic = e.target.value;

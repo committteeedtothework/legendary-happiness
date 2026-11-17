@@ -40,3 +40,6 @@ data/
 
 # Generated from the original rigged encounter asset.
 src/verity-model-data.js
+
+# Rebuilt from the user-supplied encounter recording.
+src/verity-audio-data.js

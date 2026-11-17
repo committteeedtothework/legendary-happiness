@@ -122,6 +122,7 @@ export const WYVERN_SCORE=${JSON.stringify({ url: await asset("public/audio/wyve
     "wyvern-model-data.js",
     `export const WYVERN_GLB=${JSON.stringify({ url: await asset("public/models/wyvern/wyvern.glb") })};`,
   );
+  modules.set("verity-audio-data.js",`export const VERITY_AUDIO=${JSON.stringify({src:await asset("public/audio/verity/master-of-humanity.mp3"),url:await asset("public/audio/verity/master-of-humanity.mp3"),duration:140.852245})};`);
   modules.set('verity-model-data.js',`export const VERITY_GLB=${JSON.stringify({url:await asset('public/models/verity/lord-verity.glb')})};`);
   const result = await build({
     entryPoints: ["src/main.js"],
@@ -265,6 +266,7 @@ export const WYVERN_SCORE=${JSON.stringify({ url: await asset("public/audio/wyve
     "TITAN-ASSETS.md",
     "public/models/wyvern/NOTICE.txt",
     "public/models/verity/NOTICE.txt",
+    "public/audio/verity/NOTICE.txt",
     "public/audio/DEVIN-CLAIM-NOTICE.txt",
     "public/audio/MATTHEW-CLAIM-NOTICE.txt",
     "public/audio/MENU-SOUNDS-NOTICE.txt",

@@ -1,8 +1,8 @@
-# Lord Verity — 2.25.0
+# Lord Verity — 2.25.1
 
-Use the existing Node 24.22.1/npm 11.9.0 workflow. The prebuild/pretest hooks embed the committed original Lord Verity GLB. No paid model generation or Blender installation is needed to play/build; Blender 4.3+ can regenerate the asset with scripts/build-verity-model.py.
+Use Node 24.22.1/npm 11.9.0. Prebuild/pretest hooks embed the committed original Lord Verity GLB and the exact user-supplied MP3. Blender is needed only to regenerate the original mesh. Local/mobile packaging substitutes hashed asset URLs for model/audio data.
 
-Run npm test and npx playwright test --config playwright.verity.config.js. The browser media test uses the original test-tone MP3 committed under tests/fixtures; the original song is not bundled. LORD-VERITY.md documents streaming restrictions, media import and controls. Update the relay with the game for protocol 7. Existing standalone, Electron, legacy Windows and packaging commands remain valid.
+Run npm test and npx playwright test --config playwright.verity.config.js. The browser suite includes an unaccelerated full encounter with the actual supplied song and keyboard/controller/touch inputs. The production mobile test verifies cached offline assets and dance controls. Match clients and relay on protocol 8. Existing standalone, Electron, legacy Windows and mobile commands remain valid.
 
 ## Previous build notes
 

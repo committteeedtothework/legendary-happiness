@@ -15,3 +15,9 @@ try {
 } catch {}
 if (old !== text) await writeFile("src/verity-model-data.js", text);
 console.log("Embedded rigged Lord Verity model.");
+
+const audio=await readFile("public/audio/verity/master-of-humanity.mp3");
+const audioText="// User-supplied Lord Verity recording; see public/audio/verity/NOTICE.txt.\nexport const VERITY_AUDIO="+JSON.stringify({src:"data:audio/mpeg;base64,"+audio.toString("base64"),bytes:audio.length,duration:140.852245,sha256:createHash("sha256").update(audio).digest("hex")})+";\n";
+let oldAudio;try{oldAudio=await readFile("src/verity-audio-data.js","utf8");}catch{}
+if(oldAudio!==audioText)await writeFile("src/verity-audio-data.js",audioText);
+console.log("Embedded user-supplied Lord Verity song.");

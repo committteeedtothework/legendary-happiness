@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { VERITY } from "../src/verity-simulation.js";
 import { VerityMusic, VERITY_SONG } from "../src/verity-music.js";
 
 function fixture(t) {
@@ -89,7 +90,7 @@ test("a delayed import cannot start after quitting, and a paused encounter never
   assert.equal(created[0].playCount, 0);
   music.stop();
 });
-test("bow fades the track, muted/off settings do not create media, and no copyrighted recording is silently substituted", async (t) => {
+test("bow fades the track, muted/off settings do not create media, and the supplied recording remains an explicit music option", async (t) => {
   const { game, music, created } = fixture(t);
   game.settings.verityMusic = "off";
   await music.begin("off");
@@ -102,10 +103,37 @@ test("bow fades the track, muted/off settings do not create media, and no copyri
   await music.begin("play");
   const volume = music.media.volume;
   game.world.settlements["lord-verity"] = {
-    active: { phase: "bow", age: 2.4 + (32 * 60) / 112 + 1.35 },
+    active: {
+      phase: "bow",
+      age: VERITY.arrival + VERITY.beats * VERITY.beat + 1.35,
+    },
   };
   music.update(true, true);
   assert.ok(Math.abs(music.media.volume - volume / 2) < 0.0001);
   music.stop();
   assert.equal(VERITY_SONG.id, "lhCPiauHI-g");
+});
+
+test("the supplied song starts at zero on each new visit and pause/resume preserves its playhead instead of skipping the intro", async (t) => {
+  const { game, music, created } = fixture(t);
+  game.settings.verityMusic = "supplied";
+  game.world.settlements["lord-verity"] = {
+    active: { age: 1.8, phase: "arrival" },
+  };
+  await music.begin("fresh");
+  assert.equal(created[0].currentTime, 0);
+  assert.equal(created[0].loop, false);
+  assert.match(created[0].src, /^data:audio\/mpeg;base64,/);
+  created[0].currentTime = 3.2;
+  game.running = false;
+  music.update(true, false);
+  game.world.settlements["lord-verity"].active.age = 8;
+  game.running = true;
+  music.update(true, true);
+  await Promise.resolve();
+  assert.equal(created[0].currentTime, 3.2);
+  await music.begin("next");
+  assert.equal(created[1].currentTime, 0);
+  assert.equal(created[0].src, "");
+  music.stop();
 });

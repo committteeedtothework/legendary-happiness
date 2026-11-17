@@ -1,3 +1,17 @@
+# Lord Verity duration, controls and supplied soundtrack — 2.25.1
+
+All **1,046 Node tests pass**, including the new analog-input regression. Dance locking now suppresses controller/touch axes and their raw-key fallback as well as digital keys. The complete 256-beat simulation ends, grants rewards once, retains saved cooldowns and restores normal movement. Tests cover S/Down aliases, stick hysteresis, late timeline poses, once-only scoring, actual playback offsets, source cleanup and async cancellation.
+
+The real browser test runs the extended encounter without changing its clock or duration, decodes the actual supplied 140.85-second MP3, starts at zero, exercises keyboard S/Down, controller-stick input/held-repeat rejection and controller-to-touch handoff, pauses/resumes at the actual playhead, completes naturally and starts the next visit at zero. A separate browser lifecycle/local-MP3 test passes. The production mobile test downloads verified offline content, reloads offline, decodes the supplied song locally, tests buffered touch input, rotation/pause, and restores movement after a staged ending. No YouTube request is needed for Soundtrack mode.
+
+The matching packaged Linux Electron app decodes the supplied recording offline, checks a zero fresh-start offset, saves/reloads an encounter at 80 seconds, restores that audio offset and completes a staged ending with camera/controls/audio cleanup. The production PWA upgrade test uses the previous live 2.25.0 build and retains its world, edited block, XP and inventory while migrating the old default YouTube preference to Soundtrack. Windows portable/legacy payload checks and source/download hashes accompany the release.
+
+The supplied MP3 is preserved byte for byte: SHA-256 28434d112238d82cba160a3b231f26879a5ee4becaefd69746931eee7d0332ee. The encounter lasts about 142.54 simulation seconds; the song plays once, starts fresh at 0:00, and fades during departure. Restoring an already active saved visit resumes its existing position. Exact original choreography remains unverified; the 3D model is still the documented original recreation.
+
+Existing supplied models/textures, world generation, saves, item/NPC statistics and Titan tuning remain preserved. Main remains unchanged; the mobile deployment is updated at the same URL/storage scope. Native Windows execution, physical iOS/Safari/controllers and hardware GPU performance remain unverified. Browser tests use touch emulation/software WebGL. Staged ending checks are labeled separately from the full natural browser run.
+
+## Previous validation
+
 # Mobile release — 2.25.0
 
 The production mobile build passes five Chromium touch browser tests: Overworld movement/mining/placement/inventory/save reload; interrupted offline download verification and cached audio ranges; portrait inventory and Titan touch actions/return; Pocket controls/settings/rotation; and the Lord Verity offline model/touch dance/pause/completion/control restoration. The Lord Verity test passes again after the final compact landscape layout and unobstructed Pause adjustment. Seventeen focused mobile/encounter/preservation Node tests pass.

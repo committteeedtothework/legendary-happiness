@@ -58,6 +58,8 @@ const license =
   (await readFile("public/audio/giganto/BOOST-NOTICE.txt", "utf8")) +
   "\nLord Verity original mesh and song reference:\n" +
   (await readFile("public/models/verity/NOTICE.txt", "utf8")) +
+  "\nUser-supplied Lord Verity recording:\n" +
+  (await readFile("public/audio/verity/NOTICE.txt", "utf8")) +
   "\nUser-supplied Wyvern music:\n" +
   (await readFile("public/audio/wyvern/NOTICE.txt", "utf8"));
 const js = bundle.outputFiles[0].text.replace(/<\/script/gi, "<\\/script");

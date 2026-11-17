@@ -1,2 +1,2 @@
 // Shared by the relay and bundled browser. Never import Node APIs here.
-export const PROTOCOL = 7;
+export const PROTOCOL = 8;

@@ -14,6 +14,7 @@ export function withoutVerityHooks(name, bytes) {
     ],
     "src/overworld-music.js": ["      !game.verity?.active &&\n"],
     "src/physics.js": [
+      '      (p.verityDance && ["arrival","dance","bow"].includes(p.verityDance.phase)) ? null :\n',
       '    (p.verityDance && ["arrival","dance","bow"].includes(p.verityDance.phase)) ||\n',
     ],
     "src/renderer.js": [

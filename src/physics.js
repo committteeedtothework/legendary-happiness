@@ -241,6 +241,7 @@ export function updatePlayer(game, keys, dt) {
   )
     p.crouching = true;
   const pad =
+      (p.verityDance && ["arrival","dance","bow"].includes(p.verityDance.phase)) ? null :
       game.controller?.lastDevice === "controller" && !game.multiplayer?.isGuest
         ? game.controller.move
         : game.touch?.active && !game.multiplayer?.isGuest

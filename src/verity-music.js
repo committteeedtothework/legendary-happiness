@@ -1,3 +1,6 @@
+import { prepareVerityTrack, VerityTrack } from "./verity-track.js";
+import { VERITY } from "./verity-simulation.js";
+import { VERITY_AUDIO } from "./verity-audio-data.js";
 import { LocalMusicLibrary } from "./local-music.js";
 
 export const VERITY_SONG = {
@@ -38,28 +41,51 @@ export class VerityMusic {
     this.token = 0;
     this.state = "idle";
   }
-  async begin(id) {
+  async begin(id, { resumeAt = 0 } = {}) {
     this.stop();
     this.id = id;
     const token = ++this.token,
-      mode = this.g.settings.verityMusic || "youtube";
+      mode = this.g.settings.verityMusic || "supplied";
     this.mode = mode;
     if (mode === "off" || !this.g.settings.musicEnabled || this.volume() <= 0)
       return;
     this.state = "loading";
     try {
-      if (mode === "local") {
-        const song = await this.library.get("lord-verity");
+      if (mode === "local" || mode === "supplied") {
+        const song =
+          mode === "local" ? await this.library.get("lord-verity") : null;
         if (token !== this.token) return;
-        if (!song) throw Error("Choose an MP3 in Encounters.");
-        this.objectURL = URL.createObjectURL(song.blob);
-        const media = (this.media = new Audio(this.objectURL));
-        media.loop = true;
-        media.volume = this.volume();
+        if (mode === "local" && !song)
+          throw Error("Choose an MP3 in Encounters.");
+        const src =
+          mode === "local"
+            ? (this.objectURL = URL.createObjectURL(song.blob))
+            : VERITY_AUDIO.src;
+        const context = this.g.audio?.context;
+        this.buffered = mode === "supplied" && !!context;
+        let buffer;
+        if (this.buffered)
+          buffer = await prepareVerityTrack(context, VERITY_AUDIO);
+        if (token !== this.token) return;
+        const media = (this.media = this.buffered
+          ? new VerityTrack(context, this.g.audio.master, buffer)
+          : new Audio(src));
+        media.preload = "auto";
+        media.loop = mode === "local";
+        this.initialSeek = Math.max(0, resumeAt);
+        media.currentTime = this.buffered ? this.initialSeek : 0;
+        if (this.buffered) this.initialSeek = 0;
+        media.volume = this.mediaVolume();
         media.addEventListener?.(
           "loadedmetadata",
           () => {
-            if (token === this.token) this.seekLocal(media);
+            if (token === this.token && this.initialSeek > 0) {
+              media.currentTime = Math.min(
+                this.initialSeek,
+                Math.max(0, media.duration - 0.01),
+              );
+              this.initialSeek = 0;
+            }
           },
           { once: true },
         );
@@ -73,7 +99,7 @@ export class VerityMusic {
           media.pause();
           return;
         }
-        if (!this.g.running) {
+        if (!this.g.running || this.g.ui.screen !== "play") {
           media.pause();
           this.state = "paused";
           this.paused = true;
@@ -142,7 +168,8 @@ export class VerityMusic {
       if (token === this.token) {
         if (mode === "youtube") this.embed(token);
         else {
-          this.state = "error";
+          this.state =
+            this.media && e.name === "NotAllowedError" ? "blocked" : "error";
           this.error = e.message;
         }
       }
@@ -238,7 +265,10 @@ export class VerityMusic {
     const r = this.g.world?.settlements?.["lord-verity"]?.active;
     const fade =
       r?.phase === "bow"
-        ? Math.max(0, 1 - (r.age - (2.4 + (32 * 60) / 112)) / 2.7)
+        ? Math.max(
+            0,
+            1 - (r.age - (VERITY.arrival + VERITY.beats * VERITY.beat)) / 2.7,
+          )
         : 1;
     return Math.max(
       0,
@@ -249,6 +279,11 @@ export class VerityMusic {
           fade,
       ),
     );
+  }
+  mediaVolume() {
+    return this.buffered
+      ? this.volume() / Math.max(0.001, this.g.settings.volume ?? 0.65)
+      : this.volume();
   }
   focusGame() {
     const canvas = this.g.renderer?.gl?.domElement;
@@ -272,7 +307,6 @@ export class VerityMusic {
       const media = this.media,
         token = this.token;
       try {
-        this.seekLocal(media);
         await media.play();
         if (token !== this.token) {
           media.pause();
@@ -299,7 +333,10 @@ export class VerityMusic {
       return;
     }
     const volume = this.volume();
-    if (this.media) this.media.volume = volume;
+    if (this.media) {
+      this.media.volume = this.mediaVolume();
+      if (this.media.ended) this.state = "ended";
+    }
     if (this.player && volume !== this.lastVolume)
       this.player.setVolume?.(Math.round(volume * 100));
     this.lastVolume = volume;
@@ -326,6 +363,8 @@ export class VerityMusic {
       this.media.load();
     }
     this.media = null;
+    this.initialSeek = 0;
+    this.buffered = false;
     this.player?.destroy?.();
     this.player = null;
     if (this.objectURL) URL.revokeObjectURL(this.objectURL);

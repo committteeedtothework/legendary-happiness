@@ -1,62 +1,31 @@
-# Lord Verity — 2.25.0
+# Lord Verity — 2.25.1
 
-Lord Verity appears near an eligible player in the Overworld after roughly 90 seconds of world simulation, then no sooner than ten minutes after a visit. He chooses clear, supported ground within five blocks. Visits wait while players are flying, swimming, riding, in recent PvP, in a Stand trial, or surrounded by solid obstructions. Natural visits follow the existing Mob Spawning rule. No terrain is cleared and no existing creature or Titan statistics are changed.
+Lord Verity appears on safe open Overworld ground after about 90 seconds, then has a ten-minute revisit cooldown. Nearby eligible players dance in place. The encounter lasts about **2 minutes 23 seconds**: 2.4 seconds of arrival, 256 dance beats at 112 BPM, and a three-second departure. Existing saves and visit/cooldown records remain compatible. Completed rewards are never granted twice.
 
-Nearby players are compelled into a short dance: 2.4 seconds of arrival, 32 beats at the encounter's 112 BPM timing, and a three-second bow/departure. Movement, mining, attacks, item use and inventory opening are blocked during the sequence; pause and quit remain available. Collision stays upright and uses the existing physics. Damage is suppressed during the dance, and the sequence cancels if support becomes unsafe, the player leaves the dimension, dies or becomes a spectator. Camera composition changes visually without moving the player or overwriting their selected camera mode.
+## Controls
 
-Follow the four prompts:
+- Keyboard: **A/Left**, **D/Right**, **W/Up**, **S/Down**. Space and F also clap. Escape pauses.
+- Controller: left stick or D-pad in all four directions. Down claps; the mapped Jump button also claps. Release the stick toward neutral between repeated moves. Device-specific prompts use the configured bindings.
+- Mobile: the four dance buttons. Pause remains available. Touching restores touch input after using a controller.
 
-| Move | Keyboard | Controller | Touch |
-|---|---|---|---|
-| Left | A / Left arrow | D-pad left | Left button |
-| Right | D / Right arrow | D-pad right | Right button |
-| Kick | W / Up arrow | D-pad up | Up button |
-| Clap | Space / F | Mapped jump button | Clap button |
+The highlighted card shows the next unscored beat. Its gold bar indicates timing. Accepted inputs advance the card immediately. Perfect timing is within 0.14 seconds, Good within 0.31 seconds. A short early press can wait in a 0.14-second buffer; holding a key/stick does not repeat scores. Wrong moves and duplicate inputs never score. The host validates multiplayer inputs; remote poses retain the full extended timeline.
 
-Controller prompts use the detected family/custom mapping. Each beat can score once: two points within 110 ms, one within 240 ms. The dance always releases control; at least 32 of 64 points awards one emerald and five XP, once per visit. Full-inventory rewards drop into the correct world. Per-player participation, scores, rewards and world cooldowns survive normal saves. Co-op hosts own the encounter and validate score commands; guests cannot create visits, forge participation or replay a beat for extra rewards. Only players in the Overworld participate. Other players can see the character and dancing avatars through normal shared-world replication.
+The maximum score is 512. At least 256 earns one emerald and five XP, once per visit. Normal movement, camera, inventory and combat controls return afterward. Death, dimension changes and unsafe support cancel the encounter safely. Pause freezes the singleplayer clock; save/reload preserves the active visit.
 
-## Model and choreography
+## Soundtrack
 
-The shipped GLB is an **original reference recreation**, not Horror Skunx's original mesh or a downloaded Sketchfab asset. The public Sketchfab download endpoints returned HTTP 401 and require account sign-in. No paid Tripo generation was used.
+The user supplied **Lord Verity - Master of Humanity (song).mp3**, identified as **Master of Humanity — Horror Skunx**. The exact 5,635,271-byte MP3 is included in all builds and the mobile offline download at public/audio/verity/master-of-humanity.mp3. Its duration is about 140.85 seconds; SHA-256 is **28434d112238d82cba160a3b231f26879a5ee4becaefd69746931eee7d0332ee**. No YouTube extraction was used.
 
-The new asset has 19,192 triangles, 18 bones, eight material groups, and named Idle, VerityDance and Bow clips. It has dimensional eye sockets, grin/teeth, fingers, gold sleeve braids, waistcoat/tie, lapels, coat tails, shoes and a gold-banded fedora. The character is rendered as actual skinned geometry, not a sprite or face billboard. Player and NPC dance poses use articulated limbs and hands-to-hips/clap targets, alternating steps and kicks. Pose sampling follows encounter time; rendering interpolates between host ticks/packets. The body collision and held-item animation outside this encounter are unchanged.
+**Soundtrack** is the default. Every fresh visit starts from **0:00**, without seeking past the intro after loading. It plays once, fades during departure, pauses/resumes at its actual playhead and releases its voice on exit. Loading a saved active encounter resumes its existing position. The game's gesture-unlocked Web Audio context handles the supplied recording on mobile; the normal audio-volume settings apply. Late decoding cannot start music after the encounter has ended.
 
-Rebuild the committed GLB with Blender 4.3+:
+**Pause → Encounters** also offers Local MP3, optional YouTube and Off. Existing Local MP3/Off preferences remain available; the previous default YouTube choice migrates to the included Soundtrack. Imported files stay in the device's music library. No Internet connection or video player is needed for the supplied recording.
 
-```sh
-blender -b --python scripts/build-verity-model.py
-node scripts/embed-verity.mjs
-```
+## Model and references
 
-Blender is not needed to build/play the game: the GLB is included. The standalone build embeds it, and desktop/mobile bundles package it as a local asset. Shadows and the optional local light respect existing graphics settings.
+The 19,192-triangle, 18-bone GLB remains an original reference recreation with Idle, VerityDance and Bow clips. The creator's original Sketchfab mesh was not downloaded. Appearance references remain Horror Skunx/ThatMob, [Xratior's high-poly listing](https://sketchfab.com/3d-models/high-poly-model-lord-verity-8c39adaebb0e4f7aa6694b941caa7e10) and [CheaterPMCPL's rig listing](https://sketchfab.com/3d-models/lord-verity-rig-1116a6c0018c4d0c9623a43fa4045cd8). Original creator ownership is not claimed.
 
-The character/costume references are credited below. Gemini video analysis was attempted through the installed analyze-youtube skill, but the current models returned service-unavailable responses; an older model was retired. Exact frame-by-frame choreography and original motion capture were therefore **not verified**. The dance is a functional reference-inspired recreation, not a claim of an exact original animation.
+Song reference: [Horror Skunx — Master of Humanity](https://www.youtube.com/watch?v=lhCPiauHI-g). Dance references: [tutorial](https://www.youtube.com/watch?v=Syi3HSu3-Tk) and [creator's public tutorial listing](https://www.facebook.com/RealHorrorSkunx/videos/lord-verity-dance-tutorial-lordverity-verity/1112768507907187/). Earlier native-video analysis attempts were unavailable; exact original choreography remains unverified. The dance is reference-inspired, not original motion capture.
 
-## Song
+## Compatibility
 
-The identified recording is **Master of Humanity — Horror Skunx**:
-
-https://www.youtube.com/watch?v=lhCPiauHI-g
-
-By default, each visit opens a visible, controllable, privacy-enhanced YouTube player when music is enabled and audible. It uses the IFrame API when available and a standard visible embed if that script is blocked. The player is paused/removed on pause, exit, realm changes and encounter completion. Browser autoplay or regional/provider restrictions can require pressing Play in the player. No YouTube audio was extracted or bundled.
-
-**Pause → Encounters** selects YouTube, Local MP3 or Off. Import a recording you are authorized to use for offline playback. That MP3 stays in the existing device-local music library, separate from world backups and relay traffic. Local playback uses the master/music volumes, pauses/resumes, seeks to encounter time after a co-op pause, fades during the bow and releases its media/Blob URL afterward. Background world/jukebox music pauses for the encounter and resumes through the existing music systems.
-
-The packaged app identifies YouTube requests using the game’s public project URL as its HTTP Referer; a raw no-referrer embed produced Error 153, while the identified request returned the actual song title without that error. File-opened browser/legacy editions can still require a local MP3 or serving the game over HTTP(S). The actual original-song stream could not be verified in this environment: www.youtube.com requests are blocked, although the public no-cookie embed document is reachable. Actual local MP3 decoding/play/pause/resume and cleanup were tested using an original generated test tone, not a substituted Lord Verity recording. For reliable offline audio, import the song yourself; the soundtrack is not included in the downloads.
-
-## References
-
-- Horror Skunx, [Lord Verity — Master of Humanity](https://www.youtube.com/watch?v=lhCPiauHI-g), identified through YouTube/Music search links and the public video listing.
-- [Lord Verity dance tutorial](https://www.youtube.com/watch?v=Syi3HSu3-Tk), search-identified video; native video analysis unavailable.
-- Horror Skunx's [public dance tutorial listing](https://www.facebook.com/RealHorrorSkunx/videos/lord-verity-dance-tutorial-lordverity-verity/1112768507907187/), including its hands-on-hips/forward-step description.
-- Xratior, [high-poly Lord Verity reference](https://sketchfab.com/3d-models/high-poly-model-lord-verity-8c39adaebb0e4f7aa6694b941caa7e10), credited there to Horror Skunx and Spooky Cat's port; listed CC BY 4.0. Its mesh is not distributed here.
-- CheaterPMCPL, [Lord Verity RIG reference](https://sketchfab.com/3d-models/lord-verity-rig-1116a6c0018c4d0c9623a43fa4045cd8), listed CC BY 4.0. Its mesh is not distributed here.
-- [YouTube IFrame API](https://developers.google.com/youtube/iframe_api_reference) and [embedded player parameters](https://developers.google.com/youtube/player_parameters) for visible playback, controls and lifecycle integration.
-
-Horror Skunx and ThatMob are credited for the referenced character/song universe. No affiliation or original creator asset ownership is claimed.
-
-## Compatibility and validation
-
-Use matching 2.25.0/protocol 7 clients and server for multiplayer. Existing save storage, supplied assets, world generation, item/NPC stats and both Titan simulations/rigs remain preserved. Default and hosted mobile branches are not updated. Both separate Windows editions retain their save profiles; export/import backups when switching editions.
-
-The verification download includes unit/integration logs, real in-game rig/animation/camera/pause tests, imported MP3 playback, screenshots, source-preservation hashes and packaged runtime checks. Native Windows execution, actual original-song streaming and exact choreography fidelity remain unverified on this Linux build host.
+Use matching **2.25.1 / protocol 8** clients and relay. Main, supplied models/textures, world generation, item/NPC statistics, save storage and Titan tuning remain preserved. The current mobile site receives this update at the same URL and storage scope. Windows editions retain their separate existing save profiles. Physical iOS/Safari and native Windows execution remain unverified on this Linux host; browser tests use touch emulation/software WebGL.

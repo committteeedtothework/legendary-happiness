@@ -8,6 +8,8 @@ const out =
 mkdirSync(out, { recursive: true });
 const previous = process.env.DCSMCRAFT_PREVIOUS_MOBILE;
 const current = resolve("dist/mobile");
+const releaseVersion=JSON.parse(readFileSync("package.json")).version;
+const previousVersion=previous?JSON.parse(readFileSync(resolve(previous,"offline-manifest.json"))).version:null;
 let server,
   origin,
   updated = false;
@@ -62,7 +64,7 @@ test.use({
   userAgent:
     "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile Safari/604.1",
 });
-test("existing Home Screen install upgrades from the live 2.16.0 build without losing worlds or cached shared audio", async ({
+test("existing Home Screen install upgrades from the previous live build without losing worlds or cached shared audio", async ({
   page: initialPage,
   context,
 }) => {
@@ -83,7 +85,7 @@ test("existing Home Screen install upgrades from the live 2.16.0 build without l
     await page.evaluate(
       async () => (await dcsmcraft.mobileApp.manifest).version,
     ),
-  ).toBe("2.16.0");
+  ).toBe(previousVersion);
   await page.locator('[data-action="create"]').tap();
   await page.locator('[name="difficulty"]').selectOption("peaceful");
   await page.locator('[data-action="start-world"]').tap();
@@ -121,6 +123,7 @@ test("existing Home Screen install upgrades from the live 2.16.0 build without l
     return { cache: old.cache, url: f.url };
   });
   console.log("Upgrade: requesting worker update");
+  await page.evaluate(()=>{dcsmcraft.settings.verityMusic="youtube";delete dcsmcraft.settings.verityAudioVersion;dcsmcraft.ui.saveSettings();});
   updated = true;
   await page.evaluate(async () => {
     const r = await dcsmcraft.mobileApp.registration;
@@ -156,7 +159,8 @@ test("existing Home Screen install upgrades from the live 2.16.0 build without l
       sharedAudio: !!(await (await caches.open(m.cache)).match(shared.url)),
     };
   }, shared);
-  expect(installed.version).toBe("2.25.0");
+  expect(installed.version).toBe(releaseVersion);
+  expect(await page.evaluate(()=>dcsmcraft.settings.verityMusic)).toBe("supplied");
   expect(installed.caches).not.toContain(shared.cache);
   expect(installed.sharedAudio).toBe(true);
   await page.evaluate((id) => dcsmcraft.loadWorld(id), saved.id);
@@ -183,7 +187,7 @@ test("existing Home Screen install upgrades from the live 2.16.0 build without l
     out + "/pwa-upgrade.json",
     JSON.stringify(
       {
-        from: "2.16.0",
+        from: previousVersion,
         to: installed.version,
         installed,
         saved,

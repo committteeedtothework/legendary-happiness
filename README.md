@@ -1,8 +1,9 @@
-# DCSMCRAFT 2.25.0 — Lord Verity
+# DCSMCRAFT 2.25.1 — Lord Verity
 
-Lord Verity visits the Overworld and compels nearby players into a timed dance, with a rigged 3D recreation, animated player poses, cinematic camera, controller/touch prompts and one-time rewards. Pause → Encounters configures the identified Horror Skunx song through a visible YouTube player or a device-local MP3. The original mesh and recording are not bundled. See [LORD-VERITY.md](LORD-VERITY.md) for timing, references and verified limits.
+Lord Verity's Overworld encounter now lasts about 2 minutes 23 seconds. Keyboard S/Down, controller-stick directions and touch dance inputs work alongside the existing controls, with clearer timing cues and a short early-input buffer. The user-supplied Master of Humanity MP3 is bundled offline and starts at 0:00 on each new visit. Pause → Encounters selects Soundtrack, Local MP3, YouTube or Off. See [LORD-VERITY.md](LORD-VERITY.md).
 
-Both Windows editions and existing saves remain supported. Multiplayer requires matching protocol 7 clients/server. Main and hosted mobile are unchanged.
+Existing saves and both Windows editions remain supported. Multiplayer requires matching protocol 8 clients/server. Main remains unchanged; the mobile site receives the current update.
+
 
 ## Previous release — 2.24.0
 

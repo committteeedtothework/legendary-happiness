@@ -6,6 +6,12 @@ import { AnimationMixer, Box3 } from "three";
 import { fixture } from "./multiplayer-fixture.js";
 import {
   VERITY,
+  VERITY_DURATION,
+  VERITY_KEYS,
+  nextVerityBeat,
+  verityHitBeat,
+  verityStickStep,
+  cleanDanceVisual,
   verityRecord,
   summonVerity,
   tickVerity,
@@ -133,7 +139,7 @@ test("the dance resolves, rewards once, preserves inventory/camera position, sav
   summonVerity(g);
   tickVerity(g);
   const before = { x: g.player.x, y: g.player.y, z: g.player.z };
-  for (let i = 0; i < 600; i++) {
+  for (let i = 0; i < Math.ceil(VERITY_DURATION * 20) + 10; i++) {
     for (const p of [g.player, peer.player])
       if (p.verityDance?.phase === "dance") {
         const d = p.verityDance,
@@ -163,4 +169,41 @@ test("the dance resolves, rewards once, preserves inventory/camera position, sav
   peer.player.verityDance = { id: "test", phase: "dance", time: 0 };
   m.sharedRealm.switchPeer(peer, "end");
   assert.equal(peer.player.verityDance, undefined);
+});
+
+test("the longer dance retains late poses, matches shown notes and accepts keyboard/controller directions without repeat scoring", () => {
+  assert.ok(VERITY_DURATION > 140 && VERITY_DURATION < 145);
+  assert.equal(VERITY.beats, 256);
+  assert.equal(VERITY_KEYS.KeyS, "clap");
+  assert.equal(VERITY_KEYS.ArrowDown, "clap");
+  assert.equal(VERITY_KEYS.Space, "clap");
+  assert.equal(verityStickStep({ x: 0.9, y: 0.1 }, null), "right");
+  assert.equal(verityStickStep({ x: 0.4, y: 0 }, "right"), "right");
+  assert.equal(verityStickStep({ x: 0.1, y: 0 }, "right"), null);
+  assert.equal(verityStickStep({ x: 0, y: 0.9 }, null), "clap");
+  const d = { id: "long", phase: "dance", time: 100, used: [], score: 0 };
+  assert.equal(cleanDanceVisual(d).time, 100);
+  d.time = VERITY.beat - 0.29;
+  assert.equal(verityHitBeat(d, "right"), 1);
+  assert.equal(verityHitBeat(d, "left"), 0);
+  const p = { verityDance: d };
+  assert.ok(scoreVerityStep({}, p, "right"));
+  assert.equal(scoreVerityStep({}, p, "right"), false);
+  assert.equal(nextVerityBeat(d), 0);
+  d.time = 0;
+  d.used = [0];
+  assert.equal(nextVerityBeat(d), 1);
+  d.time = VERITY.good + 0.01;
+  d.used = [];
+  assert.equal(nextVerityBeat(d), 1);
+});
+
+test("dance locking blocks analog stick/touch motion and the raw keyboard fallback, then restores movement",()=>{
+ const {game:g}=setup();summonVerity(g);tickVerity(g);const before={x:g.player.x,z:g.player.z};g.keys=new Set(["KeyW"]);g.controller={lastDevice:"controller",move:{x:-1,y:-1}};
+ for(let i=0;i<120;i++)updatePlayer(g,new Set(["KeyW","Space"]),1/60);
+ assert.deepEqual({x:g.player.x,z:g.player.z},before);
+ g.controller.lastDevice="touch";g.touch={active:true,move:{x:1,y:-1},config:{}};
+ for(let i=0;i<120;i++)updatePlayer(g,new Set(["KeyW"]),1/60);
+ assert.deepEqual({x:g.player.x,z:g.player.z},before);
+ delete g.player.verityDance;g.touch.active=false;for(let i=0;i<30;i++)updatePlayer(g,new Set(["KeyW"]),1/60);assert.ok(Math.hypot(g.player.x-before.x,g.player.z-before.z)>.1);
 });

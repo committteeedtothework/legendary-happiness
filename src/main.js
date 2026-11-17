@@ -196,7 +196,8 @@ function readSettings() {
   result.controller = controllerConfig(saved.controller);
   result.touch = touchConfig(saved.touch);
   result.standKeys = standBindings(saved.standKeys);
-  result.verityMusic=["youtube","local","off"].includes(saved.verityMusic)?saved.verityMusic:"youtube";
+  result.verityMusic=["supplied","local","off"].includes(saved.verityMusic)?saved.verityMusic:saved.verityAudioVersion===1&&saved.verityMusic==="youtube"?"youtube":"supplied";
+  result.verityAudioVersion=1;
   return result;
 }
 class Game {

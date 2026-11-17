@@ -1,6 +1,6 @@
-# Windows editions — 2.25.0
+# Windows editions — 2.25.1
 
-Run DCSMCRAFT-2.25.0-Portable.exe, or extract DCSMCRAFT-Windows-HTML-2.25.0.zip and run DCSMCRAFT.exe with installed Edge/Chrome. Existing save profiles remain unchanged. LORD-VERITY.md documents the new Overworld dance encounter. The rigged model is an original reference recreation. The original song requires an available YouTube stream, or import your authorized MP3 under Pause → Encounters for offline playback. No original song recording or signed-in Sketchfab mesh is bundled. Multiplayer uses protocol 7.
+Run DCSMCRAFT-2.25.1-Portable.exe, or extract DCSMCRAFT-Windows-HTML-2.25.1.zip and run DCSMCRAFT.exe with installed Edge/Chrome. Existing save profiles remain unchanged. Lord Verity's longer encounter, revised keyboard/controller/touch inputs and supplied offline song are included. Every new visit starts the song at 0:00. Pause → Encounters controls music options. The rigged model remains an original recreation. Multiplayer uses protocol 8.
 
 ## Previous notes
 
