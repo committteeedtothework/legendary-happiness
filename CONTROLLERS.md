@@ -35,3 +35,12 @@ Validation uses an injected Gamepad API in Chromium, not physical controllers. T
 ## Movement tuning · 2.15.0
 
 Separate stick deadzones, outer deadzone, radial response curves, vertical look scale, look smoothing, horizontal inversion, trigger threshold and hold/toggle sprint are available in Options → Controller. See [ARENA-FOOTING.md](ARENA-FOOTING.md) for ranges and arena traversal bindings. Menu navigation remains independent of gameplay response curves.
+
+2.19.0 inventory: the left stick moves a free crosshair. Confirm picks up/places,
+Attack splits a stack or places one, and Inventory quick-transfers. Hold Attack
+while crossing slots to place one per slot. The right stick scrolls; D-pad taps
+move between slots. Stack transactions use the existing inventory and multiplayer
+rules. Controller options include cursor speed and the earlier focus mode.
+Keyboard/mouse, closing inventory, disconnection and app blur hide the crosshair.
+Button badges follow Xbox, PlayStation, Switch Pro, generic or custom mapping;
+Switch's confirm/cancel convention remains supported.

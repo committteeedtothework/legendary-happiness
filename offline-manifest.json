@@ -1,17 +1,17 @@
 {
-  "version": "2.16.0",
-  "id": "aeee088c041e44af",
-  "cache": "dcsmcraft-mobile-aeee088c041e44af",
+  "version": "2.25.0",
+  "id": "43abfa734955e4d5",
+  "cache": "dcsmcraft-mobile-43abfa734955e4d5",
   "files": [
     {
       "url": "./NOTICES.txt",
-      "bytes": 39986,
-      "sha256": "fdaf3f8b90695617fa5a4279fdcf242680d0f75db14e98280009530876495d17"
+      "bytes": 42015,
+      "sha256": "85471055d9e132041ff24036fc67580ea55091706504816c8921a564e67550c2"
     },
     {
-      "url": "./app.1a1383ac86b1.js",
-      "bytes": 4000815,
-      "sha256": "1a1383ac86b111752979d4a93ed40d495c24b060f7a16c95d3963f8cdbf07037"
+      "url": "./app.d8350d54d2fa.js",
+      "bytes": 4198641,
+      "sha256": "d8350d54d2fa659fb65adde6b3c942eb33091941c505388a7ab58785a0d40e5a"
     },
     {
       "url": "./assets/aria-math.48e53255c03f.mp3",
@@ -82,6 +82,11 @@
       "url": "./assets/living-mice.0188f704883d.mp3",
       "bytes": 3071680,
       "sha256": "0188f704883dcbd94475d09b7ee3a2008af04bd2050355f3d4c595204cc6e44e"
+    },
+    {
+      "url": "./assets/lord-verity.ade19163646c.glb",
+      "bytes": 828476,
+      "sha256": "ade19163646cde20e8360c23c77df19f35c9360c7c2d42216c944d8eaead4ded"
     },
     {
       "url": "./assets/matthew-pistols-claim.db8a36c54d14.mp3",
@@ -176,7 +181,7 @@
     {
       "url": "./index.html",
       "bytes": 992,
-      "sha256": "178e0652782fa6b5beb19c280a4feb2f7cc30d574ac16c72a54c5f32aa0c2a46"
+      "sha256": "9f80158b8599d595936ebf1975bc1c761c91d5df38d2a8f36275da9d0316f75d"
     },
     {
       "url": "./manifest.webmanifest",
@@ -184,9 +189,9 @@
       "sha256": "27b10d5e945cb9a980ce71074ca33f147c001e0139fc3b0f711512b629381644"
     },
     {
-      "url": "./style.d34c77a07ff8.css",
-      "bytes": 393995,
-      "sha256": "d34c77a07ff88e947e1d6576fe28ead19ad0f8370719fd1e43018d12cb93ff9c"
+      "url": "./style.ed4b5611e321.css",
+      "bytes": 413017,
+      "sha256": "ed4b5611e321b4d69c1128796b46423d5f020a8e0100d5b992a03fc41eb42268"
     }
   ]
 }

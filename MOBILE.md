@@ -1,10 +1,10 @@
-# DCSMCRAFT Mobile · 2.16.0
+# DCSMCRAFT Mobile · 2.25.0
 
 The mobile edition runs the existing game with touch input, a smaller initial download, and an installable web app. World rules, arena balance and save format are unchanged. Desktop HTML and Windows builds remain available.
 
 ## iPhone and iPad
 
-Open the hosted mobile edition in Safari. Tap **Share → Add to Home Screen → Add**, then open DCSMCRAFT from its icon. Use **Mobile & Offline → Download for offline play** and keep the app open until **Offline ready** appears. The complete download is about 112 MB; installation initially caches only the roughly 4 MB game core. The two character models and audio load separately when needed.
+Open the hosted mobile edition in Safari. Tap **Share → Add to Home Screen → Add**, then open DCSMCRAFT from its icon. Use **Mobile & Offline → Download for offline play** and keep the app open until **Offline ready** appears. The complete download is about 114 MB; installation initially caches only the roughly 4 MB game core. The character models and audio load separately when needed.
 
 Home Screen installation requires an HTTPS website; opening the mobile ZIP or an HTML attachment in Files does not install the app. Safari 16.4 or later with WebGL 2 is the target. Landscape is recommended, with portrait menus also supported. Android Chrome can use its Install app action.
 
@@ -49,7 +49,11 @@ This is a web app, not an App Store IPA. Browser/iOS permissions and memory limi
 
 The HTTPS play site is https://committteeedtothework.github.io/legendary-happiness/ . On iOS, open it in Safari and use Share → Add to Home Screen. Update the cached offline content to receive new builds. The existing deployment branch is mobile-v2.11.0; its name is retained to preserve the installed site URL.
 
-The 2.11.1 mobile package includes Wyvern, its rig and textures as a hashed offline asset. Download the complete offline content before disconnecting; Titan models are loaded when entering their arenas.
+The 2.25.0 mobile package includes the current Overworld, End, Titan fights and Lord Verity encounter. Models and existing supplied audio are hashed offline assets. Download the complete offline content before disconnecting. Lord Verity uses four dedicated touch dance buttons; the normal movement controls return afterward. His song uses a visible YouTube player and requires Internet access. Pause → Encounters also supports an authorized local MP3 for offline playback. The 3D character is an original rigged recreation; the creator mesh and recording are not bundled. See LORD-VERITY.md.
+
+Existing installations keep the same URL, manifest ID/scope and world databases. Open Mobile & Offline, then Update & restart when offered; download offline content again for the new asset set. Export a world backup before updating. No stored world data is deleted by the update.
+
+Friends/invites still need an operator-hosted service; publishing the static mobile app does not deploy that backend.
 
 
 Current jump, platform collision and controller changes: [ARENA-FOOTING.md](ARENA-FOOTING.md).
