@@ -128,6 +128,7 @@ export class UI {
       this.game.audio.menu(menuRoleForAction(action));
       if (action === "multiplayer") this.multiplayerMenu();
       if(action==='friends')this.game.friends.panel.open();
+      if(action==='verity-settings')this.game.verity.settings();
       if (action === "world-chat") this.game.chat.open();
       if(action==='world-rules')openWorldRules(this);
       if (action === "connect-multiplayer") this.connectMultiplayer(button);
@@ -835,7 +836,7 @@ export class UI {
     this.game.running = false;
     this.setScreen(
       "pause",
-      `<div class="pause-shade"></div><main class="dialog compact pause-dialog"><h2>Game Menu</h2>${message ? `<p>${esc(message)}</p>` : ""}<button class="primary wide" data-action="resume">Back to Game</button><div class="pause-actions"><button class="secondary" data-action="achievements">Achievements</button><button class="secondary" data-action="end-journal">The End</button><button class="secondary" data-action="guide">Controls</button><button class="secondary" data-action="journal">Relic Journal</button><button class="secondary" data-action="settings">Options...</button><button class="secondary" data-action="multiplayer">${this.game.multiplayer?.connected ? "Players" : "Multiplayer"}</button><button class="secondary" data-action="friends">Friends</button><button class="secondary" data-action="world-chat">Chat</button><button class="secondary" data-action="world-tools">World...</button></div><button class="secondary wide" data-action="quit">${this.game.multiplayer?.isGuest ? "Leave Server" : "Save and Quit to Title"}</button></main>`,
+      `<div class="pause-shade"></div><main class="dialog compact pause-dialog"><h2>Game Menu</h2>${message ? `<p>${esc(message)}</p>` : ""}<button class="primary wide" data-action="resume">Back to Game</button><div class="pause-actions"><button class="secondary" data-action="achievements">Achievements</button><button class="secondary" data-action="end-journal">The End</button><button class="secondary" data-action="guide">Controls</button><button class="secondary" data-action="journal">Relic Journal</button><button class="secondary" data-action="settings">Options...</button><button class="secondary" data-action="multiplayer">${this.game.multiplayer?.connected ? "Players" : "Multiplayer"}</button><button class="secondary" data-action="friends">Friends</button><button class="secondary" data-action="world-chat">Chat</button><button class="secondary" data-action="world-tools">World...</button><button class="secondary" data-action="verity-settings">Encounters</button></div><button class="secondary wide" data-action="quit">${this.game.multiplayer?.isGuest ? "Leave Server" : "Save and Quit to Title"}</button></main>`,
     );
   }
   worldTools() {

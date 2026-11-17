@@ -1,0 +1,12 @@
+{
+  "origin": "original reference recreation",
+  "triangles": 19192,
+  "bones": 18,
+  "clips": [
+    "Idle",
+    "VerityDance",
+    "Bow"
+  ],
+  "height": 2.58,
+  "reference": "https://sketchfab.com/3d-models/high-poly-model-lord-verity-8c39adaebb0e4f7aa6694b941caa7e10"
+}

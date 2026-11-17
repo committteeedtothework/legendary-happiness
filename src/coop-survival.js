@@ -1,3 +1,4 @@
+import {danceLocked} from './verity-simulation.js';
 import {recordPeerAction} from "./multiplayer-animation.js";
 import {updateTrickster} from "./matthew.js";
 import {ruleEnabled} from "./world-rules.js";
@@ -93,7 +94,7 @@ export function damagePeer(session, peer, amount, cause, force = false, source =
     p = peer.player;
   if (
     (session.game.mode === "creative" && !force) ||
-    p.health <= 0 || p.multiplayerAway ||
+    p.health <= 0 || p.multiplayerAway || (danceLocked(p)&&!force) ||
     p.hurt > 0
   )
     return;

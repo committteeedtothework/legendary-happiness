@@ -1,3 +1,15 @@
+# Lord Verity encounter — 2.25.0
+
+All **1,041 Node tests passed**. New tests cover safe natural spawning, compulsory dance timing and once-only scoring/rewards, pause-safe music and late async cleanup, authoritative multiplayer inputs, realm isolation and preservation of existing assets/saves/Titan tuning. The real Chromium test loads the skinned GLB, checks actual bone motion, player position and camera restoration, pauses/resumes the encounter, decodes and plays an imported MP3, and verifies audio cleanup. The audio fixture is an original generated test tone, not the creator recording.
+
+The packaged matching Linux Electron runtime passes offline creation, chunk travel/seams, save-on-close/relaunch, backup export/import and both Titan portals. A separate packaged encounter test loads the Lord Verity model from the offline asset bundle and verifies dance animation, mid-encounter save/reload, completion, position/camera restoration and media cleanup. No JavaScript errors or external requests occur during those offline checks. The Windows portable contains the identical ASAR; its runtime matches the pinned official Windows archive hash. The separate legacy launcher embeds the standalone HTML byte-for-byte.
+
+The character is an original rigged 3D recreation from the cited visual references. The creator's original mesh requires a signed-in download and is not bundled. Native video analysis was unavailable, so exact choreography is unverified. The identified Horror Skunx song uses a visible YouTube player; the packaged app supplies application identification to avoid the reproduced missing-Referer Error 153. A real embed-document probe returned the song title without Error 153. Original-song audio playback remains unverified because the test environment blocks www.youtube.com; an authorized local MP3 can be imported for offline playback.
+
+Native Windows execution, physical controllers/mobile hardware and hardware GPU performance remain unverified. Linux/Chromium tests use software WebGL and are functional checks, not frame-rate benchmarks. Existing supplied assets, generation, save storage, item/NPC stats, Titan simulations/rigs and main/hosted-mobile branches are preserved. LORD-VERITY.md records controls, spawn/cooldown timing, music options, sources and limitations. Verification artifacts include test logs, in-game screenshots, payload checks and preservation hashes.
+
+## Previous validation
+
 # Friends and dimensions — 2.24.0
 
 All **1,030 Node tests passed**. Additional final focused networking tests verify realm-epoch forwarding and signed invitations after the last server edits. Coverage includes independent Cinder/End portals, owner isolation, separate world mutations and PvP, per-dimension packet routing, stale input/action rejection, death/respawn, account-bound reconnect positions/inventories and DRAGOON rewards restricted to players actually present in The End.

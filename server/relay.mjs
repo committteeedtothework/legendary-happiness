@@ -325,6 +325,7 @@ export function createRelay({
               "break",
               "use",
               "attack",
+              "verity",
               "pulse",
               "release-use",
               "swap-hands",

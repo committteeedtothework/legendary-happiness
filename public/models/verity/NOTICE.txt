@@ -1,0 +1,5 @@
+Lord Verity — DCSMCRAFT reference recreation
+
+The committed GLB is an original mesh and skeleton built using scripts/build-verity-model.py. It is not Horror Skunx's or a Sketchfab uploader's original model. Character/costume references: Horror Skunx and ThatMob; Xratior's high-poly Lord Verity and CheaterPMCPL's Lord Verity RIG listings. Full source links and limits are in LORD-VERITY.md.
+
+Master of Humanity by Horror Skunx is linked through its visible YouTube player. No song recording or YouTube-extracted audio is bundled. User-imported MP3 files stay on the user's device.

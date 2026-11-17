@@ -1,0 +1,1 @@
+Original 440 Hz sine-wave test signal, generated for media lifecycle verification with FFmpeg's lavfi sine source. No sample from Master of Humanity or another recording is used. This is a test-only fixture and is not shipped as encounter music.

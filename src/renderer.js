@@ -1,3 +1,4 @@
+import {VerityVisuals} from './verity-visuals.js';
 import {configureWeaponDisplay} from "./weapon-poses.js";
 import { addCriticalImpact, updateCriticalParticle } from "./combat-feedback.js";
 import {ModelIcons} from "./item-model-icons.js";
@@ -122,6 +123,7 @@ export class Renderer {
     this.worldAnimations = new WorldAnimations(this.scene, this.atlas);
     this.aquaticVisuals = new AquaticVisuals(this.scene);
     this.endVisuals = new EndVisuals(this.scene);
+    this.verityVisuals = new VerityVisuals(this);
     this.appliedPack = settings.texturePack;
     this.material = new THREE.MeshLambertMaterial({
       map: this.atlas.texture,
@@ -562,6 +564,7 @@ export class Renderer {
         mat.needsUpdate = true;
   }
   setWorld(world) {
+    this.verityVisuals?.clear();
     this.streamSettled = false;
     this.lastLights = undefined;
     this.worldAnimations.clear();
@@ -1786,6 +1789,7 @@ export class Renderer {
     this.modelIcons.pump();
     this.gl.info.reset();
     this.gl.autoClear = true;
+    if(game?.verity)this.verityVisuals.compose(game,frameDt);
     this.gl.render(this.scene, this.camera);
     if (player.standData?.transformed) {
       this.handRig.skin.color.set("#58a2a6");

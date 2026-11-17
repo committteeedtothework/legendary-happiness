@@ -162,6 +162,7 @@ export class OverworldMusic {
       game.mode === this.mode &&
       game.dimension === "overworld" &&
       game.running &&
+      !game.verity?.active &&
       settings.musicEnabled &&
       settings.volume > 0 &&
       (settings.musicVolume ?? 0.45) > 0 &&

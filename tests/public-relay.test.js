@@ -250,5 +250,5 @@ test("browser relay probe accepts the same protocol as actual room creation", as
   t.after(() => relay.close());
   const info = await probeRelay(`http://127.0.0.1:${port}`, { timeout: 3000 });
   assert.equal(info.url, `http://127.0.0.1:${port}`);
-  assert.equal(PROTOCOL, 6);
+  assert.equal(PROTOCOL, 7);
 });

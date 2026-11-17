@@ -1,6 +1,9 @@
-// 2.23.0 explicitly authorizes multiplayer, command, rules and encounter-isolation hooks.
+// 2.23.0 multiplayer and 2.25.0 Lord Verity encounter hooks are authorized.
+// verity-preserved.test.js byte-checks ordinary rendering/input/audio outside the new hooks.
 // Other files are still checked by their original guards and the new release baseline.
 export const multiplayerAuthorized = new Set([
+ "desktop/electron/main.cjs","scripts/build-electron.mjs",
+ "src/controller.js","src/jukebox.js","src/overworld-music.js","src/renderer.js",
  "server/Dockerfile","server/compose.yaml","render.yaml","scripts/build-standalone.mjs","scripts/build-local-game.mjs",
   "src/aquatic.js",
   "src/end-runtime.js",

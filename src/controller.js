@@ -249,6 +249,7 @@ export class ControllerInput {
   world(r, edge, dt) {
     const g = this.game,
       b = r.buttons;
+    if(g.verity?.controller(r,edge)){this.padKeys.clear();return;}
     if(this.config.sprintMode==='hold')this.sprint=!!b.sprint;
     else if(edge('sprint'))this.sprint=!this.sprint;
     if(Math.hypot(r.move.x,r.move.y)<0.001)this.sprint=false;

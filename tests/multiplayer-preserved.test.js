@@ -1,3 +1,4 @@
+import {withoutVerityHooks} from './helpers/verity-preservation.js';
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -22,7 +23,7 @@ test("multiplayer update preserves supplied assets, generation, stats, save stor
   ])
     assert.ok(files[required], required);
   for (const [name, hash] of Object.entries(files)) {
-    let content = readFileSync(new URL("../" + name, import.meta.url));
+    let content = withoutVerityHooks(name,readFileSync(new URL("../" + name, import.meta.url)));
     if (name === "src/data.js")
       content = Buffer.from(
         content.toString().replace(/VERSION = "[^"]+"/, 'VERSION = "2.22.0"'),

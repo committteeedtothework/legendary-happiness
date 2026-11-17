@@ -1,3 +1,4 @@
+import {tickVerity} from './verity-simulation.js';
 import {combatTargets,offensiveTarget,damagePvP} from "./pvp.js";
 import {ruleEnabled} from "./world-rules.js";
 import {tickEndWorld,tickEnderman,endEntityDamage,endEntityLoot} from "./end-runtime.js";
@@ -288,6 +289,7 @@ export function tickSurvival(game) {
   if(ruleEnabled(game,"doMobSpawning"))spawnFliers(game, createEntity);
   if (game.tickCount % 40 === 0) populateVillages(game, createEntity);
   if (game.tickCount % 40 === 0) populateEncounters(game, createEntity);
+  tickVerity(game,{dropItem});
   game.tickCount++;
   tickPistolTraces(game);
   tickInvasion(game, createEntity);

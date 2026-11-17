@@ -1,3 +1,5 @@
+import {danceLocked,scoreVerityStep,cleanDanceVisual} from './verity-simulation.js';
+import {poseVerityDancer,clearVerityDancer} from './verity-visuals.js';
 import {sendRealmFrames} from "./multiplayer-realms-network.js";
 import {cleanRemoteAction,sampleAction,recordPeerAction} from "./multiplayer-animation.js";
 import {SharedRealm} from "./multiplayer-world.js";
@@ -144,6 +146,7 @@ export function cleanPose(p) {
   return {
     dimension:["overworld","cinderwild","end"].includes(p.dimension)?p.dimension:"overworld",
     visualAction:cleanRemoteAction(p.visualAction),
+    verityDance:cleanDanceVisual(p.verityDance),
     health:Math.max(0,Math.min(20,Number(p.health) || 0)),
     multiplayerAway:!!p.multiplayerAway,
     x: p.x,
@@ -511,6 +514,7 @@ export class Multiplayer {
     }
     if (now - (peer.lastStandTeleport || -1000) < 500)
       for (const key of ["x", "y", "z"]) p[key] = peer.player[key];
+    delete p.verityDance;
     delete p.dimension;
     delete p.health;delete p.multiplayerAway;
     delete p.visualAction;
@@ -525,6 +529,14 @@ export class Multiplayer {
     const busy=this.peers.get(m.id);
     if(busy?.awaitingRealm || m.realmEpoch!==undefined&&m.realmEpoch!==busy?.realmEpoch){if(Number.isSafeInteger(m.seq))this.send({type:'ack',to:m.id,seq:m.seq,ok:false});return;}
     if(busy?.player.multiplayerAway){if(Number.isSafeInteger(m.seq)&&m.seq>busy.lastSeq){busy.lastSeq=m.seq;this.send({type:'ack',to:m.id,seq:m.seq,ok:false});}return;}
+    if(m.kind==='verity'){
+      if(!busy||!Number.isSafeInteger(m.seq)||m.seq<=busy.lastSeq)return;
+      busy.lastSeq=m.seq;const ok=scoreVerityStep(this.gameFor(busy),busy.player,m.payload?.step);
+      this.send({type:'ack',to:m.id,seq:m.seq,ok});this.sendPrivate(busy);return;
+    }
+    if(danceLocked(busy?.player)&&m.kind!=='close'){
+      if(Number.isSafeInteger(m.seq)&&m.seq>busy.lastSeq){busy.lastSeq=m.seq;this.send({type:'ack',to:m.id,seq:m.seq,ok:false});}return;
+    }
     if (m.kind === "stand") return this.executeStand(m);
     if (this.game.mode === "survival" || ["inventory","menu","close","trade","enchant","use","style"].includes(m.kind)) return this.executeSurvival(m);
     const peer = this.peers.get(m.id),
@@ -789,6 +801,7 @@ export class Multiplayer {
     if(s.titanRecords)this.arena.records=s.titanRecords;
     syncAchievements(g,s.player.achievements);
     g.player.standData = s.player.standData || null;
+    g.player.verityDance=s.player.verityDance||null;
     if (s.standAnnouncement) {
       g.ui.announce(s.standAnnouncement.title, s.standAnnouncement.text);
       g.audio?.standSound?.("presence");
@@ -1081,7 +1094,7 @@ export class Multiplayer {
       return false;
     if (!["inventory", "menu", "close", "respawn"].includes(kind))
       this.lastCommand = now;
-    if (this.game.mode === "survival") this.sendInput();
+    if (kind!=='verity'&&this.game.mode === "survival") this.sendInput();
     else this.send({ type: "pose",realmEpoch:this.realmEpoch, pose: cleanPose(poseFor(this.game)) });
     const seq = ++this.sequence;
     this.pending.set(seq, now);
@@ -1376,6 +1389,7 @@ export class Multiplayer {
       const a=entry.action;if(a){a.age+=dt;if(a.age>=a.duration)entry.action=null;}
       const visual=entry.action;
       animatePlayerModel(m, clean, dt, d > 0.025, visual?Math.sin(Math.PI*visual.age/visual.duration):0,visual?.kind||"attack",visual?.kind==='fire'?Math.max(0,.18-visual.age):0,g.settings.particles!=="minimal",visual,{time:g.elapsed,matthewHand:clean.stand?.hand});
+      if(clean.verityDance){const d=clean.verityDance;if(entry.danceSource!==d.time||entry.dancePhase!==d.phase){entry.danceSource=d.time;entry.dancePhase=d.phase;entry.danceTime=d.time;}else entry.danceTime=Math.min(d.time+.13,entry.danceTime+dt);poseVerityDancer(m,{...d,time:entry.danceTime},dt);}else clearVerityDancer(m);
       animateMagic(
         m,
         g.visualTime ?? g.elapsed,

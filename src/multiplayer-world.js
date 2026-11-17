@@ -124,6 +124,7 @@ export class SharedRealm {
     peer.mine = false;
     const target = this.contextFor(dimension),
       ctx = peer.context;
+    delete peer.player.verityDance;
     peer.dimension = dimension;
     Object.setPrototypeOf(ctx, target);
     for (const k of ["world", "entities", "drops", ...transient]) delete ctx[k];

@@ -1,3 +1,7 @@
+# Lord Verity addition — 2.25.0
+
+The new skinned GLB is an original reference recreation made for DCSMCRAFT. Horror Skunx/ThatMob, Xratior and CheaterPMCPL are credited for character/costume references in LORD-VERITY.md; no Sketchfab mesh was downloaded or redistributed. Master of Humanity by Horror Skunx is referenced through its visible YouTube embed. No song audio is extracted or bundled. User-imported MP3s remain local to the device. Existing asset notices remain unchanged.
+
 # Third-party software
 
 - **Three.js 0.180.0** — MIT, copyright three.js authors. WebGL renderer and mathematical utilities. Upstream license: `node_modules/three/LICENSE`. Bundled in the production build.

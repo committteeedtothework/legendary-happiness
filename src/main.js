@@ -1,3 +1,5 @@
+import {VerityEncounter} from './verity.js';
+import {danceLocked} from './verity-simulation.js';
 import {FriendsClient} from "./friends-client.js";
 import {combatTargets} from "./pvp.js";
 import {normalizeWorldRules,ruleEnabled} from "./world-rules.js";
@@ -194,6 +196,7 @@ function readSettings() {
   result.controller = controllerConfig(saved.controller);
   result.touch = touchConfig(saved.touch);
   result.standKeys = standBindings(saved.standKeys);
+  result.verityMusic=["youtube","local","off"].includes(saved.verityMusic)?saved.verityMusic:"youtube";
   return result;
 }
 class Game {
@@ -241,6 +244,7 @@ class Game {
     this.jukebox = new Jukebox(this);
     this.chat = new ChatSystem(this);
     this.giganto = new GigantoEncounter(this);
+    this.verity = new VerityEncounter(this);
     this.controller = new ControllerInput(this);
     this.touch = typeof __DCSMCRAFT_MOBILE__ !== "undefined" && __DCSMCRAFT_MOBILE__
       ? new PocketTouchInput(this) : new TouchInput(this);
@@ -278,6 +282,7 @@ class Game {
         )
       )
         e.preventDefault();
+      if (this.verity?.handleKey(e)) return;
       if (e.repeat) return;
       const freshPress = !this.keys.has(e.code);
       this.keys.add(e.code);
@@ -493,6 +498,7 @@ class Game {
     });
   }
   async newWorld({ name, seed, mode, difficulty, ...options }) {
+    this.verity?.clear();
     this.giganto.clear();
     this.multiplayer?.disconnect();
     if (this.multiplayer) this.multiplayer.isGuest = false;
@@ -560,7 +566,8 @@ class Game {
     this.ui.loading("Loading world…");
     try {
       const { data, recovered } = await this.store.load(id);
-      this.giganto.clear();
+      this.verity?.clear();
+    this.giganto.clear();
       this.standProjectiles = [];
       this.rules = normalizeWorldRules(data.rules);
       this.seekers = [];
@@ -684,6 +691,7 @@ class Game {
     return saveGame(this);
   }
   async quit() {
+    this.verity?.clear();
     if (this.multiplayer?.isGuest) {
       this.multiplayer.disconnect();
       this.multiplayer.isGuest = false;
@@ -715,6 +723,7 @@ class Game {
     return this.touch?.active ? new Set([...keys, ...this.touch.keys]) : keys;
   }
   beginPrimaryInput() {
+    if(danceLocked(this.player))return false;
     if (!this.active || this.ui.screen !== "play") return false;
     if (!this.multiplayer?.isGuest && claimPistols(this, this.target))
       return false;
@@ -736,12 +745,14 @@ class Game {
     this.mining = 0;
   }
   beginSecondaryInput() {
+    if(danceLocked(this.player))return false;
     this.player.activeHand="main";
     if(shouldUseOffhand(this)){useOffhand(this);return;}
     this.rightMouseDown = this.canRepeatPlacement();
     this.use();
   }
   endSecondaryInput() {
+    if(danceLocked(this.player)){delete this.tridentCharge;delete this.player.editionDraw;this.rightMouseDown=false;return;}
     this.rightMouseDown = false;
     if (this.multiplayer?.isGuest) this.multiplayer.command("release-use");
     else {
@@ -817,6 +828,7 @@ class Game {
     );
   }
   pause() {
+    this.verity?.music.update(this.verity.active,false);
     if (!this.active) return;
     this.running = false;
     this.mouseDown = false;
@@ -825,6 +837,7 @@ class Game {
     this.ui.pause();
   }
   openInventory(type, container = null, target = null) {
+    if(danceLocked(this.player))return;
     if (this.multiplayer?.isGuest)
       this.multiplayer.command("menu", { type });
     this.running = false;
@@ -874,6 +887,7 @@ class Game {
     this.resume();
   }
   damage(amount, cause, force = false, source = null) {
+    if(danceLocked(this.player)&&!force)return;
     if (this.multiplayer?.isGuest && this.mode === "survival") return;
     const p = this.player;
     if(p.multiplayerAway)return;
@@ -1026,6 +1040,7 @@ class Game {
     return nearest;
   }
   tryAttack() {
+    if(danceLocked(this.player))return false;
     if (
       this.multiplayer?.isGuest &&
       (this.hostileProjectiles || []).some(
@@ -1068,10 +1083,12 @@ class Game {
     this.ui.trading(entity);
   }
   firePistols() {
+    if(danceLocked(this.player))return false;
     if (this.multiplayer?.isGuest) return this.multiplayer.command("pistol");
     return firePistols(this, damageEntity);
   }
   mine(dt) {
+    if(danceLocked(this.player))return;
     if (standLocked(this)) return;
     if (this.mode === "creative" && this.inventory.held?.id === "trident") {
       this.mining = 0;
@@ -1259,6 +1276,7 @@ class Game {
     return this.targetEntity()?.type !== "villager";
   }
   use() {
+    if(danceLocked(this.player))return;
     if (standLocked(this)) return;
     if (useTrialExit(this, this.target)) return;
     if (!this.multiplayer?.isGuest && attuneTemple(this, this.target)) return;
@@ -1554,6 +1572,7 @@ class Game {
     pollAchievements(this, dt);
     this.achievementView.frame(dt);
     this.endJournal.frame();
+    this.verity.frame(dt);
     if(!this.multiplayer?.watch.target){this.controller?.frame(dt);this.touch?.frame(dt);}
     if (this.active && this.giganto?.active) {
       this.multiplayer?.frame(now,dt);
@@ -1676,6 +1695,7 @@ class Game {
       visualActive ? dt : 0,
       this.hostileProjectiles || [],
     );
+    this.renderer.verityVisuals.sync(this,visualActive?dt:0);
     this.renderer.syncIncursion(this, this.visualTime, visualActive ? dt : 0);
     this.renderer.standVisuals?.sync(this, visualActive ? dt : 0);
     validateLocalContainerMenu(this);
@@ -1688,7 +1708,7 @@ class Game {
             ? ((this.subtick || 0) % 3) / 3 + (this.accumulator || 0) * 20
             : 0)
         : 6000,
-      cameraMode: this.cameraMode,
+      cameraMode: this.verity.active?1:this.cameraMode,
       equipment: this.inventory.equipment,
       playing: this.active,
       elapsed: this.elapsed,

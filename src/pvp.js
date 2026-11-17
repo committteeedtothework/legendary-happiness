@@ -37,7 +37,7 @@ export function pvpActors(game, attacker = game.player) {
     !ruleEnabled(root, "pvp") ||
     !root.multiplayer?.connected ||
     !attacker ||
-    attacker.multiplayerAway ||
+    attacker.multiplayerAway || attacker.verityDance ||
     attacker.standData?.trial?.phase === "trial"
   )
     return [];
@@ -51,7 +51,7 @@ export function pvpActors(game, attacker = game.player) {
         a.player !== attacker &&
         a.id !== selfId &&
         (a.player.health ?? 20) > 0 &&
-        !a.player.multiplayerAway &&
+        !a.player.multiplayerAway && !a.player.verityDance &&
         a.player.standData?.trial?.phase !== "trial",
     )
     .map((a) => ({

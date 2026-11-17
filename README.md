@@ -1,3 +1,11 @@
+# DCSMCRAFT 2.25.0 — Lord Verity
+
+Lord Verity visits the Overworld and compels nearby players into a timed dance, with a rigged 3D recreation, animated player poses, cinematic camera, controller/touch prompts and one-time rewards. Pause → Encounters configures the identified Horror Skunx song through a visible YouTube player or a device-local MP3. The original mesh and recording are not bundled. See [LORD-VERITY.md](LORD-VERITY.md) for timing, references and verified limits.
+
+Both Windows editions and existing saves remain supported. Multiplayer requires matching protocol 7 clients/server. Main and hosted mobile are unchanged.
+
+## Previous release — 2.24.0
+
 # DCSMCRAFT 2.24.0 — friends and dimensions
 
 Guests can enter Cinderwild and The End independently while the host and other players remain in their own dimensions. Usernames, friend requests, presence, private invitations and account backups are available through the Friends menu. See [FRIENDS-REALMS.md](FRIENDS-REALMS.md) for setup and tested limits.

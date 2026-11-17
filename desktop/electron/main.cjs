@@ -1,3 +1,4 @@
+const {installYouTubeIdentity} = require('./youtube.cjs');
 const {
   app,
   BrowserWindow,
@@ -112,6 +113,7 @@ else
         },
       });
       installFullscreen(window,ipcMain);
+      installYouTubeIdentity(window);
       ipcMain.on("dcsmcraft:quit", (event) => {
         if (
           event.sender === window.webContents &&

@@ -1,3 +1,9 @@
+# Windows editions — 2.25.0
+
+Run DCSMCRAFT-2.25.0-Portable.exe, or extract DCSMCRAFT-Windows-HTML-2.25.0.zip and run DCSMCRAFT.exe with installed Edge/Chrome. Existing save profiles remain unchanged. LORD-VERITY.md documents the new Overworld dance encounter. The rigged model is an original reference recreation. The original song requires an available YouTube stream, or import your authorized MP3 under Pause → Encounters for offline playback. No original song recording or signed-in Sketchfab mesh is bundled. Multiplayer uses protocol 7.
+
+## Previous notes
+
 # Windows editions — 2.24.0
 
 Run **DCSMCRAFT-2.24.0-Portable.exe**, or extract **DCSMCRAFT-Windows-HTML-2.24.0.zip** and run DCSMCRAFT.exe with installed Edge/Chrome. Close the old app before starting the update. Saves, native fullscreen and supplied assets are preserved. See FRIENDS-REALMS.md for independent guest dimensions, usernames, friends and invitations.

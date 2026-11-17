@@ -22,6 +22,7 @@ const css = await Promise.all(
     "src/java-menus.css",
     "src/touch.css",
     "src/wyvern.css",
+    "src/verity.css",
   ].map((path) => readFile(path, "utf8")),
 );
 const style = await transform(css.join("\n"), {
@@ -55,6 +56,8 @@ const license =
   (await readFile("public/audio/giganto/PRELUDE-NOTICE.txt", "utf8")) +
   "\nUser-supplied Sonic power-boost effect:\n" +
   (await readFile("public/audio/giganto/BOOST-NOTICE.txt", "utf8")) +
+  "\nLord Verity original mesh and song reference:\n" +
+  (await readFile("public/models/verity/NOTICE.txt", "utf8")) +
   "\nUser-supplied Wyvern music:\n" +
   (await readFile("public/audio/wyvern/NOTICE.txt", "utf8"));
 const js = bundle.outputFiles[0].text.replace(/<\/script/gi, "<\\/script");

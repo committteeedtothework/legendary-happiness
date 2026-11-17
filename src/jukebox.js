@@ -346,7 +346,7 @@ export class Jukebox {
       this.stop("Jukebox stopped: its disc, block or world changed.");
       return;
     }
-    const show = ["play", "jukebox"].includes(g.ui.screen);
+    const show = ["play", "jukebox"].includes(g.ui.screen)&&!g.verity?.active;
     if (!show && this.state === "playing") {
       this.audio.pause();
       this.state = "menu-paused";

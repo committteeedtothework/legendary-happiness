@@ -122,6 +122,7 @@ export const WYVERN_SCORE=${JSON.stringify({ url: await asset("public/audio/wyve
     "wyvern-model-data.js",
     `export const WYVERN_GLB=${JSON.stringify({ url: await asset("public/models/wyvern/wyvern.glb") })};`,
   );
+  modules.set('verity-model-data.js',`export const VERITY_GLB=${JSON.stringify({url:await asset('public/models/verity/lord-verity.glb')})};`);
   const result = await build({
     entryPoints: ["src/main.js"],
     bundle: true,

@@ -37,3 +37,6 @@ data/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
+
+# Generated from the original rigged encounter asset.
+src/verity-model-data.js

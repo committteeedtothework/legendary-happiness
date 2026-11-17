@@ -97,6 +97,7 @@ for (const n of [
   "policy.cjs",
   "lifecycle.cjs",
   "fullscreen.cjs",
+  "youtube.cjs",
   "package.json",
 ])
   await copyFile("desktop/electron/" + n, join(appDir, n));

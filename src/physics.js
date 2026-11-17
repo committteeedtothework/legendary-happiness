@@ -200,6 +200,7 @@ export function updatePlayer(game, keys, dt) {
     if (p.boatId) return moving;
   }
   if (
+    (p.verityDance && ["arrival","dance","bow"].includes(p.verityDance.phase)) ||
     p.riftGrip ||
     (p.standData?.awakeningUntil || 0) > (game.tickCount || 0)
   ) {

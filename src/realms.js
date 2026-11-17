@@ -63,6 +63,8 @@ export function restoreRealm(seed, dimension, data = {}) {
   };
 }
 export function selectRealm(game, dimension) {
+  delete game.player.verityDance;
+  if(!game.multiplayer?.peer)game.verity?.clear?.();
   if(game.multiplayer?.peer){
     const m=game.multiplayer,manager=m.sharedRealm;
     if(manager?.travelling!==m.peer)throw Error("Use an active portal to travel.");

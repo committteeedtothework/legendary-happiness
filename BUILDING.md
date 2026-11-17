@@ -1,3 +1,11 @@
+# Lord Verity — 2.25.0
+
+Use the existing Node 24.22.1/npm 11.9.0 workflow. The prebuild/pretest hooks embed the committed original Lord Verity GLB. No paid model generation or Blender installation is needed to play/build; Blender 4.3+ can regenerate the asset with scripts/build-verity-model.py.
+
+Run npm test and npx playwright test --config playwright.verity.config.js. The browser media test uses the original test-tone MP3 committed under tests/fixtures; the original song is not bundled. LORD-VERITY.md documents streaming restrictions, media import and controls. Update the relay with the game for protocol 7. Existing standalone, Electron, legacy Windows and packaging commands remain valid.
+
+## Previous build notes
+
 # Friends and dimensions — 2.24.0
 
 Use Node 24.22.1/npm 11.9.0. Run `npm ci`, `npm test`, and `npx playwright test --config playwright.social.config.js --workers=1`. `npm run friends` starts the persistent account/friends/game relay; `npm run multiplayer` retains the classic relay. All clients and relay must use protocol 6.
