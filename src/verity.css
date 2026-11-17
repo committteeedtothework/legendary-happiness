@@ -15,3 +15,20 @@
 .verity-dancing #hud,.verity-dancing #cycle-banner{visibility:hidden}
 
 .verity-dancing #touch-controls .touch-buttons,.verity-dancing #touch-controls #touch-joystick,.verity-dancing #touch-controls #touch-dpad,.verity-dancing #touch-controls #touch-tray,.verity-dancing #touch-controls [data-touch="inventory"],.verity-dancing #touch-controls [data-touch="actions"]{display:none!important}
+
+/* Keep the dance readable beside mobile pause controls and short viewports. */
+.verity-dancing #touch-controls .touch-top{left:auto;right:max(8px,env(safe-area-inset-right));transform:none}
+.verity-dancing #touch-controls .touch-top [data-touch="chat"]{display:none}
+@media(pointer:coarse) and (max-height:500px){
+  #verity-hud{top:max(8px,env(safe-area-inset-top));min-width:340px}
+  #verity-hud h2{font-size:22px;margin-bottom:4px}
+  #verity-hud .verity-phase:empty{display:none}
+  #verity-hud .verity-notes{gap:6px;margin:6px 0}
+  #verity-hud .verity-note{width:64px;min-height:42px}
+  #verity-hud .verity-note b{font-size:13px}
+  #verity-hud .verity-note small{font-size:11px;margin-top:2px}
+  #verity-hud .verity-feedback{min-height:18px;font-size:13px}
+  #verity-hud .verity-score{font-size:13px}
+  #verity-song{width:200px;height:200px;right:max(8px,env(safe-area-inset-right));bottom:8px}
+  #verity-song-controls{right:max(8px,env(safe-area-inset-right));bottom:215px}
+}

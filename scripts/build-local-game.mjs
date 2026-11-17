@@ -264,6 +264,7 @@ export const WYVERN_SCORE=${JSON.stringify({ url: await asset("public/audio/wyve
     "THIRD_PARTY.md",
     "TITAN-ASSETS.md",
     "public/models/wyvern/NOTICE.txt",
+    "public/models/verity/NOTICE.txt",
     "public/audio/DEVIN-CLAIM-NOTICE.txt",
     "public/audio/MATTHEW-CLAIM-NOTICE.txt",
     "public/audio/MENU-SOUNDS-NOTICE.txt",
